@@ -9,14 +9,17 @@ Thanks for your interest in improving Label Me! 🎉
 4. Try the CLI: `npm run labelme -- play --seed meridian1933 --answers` (0 credits) or `npm run labelme -- draw --explain` (≤ 13 credits) · web: `npm run dev` → http://localhost:3200
 
 ## Before You Open a PR
-- `npm run ci` passes — audit, prettier, eslint, tsc, vitest with coverage, `verify` (12 fixtures replay offline), `check` (README claims vs tree).
+- `npm run ci` passes — audit, prettier, eslint, tsc, vitest with coverage, `verify` (the 62 recorded cards replay offline), `check` (README claims vs tree).
 - `npm run e2e` passes (Playwright, runs the built app with **no** key — never add a test that spends credits).
 - Add or update tests for any behavior change. Regression tests are **named after the defect they pin**
-  (`"F3: a candidate whose flow lookup failed is UNCHECKED — never crowned"`), not `test_3`.
-- Anything that changes `score()`, `rank()` or the crown rule must keep `packages/core/test/property.test.ts` green and
-  `npm run verify` at 12/12 — if a fixture legitimately changes, re-seed it with `npm run seed` and say so in the PR.
+  (`"REGRESSION (audit 2026-09-19): clue rows are emitted as each call lands, not as one batch after the slowest"`), not `test_3`.
+- Anything that changes the class rule, the clues or the tell must keep `packages/core/test/property.test.ts` green and
+  `npm run verify` at 62/62 — if a card legitimately changes, rebuild it offline with `npm run verify -- --update` and say so in the PR.
 - Keep commits conventional: `feat:` (minor), `fix:`/`perf:` (patch), `docs:`, `test:`, `ci:`, `chore:` (no release).
-  `release.yml` tags and publishes from these prefixes automatically.
+  `release.yml` tags and publishes from these prefixes automatically once the CI/CD pipeline is green on `main`
+  (bumps every `package.json` + the lockfile, commits `chore(release): vX.Y.Z [skip ci]`, annotated tag, GitHub Release
+  with generated notes). When Actions is unavailable, a maintainer runs the same algorithm locally:
+  `npm run release -- --dry-run` to preview, `npm run release` to cut it (clean tree, on `main`, level with origin).
 
 ## Credits are the constraint
 Every live Nansen call costs credits (table in `packages/core/src/client.ts`). Cached calls are free and labelled.

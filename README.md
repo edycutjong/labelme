@@ -25,6 +25,7 @@
 ![deck](https://img.shields.io/badge/deck-62%2F62%20replay%20offline-22c55e?style=flat)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat)](LICENSE)
 [![CI](https://github.com/edycutjong/labelme/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/labelme/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/edycutjong/labelme?sort=semver&style=flat)](https://github.com/edycutjong/labelme/releases/latest)
 
 </div>
 
@@ -168,6 +169,8 @@ npm run seed -- --dry        # gather + resolve candidates only (≈ 100 credits
 ```
 
 CI (`.github/workflows/ci.yml`): quality (format · lint · typecheck · tests + coverage · verify · readiness) ∥ security (TruffleHog full history · npm audit · licenses) → build → deploy gate. No key in CI — every stage is offline.
+
+Releases: semantic versions cut automatically from Conventional Commits (`release.yml` after a green pipeline on `main` — `feat:` minor, `fix:`/`perf:` patch, `!` major; bumps every `package.json`, tags, publishes with generated notes). `npm run release` (`--dry-run` to preview) runs the same algorithm locally when Actions is unavailable. The footer version on the site is the released `package.json` version.
 
 ## 📁 Project Structure
 
