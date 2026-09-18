@@ -51,7 +51,12 @@ else if (bump === "minor") [mi, pa] = [mi + 1, 0];
 else pa += 1;
 const next = `v${ma}.${mi}.${pa}`;
 say(`Bump: ${bump}  ${last || "none"} -> ${next}`);
-say(git("log", "--format=  %h %s", range));
+say(
+  git("log", "--format=%h %s", range)
+    .split("\n")
+    .map((l) => `  ${l}`)
+    .join("\n"),
+);
 if (dry) {
   say(`(dry run) would bump every package.json + lockfile to ${next.slice(1)}, commit "chore(release): ${next} [skip ci]", tag, push and publish.`);
   process.exit(0);
