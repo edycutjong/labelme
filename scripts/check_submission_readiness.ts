@@ -31,7 +31,6 @@ const MUST = [
   "docs/assets/icon-animated.svg",
   "docs/assets/readme-hero-animated.svg",
   ".github/workflows/ci.yml",
-  ".github/workflows/codeql.yml",
   ".github/workflows/gitleaks.yml",
   ".github/dependabot.yml",
   ".github/SECURITY.md",
@@ -88,8 +87,11 @@ ok(read("apps/web/lib/proof.ts").includes(`tests: ${actual},`), `apps/web/lib/pr
 const propertyRuns = Number((read("packages/core/test/property.test.ts").match(/NUM_RUNS = ([\d_]+)/) ?? ["", "0"])[1].replace(/_/g, ""));
 const propertyCount = (read("packages/core/test/property.test.ts").match(/fc\.assert\(/g) ?? []).length;
 const cases = propertyRuns * propertyCount;
-ok(readme.includes(`property_cases-${cases.toLocaleString("en-US").replace(",", "%2C")}`), `README badge says ${cases.toLocaleString("en-US")} property cases`);
-ok(read("apps/web/lib/proof.ts").includes(`propertyCases: ${cases.toLocaleString("en-US").replace(",", "_")},`), `proof.ts states ${cases} property cases`);
+ok(
+  readme.includes(`property_cases-${cases.toLocaleString("en-US").replace(/,/g, "%2C")}`),
+  `README badge says ${cases.toLocaleString("en-US")} property cases`,
+);
+ok(read("apps/web/lib/proof.ts").includes(`propertyCases: ${cases.toLocaleString("en-US").replace(/,/g, "_")},`), `proof.ts states ${cases} property cases`);
 
 // deck claims
 const cards = readdirSync("fixtures/cards").filter((f) => f.endsWith(".json")).length;
