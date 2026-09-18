@@ -252,8 +252,8 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
           </button>
         </form>
         <div className="chips" role="group" aria-label="quick starts">
-          <button type="button" className="chip" onClick={() => start("meridian")}>
-            the recorded round · meridian
+          <button type="button" className="chip" onClick={() => start("meridian1933")}>
+            the recorded round · meridian1933
           </button>
           <button type="button" className="chip" onClick={() => draw()} disabled={drawBusy}>
             Draw fresh · live · 13 credits

@@ -13,7 +13,12 @@ export const metadata: Metadata = {
     title: "Label Me",
     description: "Ten real wallets. Guess the Nansen label.",
     images: [
-      { url: "/api/og?seed=meridian", width: 1200, height: 630, alt: "Label Me share card: Can you read a wallet? Ten real wallets, guess the Nansen label" },
+      {
+        url: "/api/og?seed=meridian1933",
+        width: 1200,
+        height: 630,
+        alt: "Label Me share card: Can you read a wallet? Ten real wallets, guess the Nansen label",
+      },
     ],
   },
   twitter: { card: "summary_large_image", creator: "@edycutjong", title: "Label Me", description: "Ten real wallets. Guess the Nansen label." },

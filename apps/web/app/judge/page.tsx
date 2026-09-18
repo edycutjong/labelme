@@ -36,8 +36,8 @@ export default function Judge() {
         <ol>
           <li>
             Open{" "}
-            <a href={`${SITE}/r/meridian`}>
-              <code>{SITE}/r/meridian</code>
+            <a href={`${SITE}/r/meridian1933`}>
+              <code>{SITE}/r/meridian1933</code>
             </a>
             . Ten cards from the recorded deck, the same ten for everyone. Guess with the chips (or keys 1–5); the reveal shows the class, the free-tier tag,
             the entity name where the 1-credit lookup found one, and a one-line tell written from the card&apos;s numbers.
@@ -116,7 +116,7 @@ export default function Judge() {
         <p>The deck (0 credits, no key) and the live path (13 credits):</p>
         <pre>
           <code>{`git clone ${REPO} && cd labelme && npm install
-npm run labelme -- play --seed meridian --answers   # the recording's ten cards with the answer key, 0 credits
+npm run labelme -- play --seed meridian1933 --answers   # the recording's ten cards with the answer key, 0 credits
 export NANSEN_API_KEY=nsn_...                        # your key from https://app.nansen.ai/api
 npm run labelme -- draw --explain                    # one unseen wallet live: five calls, credits, the reveal`}</code>
         </pre>

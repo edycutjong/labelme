@@ -6,7 +6,7 @@ Thanks for your interest in improving Label Me! 🎉
 1. Fork the repo and branch from `main`: `git checkout -b feat/your-feature`
 2. Install dependencies: `npm install` (npm workspaces: `packages/core`, `packages/cli`, `apps/web`)
 3. Copy the env template: `cp .env.example .env` and paste your Nansen key (https://app.nansen.ai/api)
-4. Try the CLI: `npm run labelme -- play --seed meridian --answers` (0 credits) or `npm run labelme -- draw --explain` (≤ 13 credits) · web: `npm run dev` → http://localhost:3200
+4. Try the CLI: `npm run labelme -- play --seed meridian1933 --answers` (0 credits) or `npm run labelme -- draw --explain` (≤ 13 credits) · web: `npm run dev` → http://localhost:3200
 
 ## Before You Open a PR
 - `npm run ci` passes — audit, prettier, eslint, tsc, vitest with coverage, `verify` (12 fixtures replay offline), `check` (README claims vs tree).

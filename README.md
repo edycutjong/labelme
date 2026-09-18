@@ -32,13 +32,13 @@
 
 ## 📸 See it in Action
 
-<img src="docs/screenshots/03-reveal-correct.png" alt="Label Me — card 1 of 10 revealed: four Nansen clue panels (PnL, trades, balance, counterparties), the Contract / Pool chip green, the tell line and the Nansen provenance under it" width="100%">
+<img src="docs/screenshots/03-reveal-correct.png" alt="Label Me — card 1 of 10 revealed: four Nansen clue panels (PnL, trades, balance, counterparties), the Smart Money chip green, the tell line and the Nansen provenance under it" width="100%">
 
 | The face | The guess | The reveal |
 |---|---|---|
 | 30-day PnL (realised, win rate, trades, tokens traded, top-5), top realised trades, balance profile (tokens, total, biggest position, stables), counterparty mix by label class | five chips — **Smart Money · Exchange · Whale · Contract / Pool · Regular** — keys 1–5 | Nansen's label group, the free-tier tag as returned, the entity name where the 1-credit lookup found one (🏦 Binance), and a one-line **tell** written from the card's own numbers |
 
-Ten cards make a round; a seed makes the round shareable (`/r/meridian` is the recording's round — the same ten for everyone). **Draw fresh** pulls one unseen labelled wallet live from Nansen and streams the five calls as they land, credits and latency on each row. After every round the **house rule** — a deterministic reader over the same four clues — shows how many of the ten it would have read right, so there is a bar to beat.
+Ten cards make a round; a seed makes the round shareable (`/r/meridian1933` is the recording's round — the same ten for everyone). **Draw fresh** pulls one unseen labelled wallet live from Nansen and streams the five calls as they land, credits and latency on each row. After every round the **house rule** — a deterministic reader over the same four clues — shows how many of the ten it would have read right, so there is a bar to beat.
 
 | Face up — the player sees numbers, never a label | Draw fresh — five live Nansen calls, then the card | Score — 7/10, per class, the house rule's 7/10 next to it |
 |---|---|---|
@@ -145,7 +145,7 @@ npm install
 
 | Step | Command | Measured (clean clone, 2026-09-18) |
 |---|---|---|
-| Play the recording's round with the answer key (0 credits) | `npm run labelme -- play --seed meridian --answers` | 1 s |
+| Play the recording's round with the answer key (0 credits) | `npm run labelme -- play --seed meridian1933 --answers` | 1 s |
 | Play interactively in the terminal | `npm run labelme -- play` | — |
 | Replay the deck offline | `npm run verify` | 1 s |
 | Draw one unseen wallet live (13 credits) | `export NANSEN_API_KEY=nsn_… && npm run labelme -- draw --explain` | 1–3 s |

@@ -23,9 +23,9 @@ test.describe("home", () => {
   });
 });
 
-test.describe("/r/meridian — the recording's round", () => {
+test.describe("/r/meridian1933 — the recording's round", () => {
   test("deals card 1 face up with no label; a guess reveals Nansen's answer and the tell; ten cards reach the score", async ({ page }) => {
-    await page.goto("/r/meridian");
+    await page.goto("/r/meridian1933");
     const card = page.locator(".round .wallet");
     await expect(card).toBeVisible();
     await expect(card).toContainText("Wallet 1 of 10");
@@ -39,10 +39,10 @@ test.describe("/r/meridian — the recording's round", () => {
     }
     await expect(page.locator(".score")).toBeVisible();
     await expect(page.locator(".score-big")).toContainText(/You read wallets \d+\/10/);
-    await expect(page).toHaveURL(/\/r\/meridian\?score=\d+$/);
+    await expect(page).toHaveURL(/\/r\/meridian1933\?score=\d+$/);
   });
   test("keys 1–5 guess and Enter advances", async ({ page }) => {
-    await page.goto("/r/meridian");
+    await page.goto("/r/meridian1933");
     await expect(page.locator(".round .wallet")).toBeVisible();
     await page.keyboard.press("3");
     await expect(page.locator(".reveal")).toBeVisible();
@@ -50,8 +50,8 @@ test.describe("/r/meridian — the recording's round", () => {
     await expect(page.locator(".round .wallet")).toContainText("Wallet 2 of 10");
   });
   test("the same seed deals the same ten ids (server API)", async ({ request }) => {
-    const a = await (await request.get("/api/round?seed=meridian")).json();
-    const b = await (await request.get("/api/round?seed=meridian")).json();
+    const a = await (await request.get("/api/round?seed=meridian1933")).json();
+    const b = await (await request.get("/api/round?seed=meridian1933")).json();
     expect(a.cards.map((c: { id: string }) => c.id)).toEqual(b.cards.map((c: { id: string }) => c.id));
     expect(a.cards).toHaveLength(10);
     expect(JSON.stringify(a)).not.toMatch(/"class":|"tell":/);
@@ -84,7 +84,7 @@ test.describe("/judge", () => {
     await page.goto("/judge");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(CLAIM);
     const pre = page.locator("pre");
-    await expect(pre.first()).toContainText("npm run labelme -- play --seed meridian --answers");
+    await expect(pre.first()).toContainText("npm run labelme -- play --seed meridian1933 --answers");
     await expect(pre.first()).toContainText("npm run labelme -- draw --explain");
     await expect(pre.first()).not.toContainText("OFFLINE");
     await expect(pre.nth(1)).toContainText("npm run verify");
@@ -93,17 +93,17 @@ test.describe("/judge", () => {
 
 test.describe("responsive + share", () => {
   test("no horizontal scroll on the round page", async ({ page }) => {
-    await page.goto("/r/meridian");
+    await page.goto("/r/meridian1933");
     await expect(page.locator(".round .wallet")).toBeVisible();
     const [sw, iw] = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
     expect(sw).toBeLessThanOrEqual(iw);
   });
   test("the OG image renders for a score and the permalink carries OG tags", async ({ request }) => {
-    const og = await request.get("/api/og?seed=meridian&score=7");
+    const og = await request.get("/api/og?seed=meridian1933&score=7");
     expect(og.status()).toBe(200);
     expect(og.headers()["content-type"]).toContain("image/png");
-    const html = await (await request.get("/r/meridian?score=7")).text();
+    const html = await (await request.get("/r/meridian1933?score=7")).text();
     expect(html).toContain("I read wallets 7/10");
-    expect(html).toContain("/api/og?seed=meridian&amp;score=7");
+    expect(html).toContain("/api/og?seed=meridian1933&amp;score=7");
   });
 });
