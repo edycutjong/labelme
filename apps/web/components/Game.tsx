@@ -31,6 +31,10 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
   const [drawBusy, setDrawBusy] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const abortRef = useRef<AbortController | undefined>(undefined);
+  // where "Back" from a draw returns to: the round in progress, the score card, or the idle home
+  const [returnPhase, setReturnPhase] = useState<Phase>(initialRound ? "play" : "idle");
+  const phaseRef = useRef<Phase>(phase);
+  phaseRef.current = phase;
 
   const current: CardFace | undefined = round?.cards[i];
   const correct = guessed.filter((g) => g.reveal.correct).length;
@@ -100,6 +104,7 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
     abortRef.current?.abort();
     const ctrl = new AbortController();
     abortRef.current = ctrl;
+    if (phaseRef.current !== "draw") setReturnPhase(phaseRef.current === "loading" ? "idle" : phaseRef.current);
     setPhase("draw");
     setRows([]);
     setDrawCard(undefined);
@@ -115,6 +120,7 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
       const reader = res.body.getReader();
       const dec = new TextDecoder();
       let buf = "";
+      let gotCard = false;
       for (;;) {
         const { value, done } = await reader.read();
         if (done) break;
@@ -130,27 +136,30 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
             setStatus(`Picked one of ${e.candidates} unseen ${CLASS_INFO[e.class as LabelClass].name} wallets on ${e.token} — pulling its clues…`);
           else if (e.type === "replay") setDrawReplay(e.message);
           else if (e.type === "card") {
+            gotCard = true;
             setDrawCard(e.card);
             setStatus("");
           } else if (e.type === "house") setDrawHouse(e);
           else if (e.type === "error") throw new Error(e.message);
         }
       }
-      setDrawCard((c) => {
-        if (!c) setError("Nansen busy — try again");
-        return c;
-      });
+      // REGRESSION (review pass 1): a stream that ended without a card left the page blank — say so
+      if (!gotCard) setError("Nansen busy — try again (the draw ended without a card)");
     } catch (e) {
       if ((e as Error).name !== "AbortError") setError(`Nansen busy — try again (${(e as Error).message.slice(0, 120)})`);
     } finally {
-      setDrawBusy(false);
-      setStatus("");
+      // REGRESSION (review pass 1): only the draw that is still current may clear the busy flag and status —
+      // an aborted earlier draw must not wipe the new one's "Asking Nansen…" line
+      if (abortRef.current === ctrl) {
+        setDrawBusy(false);
+        setStatus("");
+      }
     }
   }, []);
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
-      if (ev.target instanceof HTMLInputElement) return;
+      if (ev.target instanceof HTMLInputElement || ev.target instanceof HTMLButtonElement) return;
       const n = Number(ev.key);
       if (n >= 1 && n <= DECK_CLASSES.length) {
         if (phase === "play" && !reveal) guess(DECK_CLASSES[n - 1]);
@@ -392,7 +401,7 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
                     Provenance · {rows.length} calls
                   </button>
                 )}
-                <button type="button" className="btn" onClick={() => (round ? setPhase("done") : setPhase("idle"))}>
+                <button type="button" className="btn" onClick={() => setPhase(returnPhase)}>
                   Back
                 </button>
               </div>
@@ -403,7 +412,7 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
               <button type="button" className="btn primary" onClick={() => draw()}>
                 Try again
               </button>
-              <button type="button" className="btn" onClick={() => setPhase(round ? "done" : "idle")}>
+              <button type="button" className="btn" onClick={() => setPhase(returnPhase)}>
                 Back
               </button>
             </div>

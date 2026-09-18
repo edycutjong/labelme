@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { extractPnl, extractTrades, extractBalance, extractCounterparties, fetchClues, MIX_KEYS } from "../src/clues.js";
+import { extractPnl, extractTrades, extractBalance, extractCounterparties, fetchClues, allFailed, MIX_KEYS } from "../src/clues.js";
 import { fakeClient, clueRoutes, ADDR } from "./helpers.js";
 
 describe("extractPnl", () => {
@@ -152,6 +152,14 @@ describe("fetchClues — four calls in parallel, sections degrade independently"
     expect(clues.pnl.ok).toBe(true);
     expect(clues.empty).toBe(false);
     expect(c.calls.find((x) => x.endpoint === "profiler/address/counterparties")!.ok).toBe(false);
+  });
+  it("allFailed is true only when all four sections failed (a burn address: HTTP 422 ×4)", async () => {
+    const c = fakeClient(() => new Response('{"error":"Burn address not allowed"}', { status: 422 }));
+    const { clues, failures } = await fetchClues(c, ADDR(5), Date.now());
+    expect(allFailed(clues)).toBe(true);
+    expect(failures).toHaveLength(4);
+    const c2 = fakeClient(clueRoutes("empty"));
+    expect(allFailed((await fetchClues(c2, ADDR(6), Date.now())).clues)).toBe(false);
   });
   it("an address with nothing anywhere is an empty card (still a card)", async () => {
     const c = fakeClient(clueRoutes("empty"));

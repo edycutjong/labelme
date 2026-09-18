@@ -4,7 +4,7 @@ import { classFromTag, tagIsNeutral, isPoolTag, type LabelClass } from "./classe
 import { buildCard, type Card } from "./card.js";
 import { TOKENS } from "./sources.js";
 import { rng, shuffle } from "./round.js";
-import type { ClueFailure } from "./clues.js";
+import { allFailed, type ClueFailure } from "./clues.js";
 
 export type DrawEvent =
   | { type: "call"; call: Call }
@@ -122,6 +122,9 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
     now,
   );
   for (const call of c.calls.slice(before)) opts.onProgress?.({ type: "call", call });
+  // REGRESSION (review pass 1): four failed clue calls are not a card — the page must show an error, not four "unavailable" panels
+  if (allFailed(result.card.clues))
+    throw new Error(`Nansen returned no clues for ${pick.address.slice(0, 10)}… (${result.failures.map((f) => f.error.slice(0, 60)).join("; ")}) — try again`);
   opts.onProgress?.({ type: "card", card: result.card });
   return result;
 }

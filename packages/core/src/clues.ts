@@ -170,6 +170,11 @@ export function extractCounterparties(
   };
 }
 
+/** true when every clue call failed — there is no card to read, only an error to show */
+export function allFailed(c: Clues): boolean {
+  return !c.pnl.ok && !c.trades.ok && !c.balance.ok && !c.counterparties.ok;
+}
+
 export type ClueFailure = { section: "pnl" | "trades" | "balance" | "counterparties"; error: string };
 
 /**

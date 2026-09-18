@@ -9,6 +9,7 @@ import {
   drawCard,
   buildCard,
   read,
+  allFailed,
   randomSeed,
   normalizeSeed,
   CLASS_INFO,
@@ -193,7 +194,9 @@ if (cmd === "card") {
   }
   console.log("\n" + renderFace(card.clues, `${address} · ethereum`));
   for (const f of failures) console.log(`${R}✗ ${f.section}: ${f.error}${X}`);
-  console.log(`${D}house rule reads:${X} ${B}${CLASS_INFO[h.guess].name}${X} ${D}— ${h.because}${X}`);
+  // REGRESSION (review pass 1): an address every Nansen call refused (a burn address → HTTP 422) is not "a regular wallet"
+  if (allFailed(card.clues)) console.log(`${R}${B}no clues${X} ${D}— every Nansen call failed for this address; nothing to read${X}`);
+  else console.log(`${D}house rule reads:${X} ${B}${CLASS_INFO[h.guess].name}${X} ${D}— ${h.because}${X}`);
   if (known)
     console.log(
       `${D}Nansen (from the deck):${X} ${G}${CLASS_INFO[known.class].name}${X}${known.entity ? ` · ${known.entity}` : ""}${known.nansenLabel ? ` · tag "${known.nansenLabel}"` : ""}`,

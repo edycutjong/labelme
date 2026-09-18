@@ -107,3 +107,35 @@ test.describe("responsive + share", () => {
     expect(html).toContain("/api/og?seed=meridian1933&amp;score=7");
   });
 });
+
+test.describe("review pass 1 regressions", () => {
+  test("Draw fresh in the middle of a round, then Back, returns to the same card with the score intact", async ({ page }) => {
+    await page.goto("/r/meridian1933");
+    await expect(page.locator(".round .wallet")).toBeVisible();
+    await page.keyboard.press("1");
+    await expect(page.locator(".reveal")).toBeVisible();
+    await page.keyboard.press("Enter");
+    await expect(page.locator(".round .wallet")).toContainText("Wallet 2 of 10");
+    await page.getByRole("button", { name: /Draw fresh/ }).click();
+    await expect(page.locator(".round .wallet")).toContainText("Replayed card");
+    await page.getByRole("button", { name: "Back" }).click();
+    await expect(page.locator(".round .wallet")).toContainText("Wallet 2 of 10");
+    await expect(page.locator(".dots-text")).toContainText("1/1 right");
+  });
+  test("a percent-encoded seed in the permalink never 500s", async ({ request }) => {
+    for (const p of ["/r/%25", "/r/%E0%A4%A", "/r/a%2Fb", "/r/..%2F..", "/r/%00"]) {
+      const res = await request.get(p);
+      expect(res.status(), p).toBeLessThan(500);
+    }
+  });
+  test("Enter on the focused Next button advances exactly one card", async ({ page }) => {
+    await page.goto("/r/meridian1933");
+    await expect(page.locator(".round .wallet")).toBeVisible();
+    await page.keyboard.press("2");
+    await expect(page.locator(".reveal")).toBeVisible();
+    await page.locator(".actions .btn.primary").focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator(".round .wallet")).toContainText("Wallet 2 of 10");
+    await expect(page.locator(".reveal")).toHaveCount(0);
+  });
+});

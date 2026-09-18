@@ -22,7 +22,7 @@ export {
   EXCHANGE_MARK,
 } from "./classes.js";
 export type { LabelClass, ClassInfo, CounterpartyClass } from "./classes.js";
-export { fetchClues, extractPnl, extractTrades, extractBalance, extractCounterparties, STABLECOINS, MIX_KEYS } from "./clues.js";
+export { fetchClues, extractPnl, extractTrades, extractBalance, extractCounterparties, allFailed, STABLECOINS, MIX_KEYS } from "./clues.js";
 export type { Clues, ClueFailure } from "./clues.js";
 export { tell, fmtUsd, pct } from "./tell.js";
 export { read, READER } from "./reader.js";

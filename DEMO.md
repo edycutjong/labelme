@@ -141,7 +141,7 @@ Every row is one Nansen call: endpoint, credits taken from `x-nansen-credits-cos
 git clone https://github.com/edycutjong/labelme && cd labelme && npm install   # ≈ 10 s
 npm run labelme -- play --seed meridian1933 --answers   # section 1, 0 credits
 npm run verify                                       # 62/62 cards reproduced offline, 0 network
-npm test                                             # 94 tests, no key
+npm test                                             # 96 tests, no key
 npm run reader                                       # the house rule's confusion matrix on the deck
 export NANSEN_API_KEY=nsn_…
 npm run labelme -- draw --explain                    # section 2, ≤ 13 credits

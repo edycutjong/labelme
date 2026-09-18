@@ -71,8 +71,8 @@ export function WalletCard({
           {t.ok ? (
             t.rows.length ? (
               <ul className="trades">
-                {t.rows.slice(0, 4).map((r) => (
-                  <li key={r.symbol + r.buys + r.sells}>
+                {t.rows.slice(0, 4).map((r, n) => (
+                  <li key={`${n}-${r.symbol}`}>
                     <span className="mono">{r.symbol}</span>
                     <span className={r.pnlUsd !== null && r.pnlUsd < 0 ? "down" : r.pnlUsd ? "up" : ""}>{signed(r.pnlUsd)}</span>
                     <span className="muted">

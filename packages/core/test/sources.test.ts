@@ -124,6 +124,13 @@ describe("drawCard — one fresh card, live, streamed", () => {
     const { card } = await drawCard(c, { class: "contract", seed: "s" });
     expect(card.address).toBe(ADDR("pool"));
   });
+  it("REGRESSION (review pass 1): four failed clue calls are an error, not a card of four unavailable panels", async () => {
+    const c = fakeClient((e, b) => (e.startsWith("profiler/") ? new Response('{"error":"Burn address not allowed"}', { status: 422 }) : routes(e, b)));
+    const events: string[] = [];
+    await expect(drawCard(c, { class: "whale", seed: "s", onProgress: (e) => events.push(e.type) })).rejects.toThrow(/no clues/);
+    expect(events).not.toContain("card");
+    expect(events.filter((e) => e === "call")).toHaveLength(5);
+  });
   it("a sourcing failure surfaces as an error after the call event", async () => {
     const c = fakeClient((e, b) => (e === "tgm/holders" ? new Response("down", { status: 503 }) : routes(e, b)));
     const events: string[] = [];

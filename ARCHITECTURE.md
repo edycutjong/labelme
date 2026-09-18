@@ -35,7 +35,7 @@ flowchart TB
 - `npm run verify` — every card replayed with `NANSEN_OFFLINE=1` from its own recorded responses; asserts `cardHash`, the clue/tell projection, exactly 4 calls, 0 network, 0 credits, no key in the file; `deck.json` matches the files. `--update` rebuilds cards from the untouched responses after an output-only change.
 - `npm run reader` — accuracy + confusion matrix of the house rule on the deck.
 - `npm run bench` — N live draws, cold/warm p50/p95, credits and calls per draw, out-of-sample house accuracy → `docs/BENCH.md`.
-- `npm test` — 94 vitest tests: client (retry, timeout, header credits, redaction, rate limit), cache (keys, TTL 0, offline), classes, clue extraction, tell, reader, card hash/projection/face, round determinism and balance, sourcing precedence, draw events and fallbacks, fixture round-trip, the committed deck's invariants, and 6 fast-check properties × 2,000 runs.
+- `npm test` — 96 vitest tests: client (retry, timeout, header credits, redaction, rate limit), cache (keys, TTL 0, offline), classes, clue extraction, tell, reader, card hash/projection/face, round determinism and balance, sourcing precedence, draw events and fallbacks, fixture round-trip, the committed deck's invariants, and 6 fast-check properties × 2,000 runs.
 
 ## Web
 
