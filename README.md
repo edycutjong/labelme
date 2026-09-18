@@ -168,7 +168,7 @@ npm run bench -- --runs 10   # ~130 credits → docs/BENCH.md
 npm run seed -- --dry        # gather + resolve candidates only (≈ 100 credits of sourcing pages, cached after)
 ```
 
-CI (`.github/workflows/ci.yml`): quality (format · lint · typecheck · tests + coverage · verify · readiness) ∥ security (TruffleHog full history · npm audit · licenses) → build → deploy gate. No key in CI — every stage is offline.
+CI/CD (`.github/workflows/ci.yml`): quality (format · lint · typecheck · tests + coverage · verify · readiness) ∥ security (TruffleHog full history · npm audit · licenses) → build → e2e (Playwright, keyless) → deploy gate → **production deploy** on push to `main` (`vercel build` on the runner, `vercel deploy --prebuilt --prod`, then the stable alias is re-pointed). No key in CI — every stage before the deploy is offline; the deploy needs only `VERCEL_TOKEN`.
 
 Releases: semantic versions cut automatically from Conventional Commits (`release.yml` after a green pipeline on `main` — `feat:` minor, `fix:`/`perf:` patch, `!` major; bumps every `package.json`, tags, publishes with generated notes). `npm run release` (`--dry-run` to preview) runs the same algorithm locally when Actions is unavailable. The footer version on the site is the released `package.json` version.
 
