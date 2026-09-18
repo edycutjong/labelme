@@ -98,6 +98,15 @@ test.describe("responsive + share", () => {
     const [sw, iw] = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
     expect(sw).toBeLessThanOrEqual(iw);
   });
+  test("REGRESSION (audit 2026-09-19): no horizontal scroll on / and /judge at 320 px (the example's fixture path overflowed)", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    for (const path of ["/", "/judge"]) {
+      await page.goto(path);
+      await expect(page.locator("h1")).toBeVisible();
+      const [sw, iw] = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
+      expect(sw, path).toBeLessThanOrEqual(iw);
+    }
+  });
   test("the OG image renders for a score and the permalink carries OG tags", async ({ request }) => {
     const og = await request.get("/api/og?seed=meridian1933&score=7");
     expect(og.status()).toBe(200);
@@ -105,6 +114,31 @@ test.describe("responsive + share", () => {
     const html = await (await request.get("/r/meridian1933?score=7")).text();
     expect(html).toContain("I read wallets 7/10");
     expect(html).toContain("/api/og?seed=meridian1933&amp;score=7");
+  });
+});
+
+test.describe("audit 2026-09-19 regressions", () => {
+  test("keys 1–5 still guess after a button took the focus (clicking the recorded-round chip)", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /the recorded round/ }).click();
+    await expect(page.locator(".round .wallet")).toBeVisible();
+    await page.keyboard.press("2");
+    await expect(page.locator(".reveal")).toBeVisible();
+    await expect(page.locator(".dots-text")).toContainText("/1 right");
+  });
+  test("a contract card that sits in Nansen's Exchange group says so on the reveal (meridian1933 card 10)", async ({ page, request }) => {
+    const r = (await (await request.get("/api/round?seed=meridian1933")).json()) as { cards: { id: string }[] };
+    const a = (await (await request.get(`/api/reveal?id=${r.cards[9].id}&guess=exchange`)).json()) as { class: string; source: { labelType: string } };
+    expect(a.class).toBe("contract");
+    expect(a.source.labelType).toBe("exchange");
+    await page.goto("/r/meridian1933");
+    for (let i = 0; i < 9; i++) {
+      await page.keyboard.press("1");
+      await expect(page.locator(".reveal")).toBeVisible();
+      await page.keyboard.press("Enter");
+    }
+    await page.keyboard.press("2");
+    await expect(page.locator(".reveal")).toContainText("in Nansen's Exchange group");
   });
 });
 

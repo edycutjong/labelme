@@ -40,7 +40,7 @@ export function renderReveal(card: Card, guess?: LabelClass): string {
   const ok = guess === card.class;
   const head = guess ? (ok ? `${G}${B}✔ correct${X}` : `${R}${B}✖ ${CLASS_INFO[guess].name}${X}`) : "";
   return [
-    `${head}${guess ? " — " : ""}${B}${CLASS_INFO[card.class].name}${X}${card.entity ? ` · ${card.entity}` : ""}${card.nansenLabel ? ` · tag "${card.nansenLabel}"` : ""}`,
+    `${head}${guess ? " — " : ""}${B}${CLASS_INFO[card.class].name}${X}${card.entity ? ` · ${card.entity}` : ""}${card.nansenLabel ? ` · tag "${card.nansenLabel}"` : ""}${card.source.labelType === "exchange" && card.class !== "exchange" ? ` · in Nansen's Exchange group` : ""}`,
     `${D}${card.address} · Nansen said so via ${card.source.endpoint}${card.source.labelType ? ` label_type=${card.source.labelType}` : ""}${card.source.token ? ` on ${card.source.token}` : ""}${X}`,
     `${D}tell:${X} ${card.tell}`,
   ].join("\n");
@@ -53,6 +53,8 @@ export function renderCall(c: Call): string {
 
 export function classByKey(input: string): LabelClass | undefined {
   const s = input.trim().toLowerCase();
+  // REGRESSION (audit 2026-09-19): "".startsWith matched every class name, so a bare Enter guessed Smart Money
+  if (!s) return undefined;
   const i = Number(s);
   if (Number.isInteger(i) && i >= 1 && i <= DECK_CLASSES.length) return DECK_CLASSES[i - 1];
   return DECK_CLASSES.find((k) => k === s || CLASS_INFO[k].name.toLowerCase().startsWith(s) || CLASS_INFO[k].short.toLowerCase() === s);

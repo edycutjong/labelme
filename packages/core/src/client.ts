@@ -98,6 +98,12 @@ export class NansenClient {
   private fetchImpl: typeof fetch;
   /** Every call made through this client, in order. */
   readonly calls: Call[] = [];
+  /** Fires the moment a call is recorded (live, cached or failed) — the draw stream emits provenance rows as they land. */
+  onCall?: (call: Call) => void;
+  protected record(call: Call): void {
+    this.calls.push(call);
+    this.onCall?.(call);
+  }
 
   constructor(
     private apiKey: string,
@@ -117,7 +123,7 @@ export class NansenClient {
     const t0 = Date.now();
     try {
       const { text, ms, status, attempts, totalMs, reportedCredits } = await this.postRaw(endpoint, body, opts);
-      this.calls.push({
+      this.record({
         endpoint,
         body,
         credits: reportedCredits ?? CREDITS[endpoint] ?? 1,
@@ -143,7 +149,7 @@ export class NansenClient {
     const status = e instanceof NansenError ? e.status : 0;
     const error = e instanceof Error ? (e.name === "AbortError" ? "timeout" : e.message.slice(0, 120)) : String(e);
     const attempts = (e as { attempts?: number })?.attempts ?? 1;
-    this.calls.push({ endpoint, body, credits: 0, ms: 0, cached: false, status, fieldsUsed, responseHash: "", attempts, totalMs, ok: false, error });
+    this.record({ endpoint, body, credits: 0, ms: 0, cached: false, status, fieldsUsed, responseHash: "", attempts, totalMs, ok: false, error });
   }
 
   /** The network call itself, returning the raw body so callers (and the cache) hash exactly what Nansen sent. */

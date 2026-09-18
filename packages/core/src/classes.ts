@@ -55,6 +55,12 @@ export const ENTITY_TAG =
 export const POOL_TAG = /liquidity pool|uniswap|sushi|curve|balancer|pancake|\bpool\b/i;
 /** Nansen's exchange marker on entity labels ("🏦 Binance", "🤖 🏦 Luno: Wallet"); a pool label carries it too (DEX) and stays a contract */
 export const EXCHANGE_MARK = /🏦/u;
+/**
+ * An entity label that names the CONTRACT itself ("🤖 🏦 Gnosis Safe Proxy") — the 🏦 says who owns the code, the name says
+ * what the wallet is; it stays a contract (the recorded deck: 0xee136c… in Nansen's Exchange group, tagged Proxy). Narrow on purpose:
+ * "🏦 Kraken: Staking" or "🏦 Binance: Hot Wallet" must stay exchanges.
+ */
+export const SAFE_ENTITY = /gnosis safe|\bsafe\b|\bproxy\b|multisig|multi-sig/i;
 /** a pool tag that is not an ENS name ("uniswap.eth" is a person) */
 export function isPoolTag(tag: string | null | undefined): boolean {
   const t = (tag ?? "").trim();
@@ -63,11 +69,14 @@ export function isPoolTag(tag: string | null | undefined): boolean {
 
 /**
  * When the 1-credit tx-lookup returned an entity label for the wallet itself, it outranks the free-tier tag:
- * a pool is a contract, anything else Nansen marks 🏦 is an exchange; otherwise the class stands.
+ * a pool or a Safe/Proxy/MultiSig is a contract, anything else Nansen marks 🏦 is an exchange; otherwise the class stands.
+ * REGRESSION (audit 2026-09-19): the deck's `0xee136c…` (🤖 🏦 Gnosis Safe Proxy, tagged Proxy) is recorded as a contract — this rule
+ * must reproduce every committed answer key, or `npm run seed` would silently re-deal the recording's round.
  */
 export function classFromEntity(entity: string | null | undefined, fallback: LabelClass): LabelClass {
   if (!entity) return fallback;
   if (isPoolTag(entity)) return "contract";
+  if (!ENS_TAG.test(entity) && SAFE_ENTITY.test(entity)) return "contract";
   if (EXCHANGE_MARK.test(entity)) return "exchange";
   return fallback;
 }

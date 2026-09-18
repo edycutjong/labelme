@@ -21,8 +21,8 @@ A card game on labelled ethereum wallets: PnL summary, top trades, balance profi
 | Live draw, benchmarked | 10 draws: **cold p50 2.1 s · p95 2.6 s · warm 1 ms · 12.2 credits / 5 calls per draw · 0 failed**; the house rule read 7/10 fresh cards (out-of-sample) — [docs/BENCH.md](docs/BENCH.md) is the script's output |
 | The house rule | a deterministic reader over the same four clues reads **50/62** of the deck (thresholds in [docs/RULES.md](docs/RULES.md), set on this deck — in-sample; the bench is out-of-sample) |
 | Nansen endpoints | `tgm/holders` (label_type smart_money · exchange · public_figure · plain · label-excluded) · `tgm/who-bought-sold` (label-excluded) · `smart-money/dex-trades` · `profiler/address/pnl-summary` · `profiler/address/pnl` · `profiler/address/current-balance` · `profiler/address/counterparties` · `profiler/address/transactions` + `transaction-with-token-transfer-lookup` |
-| Tests | **96 tests** (vitest) · **12,000 generated cases** (fast-check) · **10,000 generated malformed ids** rejected before any network call · 26 Playwright runs (13 tests × desktop + Pixel 7) on a built app with no key |
-| Clean clone → first output | **6 s** to the first round, **9 s** through verify and the 96 tests (clone 1 s · install 4 s · round 1 s · verify < 1 s · tests 3 s; timed 2026-09-18) |
+| Tests | **102 tests** (vitest) · **12,000 generated cases** (fast-check) · **10,000 generated malformed ids** rejected before any network call · 32 Playwright runs (16 tests × desktop + Pixel 7) on a built app with no key |
+| Clean clone → first output | **7 s** to the first round, **11 s** through verify and the 102 tests (clone 2 s · install 5 s · round < 1 s · verify 1 s · tests 3 s; re-measured 2026-09-19; 6 s / 9 s on 2026-09-18) |
 
 ## Reproduce
 

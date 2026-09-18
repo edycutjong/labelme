@@ -83,6 +83,29 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
       ? [Object.entries(POOL_RICH_TOKENS)[0], ...shuffle(Object.entries(POOL_RICH_TOKENS).slice(1), next)]
       : shuffle(Object.entries(TOKENS), next);
   const deepPage = cls === "whale" || cls === "contract";
+  // REGRESSION (audit 2026-09-19): every call is emitted the moment the client records it — the four clue calls run in parallel and
+  // used to be emitted as one batch after the slowest landed, so the page could not show rows "as they land"
+  const prevOnCall = c.onCall;
+  c.onCall = (call) => {
+    prevOnCall?.(call);
+    opts.onProgress?.({ type: "call", call });
+  };
+  try {
+    return await drawInner(c, opts, cls, tokens, deepPage, now, next);
+  } finally {
+    c.onCall = prevOnCall;
+  }
+}
+
+async function drawInner(
+  c: NansenClient,
+  opts: DrawOptions,
+  cls: LabelClass,
+  tokens: [string, string][],
+  deepPage: boolean,
+  now: number,
+  next: () => number,
+): Promise<{ card: Card; failures: ClueFailure[] }> {
   let fresh: Awaited<ReturnType<typeof candidatesFor>> = [];
   let sym = "";
   let page: number | undefined;
@@ -90,13 +113,7 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
   for (const [trySym, token] of tokens.slice(0, cls === "smart-money" ? 1 : 3)) {
     sym = trySym;
     page = deepPage ? 1 + Math.floor(next() * 3) : 1;
-    const seenBefore = c.calls.length;
-    let rows: Awaited<ReturnType<typeof candidatesFor>>;
-    try {
-      rows = await candidatesFor(c, cls, token, page, now);
-    } finally {
-      for (const call of c.calls.slice(seenBefore)) opts.onProgress?.({ type: "call", call });
-    }
+    const rows = await candidatesFor(c, cls, token, page, now);
     fresh = rows.filter((r) => !opts.exclude?.has(r.address.toLowerCase()));
     opts.onProgress?.({
       type: "picked",
@@ -110,7 +127,6 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
   if (fresh.length === 0) throw new Error(`no unseen ${cls} wallet on the sourcing pages tried — try again`);
   // smart-money: prefer a row that will have trades; we cannot know before the clues, so pick at random and accept the card as dealt
   const pick = fresh[Math.floor(next() * fresh.length)];
-  const before = c.calls.length;
   const result = await buildCard(
     c,
     {
@@ -121,7 +137,6 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
     },
     now,
   );
-  for (const call of c.calls.slice(before)) opts.onProgress?.({ type: "call", call });
   // REGRESSION (review pass 1): four failed clue calls are not a card — the page must show an error, not four "unavailable" panels
   if (allFailed(result.card.clues))
     throw new Error(`Nansen returned no clues for ${pick.address.slice(0, 10)}… (${result.failures.map((f) => f.error.slice(0, 60)).join("; ")}) — try again`);

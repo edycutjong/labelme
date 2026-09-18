@@ -53,6 +53,13 @@ describe("classFromEntity — the 1-credit entity label outranks the tag", () =>
     expect(classFromEntity("🤖 🏦 Uniswap: V2 PEPE-WETH Liquidity Pool  [0xa43fe1]", "exchange")).toBe("contract");
     expect(classFromEntity("🤖 Multisig [0x5b97a1]", "contract")).toBe("contract");
     expect(classFromEntity(null, "whale")).toBe("whale");
+  });
+  it("REGRESSION (audit 2026-09-19): an entity that names the contract itself stays a contract even with 🏦; an exchange's wallet does not", () => {
+    expect(classFromEntity("🤖 🏦 Gnosis Safe Proxy [0xee136c]", "contract")).toBe("contract"); // deck card, recording's round card 10
+    expect(classFromEntity("🤖 🏦 Gnosis Safe Proxy [0xee136c]", "exchange")).toBe("contract");
+    expect(classFromEntity("🤖 🏦 CoinEx: Cold Wallet [0x548054]", "contract")).toBe("exchange");
+    expect(classFromEntity("🏦 Kraken: Staking [0x000000]", "whale")).toBe("exchange");
+    expect(classFromEntity("safe.eth", "regular")).toBe("regular");
     expect(classFromEntity("", "regular")).toBe("regular");
   });
   it("POOL_TAG is strict enough that a MultiSig or Proxy is not a pool; isPoolTag rejects ENS names like uniswap.eth", () => {

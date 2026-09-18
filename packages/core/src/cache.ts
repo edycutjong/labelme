@@ -96,7 +96,7 @@ export class CachedNansenClient extends NansenClient {
     const hit = this.ttlMs > 0 || this.offline ? this.store.get(key) : undefined;
     const fresh = hit && Date.now() - Date.parse(hit.storedAt) < this.ttlMs;
     if (hit && (fresh || this.offline)) {
-      this.calls.push({
+      this.record({
         endpoint,
         body,
         credits: 0,
@@ -122,7 +122,7 @@ export class CachedNansenClient extends NansenClient {
       throw e;
     }
     const { text, ms, status, attempts, totalMs, reportedCredits } = raw;
-    this.calls.push({
+    this.record({
       endpoint,
       body,
       credits: reportedCredits ?? CREDITS[endpoint] ?? 1,

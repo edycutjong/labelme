@@ -20,6 +20,7 @@ export {
   isPoolTag,
   POOL_TAG,
   EXCHANGE_MARK,
+  SAFE_ENTITY,
 } from "./classes.js";
 export type { LabelClass, ClassInfo, CounterpartyClass } from "./classes.js";
 export { fetchClues, extractPnl, extractTrades, extractBalance, extractCounterparties, allFailed, STABLECOINS, MIX_KEYS } from "./clues.js";

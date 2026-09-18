@@ -26,6 +26,7 @@ export function Example({ card, deckSize, house }: { card: Card; deckSize: numbe
             </b>
             {card.entity && <span className="reveal-entity">{card.entity}</span>}
             {card.nansenLabel && <span className="fact">tag “{card.nansenLabel}”</span>}
+            {card.source.labelType === "exchange" && card.class !== "exchange" && <span className="fact">in Nansen&apos;s Exchange group</span>}
           </div>
           <p className="tell">{card.tell}</p>
           <p className="provenance">
@@ -87,7 +88,7 @@ export function HowItDecides({ deckSize, house }: { deckSize: number; house: num
           replay offline
         </li>
         <li>
-          <b>{PROOF.creditsPerDraw}</b> credits per live draw · <b>{PROOF.coldP50s} s</b> cold p50
+          <b>{PROOF.creditsPerDraw}</b> credits per live draw (mean) · <b>{PROOF.coldP50s} s</b> cold p50
         </li>
         <li>
           house rule{" "}

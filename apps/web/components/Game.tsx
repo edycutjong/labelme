@@ -159,7 +159,10 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
-      if (ev.target instanceof HTMLInputElement || ev.target instanceof HTMLButtonElement) return;
+      if (ev.target instanceof HTMLInputElement || ev.target instanceof HTMLTextAreaElement) return;
+      // REGRESSION (audit 2026-09-19): a focused button owns Enter/Space only — after clicking "the recorded round" chip the
+      // focus sits on that button and keys 1–5 went dead until the player clicked elsewhere
+      if (ev.target instanceof HTMLButtonElement && (ev.key === "Enter" || ev.key === " ")) return;
       const n = Number(ev.key);
       if (n >= 1 && n <= DECK_CLASSES.length) {
         if (phase === "play" && !reveal) guess(DECK_CLASSES[n - 1]);
@@ -220,6 +223,7 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
           </b>
           {a.entity && <span className="reveal-entity">{a.entity}</span>}
           {a.nansenLabel && <span className="fact">tag “{a.nansenLabel}”</span>}
+          {a.source.labelType === "exchange" && a.class !== "exchange" && <span className="fact">in Nansen&apos;s Exchange group</span>}
         </div>
         <p className="tell">{a.tell}</p>
         <p className="provenance">

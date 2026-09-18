@@ -6,7 +6,9 @@ import { gatherCandidates } from "../src/sources.js";
 import { drawCard } from "../src/draw.js";
 import { writeCardFixture, readCardFixture, listCardFixtures, fixtureStore, loadDeck, deckExists, writeDeckFile, writeDropped } from "../src/fixtures.js";
 import { CachedNansenClient, MemoryCache } from "../src/cache.js";
+import { NansenClient } from "../src/client.js";
 import { finishCard, buildCard } from "../src/card.js";
+import { classFromEntity, classFromTag, isPoolTag, tagIsNeutral } from "../src/classes.js";
 import { fakeClient, fakeFetch, clueRoutes, clues, ADDR, KEY } from "./helpers.js";
 
 const holder = (address: string, label: string | null) => ({ address, address_label: label, value_usd: 1, token_amount: 1, ownership_percentage: 0 });
@@ -102,6 +104,25 @@ describe("drawCard — one fresh card, live, streamed", () => {
     expect(events.at(-1)).toBe("card");
     expect(c.creditsSpent).toBe(13);
   });
+  it("REGRESSION (audit 2026-09-19): clue rows are emitted as each call lands, not as one batch after the slowest", async () => {
+    const slow = async (endpoint: string, body: Record<string, unknown>) => {
+      if (endpoint === "profiler/address/counterparties") await new Promise((r) => setTimeout(r, 300));
+      return routes(endpoint, body);
+    };
+    const c = new NansenClient(KEY, {
+      rps: 1000,
+      fetchImpl: async (url, init) =>
+        fakeFetch(routes)(url, init).then(async (r) => (await slow(String(url).replace("https://api.nansen.ai/api/v1/", ""), {}), r)),
+    });
+    const stamps: { endpoint: string; at: number }[] = [];
+    const t0 = Date.now();
+    await drawCard(c, { class: "whale", seed: "s", onProgress: (e) => e.type === "call" && stamps.push({ endpoint: e.call.endpoint, at: Date.now() - t0 }) });
+    const fast = stamps.filter((s) => /pnl|balance/.test(s.endpoint)).map((s) => s.at);
+    const cp = stamps.find((s) => s.endpoint === "profiler/address/counterparties")!.at;
+    expect(fast).toHaveLength(3);
+    for (const at of fast) expect(cp - at).toBeGreaterThanOrEqual(200);
+    expect(c.onCall).toBeUndefined(); // the hook is restored after the draw
+  });
   it("smart-money draws come from the live trade feed (active by construction)", async () => {
     const c = fakeClient(routes);
     const { card } = await drawCard(c, { class: "smart-money", seed: "s" });
@@ -192,6 +213,17 @@ describe("fixtures — write, list, read, replay", () => {
       expect(c.cardHash).toBe(
         finishCard({ address: c.address, class: c.class, nansenLabel: c.nansenLabel, entity: c.entity, source: c.source }, c.clues, c.now).cardHash,
       );
+  });
+  it("REGRESSION (audit 2026-09-19): every committed answer key is what the code's own rules would deal today", () => {
+    // if this fails, `npm run seed` would re-class a card and silently change the recording's round (meridian1933)
+    for (const c of loadDeck()) {
+      expect(classFromEntity(c.entity, c.class), `${c.address} entity ${c.entity}`).toBe(c.class);
+      if (c.class === "regular") expect(tagIsNeutral(c.nansenLabel), `${c.address} tag ${c.nansenLabel}`).toBe(true);
+      if (c.class === "whale") expect(classFromTag(c.nansenLabel), `${c.address} tag ${c.nansenLabel}`).toBe("whale");
+      if (c.class === "contract") expect(classFromTag(c.nansenLabel) === "contract" || isPoolTag(c.entity), `${c.address}`).toBe(true);
+      if (c.class === "smart-money") expect(c.clues.pnl.trades, `${c.address} dormant`).toBeGreaterThanOrEqual(5);
+      expect(c.clues.empty, `${c.address} empty`).toBe(false);
+    }
   });
   it("a card built from empty clues is still a valid card", () => {
     const c = finishCard(

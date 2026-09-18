@@ -73,8 +73,8 @@ export default function Judge() {
             <tr>
               <th>Live draw, benchmarked</th>
               <td>
-                cold p50 <b>{PROOF.coldP50s} s</b>, <b>{PROOF.creditsPerDraw} credits</b> / 5 calls per draw; out-of-sample house-reader score on the fresh
-                cards — <a href={`${REPO}/blob/main/docs/BENCH.md`}>docs/BENCH.md</a> is the script&rsquo;s output
+                10 draws: cold p50 <b>{PROOF.coldP50s} s</b> · p95 2.6 s · warm 1 ms · <b>{PROOF.creditsPerDraw} credits</b> / 5 calls per draw · 0 failed; the
+                house rule read 7/10 fresh cards (out-of-sample) — <a href={`${REPO}/blob/main/docs/BENCH.md`}>docs/BENCH.md</a> is the script&rsquo;s output
               </td>
             </tr>
             <tr>
@@ -107,7 +107,9 @@ export default function Judge() {
             </tr>
             <tr>
               <th>Clean clone → first output</th>
-              <td>{PROOF.cloneSeconds ? `${PROOF.cloneSeconds} s of machine time` : "measured in README (timed clean clone)"}</td>
+              <td>
+                <b>{PROOF.cloneSeconds} s</b> of machine time through verify and the tests (timed clean clone from GitHub, 2026-09-19; the steps are in README)
+              </td>
             </tr>
           </tbody>
         </table>
@@ -141,7 +143,10 @@ npm run labelme -- draw --explain                    # one unseen wallet live: f
             A dormant Smart Money wallet (0 trades this month) is unreadable from cheap clues; the deck keeps only active ones (≥ 5 trades), a live draw can
             still deal one and says so in the tell.
           </li>
-          <li>Nansen latency swings by the minute; a live draw takes 2–12 s cold. The default round never touches the network.</li>
+          <li>
+            Nansen latency swings by the minute; a live draw takes 1–3 s cold on Vercel, up to 12 s on a bad minute. The default round never touches the
+            network.
+          </li>
         </ul>
 
         <h2>Links</h2>

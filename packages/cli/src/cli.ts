@@ -21,7 +21,11 @@ import { renderFace, renderChoices, renderReveal, renderCall, classByKey, G, R, 
 
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith("--")));
-const opt = (k: string) => (args.includes(k) ? args[args.indexOf(k) + 1] : undefined);
+/** the value after a flag; a following flag is not a value (`--seed --answers` is an absent seed, not the seed "--answers") */
+const opt = (k: string) => {
+  const v = args.includes(k) ? args[args.indexOf(k) + 1] : undefined;
+  return v === undefined || v.startsWith("--") ? undefined : v;
+};
 const positional = args.filter((a, i) => !a.startsWith("--") && !(i > 0 && ["--seed", "--class"].includes(args[i - 1])));
 const cmd = positional[0];
 
@@ -93,6 +97,18 @@ if (cmd === "play") {
   process.exit(0);
 }
 
+const cardAddress = (positional[1] ?? "").trim().toLowerCase();
+if (cmd === "card" && !/^0x[0-9a-f]{40}$/.test(cardAddress)) {
+  console.error(`card needs an ethereum address (0x + 40 hex chars), got ${JSON.stringify(positional[1] ?? "")}`);
+  process.exit(1);
+}
+// REGRESSION (audit 2026-09-19): a judge who skipped the `export NANSEN_API_KEY=…` line got a Node stack trace, not a sentence
+if (!/^nsn_/.test(process.env.NANSEN_API_KEY ?? "")) {
+  console.error(
+    `${R}${B}NANSEN_API_KEY is not set${X} ${D}— \`${cmd}\` calls Nansen live. Get a key at https://app.nansen.ai/api, then:${X}\n  export NANSEN_API_KEY=nsn_…   ${D}(the deck round needs none: npm run labelme -- play)${X}`,
+  );
+  process.exit(1);
+}
 const client = cachedClientFromEnv({ ttlMs: flags.has("--no-cache") ? 0 : undefined });
 
 if (cmd === "draw") {
@@ -153,11 +169,7 @@ if (cmd === "draw") {
 }
 
 if (cmd === "card") {
-  const address = (positional[1] ?? "").trim().toLowerCase();
-  if (!/^0x[0-9a-f]{40}$/.test(address)) {
-    console.error(`card needs an ethereum address (0x + 40 hex chars), got ${JSON.stringify(positional[1] ?? "")}`);
-    process.exit(1);
-  }
+  const address = cardAddress;
   const known = deck.find((c) => c.address === address);
   const t0 = Date.now();
   const { card, failures } = await buildCard(
