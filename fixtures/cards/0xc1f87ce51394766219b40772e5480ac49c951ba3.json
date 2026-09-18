@@ -1,0 +1,201 @@
+{
+  "edge": "contract via tgm/holders all_holders",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 6,
+    "credits": 10,
+    "ms": 3984,
+    "failed": []
+  },
+  "responses": {
+    "f600f837332c846a1b5196021b4c43b3": {
+      "storedAt": "2026-09-18T10:09:08.719Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/transactions",
+      "body": {
+        "address": "0xc1f87ce51394766219b40772e5480ac49c951ba3",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"method\":\"settle(address[],uint256[],(uint256,uint256,address,uint256,uint256,uint32,bytes32,uint256,uint256,uint256,bytes)[],(address,uint256,bytes)[][3])\",\"tokens_sent\":[{\"token_symbol\":\"USDT\",\"token_amount\":-12500.0,\"price_usd\":null,\"value_usd\":null,\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"chain\":\"ethereum\",\"from_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"from_address_label\":\"Proxy [0xc1f87c]\",\"to_address_label\":\"High Balance [0x9008d1]\"}],\"tokens_received\":[{\"token_symbol\":\"SOLW\",\"token_amount\":119.275313343,\"price_usd\":null,\"value_usd\":null,\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"chain\":\"ethereum\",\"from_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"from_address_label\":\"High Balance [0x9008d1]\",\"to_address_label\":\"Proxy [0xc1f87c]\"}],\"volume_usd\":12481.537077819588,\"block_timestamp\":\"2026-08-31T11:42:23\",\"transaction_hash\":\"0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef\",\"source_type\":\"transfer\"},{\"chain\":\"ethereum\",\"method\":\"settle(address[],uint256[],(uint256,uint256,address,uint256,uint256,uint32,bytes32,uint256,uint256,uint256,bytes)[],(address,uint256,bytes)[][3])\",\"tokens_sent\":[{\"token_symbol\":\"USDT\",\"token_amount\":-10000.0,\"price_usd\":null,\"value_usd\":null,\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"chain\":\"ethereum\",\"from_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"from_address_label\":\"Proxy [0xc1f87c]\",\"to_address_label\":\"High Balance [0x9008d1]\"}],\"tokens_received\":[{\"token_symbol\":\"WETH\",\"token_amount\":4.051069553214082,\"price_usd\":null,\"value_usd\":null,\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"chain\":\"ethereum\",\"from_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"from_address_label\":\"High Balance [0x9008d1]\",\"to_address_label\":\"Proxy [0xc1f87c]\"}],\"volume_usd\":9985.22966225567,\"block_timestamp\":\"2026-08-31T11:41:59\",\"transaction_hash\":\"0x0cb7be1f00e138eca6c90b67b592e3735c63be604344a1706c84a2ffd58f3d9d\",\"source_type\":\"transfer\"},{\"chain\":\"ethereum\",\"method\":\"0x4a7cf362\",\"tokens_sent\":[{\"token_symbol\":\"USDT\",\"token_amount\":-10000.0,\"price_usd\":null,\"value_usd\":null,\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"chain\":\"ethereum\",\"from_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"from_address_label\":\"Proxy [0xc1f87c]\",\"to_address_label\":\"High Balance [0x9008d1]\"}],\"tokens_received\":[{\"token_symbol\":\"AAVE\",\"token_amount\":80.30066400084604,\"price_usd\":null,\"value_usd\":null,\"token_address\":\"0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9\",\"chain\":\"ethereum\",\"from_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"from_address_label\":\"High Balance [0x9008d1]\",\"to_address_label\":\"Proxy [0xc1f87c]\"}],\"volume_usd\":9985.22966225567,\"block_timestamp\":\"2026-08-31T11:41:47\",\"transaction_hash\":\"0x12f24c3774684ade8fd4ff68bd4950b5811c1467fba8ca8a9f02e2eda847adf4\",\"source_type\":\"transfer\"}]}"
+    },
+    "bf5c44957a1cb7c642d594e6e76ec93a": {
+      "storedAt": "2026-09-18T10:09:10.359Z",
+      "ttlMs": 86400000,
+      "endpoint": "transaction-with-token-transfer-lookup",
+      "body": {
+        "chain": "ethereum",
+        "transaction_hash": "0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef"
+      },
+      "text": "{\"data\":[{\"chain\":\"ethereum\",\"transaction_hash\":\"0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef\",\"from_address\":\"0x188f88455df530b9f154ed72d6fcd6a2cea6a09f\",\"from_address_label\":\"High Activity\",\"to_address\":\"0x3980daa7eaad0b7e0c53cfc5c2760037270da54d\",\"to_address_label\":\"High Activity\",\"native_value\":0.0,\"dated_native_price\":2448.834510514016,\"dated_native_value_usd\":0.0,\"current_native_price\":2507.7957971274927,\"current_native_value_usd\":0.0,\"receipt_status\":1,\"block_timestamp\":\"2026-08-31T11:42:23Z\",\"token_transfer_array\":[{\"from_address\":\"0x0000000000000000000000000000000000000000\",\"from_address_label\":\"Burn Address [0x000000]\",\"to_address\":\"0xb2b9a09f710e37fe1d686012912851053f0b0bda\",\"to_address_label\":\"🤖 Uniswap FWWETH-FWSOL Liquidity Pool Fork:  [0xb2b9a0]\",\"token_address\":\"0xa250cc729bb3323e7933022a67b52200fe354767\",\"token_symbol\":\"FWWETH\",\"token_amount\":0.7864392231677076,\"dated_price_usd\":2450.28,\"dated_value_usd\":1926.9962997433709,\"current_price_usd\":2466.43,\"current_value_usd\":1939.697293197529,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-298\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x0000000000000000000000000000000000000000\",\"to_address_label\":\"Burn Address [0x000000]\",\"token_address\":\"0xb84df8a4659bb12917ea90ce19bfc9d87b8dec2b\",\"token_symbol\":\"FWSOL\",\"token_amount\":18.544908218,\"dated_price_usd\":103.481750918146,\"dated_value_usd\":1919.0595730149548,\"current_price_usd\":106.06592039886,\"current_value_usd\":1966.9827588545527,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-303\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x0000000000000000000000000000000000000000\",\"to_address_label\":\"Burn Address [0x000000]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":0.44783127240474696,\"dated_price_usd\":2449.57,\"dated_value_usd\":1096.994049944496,\"current_price_usd\":2510.91,\"current_value_usd\":1124.4640201938032,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-306\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"to_address_label\":\"🤖 🏦 Uniswap: PoolManager V4 [0x000000]\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_amount\":125.0,\"dated_price_usd\":0.998522966225567,\"dated_value_usd\":124.81537077819588,\"current_price_usd\":1.00359988509697,\"current_value_usd\":125.44998563712126,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-288\"},{\"from_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"from_address_label\":\"🤖 🏦 Uniswap: PoolManager V4 [0x000000]\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address_label\":\"🤖 CoW Protocol: Settlement [0x9008d1]\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_amount\":11.755591315,\"dated_price_usd\":103.1491536064366,\"dated_value_usd\":1212.579294285427,\"current_price_usd\":106.070351580638,\"current_value_usd\":1246.9197038203447,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-320\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"to_address_label\":\"🤖 🏦 Uniswap: PoolManager V4 [0x000000]\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_amount\":0.49888342539293307,\"dated_price_usd\":2448.834510514016,\"dated_value_usd\":1221.682948825659,\"current_price_usd\":2507.7957971274927,\"current_value_usd\":1251.0977574569647,\"transfer_id\":\"trace-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-125_0_4_1_26_0_3\"},{\"from_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"from_address_label\":\"🤖 🏦 Uniswap: PoolManager V4 [0x000000]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_amount\":0.05107162970262111,\"dated_price_usd\":2448.834510514016,\"dated_value_usd\":125.06596932397125,\"current_price_usd\":2507.7957971274927,\"current_value_usd\":128.07721832068484,\"transfer_id\":\"trace-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-125_0_4_1_4_0_1_0\"},{\"from_address\":\"0x391af49b1793529f430c4b5918da6bb237306865\",\"from_address_label\":\"Top 100 on WETH Leaderboard [0x391af4]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":1.5763890121696644,\"dated_price_usd\":2449.57,\"dated_value_usd\":3861.475232540445,\"current_price_usd\":2510.91,\"current_value_usd\":3958.1709345469317,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-294\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x391af49b1793529f430c4b5918da6bb237306865\",\"to_address_label\":\"Top 100 on WETH Leaderboard [0x391af4]\",\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_amount\":3858.826899,\"dated_price_usd\":0.9998484432436219,\"dated_value_usd\":3858.242067711763,\"current_price_usd\":0.999779432981435,\"current_value_usd\":3857.9757690557294,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-295\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x52aa899454998be5b000ad077a46bbe360f4e497\",\"to_address_label\":\"🤖 Fluid: Liquidity Proxy [0x52aa89]\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_amount\":3734.830504,\"dated_price_usd\":0.998522966225567,\"dated_value_usd\":3729.3140332038097,\"current_price_usd\":1.00359988509697,\"current_value_usd\":3748.2754646710587,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-279\"},{\"from_address\":\"0x52aa899454998be5b000ad077a46bbe360f4e497\",\"from_address_label\":\"🤖 Fluid: Liquidity Proxy [0x52aa89]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_amount\":3733.859417,\"dated_price_usd\":0.9998484432436219,\"dated_value_usd\":3733.293525377988,\"current_price_usd\":0.999779432981435,\"current_value_usd\":3733.0358507606516,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-281\"},{\"from_address\":\"0xb84df8a4659bb12917ea90ce19bfc9d87b8dec2b\",\"from_address_label\":\"🤖 Few Wrapped Wrapped SOL [0xb84df8]\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address_label\":\"🤖 CoW Protocol: Settlement [0x9008d1]\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_amount\":18.544908218,\"dated_price_usd\":103.1491536064366,\"dated_value_usd\":1912.8915863957504,\"current_price_usd\":106.070351580638,\"current_value_usd\":1967.064934713923,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-304\"},{\"from_address\":\"0x67336cec42645f55059eff241cb02ea5cc52ff86\",\"from_address_label\":\"​​Trading Bot [0x67336c]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_amount\":72.572179289,\"dated_price_usd\":103.1491536064366,\"dated_value_usd\":7485.7588690349185,\"current_price_usd\":106.070351580638,\"current_value_usd\":7697.756572157326,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-309\"},{\"from_address\":\"0xbbbbbbb520d69a9775e85b458c58c648259fad5f\",\"from_address_label\":\"🤖 Bebop: PMM RFQ Settlement [0xbbbbbb]\",\"to_address\":\"0x67336cec42645f55059eff241cb02ea5cc52ff86\",\"to_address_label\":\"​​Trading Bot [0x67336c]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":3.0791009556365907,\"dated_price_usd\":2449.57,\"dated_value_usd\":7542.473327898724,\"current_price_usd\":2510.91,\"current_value_usd\":7731.345380517471,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-313\"},{\"from_address\":\"0xe0e0e08a6a4b9dc7bd67bcb7aade5cf48157d444\",\"from_address_label\":\"​​🤖 🏦 Ekubo: Liquidity Pool [0xe0e0e0]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_amount\":124.967482,\"dated_price_usd\":0.9998484432436219,\"dated_value_usd\":124.94854233377534,\"current_price_usd\":0.999779432981435,\"current_value_usd\":124.93991829507769,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-290\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0xe0e0e08a6a4b9dc7bd67bcb7aade5cf48157d444\",\"to_address_label\":\"​​🤖 🏦 Ekubo: Liquidity Pool [0xe0e0e0]\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_amount\":125.0,\"dated_price_usd\":0.998522966225567,\"dated_value_usd\":124.81537077819588,\"current_price_usd\":1.00359988509697,\"current_value_usd\":125.44998563712126,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-291\"},{\"from_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"from_address_label\":\"🤓 🤖 Gnosis Safe Proxy [0xc1f87c]\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address_label\":\"🤖 CoW Protocol: Settlement [0x9008d1]\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_amount\":12500.0,\"dated_price_usd\":0.998522966225567,\"dated_value_usd\":12481.537077819588,\"current_price_usd\":1.00359988509697,\"current_value_usd\":12544.998563712126,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-275\"},{\"from_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"from_address_label\":\"🤖 CoW Protocol: Settlement [0x9008d1]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_amount\":12500.0,\"dated_price_usd\":0.998522966225567,\"dated_value_usd\":12481.537077819588,\"current_price_usd\":1.00359988509697,\"current_value_usd\":12544.998563712126,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-278\"},{\"from_address\":\"0x127452f3f9cdc0389b0bf59ce6131aa3bd763598\",\"from_address_label\":\"🤖 🏦 Uniswap: V3 WETH-SOLW (0.3%) Liquidity Pool  [0x127452]\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address_label\":\"🤖 CoW Protocol: Settlement [0x9008d1]\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_amount\":17.410851336,\"dated_price_usd\":103.1491536064366,\"dated_value_usd\":1795.9145788758958,\"current_price_usd\":106.070351580638,\"current_value_usd\":1846.775122527741,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-316\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"to_address_label\":\"🤖 CoW Protocol: Settlement [0x9008d1]\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_amount\":72.608478145,\"dated_price_usd\":103.1491536064366,\"dated_value_usd\":7489.5030653082,\"current_price_usd\":106.070351580638,\"current_value_usd\":7701.606804575222,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-321\"},{\"from_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"from_address_label\":\"🤖 CoW Protocol: Settlement [0x9008d1]\",\"to_address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"to_address_label\":\"🤓 🤖 Gnosis Safe Proxy [0xc1f87c]\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_amount\":119.275313343,\"dated_price_usd\":103.1491536064366,\"dated_value_usd\":12303.147617472963,\"current_price_usd\":106.070351580638,\"current_value_usd\":12651.574421182773,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-323\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0xa250cc729bb3323e7933022a67b52200fe354767\",\"to_address_label\":\"🤖 🏦 Ring Protocol: fwwETH Token [0xa250cc]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":0.7864392231677076,\"dated_price_usd\":2449.57,\"dated_value_usd\":1926.4379278949218,\"current_price_usd\":2510.91,\"current_value_usd\":1974.6781098440288,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-297\"},{\"from_address\":\"0xb2b9a09f710e37fe1d686012912851053f0b0bda\",\"from_address_label\":\"🤖 Uniswap FWWETH-FWSOL Liquidity Pool Fork:  [0xb2b9a0]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xb84df8a4659bb12917ea90ce19bfc9d87b8dec2b\",\"token_symbol\":\"FWSOL\",\"token_amount\":18.544908218,\"dated_price_usd\":103.481750918146,\"dated_value_usd\":1919.0595730149548,\"current_price_usd\":106.06592039886,\"current_value_usd\":1966.9827588545527,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-300\"},{\"from_address\":\"0xb7131fc8cdc43060a6210257f537dba5fcae6aed\",\"from_address_label\":\"🤖 Top 100 on LIT Leaderboard [0xb7131f]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_amount\":0.036298856,\"dated_price_usd\":103.1491536064366,\"dated_value_usd\":3.7441962732819225,\"current_price_usd\":106.070351580638,\"current_value_usd\":3.850232417894951,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-311\"},{\"from_address\":\"0xbbbbbbb520d69a9775e85b458c58c648259fad5f\",\"from_address_label\":\"🤖 Bebop: PMM RFQ Settlement [0xbbbbbb]\",\"to_address\":\"0xb7131fc8cdc43060a6210257f537dba5fcae6aed\",\"to_address_label\":\"🤖 Top 100 on LIT Leaderboard [0xb7131f]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":0.001542867574694618,\"dated_price_usd\":2449.57,\"dated_value_usd\":3.7793621249446954,\"current_price_usd\":2510.91,\"current_value_usd\":3.874001621976463,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-314\"},{\"from_address\":\"0xbee3211ab312a8d065c4fef0247448e17a8da000\",\"from_address_label\":\"​​🤖 Kipseli: DEX/CEX Trading Bot [0xbee321]\",\"to_address\":\"0xbbbbbbb520d69a9775e85b458c58c648259fad5f\",\"to_address_label\":\"🤖 Bebop: PMM RFQ Settlement [0xbbbbbb]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":3.0806439382177717,\"dated_price_usd\":2449.57,\"dated_value_usd\":7546.252971740108,\"current_price_usd\":2510.91,\"current_value_usd\":7735.219670910385,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-307\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0xbee3211ab312a8d065c4fef0247448e17a8da000\",\"to_address_label\":\"​​🤖 Kipseli: DEX/CEX Trading Bot [0xbee321]\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_amount\":7543.705503,\"dated_price_usd\":0.998522966225567,\"dated_value_usd\":7532.563195187693,\"current_price_usd\":1.00359988509697,\"current_value_usd\":7570.861976016181,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-308\"},{\"from_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"from_address_label\":\"🤖 Wrapped Ether: WETH Token [0xc02aaa]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_amount\":0.44783127240474696,\"dated_price_usd\":2448.834510514016,\"dated_value_usd\":1096.6646747521474,\"current_price_usd\":2507.7957971274927,\"current_value_usd\":1123.0693827588818,\"transfer_id\":\"trace-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-125_0_4_1_21_0\"},{\"from_address\":\"0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b\",\"from_address_label\":\"🤖 🏦 Uniswap: V3 WETH-USDT (0.01%) Liquidity Pool  [0xc7bbec]\",\"to_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"to_address_label\":\"🤖 High Activity [0x000000]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":0.3967802500619733,\"dated_price_usd\":2449.57,\"dated_value_usd\":971.9409971443081,\"current_price_usd\":2510.91,\"current_value_usd\":996.2794976831094,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-284\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0xc7bbec68d12a0d1830360f8ec58fa599ba1b0e9b\",\"to_address_label\":\"🤖 🏦 Uniswap: V3 WETH-USDT (0.01%) Liquidity Pool  [0xc7bbec]\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_amount\":971.463993,\"dated_price_usd\":0.998522966225567,\"dated_value_usd\":970.0291078716934,\"current_price_usd\":1.00359988509697,\"current_value_usd\":974.9611517506437,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-285\"},{\"from_address\":\"0x00000000853f17000ee966ffd0cf71d495610c00\",\"from_address_label\":\"🤖 High Activity [0x000000]\",\"to_address\":\"0x127452f3f9cdc0389b0bf59ce6131aa3bd763598\",\"to_address_label\":\"🤖 🏦 Uniswap: V3 WETH-SOLW (0.3%) Liquidity Pool  [0x127452]\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_amount\":0.7388986870325056,\"dated_price_usd\":2449.57,\"dated_value_usd\":1809.984056794215,\"current_price_usd\":2510.91,\"current_value_usd\":1855.3081022567885,\"transfer_id\":\"token-transfer-0xb8e5f711be0ff35c3cda0ae3452e25f211e13a6a62fc85179ab576d87d163eef-317\"}],\"nft_transfer_array\":null}]}"
+    },
+    "967c6c37735da3cf6e50dfd0926b5be1": {
+      "storedAt": "2026-09-18T10:09:10.991Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0xc1f87ce51394766219b40772e5480ac49c951ba3",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0x2260fac5e5542a773aa44fbcfedf7c193bc2c599\",\"token_symbol\":\"WBTC\",\"token_name\":\"Wrapped BTC\",\"token_amount\":0.66328263,\"price_usd\":78056.9914531744,\"value_usd\":51773.84658094904},{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9\",\"token_symbol\":\"AAVE\",\"token_name\":\"AAVE\",\"token_amount\":321.67193287158904,\"price_usd\":135.846260785261,\"value_usd\":43697.92928017285},{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_name\":\"Wrapped Ether\",\"token_amount\":17.18569572291714,\"price_usd\":2510.91,\"value_usd\":43151.73524762987},{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_name\":\"SOL (Wormhole)\",\"token_amount\":368.537466596,\"price_usd\":106.070351580638,\"value_usd\":39090.898652475356},{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0x514910771af9ca656af840dff83e8264ecf986ca\",\"token_symbol\":\"LINK\",\"token_name\":\"ChainLink Token\",\"token_amount\":2337.4102883820146,\"price_usd\":11.8824592687963,\"value_usd\":27774.182546164702},{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"token_amount\":200.541445,\"price_usd\":1.00359988509697,\"value_usd\":201.26337115918037},{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0xf939e0a03fb07f59a73314e73794be0e57ac1b4e\",\"token_symbol\":\"CRVUSD\",\"token_name\":\"Curve.Fi USD Stablecoin\",\"token_amount\":0.0001,\"price_usd\":0.998868044492092,\"value_usd\":0.0000998868044492092},{\"chain\":\"ethereum\",\"address\":\"0xc1f87ce51394766219b40772e5480ac49c951ba3\",\"token_address\":\"0x23878914efe38d27c4d67ab83ed1b93a74d4086a\",\"token_symbol\":\"AETHUSDT\",\"token_name\":\"Aave Ethereum USDT\",\"token_amount\":1e-6,\"price_usd\":0.950765541907981,\"value_usd\":9.50765541907981e-7}]}"
+    },
+    "6ace983681c5e06f81b61d2cf737703e": {
+      "storedAt": "2026-09-18T10:09:11.113Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0xc1f87ce51394766219b40772e5480ac49c951ba3",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[],\"traded_token_count\":3,\"traded_times\":3,\"realized_pnl_usd\":0.0,\"realized_pnl_percent\":0.0,\"win_rate\":0.6666666666666666}"
+    },
+    "005b8aa09e27ad2e07cd26934dce2e28": {
+      "storedAt": "2026-09-18T10:09:11.224Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0xc1f87ce51394766219b40772e5480ac49c951ba3",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[]}"
+    },
+    "82768da9d4cf3fa4f8db22abbf67e3aa": {
+      "storedAt": "2026-09-18T10:09:11.288Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0xc1f87ce51394766219b40772e5480ac49c951ba3",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0x9008d19f58aabd9ed0d60971565aa8510560ab41\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":6,\"total_volume_usd\":64598.69305636902,\"volume_in_usd\":32146.69665403809,\"volume_out_usd\":32451.99640233093,\"tokens_info\":[{\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"num_transfer\":\"3\",\"total_token_amount\":32500.0,\"token_in_amount\":0.0,\"token_out_amount\":32500.0},{\"token_address\":\"0xd31a59c85ae9d8edefec411d448f90841571b89c\",\"token_symbol\":\"SOLW\",\"token_name\":\"SOL (Wormhole)\",\"num_transfer\":\"1\",\"total_token_amount\":119.275313343,\"token_in_amount\":119.275313343,\"token_out_amount\":0.0},{\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_name\":\"Wrapped Ether\",\"num_transfer\":\"1\",\"total_token_amount\":4.051069553214082,\"token_in_amount\":4.051069553214082,\"token_out_amount\":0.0},{\"token_address\":\"0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9\",\"token_symbol\":\"AAVE\",\"token_name\":\"AAVE\",\"num_transfer\":\"1\",\"total_token_amount\":80.30066400084604,\"token_in_amount\":80.30066400084604,\"token_out_amount\":0.0}]}]}"
+    }
+  },
+  "card": {
+    "id": "d288446ab3",
+    "address": "0xc1f87ce51394766219b40772e5480ac49c951ba3",
+    "chain": "ethereum",
+    "class": "contract",
+    "nansenLabel": "Proxy",
+    "entity": "🤓 🤖 Gnosis Safe Proxy [0xc1f87c]",
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 0,
+        "realizedPct": 0,
+        "winRate": 0.667,
+        "trades": 3,
+        "tokensTraded": 3,
+        "top": []
+      },
+      "trades": {
+        "ok": true,
+        "rows": []
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 8,
+        "tokensCapped": false,
+        "totalUsd": 205690,
+        "topShare": 0.252,
+        "topSymbol": "WBTC",
+        "stableShare": 0.001
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 1,
+        "countCapped": false,
+        "interactions": 6,
+        "topOutShare": 1,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 1,
+          "activity": 0,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 1,
+          "activity": 0,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        }
+      },
+      "empty": false
+    },
+    "tell": "6 interactions from 1 counterparties in 30 d · 8 tokens · 3 trades — traffic without a trader: a contract or pool",
+    "source": {
+      "endpoint": "tgm/holders",
+      "labelType": "all_holders",
+      "token": null,
+      "tag": "Proxy"
+    },
+    "readerGuess": "regular",
+    "readerBecause": "3 trades, 8 tokens, $205690 — nothing that reads like a label",
+    "cardHash": "09ced2d6aab3181b425958427e2aa67500ff5b6e641b80c7b02218d08bb50ce1",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

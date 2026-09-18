@@ -1,0 +1,219 @@
+{
+  "edge": "smart-money via smart-money/dex-trades",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 4,
+    "credits": 8,
+    "ms": 957,
+    "failed": []
+  },
+  "responses": {
+    "eb562cef36e27d753b2dbeaee97a229a": {
+      "storedAt": "2026-09-18T10:07:39.763Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0x2b3a50c13db0813af58e574c49c75a5249cfdfde",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2\",\"token_symbol\":\"LIT\",\"token_name\":\"Lighter\",\"token_amount\":11301.857640681064,\"price_usd\":4.97575402887045,\"value_usd\":56235.26368933909},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44\",\"token_symbol\":\"WTAO\",\"token_name\":\"Wrapped TAO\",\"token_amount\":200.044894274,\"price_usd\":249.804214267784,\"value_usd\":49972.05763239849},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"token_name\":\"Rekt\",\"token_amount\":443877363745.9964,\"price_usd\":1.08614756051946e-7,\"value_usd\":48211.6315802523},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xe76c6c83af64e4c60245d8c7de953df673a7a33d\",\"token_symbol\":\"RAIL\",\"token_name\":\"Rail\",\"token_amount\":11220.211890010063,\"price_usd\":2.70865506151708,\"value_usd\":30391.683727169882},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0x881ba05de1e78f549cc63a8f6cabb1d4ad32250d\",\"token_symbol\":\"00\",\"token_name\":\"00 Token\",\"token_amount\":1000001.0000000002,\"price_usd\":0.0119841524965915,\"value_usd\":11984.164480743999},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"token_name\":\"Fake World Assets\",\"token_amount\":400000.0000000001,\"price_usd\":0.0162530682768819,\"value_usd\":6501.227310752761},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"token_amount\":0.046494323686921295,\"price_usd\":2507.7957971274927,\"value_usd\":116.59826953234645},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf\",\"token_symbol\":\"CBBTC\",\"token_name\":\"Coinbase Wrapped BTC\",\"token_amount\":7.73e-6,\"price_usd\":77523.5064530271,\"value_usd\":0.5992567048818995},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xa35923162c49cf95e6bf26623385eb431ad920d3\",\"token_symbol\":\"TURBO\",\"token_name\":\"Turbo\",\"token_amount\":189.0,\"price_usd\":0.000957864983376783,\"value_usd\":0.181036481858212},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xd4419c2d3daa986dc30444fa333a846be44fd1eb\",\"token_symbol\":\"ZIK\",\"token_name\":\"ZIK coin\",\"token_amount\":888.0,\"price_usd\":0.000127764350055513,\"value_usd\":0.11345474284929555},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"token_amount\":0.002163,\"price_usd\":0.998408478070488,\"value_usd\":0.002159557538066466},{\"chain\":\"ethereum\",\"address\":\"0x2b3a50c13db0813af58e574c49c75a5249cfdfde\",\"token_address\":\"0x2b591e99afe9f32eaa6214f7b7629768c40eeb39\",\"token_symbol\":\"HEX\",\"token_name\":\"HEX\",\"token_amount\":1.0,\"price_usd\":0.00112368375855495,\"value_usd\":0.00112368375855495}]}"
+    },
+    "195bad670f36a123992b57ac8038cb54": {
+      "storedAt": "2026-09-18T10:07:40.044Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0x2b3a50c13db0813af58e574c49c75a5249cfdfde",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[{\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"token_price\":1.08614756051946e-7,\"roi_percent_realised\":0.3517467096907729,\"pnl_usd_realised\":1745.4464740238218,\"pnl_usd_unrealised\":1751.451332002905,\"roi_percent_unrealised\":0.03769790221743493,\"bought_amount\":243877363745.9964,\"bought_usd\":26611.27845686346,\"cost_basis_usd\":1.0466895598405799e-7,\"sold_amount\":49999999999.99999,\"sold_usd\":6707.671921870304,\"avg_sold_price_usd\":1.341534384374061e-7,\"holding_amount\":443877363745.9964,\"holding_usd\":48211.6315802523,\"nof_buys\":\"2\",\"nof_sells\":\"1\",\"max_balance_held\":443877363745.9964,\"max_balance_held_usd\":48211.6315802523},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_price\":2507.7957971274927,\"roi_percent_realised\":0.002282186449315491,\"pnl_usd_realised\":364.93475149315293,\"pnl_usd_unrealised\":2.8653313049505322,\"roi_percent_unrealised\":0.025193504622395578,\"bought_amount\":64.70474439268457,\"bought_usd\":160184.6829605446,\"cost_basis_usd\":2446.168246111915,\"sold_amount\":64.59677141451621,\"sold_usd\":160270.69162013542,\"avg_sold_price_usd\":2481.0944589116,\"holding_amount\":0.046494323686921295,\"holding_usd\":116.59826953234645,\"nof_buys\":\"53\",\"nof_sells\":\"33\",\"max_balance_held\":20.030643075182013,\"max_balance_held_usd\":50232.762517702366},{\"token_address\":\"0x881ba05de1e78f549cc63a8f6cabb1d4ad32250d\",\"token_symbol\":\"00\",\"token_price\":0.0119841524965915,\"roi_percent_realised\":0.025218344347767166,\"pnl_usd_realised\":0.3209836765260872,\"pnl_usd_unrealised\":-8597.275606064602,\"roi_percent_unrealised\":-0.41771982766040316,\"bought_amount\":1000619.4307158143,\"bought_usd\":20594.168268805788,\"cost_basis_usd\":0.020581419505389092,\"sold_amount\":618.4307158139999,\"sold_usd\":13.049165673712082,\"avg_sold_price_usd\":0.021100448829641846,\"holding_amount\":1000001.0000000002,\"holding_usd\":11984.164480743999,\"nof_buys\":\"13\",\"nof_sells\":\"1\",\"max_balance_held\":1000619.4307158143,\"max_balance_held_usd\":11991.575848750892},{\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"token_price\":0.0162530682768819,\"roi_percent_realised\":-0.13348357320424026,\"pnl_usd_realised\":-1992.3212082206835,\"pnl_usd_unrealised\":707.8879154657598,\"roi_percent_unrealised\":0.12218996112011682,\"bought_amount\":480054.866858379,\"bought_usd\":8307.604988388994,\"cost_basis_usd\":0.0144833484882175,\"sold_amount\":580054.8668583789,\"sold_usd\":12933.269712036428,\"avg_sold_price_usd\":0.02229663166535262,\"holding_amount\":400000.0000000001,\"holding_usd\":6501.227310752761,\"nof_buys\":\"12\",\"nof_sells\":\"6\",\"max_balance_held\":500000.0,\"max_balance_held_usd\":8126.534138440949}]}"
+    },
+    "08d41ef6485e9d75a1ed94f468da4860": {
+      "storedAt": "2026-09-18T10:07:40.123Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0x2b3a50c13db0813af58e574c49c75a5249cfdfde",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0x5c7bcd6e7de5423a257d81b442095a1a6ced35c5\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":22,\"total_volume_usd\":106129.15540907152,\"volume_in_usd\":82666.83152716009,\"volume_out_usd\":23462.323881911434,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"22\",\"total_token_amount\":42.51941694777149,\"token_in_amount\":33.11949175163032,\"token_out_amount\":9.399925196141162}]},{\"counterparty_address\":\"0xb92fe925dc43a0ecde6c8b1a2709c170ec4fff4f\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":9,\"total_volume_usd\":87660.59971809847,\"volume_in_usd\":87660.59971809847,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2\",\"token_symbol\":\"LIT\",\"token_name\":\"Lighter\",\"num_transfer\":\"4\",\"total_token_amount\":8425.830647843886,\"token_in_amount\":8425.830647843886,\"token_out_amount\":0.0},{\"token_address\":\"0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44\",\"token_symbol\":\"WTAO\",\"token_name\":\"Wrapped TAO\",\"num_transfer\":\"2\",\"total_token_amount\":78.654561497,\"token_in_amount\":78.654561497,\"token_out_amount\":0.0},{\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"token_name\":\"Rekt\",\"num_transfer\":\"2\",\"total_token_amount\":243877363745.9964,\"token_in_amount\":243877363745.9964,\"token_out_amount\":0.0},{\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"token_name\":\"Fake World Assets\",\"num_transfer\":\"1\",\"total_token_amount\":402811.02051975357,\"token_in_amount\":402811.02051975357,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x1231deb6f5749ef6ce6943a275a1d3e7486f4eae\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":16,\"total_volume_usd\":84578.18821696188,\"volume_in_usd\":42910.12647818048,\"volume_out_usd\":41668.0617387814,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"8\",\"total_token_amount\":16.75,\"token_in_amount\":0.0,\"token_out_amount\":16.75},{\"token_address\":\"0x881ba05de1e78f549cc63a8f6cabb1d4ad32250d\",\"token_symbol\":\"00\",\"token_name\":\"00 Token\",\"num_transfer\":\"5\",\"total_token_amount\":320442.43239528453,\"token_in_amount\":320442.43239528453,\"token_out_amount\":0.0},{\"token_address\":\"0xe76c6c83af64e4c60245d8c7de953df673a7a33d\",\"token_symbol\":\"RAIL\",\"token_name\":\"Rail\",\"num_transfer\":\"2\",\"total_token_amount\":11220.211890010063,\"token_in_amount\":11220.211890010063,\"token_out_amount\":0.0},{\"token_address\":\"0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44\",\"token_symbol\":\"WTAO\",\"token_name\":\"Wrapped TAO\",\"num_transfer\":\"1\",\"total_token_amount\":43.537917192,\"token_in_amount\":43.537917192,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":19,\"total_volume_usd\":69176.22288887094,\"volume_in_usd\":24731.467182034175,\"volume_out_usd\":44444.75570683676,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"17\",\"total_token_amount\":21.702021247052983,\"token_in_amount\":3.8806399665069766,\"token_out_amount\":17.821381280546007},{\"token_address\":\"0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44\",\"token_symbol\":\"WTAO\",\"token_name\":\"Wrapped TAO\",\"num_transfer\":\"2\",\"total_token_amount\":58.185774707,\"token_in_amount\":58.185774707,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x81f06e1dacee710ecde8d6677714cf50eb10893b\",\"counterparty_address_label\":null,\"interaction_count\":4,\"total_volume_usd\":68602.89227339326,\"volume_in_usd\":0.0,\"volume_out_usd\":68602.89227339326,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"4\",\"total_token_amount\":68620.778274,\"token_in_amount\":0.0,\"token_out_amount\":68620.778274}]},{\"counterparty_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":27,\"total_volume_usd\":51432.11219450447,\"volume_in_usd\":34740.991489371794,\"volume_out_usd\":16691.120705132682,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"11\",\"total_token_amount\":6.808816167844378,\"token_in_amount\":6.808816167844378,\"token_out_amount\":0.0},{\"token_address\":\"0x881ba05de1e78f549cc63a8f6cabb1d4ad32250d\",\"token_symbol\":\"00\",\"token_name\":\"00 Token\",\"num_transfer\":\"6\",\"total_token_amount\":313384.8933327948,\"token_in_amount\":312766.4626169808,\"token_out_amount\":618.4307158139999},{\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"token_name\":\"Fake World Assets\",\"num_transfer\":\"6\",\"total_token_amount\":580054.8668583789,\"token_in_amount\":0.0,\"token_out_amount\":580054.8668583789},{\"token_address\":\"0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2\",\"token_symbol\":\"LIT\",\"token_name\":\"Lighter\",\"num_transfer\":\"3\",\"total_token_amount\":2876.0269928371786,\"token_in_amount\":2876.0269928371786,\"token_out_amount\":0.0},{\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"token_name\":\"Rekt\",\"num_transfer\":\"1\",\"total_token_amount\":24800000000.0,\"token_in_amount\":0.0,\"token_out_amount\":24800000000.0}]},{\"counterparty_address\":\"0x75220b7600c300005038432a0000f308e0000068\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":48856.621218725646,\"volume_in_usd\":48856.621218725646,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":19.990379835386207,\"token_in_amount\":19.990379835386207,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x4cd00e387622c35bddb9b4c962c136462338bc31\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":3,\"total_volume_usd\":39702.6577246158,\"volume_in_usd\":0.0,\"volume_out_usd\":39702.6577246158,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":13.86,\"token_in_amount\":0.0,\"token_out_amount\":13.86},{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":4962.177018,\"token_in_amount\":0.0,\"token_out_amount\":4962.177018}]},{\"counterparty_address\":\"0xef1ec136931ab5728b0783fd87d109c9d15d31f1\",\"counterparty_address_label\":[\"ultrahd.eth*\"],\"interaction_count\":1,\"total_volume_usd\":26769.64115159904,\"volume_in_usd\":26769.64115159904,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":26778.080304,\"token_in_amount\":26778.080304,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x394311a6aaa0d8e3411d8b62de4578d41322d1bd\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":26264.135563670487,\"volume_in_usd\":26264.135563670487,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":26272.415355,\"token_in_amount\":26272.415355,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x66a9893cc07d91d95644aedd05d03f95e1dba8af\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":3,\"total_volume_usd\":12130.814661764161,\"volume_in_usd\":7063.772294055902,\"volume_out_usd\":5067.04236770826,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":2.8285712879137592,\"token_in_amount\":0.7971244980468201,\"token_out_amount\":2.031446789866939},{\"token_address\":\"0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44\",\"token_symbol\":\"WTAO\",\"token_name\":\"Wrapped TAO\",\"num_transfer\":\"1\",\"total_token_amount\":19.666640878,\"token_in_amount\":19.666640878,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":9357.95942917877,\"volume_in_usd\":9357.95942917877,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":4962.177008,\"token_in_amount\":4962.177008,\"token_out_amount\":0.0},{\"token_address\":\"0x881ba05de1e78f549cc63a8f6cabb1d4ad32250d\",\"token_symbol\":\"00\",\"token_name\":\"00 Token\",\"num_transfer\":\"1\",\"total_token_amount\":247905.98602182997,\"token_in_amount\":247905.98602182997,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x0889e9327b98d7d1be3c301a4585ff3330502c9a\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":5,\"total_volume_usd\":9084.662483566564,\"volume_in_usd\":9084.662483566564,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"2\",\"total_token_amount\":6953.282396,\"token_in_amount\":6953.282396,\"token_out_amount\":0.0},{\"token_address\":\"0x881ba05de1e78f549cc63a8f6cabb1d4ad32250d\",\"token_symbol\":\"00\",\"token_name\":\"00 Token\",\"num_transfer\":\"2\",\"total_token_amount\":119504.54968171899,\"token_in_amount\":119504.54968171899,\"token_out_amount\":0.0},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.005192021139440278,\"token_in_amount\":0.005192021139440278,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x0000000000001ff3684f28c67538d4d072c22734\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":3,\"total_volume_usd\":7934.508363529655,\"volume_in_usd\":0.0,\"volume_out_usd\":7934.508363529655,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"3\",\"total_token_amount\":3.2,\"token_in_amount\":0.0,\"token_out_amount\":3.2}]},{\"counterparty_address\":\"0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":2,\"total_volume_usd\":7101.504885144088,\"volume_in_usd\":7101.504885144088,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"2\",\"total_token_amount\":7102.05,\"token_in_amount\":7102.05,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xf12533a96712133d9bb97c24de5bcf52f48851bd\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":1,\"total_volume_usd\":3392.1200835426002,\"volume_in_usd\":0.0,\"volume_out_usd\":3392.1200835426002,\"tokens_info\":[{\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"token_name\":\"Rekt\",\"num_transfer\":\"1\",\"total_token_amount\":25200000000.0,\"token_in_amount\":0.0,\"token_out_amount\":25200000000.0}]},{\"counterparty_address\":\"0xb276f62db0ce8ca2ca5bc522695be604521eac1c\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":4,\"total_volume_usd\":3324.8024593995297,\"volume_in_usd\":154.96921975363614,\"volume_out_usd\":3169.8332396458936,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"4\",\"total_token_amount\":1.3467695835595592,\"token_in_amount\":0.06277300203569015,\"token_out_amount\":1.283996581523869}]},{\"counterparty_address\":\"0xe0554a476a092703abdb3ef35c80e0d76d32939f\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":2,\"total_volume_usd\":2654.052399681319,\"volume_in_usd\":2654.052399681319,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"2\",\"total_token_amount\":2654.25,\"token_in_amount\":2654.25,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x6a1a1c0cfb3d3c538e13d36d608a5bcaa992fc78\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":11,\"total_volume_usd\":2294.1577196833005,\"volume_in_usd\":2294.1577196833005,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"token_name\":\"Fake World Assets\",\"num_transfer\":\"11\",\"total_token_amount\":77243.84633862542,\"token_in_amount\":77243.84633862542,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x02b90d5416bdf0917325a1936d63062253b0abcd\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":1999.6880196284374,\"volume_in_usd\":0.0,\"volume_out_usd\":1999.6880196284374,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":2000.0,\"token_in_amount\":0.0,\"token_out_amount\":2000.0}]},{\"counterparty_address\":\"0x3416cf6c708da44db2624d63ea0aaef7113527c6\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":1,\"total_volume_usd\":860.6523138998697,\"volume_in_usd\":860.6523138998697,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":860.7,\"token_in_amount\":860.7,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x3f9c77dd2f9ae59845402973dc4e40d19553e4f3\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":593.50673152567,\"volume_in_usd\":0.0,\"volume_out_usd\":593.50673152567,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.26,\"token_in_amount\":0.0,\"token_out_amount\":0.26}]},{\"counterparty_address\":\"0xcf4d29f14cc585ddd1167f956092852af844e040\",\"counterparty_address_label\":[\"Token Contract\"],\"interaction_count\":1,\"total_volume_usd\":76.5226742092704,\"volume_in_usd\":76.5226742092704,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.030568530240301744,\"token_in_amount\":0.030568530240301744,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x666fedd4cdd4e890a5ad20e7b60975409435a64a\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":45.8918264397351,\"volume_in_usd\":45.8918264397351,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.01829966638125043,\"token_in_amount\":0.01829966638125043,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xfeeeeee44046c3f61a8cc081e0918ef0de0a7ffc\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":4,\"total_volume_usd\":4.200011487453817,\"volume_in_usd\":4.200011487453817,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"4\",\"total_token_amount\":0.001698177955767065,\"token_in_amount\":0.001698177955767065,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xee826edbf34f4f33dad062405d7fbfdfdf405205\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":1.5159826988928584,\"volume_in_usd\":0.0,\"volume_out_usd\":1.5159826988928584,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.000607778258730563,\"token_in_amount\":0.0,\"token_out_amount\":0.000607778258730563}]},{\"counterparty_address\":\"0x396343362be2a4da1ce0c1c210945346fb82aa49\",\"counterparty_address_label\":[\"quasarbuilder.eth\"],\"interaction_count\":2,\"total_volume_usd\":0.8302429111721772,\"volume_in_usd\":0.8302429111721772,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":0.000336304461208372,\"token_in_amount\":0.000336304461208372,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xa03400e098f4421b34a3a44a1b4e571419517687\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":0.17370969590905364,\"volume_in_usd\":0.17370969590905364,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa35923162c49cf95e6bf26623385eb431ad920d3\",\"token_symbol\":\"TURBO\",\"token_name\":\"Turbo\",\"num_transfer\":\"1\",\"total_token_amount\":189.0,\"token_in_amount\":189.0,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xdaf5f6939efdd7d153b6662b4e75a7ec3a8809b2\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.026727590450383965,\"volume_in_usd\":0.026727590450383965,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.000010676876695378,\"token_in_amount\":0.000010676876695378,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x81f0f9bfb0dfec784baadf97d64431ed5c79893b\",\"counterparty_address_label\":null,\"interaction_count\":6,\"total_volume_usd\":0.0010596659394010526,\"volume_in_usd\":0.0010596659394010526,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa099a809ef88098fce04ae73f28ce29284155fdd\",\"token_symbol\":\"ÚЅDС\",\"token_name\":\"ÚЅDС\",\"num_transfer\":\"2\",\"total_token_amount\":106114.991756,\"token_in_amount\":0.0,\"token_out_amount\":106114.991756},{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"2\",\"total_token_amount\":0.00106,\"token_in_amount\":0.00106,\"token_out_amount\":0.0},{\"token_address\":\"0x264a7af161ba3f3e019e7f332f766f23d7188b29\",\"token_symbol\":\"ÚЅDС\",\"token_name\":\"ÚЅDС\",\"num_transfer\":\"2\",\"total_token_amount\":20000.564792,\"token_in_amount\":0.0,\"token_out_amount\":20000.564792}]},{\"counterparty_address\":\"0x81f0a11150196fda3c91dd0826c21feef932893b\",\"counterparty_address_label\":null,\"interaction_count\":3,\"total_volume_usd\":0.0008997163636424031,\"volume_in_usd\":0.0008997163636424031,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"3\",\"total_token_amount\":0.0009,\"token_in_amount\":0.0009,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x81f003978f6425c0b15de7503087da2afccf893b\",\"counterparty_address_label\":null,\"interaction_count\":7,\"total_volume_usd\":0.00021293547020521174,\"volume_in_usd\":0.00021293547020521174,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"7\",\"total_token_amount\":0.000213,\"token_in_amount\":0.000213,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x02b9ab99608ed1c45b49a57b0f3af46253b0abcd\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.00019896895795302953,\"volume_in_usd\":0.00019896895795302953,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":0.000199,\"token_in_amount\":0.000199,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x02b9d2c8eefea7e774eddc07c845a975453fabcd\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.000019996880196284375,\"volume_in_usd\":0.000019996880196284375,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"num_transfer\":\"1\",\"total_token_amount\":0.00002,\"token_in_amount\":0.00002,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x3f9c0cc2b8e0164dc005d0d31a9b71901c26e4f3\",\"counterparty_address_label\":null,\"interaction_count\":4,\"total_volume_usd\":0.000010007543671901123,\"volume_in_usd\":0.000010007543671901123,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"4\",\"total_token_amount\":4e-9,\"token_in_amount\":4e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x3f9c11e630a56c88d66305d897280683e683e4f3\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":4.972039504725796e-6,\"volume_in_usd\":4.972039504725796e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":2e-9,\"token_in_amount\":2e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x81f0cab7e65446e302abfe335a5eab094f6b893b\",\"counterparty_address_label\":null,\"interaction_count\":3,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x520a990a29ded0062cc0c3fb77661e6cfb64b26e\",\"token_symbol\":\"Ụ᠋5DC\",\"token_name\":\"Ụ᠋5DC\",\"num_transfer\":\"3\",\"total_token_amount\":30000.847188,\"token_in_amount\":0.0,\"token_out_amount\":30000.847188}]},{\"counterparty_address\":\"0x02b9e42ab3d791deeea097e23a20adad4d34abcd\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x91ad9d78f62c475a53e04c784908b46ccdd0c0f3\",\"token_symbol\":\"Ụ᠋5DC\",\"token_name\":\"Ụ᠋5DC\",\"num_transfer\":\"1\",\"total_token_amount\":2000.0,\"token_in_amount\":0.0,\"token_out_amount\":2000.0}]}]}"
+    },
+    "df66a4fca2d3eb35cfab3bfa5dd3f196": {
+      "storedAt": "2026-09-18T10:07:40.155Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0x2b3a50c13db0813af58e574c49c75a5249cfdfde",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[{\"realized_pnl\":1745.4464740238218,\"realized_roi\":0.3517467096907729,\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"chain\":\"ethereum\"},{\"realized_pnl\":364.93475149315304,\"realized_roi\":0.0022821864493154926,\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"chain\":\"ethereum\"},{\"realized_pnl\":0.3209836765260872,\"realized_roi\":0.025218344347767166,\"token_address\":\"0x881ba05de1e78f549cc63a8f6cabb1d4ad32250d\",\"token_symbol\":\"00\",\"chain\":\"ethereum\"},{\"realized_pnl\":-1992.3212082206835,\"realized_roi\":-0.13348357320424023,\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"chain\":\"ethereum\"}],\"traded_token_count\":8,\"traded_times\":136,\"realized_pnl_usd\":118.38100097281742,\"realized_pnl_percent\":0.0006583807132383257,\"win_rate\":0.75}"
+    }
+  },
+  "card": {
+    "id": "01d32c6467",
+    "address": "0x2b3a50c13db0813af58e574c49c75a5249cfdfde",
+    "chain": "ethereum",
+    "class": "smart-money",
+    "nansenLabel": "REKT Whale",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 118,
+        "realizedPct": 0.001,
+        "winRate": 0.75,
+        "trades": 136,
+        "tokensTraded": 8,
+        "top": [
+          {
+            "symbol": "REKT",
+            "roi": 0.352,
+            "pnlUsd": 1745
+          },
+          {
+            "symbol": "ETH",
+            "roi": 0.002,
+            "pnlUsd": 365
+          },
+          {
+            "symbol": "00",
+            "roi": 0.025,
+            "pnlUsd": 0
+          },
+          {
+            "symbol": "FWA",
+            "roi": -0.133,
+            "pnlUsd": -1992
+          }
+        ]
+      },
+      "trades": {
+        "ok": true,
+        "rows": [
+          {
+            "symbol": "REKT",
+            "pnlUsd": 1745,
+            "buys": 2,
+            "sells": 1
+          },
+          {
+            "symbol": "ETH",
+            "pnlUsd": 365,
+            "buys": 53,
+            "sells": 33
+          },
+          {
+            "symbol": "00",
+            "pnlUsd": 0,
+            "buys": 13,
+            "sells": 1
+          },
+          {
+            "symbol": "FWA",
+            "pnlUsd": -1992,
+            "buys": 12,
+            "sells": 6
+          }
+        ]
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 12,
+        "tokensCapped": false,
+        "totalUsd": 203414,
+        "topShare": 0.276,
+        "topSymbol": "LIT",
+        "stableShare": 0
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 38,
+        "countCapped": false,
+        "interactions": 178,
+        "topOutShare": 0.267,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0.259,
+          "activity": 0.595,
+          "ens": 0.04,
+          "other": 0,
+          "unlabelled": 0.106
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 1,
+          "wealth": 9,
+          "activity": 12,
+          "ens": 2,
+          "other": 0,
+          "unlabelled": 14
+        }
+      },
+      "empty": false
+    },
+    "tell": "136 trades in 30 d · win rate 75% · realised $118 across 8 tokens · 60% of flow through DEX pools and routers — a trader Nansen tracks as Smart Money",
+    "source": {
+      "endpoint": "smart-money/dex-trades",
+      "labelType": null,
+      "token": null,
+      "tag": "REKT Whale"
+    },
+    "readerGuess": "smart-money",
+    "readerBecause": "136 trades across 8 tokens in 30 days — an active multi-token trader",
+    "cardHash": "a3f3e425616b6983c61416788514da104205357667f7ca50a4b0d30fb97d5a7a",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

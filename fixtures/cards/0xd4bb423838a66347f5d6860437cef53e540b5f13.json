@@ -1,0 +1,173 @@
+{
+  "edge": "whale via tgm/holders all_holders on PEPE",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 4,
+    "credits": 8,
+    "ms": 1144,
+    "failed": []
+  },
+  "responses": {
+    "81ac854b02a82d083d924a6c4505b053": {
+      "storedAt": "2026-09-18T10:08:41.636Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0xd4bb423838a66347f5d6860437cef53e540b5f13",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0xd4bb423838a66347f5d6860437cef53e540b5f13\",\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"token_amount\":4597107277793.787,\"price_usd\":3.7018511817483e-6,\"value_usd\":17017807.00892464},{\"chain\":\"ethereum\",\"address\":\"0xd4bb423838a66347f5d6860437cef53e540b5f13\",\"token_address\":\"0x66e564819340cc2f54abceb4e49941fa07e426b4\",\"token_symbol\":\"BRETT\",\"token_name\":\"BRETT\",\"token_amount\":6374090.909,\"price_usd\":1.10955848816979e-6,\"value_usd\":7.072426672446842},{\"chain\":\"ethereum\",\"address\":\"0xd4bb423838a66347f5d6860437cef53e540b5f13\",\"token_address\":\"0x45547ab0100f5e8b158258b6d94d7586de69fc21\",\"token_symbol\":\"MYSTERY\",\"token_name\":\"Mystery\",\"token_amount\":5474292721.0,\"price_usd\":9.30442929602745e-11,\"value_usd\":0.5093516956830222}]}"
+    },
+    "917fc943d3f5fb0a351c40f09d485127": {
+      "storedAt": "2026-09-18T10:08:41.676Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0xd4bb423838a66347f5d6860437cef53e540b5f13",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[],\"traded_token_count\":1,\"traded_times\":7,\"realized_pnl_usd\":0.0,\"realized_pnl_percent\":0.0,\"win_rate\":0.0}"
+    },
+    "de8e245e46ae1e2c8c075e772178aaae": {
+      "storedAt": "2026-09-18T10:08:41.681Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0xd4bb423838a66347f5d6860437cef53e540b5f13",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[]}"
+    },
+    "c0968079f5d9f4da7753f0be2ec0a6a1": {
+      "storedAt": "2026-09-18T10:08:41.846Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0xd4bb423838a66347f5d6860437cef53e540b5f13",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":7,\"total_volume_usd\":850182.5728284115,\"volume_in_usd\":850182.5728284115,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"7\",\"total_token_amount\":211462724771.29507,\"token_in_amount\":211462724771.29507,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x7aa8c01199b69532281ecb3a9305d2e881ed88ae\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xdc7404100a092c898e93708ef73f3322a7acc213\",\"token_symbol\":\"SUPRA\",\"token_name\":\"SUPRA\",\"num_transfer\":\"1\",\"total_token_amount\":100.0,\"token_in_amount\":100.0,\"token_out_amount\":0.0}]}]}"
+    }
+  },
+  "card": {
+    "id": "1d1b2e6150",
+    "address": "0xd4bb423838a66347f5d6860437cef53e540b5f13",
+    "chain": "ethereum",
+    "class": "whale",
+    "nansenLabel": "Token Millionaire",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 0,
+        "realizedPct": 0,
+        "winRate": 0,
+        "trades": 7,
+        "tokensTraded": 1,
+        "top": []
+      },
+      "trades": {
+        "ok": true,
+        "rows": []
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 3,
+        "tokensCapped": false,
+        "totalUsd": 17017815,
+        "topShare": 1,
+        "topSymbol": "PEPE",
+        "stableShare": 0
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 2,
+        "countCapped": false,
+        "interactions": 8,
+        "topOutShare": null,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0,
+          "activity": 1,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0,
+          "activity": 1,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 1
+        }
+      },
+      "empty": false
+    },
+    "tell": "PEPE is 100% of a $17M balance · 7 trades · 2 counterparties in 30 d — a big holder sitting still: a whale",
+    "source": {
+      "endpoint": "tgm/holders",
+      "labelType": "all_holders",
+      "token": "PEPE",
+      "tag": "Token Millionaire"
+    },
+    "readerGuess": "whale",
+    "readerBecause": "one position is 100% of $17M and only 7 trades",
+    "cardHash": "8cd74f22b66e126972ad8a31712957a11437a21238e3279c8125d2f14010b3f9",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

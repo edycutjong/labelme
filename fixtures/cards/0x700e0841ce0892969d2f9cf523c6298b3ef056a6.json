@@ -1,0 +1,197 @@
+{
+  "edge": "whale via tgm/holders all_holders on PEPE",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 4,
+    "credits": 8,
+    "ms": 2273,
+    "failed": []
+  },
+  "responses": {
+    "15e30310ebf53074f2b01e5c1601706a": {
+      "storedAt": "2026-09-18T10:08:45.921Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0x700e0841ce0892969d2f9cf523c6298b3ef056a6",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[{\"realized_pnl\":1609559.86205682,\"realized_roi\":0.025603957876580895,\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"chain\":\"ethereum\"},{\"realized_pnl\":-70.57000942229308,\"realized_roi\":-0.2085669636021137,\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"chain\":\"ethereum\"}],\"traded_token_count\":2,\"traded_times\":5019,\"realized_pnl_usd\":1609489.2920473977,\"realized_pnl_percent\":0.02560269748569266,\"win_rate\":0.5}"
+    },
+    "e573eb3a26d19b58e114bf9e79eb5d95": {
+      "storedAt": "2026-09-18T10:08:45.924Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0x700e0841ce0892969d2f9cf523c6298b3ef056a6",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_price\":3.7018511817483e-6,\"roi_percent_realised\":0.025603957876580884,\"pnl_usd_realised\":1609559.8620568193,\"pnl_usd_unrealised\":454820.6492474291,\"roi_percent_unrealised\":0.07834599328181881,\"bought_amount\":18292577772111.066,\"bought_usd\":64824281.77765619,\"cost_basis_usd\":3.432897423286336e-6,\"sold_amount\":18060701307207.83,\"sold_usd\":64473272.957329184,\"avg_sold_price_usd\":3.569810045615372e-6,\"holding_amount\":1691073781040.879,\"holding_usd\":6260103.474769744,\"nof_buys\":\"1867\",\"nof_sells\":\"2402\",\"max_balance_held\":2173995482041.2427,\"max_balance_held_usd\":8047807.74430984},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_price\":2507.7957971274927,\"roi_percent_realised\":-0.20856696360211363,\"pnl_usd_realised\":-70.57000942229308,\"pnl_usd_unrealised\":-9870.388204409974,\"roi_percent_unrealised\":-0.16736530964926472,\"bought_amount\":4.000134368160265,\"bought_usd\":9716.063360034013,\"cost_basis_usd\":3011.880031170837,\"sold_amount\":0.10972723943176516,\"sold_usd\":267.7865941523773,\"avg_sold_price_usd\":2440.4750865795977,\"holding_amount\":19.58083101555852,\"holding_usd\":49104.72572508131,\"nof_buys\":\"25\",\"nof_sells\":\"725\",\"max_balance_held\":19.92693926443094,\"max_balance_held_usd\":49972.69453695472}]}"
+    },
+    "475881cda618171ddd24e611daf17871": {
+      "storedAt": "2026-09-18T10:08:45.933Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0x700e0841ce0892969d2f9cf523c6298b3ef056a6",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"token_amount\":2185932151101.4785,\"price_usd\":3.7018511817483e-6,\"value_usd\":8091995.516776612},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"token_amount\":50.43524864328055,\"price_usd\":2507.7957971274927,\"value_usd\":126481.30457469905},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\"token_symbol\":\"USDC\",\"token_name\":\"USD Coin\",\"token_amount\":38.23,\"price_usd\":0.998408478070488,\"value_usd\":38.16915611663475},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0x66e564819340cc2f54abceb4e49941fa07e426b4\",\"token_symbol\":\"BRETT\",\"token_name\":\"BRETT\",\"token_amount\":6374090.909,\"price_usd\":1.10955848816979e-6,\"value_usd\":7.072426672446842},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0x45547ab0100f5e8b158258b6d94d7586de69fc21\",\"token_symbol\":\"MYSTERY\",\"token_name\":\"Mystery\",\"token_amount\":5474292721.0,\"price_usd\":9.30442929602745e-11,\"value_usd\":0.5093516956830222},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0xd4419c2d3daa986dc30444fa333a846be44fd1eb\",\"token_symbol\":\"ZIK\",\"token_name\":\"ZIK coin\",\"token_amount\":444.0,\"price_usd\":0.000127764350055513,\"value_usd\":0.056727371424647774},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"token_amount\":0.03,\"price_usd\":0.996152730352117,\"value_usd\":0.02988458191056351},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0x2b591e99afe9f32eaa6214f7b7629768c40eeb39\",\"token_symbol\":\"HEX\",\"token_name\":\"HEX\",\"token_amount\":1.0,\"price_usd\":0.00112368375855495,\"value_usd\":0.00112368375855495},{\"chain\":\"ethereum\",\"address\":\"0x700e0841ce0892969d2f9cf523c6298b3ef056a6\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_name\":\"Wrapped Ether\",\"token_amount\":1e-7,\"price_usd\":2509.58,\"value_usd\":0.00025095799999999996}]}"
+    },
+    "1bc430f0119e5c587bd3095f83d2ddd6": {
+      "storedAt": "2026-09-18T10:08:47.104Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0x700e0841ce0892969d2f9cf523c6298b3ef056a6",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":false},\"data\":[{\"counterparty_address\":\"0xeb9ca8fdfac0652a97c0e1a48c1178d32d3a6b8f\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":164,\"total_volume_usd\":36501060.45925074,\"volume_in_usd\":36501060.45925074,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"164\",\"total_token_amount\":10367355043116.229,\"token_in_amount\":10367355043116.229,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x9b0c45d46d386cedd98873168c36efd0dcba8d46\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":235,\"total_volume_usd\":36205902.67388562,\"volume_in_usd\":0.0,\"volume_out_usd\":36205902.67388562,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"235\",\"total_token_amount\":10278719520244.6,\"token_in_amount\":0.0,\"token_out_amount\":10278719520244.6}]},{\"counterparty_address\":\"0x84b38bc60f3bd82640ecefa320dab2be62e2da15\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":440,\"total_volume_usd\":17188514.17909437,\"volume_in_usd\":17188514.17909437,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"440\",\"total_token_amount\":4730694144840.0625,\"token_in_amount\":4730694144840.0625,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":89,\"total_volume_usd\":5315801.040392232,\"volume_in_usd\":0.0,\"volume_out_usd\":5315801.040392232,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"89\",\"total_token_amount\":1478114243697.0,\"token_in_amount\":0.0,\"token_out_amount\":1478114243697.0}]},{\"counterparty_address\":\"0xbc8a0f5e41857292d12ef620e2a5895ce65a5ce0\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":198,\"total_volume_usd\":4060713.965051288,\"volume_in_usd\":0.0,\"volume_out_usd\":4060713.965051288,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"198\",\"total_token_amount\":1127361224459.0,\"token_in_amount\":0.0,\"token_out_amount\":1127361224459.0}]},{\"counterparty_address\":\"0x51c72848c68a965f66fa7a88855f9f7784502a7f\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":62,\"total_volume_usd\":3727283.5653491896,\"volume_in_usd\":0.0,\"volume_out_usd\":3727283.5653491896,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"62\",\"total_token_amount\":1013957923744.9999,\"token_in_amount\":0.0,\"token_out_amount\":1013957923744.9999}]},{\"counterparty_address\":\"0xeae7380dd4cef6fbd1144f49e4d1e6964258a4f4\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":55,\"total_volume_usd\":2793508.205435954,\"volume_in_usd\":0.0,\"volume_out_usd\":2793508.205435954,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"55\",\"total_token_amount\":745921667496.0,\"token_in_amount\":0.0,\"token_out_amount\":745921667496.0}]},{\"counterparty_address\":\"0x46efe4d9415abf4e0e2e92ad219fbd971c022388\",\"counterparty_address_label\":null,\"interaction_count\":9,\"total_volume_usd\":2714562.879728308,\"volume_in_usd\":2714562.879728308,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"9\",\"total_token_amount\":797324127989.5721,\"token_in_amount\":797324127989.5721,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xd2dd7b597fd2435b6db61ddf48544fd931e6869f\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":22,\"total_volume_usd\":2417634.2490870673,\"volume_in_usd\":1227547.3174227718,\"volume_out_usd\":1190086.9316642957,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"22\",\"total_token_amount\":671768905031.46,\"token_in_amount\":346004623609.94,\"token_out_amount\":325764281421.52}]},{\"counterparty_address\":\"0x3d3f20583c80582b5db10724b8513e7fbc28b718\",\"counterparty_address_label\":null,\"interaction_count\":19,\"total_volume_usd\":1807626.4640214103,\"volume_in_usd\":1807626.4640214103,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"19\",\"total_token_amount\":501122224500.0,\"token_in_amount\":501122224500.0,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xb8ffb182038836666f1fc350b943c6b2cdaf4193\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":6,\"total_volume_usd\":1498200.6380442898,\"volume_in_usd\":0.0,\"volume_out_usd\":1498200.6380442898,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"6\",\"total_token_amount\":437479041947.04004,\"token_in_amount\":0.0,\"token_out_amount\":437479041947.04004}]},{\"counterparty_address\":\"0x85ffcc959bd380c43a49bfd518ec141ccc1b7c35\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":71,\"total_volume_usd\":1439934.364640622,\"volume_in_usd\":0.0,\"volume_out_usd\":1439934.364640622,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"71\",\"total_token_amount\":396662828904.0,\"token_in_amount\":0.0,\"token_out_amount\":396662828904.0}]},{\"counterparty_address\":\"0x7dafba1d69f6c01ae7567ffd7b046ca03b706f83\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":5,\"total_volume_usd\":1334908.4011598914,\"volume_in_usd\":789906.1067685279,\"volume_out_usd\":545002.2943913634,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"5\",\"total_token_amount\":420955027154.68,\"token_in_amount\":265629962421.81,\"token_out_amount\":155325064732.87}]},{\"counterparty_address\":\"0xcc282e2004428939ee5149a9e7872f0b4d5d5ec7\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":20,\"total_volume_usd\":1281773.0222962226,\"volume_in_usd\":522177.23307713587,\"volume_out_usd\":759595.7892190868,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"20\",\"total_token_amount\":357274189289.87994,\"token_in_amount\":149724610369.48,\"token_out_amount\":207549578920.4}]},{\"counterparty_address\":\"0x6455327f820edd69c4cd665b995e0fec679d7f9e\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":43,\"total_volume_usd\":932227.6620768722,\"volume_in_usd\":0.0,\"volume_out_usd\":932227.6620768722,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"43\",\"total_token_amount\":256583070870.99997,\"token_in_amount\":0.0,\"token_out_amount\":256583070870.99997}]},{\"counterparty_address\":\"0x06fd4ba7973a0d39a91734bbc35bc2bcaa99e3b0\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":36,\"total_volume_usd\":680912.2090592112,\"volume_in_usd\":0.0,\"volume_out_usd\":680912.2090592112,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"36\",\"total_token_amount\":173954490804.0,\"token_in_amount\":0.0,\"token_out_amount\":173954490804.0}]},{\"counterparty_address\":\"0x794cb95854eca4ef039d415c7aff12e850ba36e9\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":547965.7187088236,\"volume_in_usd\":0.0,\"volume_out_usd\":547965.7187088236,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":166023816210.64,\"token_in_amount\":0.0,\"token_out_amount\":166023816210.64}]},{\"counterparty_address\":\"0x29fcfcccc431a8ddbdf81d67b1dac77dd4106041\",\"counterparty_address_label\":null,\"interaction_count\":4,\"total_volume_usd\":491324.8336757114,\"volume_in_usd\":491324.02981657657,\"volume_out_usd\":0.8038591348721879,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"3\",\"total_token_amount\":144454634084.46,\"token_in_amount\":144454634084.46,\"token_out_amount\":0.0},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.000324936524149862,\"token_in_amount\":0.0,\"token_out_amount\":0.000324936524149862}]},{\"counterparty_address\":\"0xd73113b56c0f2de7681ba0cb09d5cd1a14376b3e\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":443424.0442780276,\"volume_in_usd\":443424.0442780276,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":120257986321.7,\"token_in_amount\":120257986321.7,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x5c4c6c6d0358baf2ade28ffb1723e70139cd534d\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":21,\"total_volume_usd\":437208.12958929164,\"volume_in_usd\":0.0,\"volume_out_usd\":437208.12958929164,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"21\",\"total_token_amount\":116950830658.0,\"token_in_amount\":0.0,\"token_out_amount\":116950830658.0}]},{\"counterparty_address\":\"0x52c5233d3d12e9d5522759ace8b551d926b797d1\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":9,\"total_volume_usd\":413598.1106788252,\"volume_in_usd\":413598.1106788252,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"9\",\"total_token_amount\":125033861039.40166,\"token_in_amount\":125033861039.40166,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x58e1885adc33d07b1afc16f11463163a1a28cced\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":65,\"total_volume_usd\":404843.7192215581,\"volume_in_usd\":404843.7192215581,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"65\",\"total_token_amount\":108509496100.70218,\"token_in_amount\":108509496100.70218,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x18a3a7fbee2c00d29eb80ebc536b0c4e0714a50f\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":60,\"total_volume_usd\":378118.11100587633,\"volume_in_usd\":378118.11100587633,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"60\",\"total_token_amount\":99705781192.24062,\"token_in_amount\":99705781192.24062,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xe129188380d48fa09a6a89ac91adc761afdc1612\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":49,\"total_volume_usd\":355124.7722908611,\"volume_in_usd\":355124.7722908611,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"49\",\"total_token_amount\":96823022382.90767,\"token_in_amount\":96823022382.90767,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xe1fc412c483b02515ca2f5a733524c703263934d\",\"counterparty_address_label\":null,\"interaction_count\":11,\"total_volume_usd\":350097.41001354984,\"volume_in_usd\":350097.00025737745,\"volume_out_usd\":0.4097561723691899,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"10\",\"total_token_amount\":104192096001.69261,\"token_in_amount\":104192096001.69261,\"token_out_amount\":0.0},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.000167177799988344,\"token_in_amount\":0.0,\"token_out_amount\":0.000167177799988344}]},{\"counterparty_address\":\"0x040d6d590f4deb5013cdfdd7cd0df46ec9fe0f3f\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":1,\"total_volume_usd\":335363.0614915561,\"volume_in_usd\":0.0,\"volume_out_usd\":335363.0614915561,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":99999660000.0,\"token_in_amount\":0.0,\"token_out_amount\":99999660000.0}]},{\"counterparty_address\":\"0xdc2692379ef39a8a115ccdf56080645d35d1eb20\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":16,\"total_volume_usd\":330479.1115391347,\"volume_in_usd\":0.0,\"volume_out_usd\":330479.1115391347,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"16\",\"total_token_amount\":90689907262.00002,\"token_in_amount\":0.0,\"token_out_amount\":90689907262.00002}]},{\"counterparty_address\":\"0x4f65cb86f9762bb9785649159d62440878d33bcc\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":247760.41859240513,\"volume_in_usd\":0.0,\"volume_out_usd\":247760.41859240513,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":72443483073.31,\"token_in_amount\":0.0,\"token_out_amount\":72443483073.31}]},{\"counterparty_address\":\"0xdcdddf7bfd551c4b402f9ceecfd10214f3269a5d\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":34,\"total_volume_usd\":222558.2391139661,\"volume_in_usd\":222558.2391139661,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"34\",\"total_token_amount\":59391965354.03,\"token_in_amount\":59391965354.03,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x3358d042870c3d1b628ad778640136b8e569204f\",\"counterparty_address_label\":null,\"interaction_count\":3,\"total_volume_usd\":219096.7476609417,\"volume_in_usd\":0.0,\"volume_out_usd\":219096.7476609417,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"3\",\"total_token_amount\":60964679113.0,\"token_in_amount\":0.0,\"token_out_amount\":60964679113.0}]},{\"counterparty_address\":\"0xb46a0f71fded6ceb00b1c9278e0ac7e22c242df5\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":12,\"total_volume_usd\":181446.64920523774,\"volume_in_usd\":0.0,\"volume_out_usd\":181446.64920523774,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"12\",\"total_token_amount\":46430327200.0,\"token_in_amount\":0.0,\"token_out_amount\":46430327200.0}]},{\"counterparty_address\":\"0x57483d84305357f22e293a55bb7ddc2798352d40\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":5,\"total_volume_usd\":148266.65133332313,\"volume_in_usd\":0.0,\"volume_out_usd\":148266.65133332313,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"5\",\"total_token_amount\":40047281509.0,\"token_in_amount\":0.0,\"token_out_amount\":40047281509.0}]},{\"counterparty_address\":\"0x0b60c1ee6d01c3d5704eeae6c12552c7a63beead\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":8,\"total_volume_usd\":140640.26221280536,\"volume_in_usd\":0.0,\"volume_out_usd\":140640.26221280536,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"8\",\"total_token_amount\":36886496046.0,\"token_in_amount\":0.0,\"token_out_amount\":36886496046.0}]},{\"counterparty_address\":\"0xe19ed11103265687a351662aab588a890ec598b4\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":22,\"total_volume_usd\":139336.64773181523,\"volume_in_usd\":80437.80336143705,\"volume_out_usd\":58898.84437037817,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"22\",\"total_token_amount\":40930721059.85999,\"token_in_amount\":23718763033.5,\"token_out_amount\":17211958026.36}]},{\"counterparty_address\":\"0x32990e2d6684d7197b906f3615d9ff27dcaf1d25\",\"counterparty_address_label\":null,\"interaction_count\":4,\"total_volume_usd\":129750.08314723475,\"volume_in_usd\":0.0,\"volume_out_usd\":129750.08314723475,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"4\",\"total_token_amount\":36299662939.28,\"token_in_amount\":0.0,\"token_out_amount\":36299662939.28}]},{\"counterparty_address\":\"0x150819f32b6e5957b4116ec8df419e50b15bb679\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":11,\"total_volume_usd\":129041.06395799672,\"volume_in_usd\":0.0,\"volume_out_usd\":129041.06395799672,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"11\",\"total_token_amount\":35312055084.0,\"token_in_amount\":0.0,\"token_out_amount\":35312055084.0}]},{\"counterparty_address\":\"0xd7bafbc96c99f0bd07301300516140ade8a6d68f\",\"counterparty_address_label\":null,\"interaction_count\":5,\"total_volume_usd\":126781.68008097394,\"volume_in_usd\":0.0,\"volume_out_usd\":126781.68008097394,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"5\",\"total_token_amount\":35192705169.0,\"token_in_amount\":0.0,\"token_out_amount\":35192705169.0}]},{\"counterparty_address\":\"0xcc37555a605467a95c540114598b1393b726261a\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":121366.86460355471,\"volume_in_usd\":121366.44453763933,\"volume_out_usd\":0.42006591538644966,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":30093783610.39,\"token_in_amount\":30093783610.39,\"token_out_amount\":0.0},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.000170155070817274,\"token_in_amount\":0.0,\"token_out_amount\":0.000170155070817274}]},{\"counterparty_address\":\"0x27bffb0f09c18539f9a47a39958bb149fe42a155\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":101652.24764275705,\"volume_in_usd\":0.0,\"volume_out_usd\":101652.24764275705,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":27204676458.899998,\"token_in_amount\":0.0,\"token_out_amount\":27204676458.899998}]},{\"counterparty_address\":\"0xcf1208c781de49d36b2bcaea16fe2447e976a100\",\"counterparty_address_label\":null,\"interaction_count\":4,\"total_volume_usd\":99109.89669850106,\"volume_in_usd\":0.0,\"volume_out_usd\":99109.89669850106,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"4\",\"total_token_amount\":24264301947.39,\"token_in_amount\":0.0,\"token_out_amount\":24264301947.39}]},{\"counterparty_address\":\"0xcfb7e94d71ab3c65479dacd9d8f2159184ca17ed\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":96716.12446661398,\"volume_in_usd\":0.0,\"volume_out_usd\":96716.12446661398,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":30987189925.28,\"token_in_amount\":0.0,\"token_out_amount\":30987189925.28}]},{\"counterparty_address\":\"0xe71cab44917bf40b072b47138a76006558cb29c6\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":2,\"total_volume_usd\":92448.44192407641,\"volume_in_usd\":0.0,\"volume_out_usd\":92448.44192407641,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":26838109823.96,\"token_in_amount\":0.0,\"token_out_amount\":26838109823.96}]},{\"counterparty_address\":\"0xb180647d5ad76abeb6be0d363f6e182bd8df46d1\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":11,\"total_volume_usd\":91136.66302575817,\"volume_in_usd\":0.0,\"volume_out_usd\":91136.66302575817,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"11\",\"total_token_amount\":25146678001.000004,\"token_in_amount\":0.0,\"token_out_amount\":25146678001.000004}]},{\"counterparty_address\":\"0xadd3c21a8bf315fa17caa8f5d9c18a8e899d277a\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":90384.10222681836,\"volume_in_usd\":0.0,\"volume_out_usd\":90384.10222681836,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":24968405478.96,\"token_in_amount\":0.0,\"token_out_amount\":24968405478.96}]},{\"counterparty_address\":\"0x5733cc995209e11e3e42479ffc8e9778031cfa06\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":23,\"total_volume_usd\":85064.2725165586,\"volume_in_usd\":0.0,\"volume_out_usd\":85064.2725165586,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"23\",\"total_token_amount\":22515095953.0,\"token_in_amount\":0.0,\"token_out_amount\":22515095953.0}]},{\"counterparty_address\":\"0x42bf5681a3bec188d2e67e3f82f72d4df6f02585\",\"counterparty_address_label\":null,\"interaction_count\":12,\"total_volume_usd\":76384.11531336939,\"volume_in_usd\":76384.11531336939,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"12\",\"total_token_amount\":20704236495.2621,\"token_in_amount\":20704236495.2621,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xfed2399b20011af1fc985d5354f12cbc57ed48f9\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":7,\"total_volume_usd\":59082.330482219826,\"volume_in_usd\":0.0,\"volume_out_usd\":59082.330482219826,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"7\",\"total_token_amount\":15537044399.0,\"token_in_amount\":0.0,\"token_out_amount\":15537044399.0}]},{\"counterparty_address\":\"0xee845948e6806d12e966137caa07d49bbe632fe3\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":14,\"total_volume_usd\":58963.01682447798,\"volume_in_usd\":0.0,\"volume_out_usd\":58963.01682447798,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"14\",\"total_token_amount\":15648482320.0,\"token_in_amount\":0.0,\"token_out_amount\":15648482320.0}]},{\"counterparty_address\":\"0xdf3288f9e54809c97edabdeb8f0c3c26ce0f5192\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":56394.818585554254,\"volume_in_usd\":0.0,\"volume_out_usd\":56394.818585554254,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":15584081802.1,\"token_in_amount\":0.0,\"token_out_amount\":15584081802.1}]},{\"counterparty_address\":\"0xa96bbda2a5b5ee58ff5f339afe05ffbe2ed48834\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":19,\"total_volume_usd\":53766.96979487362,\"volume_in_usd\":0.0,\"volume_out_usd\":53766.96979487362,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"19\",\"total_token_amount\":14162331401.0,\"token_in_amount\":0.0,\"token_out_amount\":14162331401.0}]}]}"
+    }
+  },
+  "card": {
+    "id": "9e164eeccc",
+    "address": "0x700e0841ce0892969d2f9cf523c6298b3ef056a6",
+    "chain": "ethereum",
+    "class": "whale",
+    "nansenLabel": "Token Millionaire",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 1609489,
+        "realizedPct": 0.026,
+        "winRate": 0.5,
+        "trades": 5019,
+        "tokensTraded": 2,
+        "top": [
+          {
+            "symbol": "PEPE",
+            "roi": 0.026,
+            "pnlUsd": 1609560
+          },
+          {
+            "symbol": "ETH",
+            "roi": -0.209,
+            "pnlUsd": -71
+          }
+        ]
+      },
+      "trades": {
+        "ok": true,
+        "rows": [
+          {
+            "symbol": "PEPE",
+            "pnlUsd": 1609560,
+            "buys": 1867,
+            "sells": 2402
+          },
+          {
+            "symbol": "ETH",
+            "pnlUsd": -71,
+            "buys": 25,
+            "sells": 725
+          }
+        ]
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 9,
+        "tokensCapped": false,
+        "totalUsd": 8218523,
+        "topShare": 0.985,
+        "topSymbol": "PEPE",
+        "stableShare": 0
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 50,
+        "countCapped": true,
+        "interactions": 1921,
+        "topOutShare": 0.574,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0.614,
+          "activity": 0.332,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0.054
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 16,
+          "activity": 22,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 12
+        }
+      },
+      "empty": false
+    },
+    "tell": "PEPE is 99% of a $8.2M balance · 5019 trades · 50 counterparties in 30 d — a big holder sitting still: a whale",
+    "source": {
+      "endpoint": "tgm/holders",
+      "labelType": "all_holders",
+      "token": "PEPE",
+      "tag": "Token Millionaire"
+    },
+    "readerGuess": "contract",
+    "readerBecause": "1921 interactions from 50+ counterparties and only 9 tokens — traffic, not trading",
+    "cardHash": "af20da230013c1405fab1b344b01f2f26ed2aacbef3fb4581ed52fe5f556b6f6",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

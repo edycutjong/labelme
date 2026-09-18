@@ -1,0 +1,201 @@
+{
+  "edge": "contract via tgm/holders exchange on SHIB",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 6,
+    "credits": 10,
+    "ms": 4327,
+    "failed": []
+  },
+  "responses": {
+    "9e7f84179ebc4b517d2615dd1e6dcbb1": {
+      "storedAt": "2026-09-18T10:08:57.417Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/transactions",
+      "body": {
+        "address": "0xee136c0389733849dd710ac7104e92c6bf497574",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"method\":\"received\",\"tokens_sent\":[],\"tokens_received\":[{\"token_symbol\":\"ETH\",\"token_amount\":4.510441822369e-6,\"price_usd\":null,\"value_usd\":null,\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"chain\":\"ethereum\",\"from_address\":\"0x4b14a27ff0ad06364ac02d02970cd9d80cc1f8fb\",\"to_address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"from_address_label\":\"[0x4b14a2]\",\"to_address_label\":\"Proxy [0xee136c]\"}],\"volume_usd\":0.011158216234017233,\"block_timestamp\":\"2026-09-15T20:29:35\",\"transaction_hash\":\"0xb30d807f23360993fcea60050ab2526391b54351ff8f95b2a6bbe4cdd87e8db4\",\"source_type\":\"transfer\"}]}"
+    },
+    "5cada8ead23797046971191e51bb7b17": {
+      "storedAt": "2026-09-18T10:08:58.980Z",
+      "ttlMs": 86400000,
+      "endpoint": "transaction-with-token-transfer-lookup",
+      "body": {
+        "chain": "ethereum",
+        "transaction_hash": "0xb30d807f23360993fcea60050ab2526391b54351ff8f95b2a6bbe4cdd87e8db4"
+      },
+      "text": "{\"data\":[{\"chain\":\"ethereum\",\"transaction_hash\":\"0xb30d807f23360993fcea60050ab2526391b54351ff8f95b2a6bbe4cdd87e8db4\",\"from_address\":\"0x4b14a27ff0ad06364ac02d02970cd9d80cc1f8fb\",\"from_address_label\":\"\",\"to_address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"to_address_label\":\"Proxy\",\"native_value\":4.510441822369e-6,\"dated_native_price\":2473.863242993045,\"dated_native_value_usd\":0.011158216234017233,\"current_native_price\":2507.7957971274927,\"current_native_value_usd\":0.011311267045325047,\"receipt_status\":1,\"block_timestamp\":\"2026-09-15T20:29:35Z\",\"token_transfer_array\":[{\"from_address\":\"0x4b14a27ff0ad06364ac02d02970cd9d80cc1f8fb\",\"from_address_label\":\"[0x4b14a2]\",\"to_address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"to_address_label\":\"🤖 🏦 Gnosis Safe Proxy [0xee136c]\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_amount\":4.510441822369e-6,\"dated_price_usd\":2473.863242993045,\"dated_value_usd\":0.011158216234017233,\"current_price_usd\":2507.7957971274927,\"current_value_usd\":0.011311267045325047,\"transfer_id\":\"trace-0xb30d807f23360993fcea60050ab2526391b54351ff8f95b2a6bbe4cdd87e8db4-46\"}],\"nft_transfer_array\":null}]}"
+    },
+    "57347f5fccf4e7fc4bca4d320e0b0107": {
+      "storedAt": "2026-09-18T10:08:59.584Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0xee136c0389733849dd710ac7104e92c6bf497574",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0x4b14a27ff0ad06364ac02d02970cd9d80cc1f8fb\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.011158216234017233,\"volume_in_usd\":0.011158216234017233,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":4.510441822369e-6,\"token_in_amount\":4.510441822369e-6,\"token_out_amount\":0.0}]}]}"
+    },
+    "801258c409a2d30525b1f7271cb727ab": {
+      "storedAt": "2026-09-18T10:08:59.881Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0xee136c0389733849dd710ac7104e92c6bf497574",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[]}"
+    },
+    "a78dfd9a66aee4c45565953715db8432": {
+      "storedAt": "2026-09-18T10:09:00.040Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0xee136c0389733849dd710ac7104e92c6bf497574",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x11eef04c884e24d9b7b4760e7476d06ddf797f36\",\"token_symbol\":\"MX\",\"token_name\":\"MX Token\",\"token_amount\":80001050.0,\"price_usd\":1.78602811563075,\"value_usd\":142884124.57998142},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"token_amount\":85000420.0,\"price_usd\":1.00359988509697,\"value_usd\":85306411.7451942},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"token_amount\":14963.600033510442,\"price_usd\":2507.7957971274927,\"value_usd\":37525653.2739343},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce\",\"token_symbol\":\"SHIB\",\"token_name\":\"SHIBA INU\",\"token_amount\":500010000103.24005,\"price_usd\":5.39443968101163e-6,\"value_usd\":2697273.785459548},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x8ab2ff0116a279a99950c66a12298962d152b83c\",\"token_symbol\":\"ORDS\",\"token_name\":\"Ordiswap\",\"token_amount\":12000000.0,\"price_usd\":0.000158782778795455,\"value_usd\":1905.3933455454599},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x5b649c07e7ba0a1c529deaabed0b47699919b4a2\",\"token_symbol\":\"SGT\",\"token_name\":\"SGT\",\"token_amount\":100.0,\"price_usd\":0.0270399824006811,\"value_usd\":2.70399824006811},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x393f1d49425d94f47b26e591a9d111df5cd61065\",\"token_symbol\":\"GUA\",\"token_name\":\"GUA\",\"token_amount\":28888.000000000004,\"price_usd\":4.18789207000079e-6,\"value_usd\":0.12097982611818284},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0xd4419c2d3daa986dc30444fa333a846be44fd1eb\",\"token_symbol\":\"ZIK\",\"token_name\":\"ZIK coin\",\"token_amount\":777.0,\"price_usd\":0.000127764350055513,\"value_usd\":0.0992728999931336},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0xe15ed6cad89cb6d71b1f18eff938c65fbc59b371\",\"token_symbol\":\"STRAYDOG\",\"token_name\":\"Stray Dog\",\"token_amount\":69.0,\"price_usd\":0.0000478445065199678,\"value_usd\":0.0033012709498777782},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0xd09eb9099fac55edcbf4965e0a866779ca365a0c\",\"token_symbol\":\"COLON\",\"token_name\":\"Colon\",\"token_amount\":17.42147119,\"price_usd\":0.0000475820614470776,\"value_usd\":0.0008289495126610721},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x74ab072c91bf33479f959ce70561e785fd7391fd\",\"token_symbol\":\"GBTC6900\",\"token_name\":\"GBTC\",\"token_amount\":7.42147119,\"price_usd\":0.0000544500736613856,\"value_usd\":0.00040409965297135103},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\"token_symbol\":\"WETH\",\"token_name\":\"Wrapped Ether\",\"token_amount\":1e-7,\"price_usd\":2510.91,\"value_usd\":0.000251091},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x0000000000085d4780b73119b644ae5ecd22b376\",\"token_symbol\":\"TUSD\",\"token_name\":\"TrueUSD\",\"token_amount\":0.0001,\"price_usd\":1.00365369173614,\"value_usd\":0.00010036536917361401},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0x70c29e99ca32592c0e88bb571b87444bb0e08e33\",\"token_symbol\":\"MARVIN\",\"token_name\":\"The Martian Dog\",\"token_amount\":14.54989795,\"price_usd\":7.43000623757194e-7,\"value_usd\":0.00001081058325245352},{\"chain\":\"ethereum\",\"address\":\"0xee136c0389733849dd710ac7104e92c6bf497574\",\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"token_name\":\"Rekt\",\"token_amount\":4e-18,\"price_usd\":1.08614756051946e-7,\"value_usd\":4.344590242077841e-25}]}"
+    },
+    "04bc85473e0f7610ee9319d76ea172f8": {
+      "storedAt": "2026-09-18T10:09:00.520Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0xee136c0389733849dd710ac7104e92c6bf497574",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[],\"traded_token_count\":0,\"traded_times\":0,\"realized_pnl_usd\":0.0,\"realized_pnl_percent\":0.0,\"win_rate\":0.0}"
+    }
+  },
+  "card": {
+    "id": "f4d3b90d6b",
+    "address": "0xee136c0389733849dd710ac7104e92c6bf497574",
+    "chain": "ethereum",
+    "class": "contract",
+    "nansenLabel": "Proxy",
+    "entity": "🤖 🏦 Gnosis Safe Proxy [0xee136c]",
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 0,
+        "realizedPct": 0,
+        "winRate": 0,
+        "trades": 0,
+        "tokensTraded": 0,
+        "top": []
+      },
+      "trades": {
+        "ok": true,
+        "rows": []
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 15,
+        "tokensCapped": false,
+        "totalUsd": 268415372,
+        "topShare": 0.532,
+        "topSymbol": "MX",
+        "stableShare": 0.318
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 1,
+        "countCapped": false,
+        "interactions": 1,
+        "topOutShare": null,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0,
+          "activity": 0,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 1
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0,
+          "activity": 0,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 1
+        }
+      },
+      "empty": false
+    },
+    "tell": "1 interactions from 1 counterparties in 30 d · 15 tokens · no trades of its own — traffic without a trader: a contract or pool",
+    "source": {
+      "endpoint": "tgm/holders",
+      "labelType": "exchange",
+      "token": "SHIB",
+      "tag": "Proxy"
+    },
+    "readerGuess": "regular",
+    "readerBecause": "0 trades, 15 tokens, $268415372 — nothing that reads like a label",
+    "cardHash": "853bf3de2b3d5205f34c4a92321b409dfec054f2f6c0b57db2606c7481461f8a",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "edge": "regular via tgm/who-bought-sold exclude all 17 label groups on PEPE",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 4,
+    "credits": 8,
+    "ms": 911,
+    "failed": []
+  },
+  "responses": {
+    "0235983b4ac102568b0c809c61b5acfd": {
+      "storedAt": "2026-09-18T10:09:56.358Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0x50b98497785b1768b8c029c198e68b7924c75e2b",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0x50b98497785b1768b8c029c198e68b7924c75e2b\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"token_amount\":0.0301846030988484,\"price_usd\":2507.7957971274927,\"value_usd\":75.69682078925351},{\"chain\":\"ethereum\",\"address\":\"0x50b98497785b1768b8c029c198e68b7924c75e2b\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"token_amount\":0.935803,\"price_usd\":1.00359988509697,\"value_usd\":0.9391717832733999}]}"
+    },
+    "26250b56207e3bdb38999de1842a6981": {
+      "storedAt": "2026-09-18T10:09:56.767Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0x50b98497785b1768b8c029c198e68b7924c75e2b",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_price\":3.70591787940193e-6,\"roi_percent_realised\":0.07203152012731161,\"pnl_usd_realised\":5588.265049042137,\"pnl_usd_unrealised\":0.0,\"roi_percent_unrealised\":null,\"bought_amount\":25052951488.94021,\"bought_usd\":77580.8290476891,\"cost_basis_usd\":3.096706281843915e-6,\"sold_amount\":25052951488.94021,\"sold_usd\":83169.09409673123,\"avg_sold_price_usd\":3.3197323729879405e-6,\"holding_amount\":0.0,\"holding_usd\":0.0,\"nof_buys\":\"4\",\"nof_sells\":\"6\",\"max_balance_held\":25039959766.940205,\"max_balance_held_usd\":92796.03459980869},{\"token_address\":\"0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66\",\"token_symbol\":\"SYRUP\",\"token_price\":0.214818936068178,\"roi_percent_realised\":0.08299495104690052,\"pnl_usd_realised\":1360.6141915959129,\"pnl_usd_unrealised\":0.0,\"roi_percent_unrealised\":null,\"bought_amount\":0.0,\"bought_usd\":0.0,\"cost_basis_usd\":0.1639393932321291,\"sold_amount\":99999.99999999999,\"sold_usd\":17754.55351480882,\"avg_sold_price_usd\":0.17754553514808824,\"holding_amount\":0.0,\"holding_usd\":0.0,\"nof_buys\":\"0\",\"nof_sells\":\"1\",\"max_balance_held\":99999.99999999999,\"max_balance_held_usd\":21481.893606817797},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_price\":2507.7957971274927,\"roi_percent_realised\":0.00265080076454503,\"pnl_usd_realised\":933.6935448504458,\"pnl_usd_unrealised\":-0.0995751485748696,\"roi_percent_unrealised\":-0.0013137187770319223,\"bought_amount\":144.72832457636534,\"bought_usd\":352288.3118829226,\"cost_basis_usd\":2511.0946693455166,\"sold_amount\":144.7088227574395,\"sold_usd\":353164.4448479195,\"avg_sold_price_usd\":2440.517710795649,\"holding_amount\":0.0301846030988484,\"holding_usd\":75.69682078925351,\"nof_buys\":\"28\",\"nof_sells\":\"15\",\"max_balance_held\":28.36054938142472,\"max_balance_held_usd\":71122.46654296362},{\"token_address\":\"0xe76c5b78f93909d34404e9eb4c1f19e7582a5de1\",\"token_symbol\":\"H\",\"token_price\":0.0819017377922347,\"roi_percent_realised\":-0.38371946198755724,\"pnl_usd_realised\":-5749.704732431224,\"pnl_usd_unrealised\":-0.0,\"roi_percent_unrealised\":null,\"bought_amount\":0.0,\"bought_usd\":0.0,\"cost_basis_usd\":0.149841363340014,\"sold_amount\":99999.99999999999,\"sold_usd\":9234.431601570173,\"avg_sold_price_usd\":0.09234431601570174,\"holding_amount\":0.0,\"holding_usd\":0.0,\"nof_buys\":\"0\",\"nof_sells\":\"1\",\"max_balance_held\":99999.99999999999,\"max_balance_held_usd\":8190.173779223468}]}"
+    },
+    "7c8d6f054171b1f6ce6bbdb35714ed5f": {
+      "storedAt": "2026-09-18T10:09:56.774Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0x50b98497785b1768b8c029c198e68b7924c75e2b",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[{\"realized_pnl\":5588.265049042137,\"realized_roi\":0.0720315201273116,\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"chain\":\"ethereum\"},{\"realized_pnl\":1360.6141915959129,\"realized_roi\":0.08299495104690052,\"token_address\":\"0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66\",\"token_symbol\":\"SYRUP\",\"chain\":\"ethereum\"},{\"realized_pnl\":933.6935448504457,\"realized_roi\":0.00265080076454503,\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"chain\":\"ethereum\"},{\"realized_pnl\":-5749.704732431224,\"realized_roi\":-0.38371946198755724,\"token_address\":\"0xe76c5b78f93909d34404e9eb4c1f19e7582a5de1\",\"token_symbol\":\"H\",\"chain\":\"ethereum\"}],\"traded_token_count\":4,\"traded_times\":55,\"realized_pnl_usd\":2132.868053057272,\"realized_pnl_percent\":0.004624709217286525,\"win_rate\":0.75}"
+    },
+    "fa642da7e6a396aae407b1ff0368f27e": {
+      "storedAt": "2026-09-18T10:09:56.798Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0x50b98497785b1768b8c029c198e68b7924c75e2b",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0xe9dc3e0a017ae82200b12f97fe69760b3bf27096\",\"counterparty_address_label\":[\"Uses \\\"TRADEXYZ1\\\" HL Referral Code\"],\"interaction_count\":7,\"total_volume_usd\":270697.1888678415,\"volume_in_usd\":181633.84978186048,\"volume_out_usd\":89063.33908598099,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"6\",\"total_token_amount\":103.13,\"token_in_amount\":75.0,\"token_out_amount\":28.13},{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":6249999999.999999,\"token_in_amount\":0.0,\"token_out_amount\":6249999999.999999}]},{\"counterparty_address\":\"0x4cd00e387622c35bddb9b4c962c136462338bc31\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":7,\"total_volume_usd\":150326.7097160705,\"volume_in_usd\":0.0,\"volume_out_usd\":150326.7097160705,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"5\",\"total_token_amount\":57.105489424106146,\"token_in_amount\":0.0,\"token_out_amount\":57.105489424106146},{\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"num_transfer\":\"2\",\"total_token_amount\":8362.043808,\"token_in_amount\":0.0,\"token_out_amount\":8362.043808}]},{\"counterparty_address\":\"0xf5e10380213880111522dd0efd3dbb45b9f62bcc\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":89337.0482516845,\"volume_in_usd\":89337.0482516845,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":35.54467272736981,\"token_in_amount\":35.54467272736981,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x0889e9327b98d7d1be3c301a4585ff3330502c9a\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":6,\"total_volume_usd\":88317.53321159656,\"volume_in_usd\":71240.99529031113,\"volume_out_usd\":17076.53792128543,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"3\",\"total_token_amount\":12.081022227117785,\"token_in_amount\":12.081022227117785,\"token_out_amount\":0.0},{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":14513563138.39202,\"token_in_amount\":14500571416.39202,\"token_out_amount\":12991722.0},{\"token_address\":\"0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66\",\"token_symbol\":\"SYRUP\",\"token_name\":\"Syrup Token\",\"num_transfer\":\"1\",\"total_token_amount\":99999.99999999999,\"token_in_amount\":0.0,\"token_out_amount\":99999.99999999999}]},{\"counterparty_address\":\"0xc1d13492285eb664951e201bf7c80c7c6318a1b5\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":4,\"total_volume_usd\":84776.1816037551,\"volume_in_usd\":30057.311763405498,\"volume_out_usd\":54718.8698403496,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":2201390807.895665,\"token_in_amount\":2161431040.95546,\"token_out_amount\":39959766.94020521},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":31.49724,\"token_in_amount\":9.86724,\"token_out_amount\":21.63}]},{\"counterparty_address\":\"0x0000000000001ff3684f28c67538d4d072c22734\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":2,\"total_volume_usd\":62561.95285825063,\"volume_in_usd\":0.0,\"volume_out_usd\":62561.95285825063,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":26.7,\"token_in_amount\":0.0,\"token_out_amount\":26.7}]},{\"counterparty_address\":\"0x2cff890f0378a11913b6129b2e97417a2c302680\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":4,\"total_volume_usd\":45038.49983859992,\"volume_in_usd\":45038.49983859992,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":12.235389601477745,\"token_in_amount\":12.235389601477745,\"token_out_amount\":0.0},{\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"num_transfer\":\"1\",\"total_token_amount\":8364.979611,\"token_in_amount\":8364.979611,\"token_out_amount\":0.0},{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":3350989264.661554,\"token_in_amount\":3350989264.661554,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xb6cf032878204b3bf28aea692b48cf0045bc99fe\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":2,\"total_volume_usd\":42266.39965944875,\"volume_in_usd\":0.0,\"volume_out_usd\":42266.39965944875,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"2\",\"total_token_amount\":12499999999.999998,\"token_in_amount\":0.0,\"token_out_amount\":12499999999.999998}]},{\"counterparty_address\":\"0x9b52969125d6bd4ea78ec7beab11c473898e8740\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":1,\"total_volume_usd\":21133.199829724374,\"volume_in_usd\":0.0,\"volume_out_usd\":21133.199829724374,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":6249999999.999999,\"token_in_amount\":0.0,\"token_out_amount\":6249999999.999999}]},{\"counterparty_address\":\"0x666fedd4cdd4e890a5ad20e7b60975409435a64a\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":17041.676302132404,\"volume_in_usd\":17041.676302132404,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":5039959766.93117,\"token_in_amount\":5039959766.93117,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":9728.051731596179,\"volume_in_usd\":0.0,\"volume_out_usd\":9728.051731596179,\"tokens_info\":[{\"token_address\":\"0xe76c5b78f93909d34404e9eb4c1f19e7582a5de1\",\"token_symbol\":\"H\",\"token_name\":\"Humanity\",\"num_transfer\":\"1\",\"total_token_amount\":99999.99999999999,\"token_in_amount\":0.0,\"token_out_amount\":99999.99999999999}]},{\"counterparty_address\":\"0x3373ad0456130cc858aa8a4a36e23f1cf2c8ac94\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":8458.051472634983,\"volume_in_usd\":0.0,\"volume_out_usd\":8458.051472634983,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":4.4,\"token_in_amount\":0.0,\"token_out_amount\":4.4}]},{\"counterparty_address\":\"0x3a30fbef790d40c0f8ff484924ab3c8949ae9899\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":8393.661766610936,\"volume_in_usd\":0.0,\"volume_out_usd\":8393.661766610936,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":3.4,\"token_in_amount\":0.0,\"token_out_amount\":3.4}]},{\"counterparty_address\":\"0x58e779ef4208834f7c66c5c6f8f73581a6db20d0\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":7966.285149185596,\"volume_in_usd\":0.0,\"volume_out_usd\":7966.285149185596,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":3.3333333333333335,\"token_in_amount\":0.0,\"token_out_amount\":3.3333333333333335}]},{\"counterparty_address\":\"0x69460570c93f9de5e2edbc3052bf10125f0ca22d\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":24.825259040356784,\"volume_in_usd\":0.0,\"volume_out_usd\":24.825259040356784,\"tokens_info\":[{\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"num_transfer\":\"1\",\"total_token_amount\":2.0,\"token_in_amount\":0.0,\"token_out_amount\":2.0},{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.01,\"token_in_amount\":0.0,\"token_out_amount\":0.01}]},{\"counterparty_address\":\"0x3373e0d4a5c0d4c9511ab973bcf96f40eaa0ac94\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.000010043960071972877,\"volume_in_usd\":0.000010043960071972877,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":4.4e-9,\"token_in_amount\":4.4e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xe9dc664fe21b90837034689ac6052434dc0d7096\",\"counterparty_address_label\":null,\"interaction_count\":4,\"total_volume_usd\":9.981370986475648e-6,\"volume_in_usd\":9.981370986475648e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"4\",\"total_token_amount\":4e-9,\"token_in_amount\":4e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x33732bf3461ab872f6fa921e16c6caf77c34ac94\",\"counterparty_address_label\":null,\"interaction_count\":4,\"total_volume_usd\":9.130872792702617e-6,\"volume_in_usd\":9.130872792702617e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"4\",\"total_token_amount\":4e-9,\"token_in_amount\":4e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xe9dc18915be744d72514ff5b2af65b3075281096\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":4.982635793098766e-6,\"volume_in_usd\":4.982635793098766e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":2e-9,\"token_in_amount\":2e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x3a30421f17908de4e1859ef2e42e60bb73319899\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":4.9600419455526e-6,\"volume_in_usd\":4.9600419455526e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":2e-9,\"token_in_amount\":2e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xe9dcddfc05237d7328e383629c087ca3984c7096\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":4.8812034413050615e-6,\"volume_in_usd\":4.8812034413050615e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":2e-9,\"token_in_amount\":2e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xe9dc3e127ce9c3fc5caa6fb4c9f3063eeca19096\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":2.5235207305578433e-6,\"volume_in_usd\":2.5235207305578433e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":1e-9,\"token_in_amount\":1e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x58e7f3a7c98d04c581787d2faf452665621c20d0\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":2.389885544755679e-6,\"volume_in_usd\":2.389885544755679e-6,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":1e-9,\"token_in_amount\":1e-9,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xd176aaf656c1b6c6a20f053675a668a974728931\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x514b9e5467b9eb811519e316263c9099eae546ca\",\"token_symbol\":\"PVC\",\"token_name\":\"Privacy Coin\",\"num_transfer\":\"1\",\"total_token_amount\":1000000.0,\"token_in_amount\":1000000.0,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xe9d654ae23ba018788cb0d1bea78f79b47097096\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x89c334f48860997b7f1655580700a6ecb7da0f56\",\"token_symbol\":\"E͏TH\",\"token_name\":\"E͏TH\",\"num_transfer\":\"1\",\"total_token_amount\":9.96,\"token_in_amount\":0.0,\"token_out_amount\":9.96}]},{\"counterparty_address\":\"0x924e9ae07483d90ba66cd5931c9498fe410f2588\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x7a9f61ee8673692ca74dc94916d69167070ff093\",\"token_symbol\":\"ÚЅDТ\",\"token_name\":\"ÚЅDТ\",\"num_transfer\":\"2\",\"total_token_amount\":32150.0,\"token_in_amount\":0.0,\"token_out_amount\":32150.0}]}]}"
+    }
+  },
+  "card": {
+    "id": "2bbdbef18b",
+    "address": "0x50b98497785b1768b8c029c198e68b7924c75e2b",
+    "chain": "ethereum",
+    "class": "regular",
+    "nansenLabel": "Uses \"TRADEXYZ1\" HL Referral Code",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 2133,
+        "realizedPct": 0.005,
+        "winRate": 0.75,
+        "trades": 55,
+        "tokensTraded": 4,
+        "top": [
+          {
+            "symbol": "PEPE",
+            "roi": 0.072,
+            "pnlUsd": 5588
+          },
+          {
+            "symbol": "SYRUP",
+            "roi": 0.083,
+            "pnlUsd": 1361
+          },
+          {
+            "symbol": "ETH",
+            "roi": 0.003,
+            "pnlUsd": 934
+          },
+          {
+            "symbol": "H",
+            "roi": -0.384,
+            "pnlUsd": -5750
+          }
+        ]
+      },
+      "trades": {
+        "ok": true,
+        "rows": [
+          {
+            "symbol": "PEPE",
+            "pnlUsd": 5588,
+            "buys": 4,
+            "sells": 6
+          },
+          {
+            "symbol": "SYRUP",
+            "pnlUsd": 1361,
+            "buys": 0,
+            "sells": 1
+          },
+          {
+            "symbol": "ETH",
+            "pnlUsd": 934,
+            "buys": 28,
+            "sells": 15
+          },
+          {
+            "symbol": "H",
+            "pnlUsd": -5750,
+            "buys": 0,
+            "sells": 1
+          }
+        ]
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 2,
+        "tokensCapped": false,
+        "totalUsd": 77,
+        "topShare": 0.988,
+        "topSymbol": "ETH",
+        "stableShare": 0.012
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 26,
+        "countCapped": false,
+        "interactions": 63,
+        "topOutShare": 0.319,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0.448,
+          "activity": 0.226,
+          "ens": 0.299,
+          "other": 0,
+          "unlabelled": 0.027
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 6,
+          "activity": 6,
+          "ens": 1,
+          "other": 0,
+          "unlabelled": 13
+        }
+      },
+      "empty": false
+    },
+    "tell": "55 trades · 2 tokens worth $77 · 26 counterparties in 30 d — none of Nansen's label groups: a regular wallet",
+    "source": {
+      "endpoint": "tgm/who-bought-sold",
+      "labelType": "exclude all 17 label groups",
+      "token": "PEPE",
+      "tag": "Uses \"TRADEXYZ1\" HL Referral Code"
+    },
+    "readerGuess": "regular",
+    "readerBecause": "55 trades, 2 tokens, $77 — nothing that reads like a label",
+    "cardHash": "ead6b0f813337913bce0635671d3e82ea17e8fae78b75e80fe2a46e430ca6207",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

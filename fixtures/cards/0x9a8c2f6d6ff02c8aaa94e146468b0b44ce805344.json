@@ -1,0 +1,173 @@
+{
+  "edge": "smart-money via smart-money/dex-trades",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 4,
+    "credits": 8,
+    "ms": 1033,
+    "failed": []
+  },
+  "responses": {
+    "3d36bc22d70ff85f10b45448e27613bb": {
+      "storedAt": "2026-09-18T10:07:41.734Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344\",\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"token_name\":\"Fake World Assets\",\"token_amount\":488444.0289776968,\"price_usd\":0.0162530682768819,\"value_usd\":7938.714152409786},{\"chain\":\"ethereum\",\"address\":\"0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"token_amount\":0.012779941071413236,\"price_usd\":2507.7957971274927,\"value_usd\":32.04948250642714},{\"chain\":\"ethereum\",\"address\":\"0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344\",\"token_address\":\"0xa35923162c49cf95e6bf26623385eb431ad920d3\",\"token_symbol\":\"TURBO\",\"token_name\":\"Turbo\",\"token_amount\":603.0,\"price_usd\":0.000957864983376783,\"value_usd\":0.5775925849762001},{\"chain\":\"ethereum\",\"address\":\"0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344\",\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"token_amount\":74213.0,\"price_usd\":3.7018511817483e-6,\"value_usd\":0.2747254817510866}]}"
+    },
+    "359efd3ffda14ea0c6338104f9143fc1": {
+      "storedAt": "2026-09-18T10:07:41.761Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[]}"
+    },
+    "4e5c9910ff82e0cddfd635c5479fdc36": {
+      "storedAt": "2026-09-18T10:07:41.793Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[],\"traded_token_count\":4,\"traded_times\":5,\"realized_pnl_usd\":0.0,\"realized_pnl_percent\":0.0,\"win_rate\":1.0}"
+    },
+    "08c1d274f8d61224834f8fa963ce208d": {
+      "storedAt": "2026-09-18T10:07:42.161Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0x2fc617e933a52713247ce25730f6695920b3befe\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":1,\"total_volume_usd\":7119.614504159092,\"volume_in_usd\":7119.614504159092,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":2.9130913,\"token_in_amount\":2.9130913,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":7087.6192799248565,\"volume_in_usd\":0.0,\"volume_out_usd\":7087.6192799248565,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":2.9,\"token_in_amount\":0.0,\"token_out_amount\":2.9}]},{\"counterparty_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":5768.663892139534,\"volume_in_usd\":5768.663892139534,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa0df17b5ac76ababa36e1450e2cbcd18a620c845\",\"token_symbol\":\"FWA\",\"token_name\":\"Fake World Assets\",\"num_transfer\":\"1\",\"total_token_amount\":488444.0289776968,\"token_in_amount\":488444.0289776968,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xa03400e098f4421b34a3a44a1b4e571419517687\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":2,\"total_volume_usd\":0.765402277401004,\"volume_in_usd\":0.765402277401004,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":74213.0,\"token_in_amount\":74213.0,\"token_out_amount\":0.0},{\"token_address\":\"0xa35923162c49cf95e6bf26623385eb431ad920d3\",\"token_symbol\":\"TURBO\",\"token_name\":\"Turbo\",\"num_transfer\":\"1\",\"total_token_amount\":603.0,\"token_in_amount\":603.0,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xd176aaf656c1b6c6a20f053675a668a974728931\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x514b9e5467b9eb811519e316263c9099eae546ca\",\"token_symbol\":\"PVC\",\"token_name\":\"Privacy Coin\",\"num_transfer\":\"1\",\"total_token_amount\":1000000.0,\"token_in_amount\":1000000.0,\"token_out_amount\":0.0}]}]}"
+    }
+  },
+  "card": {
+    "id": "893c2b9530",
+    "address": "0x9a8c2f6d6ff02c8aaa94e146468b0b44ce805344",
+    "chain": "ethereum",
+    "class": "smart-money",
+    "nansenLabel": "",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 0,
+        "realizedPct": 0,
+        "winRate": 1,
+        "trades": 5,
+        "tokensTraded": 4,
+        "top": []
+      },
+      "trades": {
+        "ok": true,
+        "rows": []
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 4,
+        "tokensCapped": false,
+        "totalUsd": 7972,
+        "topShare": 0.996,
+        "topSymbol": "FWA",
+        "stableShare": 0
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 5,
+        "countCapped": false,
+        "interactions": 6,
+        "topOutShare": 1,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0.356,
+          "activity": 0.644,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 1,
+          "activity": 4,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        }
+      },
+      "empty": false
+    },
+    "tell": "5 trades in 30 d · win rate 100% · realised $0 across 4 tokens · 64% of flow through DEX pools and routers — a trader Nansen tracks as Smart Money",
+    "source": {
+      "endpoint": "smart-money/dex-trades",
+      "labelType": null,
+      "token": null,
+      "tag": ""
+    },
+    "readerGuess": "regular",
+    "readerBecause": "5 trades, 4 tokens, $7972 — nothing that reads like a label",
+    "cardHash": "1e665532c67828bdab3481ab6a05decbaa457e2ccfdc1a514e5d3e3f9a9a2e21",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "edge": "regular via tgm/who-bought-sold exclude all 17 label groups on PEPE",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 1,
+    "credits": 1,
+    "ms": 5411,
+    "failed": []
+  },
+  "responses": {
+    "739a859bb3bc859e823a17a82b95cf79": {
+      "storedAt": "2026-09-18T10:01:18.272Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0x5d37e4b108e3f29683b888f993a8d3fb6586b043",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[{\"realized_pnl\":8.87336623190769,\"realized_roi\":0.00025245240120629997,\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"chain\":\"ethereum\"}],\"traded_token_count\":2,\"traded_times\":13,\"realized_pnl_usd\":8.87336623190769,\"realized_pnl_percent\":0.00025245240120629997,\"win_rate\":1.0}"
+    },
+    "84855b7418ed35051ba618ad1470abca": {
+      "storedAt": "2026-09-18T10:01:18.403Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0x5d37e4b108e3f29683b888f993a8d3fb6586b043",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0x5d37e4b108e3f29683b888f993a8d3fb6586b043\",\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"token_amount\":9458489237.882757,\"price_usd\":3.72009106296629e-6,\"value_usd\":35186.44128301048},{\"chain\":\"ethereum\",\"address\":\"0x5d37e4b108e3f29683b888f993a8d3fb6586b043\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"token_amount\":0.001682539801064507,\"price_usd\":2503.242390190778,\"value_usd\":4.211804953207833}]}"
+    },
+    "d79d1671986361cfd7559afc6bbc3e8b": {
+      "storedAt": "2026-09-18T10:01:18.607Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0x5d37e4b108e3f29683b888f993a8d3fb6586b043",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0x4c82d1fbfe28c977cbb58d8c7ff8fcf9f70a2cca\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":5,\"total_volume_usd\":35316.84788750339,\"volume_in_usd\":0.0,\"volume_out_usd\":35316.84788750339,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"5\",\"total_token_amount\":14.108441126554988,\"token_in_amount\":0.0,\"token_out_amount\":14.108441126554988}]},{\"counterparty_address\":\"0x44fbe352f5797ef1e84e0c33cfac318bf89256a8\",\"counterparty_address_label\":null,\"interaction_count\":2,\"total_volume_usd\":35315.240568573194,\"volume_in_usd\":35315.240568573194,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"2\",\"total_token_amount\":14.107799031751668,\"token_in_amount\":14.107799031751668,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xa43fe16908251ee70ef74718545e4fe6c5ccec9f\",\"counterparty_address_label\":[\"UniswapV2\"],\"interaction_count\":4,\"total_volume_usd\":35086.08113313074,\"volume_in_usd\":35086.08113313074,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"4\",\"total_token_amount\":9431511363.368118,\"token_in_amount\":9431511363.368118,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x11950d141ecb863f01007add7d1a342041227b58\",\"counterparty_address_label\":[\"Token Millionaire\"],\"interaction_count\":1,\"total_volume_usd\":85.27053494910696,\"volume_in_usd\":85.27053494910696,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":22921625.70910691,\"token_in_amount\":22921625.70910691,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x992c59d45dd67706d7aaa118beb331c203858417\",\"counterparty_address_label\":[\"Liquidity Pool\"],\"interaction_count\":1,\"total_volume_usd\":15.089614930630162,\"volume_in_usd\":15.089614930630162,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x6982508145454ce325ddbe47a25d4ec3d2311933\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"num_transfer\":\"1\",\"total_token_amount\":4056248.8055327744,\"token_in_amount\":4056248.8055327744,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xfeeeeee44046c3f61a8cc081e0918ef0de0a7ffc\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":6.876109288691614,\"volume_in_usd\":6.876109288691614,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.002746881131302498,\"token_in_amount\":0.002746881131302498,\"token_out_amount\":0.0}]}]}"
+    },
+    "3638a7644ec6c519ac95afbd4891801b": {
+      "storedAt": "2026-09-18T10:09:49.345Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0x5d37e4b108e3f29683b888f993a8d3fb6586b043",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_price\":2507.7957971274927,\"roi_percent_realised\":0.00025245240120629997,\"pnl_usd_realised\":8.87336623190769,\"pnl_usd_unrealised\":0.026626982432326342,\"roi_percent_unrealised\":0.006350585077652769,\"bought_amount\":14.110545912882971,\"bought_usd\":35153.9154263308,\"cost_basis_usd\":2491.970327551391,\"sold_amount\":14.108441126554988,\"sold_usd\":35157.54372748754,\"avg_sold_price_usd\":2491.95098254433,\"holding_amount\":0.001682539801064507,\"holding_usd\":4.2194662416092985,\"nof_buys\":\"3\",\"nof_sells\":\"5\",\"max_balance_held\":12.120027782407844,\"max_balance_held_usd\":30394.554733790836}]}"
+    }
+  },
+  "card": {
+    "id": "a59ee4e802",
+    "address": "0x5d37e4b108e3f29683b888f993a8d3fb6586b043",
+    "chain": "ethereum",
+    "class": "regular",
+    "nansenLabel": "",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 9,
+        "realizedPct": 0,
+        "winRate": 1,
+        "trades": 13,
+        "tokensTraded": 2,
+        "top": [
+          {
+            "symbol": "ETH",
+            "roi": 0,
+            "pnlUsd": 9
+          }
+        ]
+      },
+      "trades": {
+        "ok": true,
+        "rows": [
+          {
+            "symbol": "ETH",
+            "pnlUsd": 9,
+            "buys": 3,
+            "sells": 5
+          }
+        ]
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 2,
+        "tokensCapped": false,
+        "totalUsd": 35191,
+        "topShare": 1,
+        "topSymbol": "PEPE",
+        "stableShare": 0
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 6,
+        "countCapped": false,
+        "interactions": 14,
+        "topOutShare": 1,
+        "mix": {
+          "pool": 0.332,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0.001,
+          "activity": 0.334,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0.334
+        },
+        "counts": {
+          "pool": 2,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 1,
+          "activity": 2,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 1
+        }
+      },
+      "empty": false
+    },
+    "tell": "13 trades · 2 tokens worth $35K · 6 counterparties in 30 d — none of Nansen's label groups: a regular wallet",
+    "source": {
+      "endpoint": "tgm/who-bought-sold",
+      "labelType": "exclude all 17 label groups",
+      "token": "PEPE",
+      "tag": ""
+    },
+    "readerGuess": "regular",
+    "readerBecause": "13 trades, 2 tokens, $35191 — nothing that reads like a label",
+    "cardHash": "a0ab19c3cb405c8f6ff91ef7144dca3fab759228c8fa3a129dad05064f17c752",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}

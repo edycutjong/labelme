@@ -1,0 +1,191 @@
+{
+  "edge": "contract via tgm/holders all_holders",
+  "recordedAt": "2026-09-18T10:11:01.398Z",
+  "now": 1789726261398,
+  "live": {
+    "calls": 5,
+    "credits": 9,
+    "ms": 2424,
+    "failed": []
+  },
+  "responses": {
+    "35b455e22928d9b1b11e02a54d8c1e4e": {
+      "storedAt": "2026-09-18T10:11:05.295Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/transactions",
+      "body": {
+        "address": "0x97639ab7476b643ba63f0806a0eece2013959b19",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[]}"
+    },
+    "e19e3a4f4af307989039d910e6ac2a79": {
+      "storedAt": "2026-09-18T10:11:05.950Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0x97639ab7476b643ba63f0806a0eece2013959b19",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[]}"
+    },
+    "f5a94f75f825f5f5b194007ff2d7ed35": {
+      "storedAt": "2026-09-18T10:11:06.017Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0x97639ab7476b643ba63f0806a0eece2013959b19",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0xaaee1a9723aadb7afa2810263653a34ba2c21c7a\",\"token_symbol\":\"MOG\",\"token_name\":\"Mog Coin\",\"token_amount\":1376790590141.2617,\"price_usd\":1.03108634755744e-7,\"value_usd\":141958.9980940206},{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0xb03eef386a61b5b462051636001485fffdd3d843\",\"token_symbol\":\"AMERICA\",\"token_name\":\"America Party\",\"token_amount\":42069000.0,\"price_usd\":9.48688315914128e-8,\"value_usd\":3.991036876219145},{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0xeeacc51af745846ddf46012b46c6910ea9b12898\",\"token_symbol\":\"DOGC\",\"token_name\":\"Dogc\",\"token_amount\":20000.0,\"price_usd\":1.60718825555995e-6,\"value_usd\":0.032143765111199},{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0xb8a914a00664e9361eae187468eff94905dfbc15\",\"token_symbol\":\"DRIP\",\"token_name\":\"DRIP\",\"token_amount\":6.9,\"price_usd\":0.00194042891081047,\"value_usd\":0.013388959484592244},{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0xc0fe7f77ed2f522978b719372282ca89de8cf3e4\",\"token_symbol\":\"CATCOIN\",\"token_name\":\"Catcoin\",\"token_amount\":67.0,\"price_usd\":0.0000587377621029725,\"value_usd\":0.003935430060899157},{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0x6967b9a8c0b14849cfe8f9e5732b401433fd2898\",\"token_symbol\":\"NAKA\",\"token_name\":\"Naka Go\",\"token_amount\":20.0,\"price_usd\":0.00010475662615524,\"value_usd\":0.0020951325231048},{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0x4f2cef6f39114ade3d8af4020fa1de1d064cadaf\",\"token_symbol\":\"HOKK\",\"token_name\":\"Hokkaidu Inu\",\"token_amount\":1.0,\"price_usd\":0.0000282608136400244,\"value_usd\":0.0000282608136400244},{\"chain\":\"ethereum\",\"address\":\"0x97639ab7476b643ba63f0806a0eece2013959b19\",\"token_address\":\"0xdd3b11ef34cd511a2da159034a05fcb94d806686\",\"token_symbol\":\"REKT\",\"token_name\":\"Rekt\",\"token_amount\":1e-18,\"price_usd\":1.08614756051946e-7,\"value_usd\":1.0861475605194602e-25}]}"
+    },
+    "275b1667cac2410dffcec39ad60595c3": {
+      "storedAt": "2026-09-18T10:11:06.192Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0x97639ab7476b643ba63f0806a0eece2013959b19",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":true},\"data\":[]}"
+    },
+    "b0a49ecfdb029a57c74724e8f7330f72": {
+      "storedAt": "2026-09-18T10:11:06.376Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0x97639ab7476b643ba63f0806a0eece2013959b19",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[],\"traded_token_count\":0,\"traded_times\":0,\"realized_pnl_usd\":0.0,\"realized_pnl_percent\":0.0,\"win_rate\":0.0}"
+    }
+  },
+  "card": {
+    "id": "90d050ed5e",
+    "address": "0x97639ab7476b643ba63f0806a0eece2013959b19",
+    "chain": "ethereum",
+    "class": "contract",
+    "nansenLabel": "Proxy",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": 0,
+        "realizedPct": 0,
+        "winRate": 0,
+        "trades": 0,
+        "tokensTraded": 0,
+        "top": []
+      },
+      "trades": {
+        "ok": true,
+        "rows": []
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 8,
+        "tokensCapped": false,
+        "totalUsd": 141963,
+        "topShare": 1,
+        "topSymbol": "MOG",
+        "stableShare": 0
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 0,
+        "countCapped": false,
+        "interactions": 0,
+        "topOutShare": null,
+        "mix": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0,
+          "activity": 0,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        },
+        "counts": {
+          "pool": 0,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0,
+          "activity": 0,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        }
+      },
+      "empty": false
+    },
+    "tell": "0 interactions from 0 counterparties in 30 d · 8 tokens · no trades of its own — traffic without a trader: a contract or pool",
+    "source": {
+      "endpoint": "tgm/holders",
+      "labelType": "all_holders",
+      "token": null,
+      "tag": "Proxy"
+    },
+    "readerGuess": "regular",
+    "readerBecause": "0 trades, 8 tokens, $141963 — nothing that reads like a label",
+    "cardHash": "5e300363e22d87a0f1d5b55ce9c7572620b9249c50dc9fbb184b2f02958563fb",
+    "recordedAt": "2026-09-18T10:11:01.398Z",
+    "now": 1789726261398
+  }
+}

@@ -25,6 +25,22 @@ export const ENS_TAG = /\.(eth|sol|base\.eth)\*?$|on opensea|referral code/i;
 /** an entity name: exchange/fund/protocol labels carry emoji prefixes or a "Name: role" shape; only seen on tx-lookup labels so far */
 export const ENTITY_TAG = /🏦|🤖|🐋|binance|coinbase|kraken|okx|bybit|bitget|kucoin|gate\.io|huobi|htx|robinhood|crypto\.com|gemini|bitfinex|upbit|mexc|:\s*(deposit|hot wallet|cold wallet)/i;
 
+/** unambiguous pool tags — the only structural tags the live draw deals as "contract" (a MultiSig may be an exchange's wallet) */
+export const POOL_TAG = /liquidity pool|uniswap|sushi|curve|balancer|pancake|\bpool\b/i;
+/** Nansen's exchange marker on entity labels ("🏦 Binance", "🤖 🏦 Luno: Wallet"); a pool label carries it too (DEX) and stays a contract */
+export const EXCHANGE_MARK = /🏦/u;
+
+/**
+ * When the 1-credit tx-lookup returned an entity label for the wallet itself, it outranks the free-tier tag:
+ * a pool is a contract, anything else Nansen marks 🏦 is an exchange; otherwise the class stands.
+ */
+export function classFromEntity(entity: string | null | undefined, fallback: LabelClass): LabelClass {
+  if (!entity) return fallback;
+  if (POOL_TAG.test(entity)) return "contract";
+  if (EXCHANGE_MARK.test(entity)) return "exchange";
+  return fallback;
+}
+
 export type CounterpartyClass = "pool" | "contract" | "wealth" | "activity" | "ens" | "entity" | "other" | "unlabelled";
 
 /** Bucket a counterparty's labels (the OTHER side of a transfer) into a class the card can show without leaking the wallet's own label. */

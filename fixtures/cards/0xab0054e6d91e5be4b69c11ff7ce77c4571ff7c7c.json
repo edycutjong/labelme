@@ -1,0 +1,230 @@
+{
+  "edge": "smart-money via smart-money/dex-trades",
+  "recordedAt": "2026-09-18T10:07:28.640Z",
+  "now": 1789726048640,
+  "live": {
+    "calls": 4,
+    "credits": 8,
+    "ms": 980,
+    "failed": []
+  },
+  "responses": {
+    "af09d26eb9e15c53b0dd55efbe46b275": {
+      "storedAt": "2026-09-18T10:07:38.726Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/current-balance",
+      "body": {
+        "address": "0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c",
+        "chain": "ethereum",
+        "hide_spam_token": true,
+        "pagination": {
+          "page": 1,
+          "per_page": 100
+        },
+        "order_by": [
+          {
+            "field": "value_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":100,\"is_last_page\":true},\"data\":[{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"token_amount\":1.5950110852875756,\"price_usd\":2507.7957971274927,\"value_usd\":3999.962096055943},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x75e2fc69ff2ac12af65ba7d321bbf4f878c535d2\",\"token_symbol\":\"STOCKER\",\"token_name\":\"Stockereum.fun\",\"token_amount\":13003815.691080453,\"price_usd\":0.000195882474895057,\"value_usd\":2547.219600648015},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x6a77e39240da69ea788e4cf93663d2c41ea4b12b\",\"token_symbol\":\"SPIRAL\",\"token_name\":\"Spiral\",\"token_amount\":14248.495511277422,\"price_usd\":0.0123694634579937,\"value_usd\":176.24624455813333},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x14c3abf95cb9c93a8b82c1cdcb76d72cb87b2d4c\",\"token_symbol\":\"AAPLON\",\"token_name\":\"Apple (Ondo Tokenized)\",\"token_amount\":0.10108352690251161,\"price_usd\":339.073566030514,\"value_usd\":34.27475193377601},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xa693b19d2931d498c5b318df961919bb4aee87a5\",\"token_symbol\":\"UST-WORMHOLE\",\"token_name\":\"TerraUSD (Wormhole)\",\"token_amount\":1707.589641,\"price_usd\":0.00504711232831072,\"value_usd\":8.618396728786777},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x30ae41d5f9988d359c733232c6c693c0e645c77e\",\"token_symbol\":\"WAAC\",\"token_name\":\"Wrapped AyeAyeCoin\",\"token_amount\":1.0,\"price_usd\":0.306711315796437,\"value_usd\":0.306711315796437},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xb48eb8368c9c6e9b0734de1ef4ceb9f484b80b9c\",\"token_symbol\":\"VMPX\",\"token_name\":\"VMPX\",\"token_amount\":415.0228506594619,\"price_usd\":0.00058297694157922,\"value_usd\":0.24194875216294245},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"token_symbol\":\"USDT\",\"token_name\":\"Tether USD\",\"token_amount\":0.036491,\"price_usd\":0.996152730352117,\"value_usd\":0.03635060928327911},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xd4419c2d3daa986dc30444fa333a846be44fd1eb\",\"token_symbol\":\"ZIK\",\"token_name\":\"ZIK coin\",\"token_amount\":133.0,\"price_usd\":0.000127764350055513,\"value_usd\":0.016992658557383227},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x2b591e99afe9f32eaa6214f7b7629768c40eeb39\",\"token_symbol\":\"HEX\",\"token_name\":\"HEX\",\"token_amount\":1.0,\"price_usd\":0.00112368375855495,\"value_usd\":0.00112368375855495},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x0258f474786ddfd37abce6df6bbb1dd5dfc4434a\",\"token_symbol\":\"ORN\",\"token_name\":\"Orion Protocol\",\"token_amount\":0.02152719,\"price_usd\":0.0309583645494873,\"value_usd\":0.0006664465957460776},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x72e4f9f808c49a2a61de9c5896298920dc4eeea9\",\"token_symbol\":\"BITCOIN\",\"token_name\":\"HarryPotterObamaSonic10Inu\",\"token_amount\":1e-8,\"price_usd\":0.0144894384108016,\"value_usd\":1.44894384108016e-10},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x42069026eac8eee0fd9b5f7adfa4f6e6d69a2b39\",\"token_symbol\":\"MSTR\",\"token_name\":\"MSTR2100\",\"token_amount\":1e-9,\"price_usd\":0.0241528668861425,\"value_usd\":2.4152866886142504e-11},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x36c7188d64c44301272db3293899507eabb8ed43\",\"token_symbol\":\"SWAG\",\"token_name\":\"Swag\",\"token_amount\":1e-9,\"price_usd\":0.00180513916725521,\"value_usd\":1.8051391672552102e-12},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xebb66a88cedd12bfe3a289df6dfee377f2963f12\",\"token_symbol\":\"OSCAR\",\"token_name\":\"Oscar\",\"token_amount\":1e-9,\"price_usd\":0.000688757992888672,\"value_usd\":6.887579928886721e-13},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x8802269d1283cdb2a5a329649e5cb4cdcee91ab6\",\"token_symbol\":\"FIGHT\",\"token_name\":\"Fight to MAGA\",\"token_amount\":1e-9,\"price_usd\":0.000241067847313452,\"value_usd\":2.41067847313452e-13},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x1f70300bce8c2302780bd0a153ebb75b8ca7efcb\",\"token_symbol\":\"BARRON\",\"token_name\":\"Mini Donald\",\"token_amount\":1e-9,\"price_usd\":0.0000929455024906576,\"value_usd\":9.294550249065761e-14},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x812ba41e071c7b7fa4ebcfb62df5f45f6fa853ee\",\"token_symbol\":\"NEIRO\",\"token_name\":\"Neiro\",\"token_amount\":1e-9,\"price_usd\":0.0000884951222213547,\"value_usd\":8.849512222135471e-14},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x71297312753ea7a2570a5a3278ed70d9a75f4f44\",\"token_symbol\":\"EBULL\",\"token_name\":\"ETHEREUM IS GOOD\",\"token_amount\":1e-9,\"price_usd\":0.0000184818126123763,\"value_usd\":1.84818126123763e-14},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x28561b8a2360f463011c16b6cc0b0cbef8dbbcad\",\"token_symbol\":\"MOODENG\",\"token_name\":\"MOO DENG\",\"token_amount\":1e-9,\"price_usd\":3.99116595499074e-6,\"value_usd\":3.99116595499074e-15},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x356e17967206efb413b60ab0ba44e269063a26c9\",\"token_symbol\":\"OCISLY\",\"token_name\":\"Of Course I Still Love You\",\"token_amount\":1e-9,\"price_usd\":6.83053355814503e-7,\"value_usd\":6.83053355814503e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xf89674f18309a2e97843c6e9b19c07c22caef6d5\",\"token_symbol\":\"GAMER\",\"token_name\":\"cyb3rgam3r420\",\"token_amount\":1e-9,\"price_usd\":6.75282796328964e-7,\"value_usd\":6.75282796328964e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x7d4a23832fad83258b32ce4fd3109ceef4332af4\",\"token_symbol\":\"STONKS\",\"token_name\":\"Stonks\",\"token_amount\":1e-9,\"price_usd\":3.9398110231394e-7,\"value_usd\":3.9398110231394005e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x69420e3a3aa9e17dea102bb3a9b3b73dcddb9528\",\"token_symbol\":\"ELON\",\"token_name\":\"Elon\",\"token_amount\":1e-9,\"price_usd\":2.38787266016866e-7,\"value_usd\":2.38787266016866e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x8e42fe26fc1697f57076c9f2a8d1ff69cf7f6fda\",\"token_symbol\":\"AGURI\",\"token_name\":\"Aguri-Chan\",\"token_amount\":1e-9,\"price_usd\":1.76375823930248e-7,\"value_usd\":1.76375823930248e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x465dbc39f46f9d43c581a5d90a43e4a0f2a6ff2d\",\"token_symbol\":\"ITO\",\"token_name\":\"ITO\",\"token_amount\":1e-9,\"price_usd\":1.3495970019784e-7,\"value_usd\":1.3495970019784e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x5640e0560e6afd6a9f4ddb41230d0201d181fea7\",\"token_symbol\":\"DMAGA\",\"token_name\":\"DARK MAGA\",\"token_amount\":1e-9,\"price_usd\":1.27578391443289e-7,\"value_usd\":1.27578391443289e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x2b7c0fa747611d4412b54076c62119926474edb3\",\"token_symbol\":\"NCAT\",\"token_name\":\"Neuracat\",\"token_amount\":1e-9,\"price_usd\":1.15621161940846e-7,\"value_usd\":1.15621161940846e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x85d19fb57ca7da715695fcf347ca2169144523a7\",\"token_symbol\":\"CONAN\",\"token_name\":\"Conan\",\"token_amount\":1e-9,\"price_usd\":1.10687462263877e-7,\"value_usd\":1.10687462263877e-16},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x50d7ee9708fec39673c92e1aae048eb3685eea9b\",\"token_symbol\":\"GINNAN\",\"token_name\":\"Ginnan\",\"token_amount\":1e-9,\"price_usd\":4.48012511668402e-8,\"value_usd\":4.4801251166840205e-17},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xec21890967a8ceb3e55a3f79dac4e90673ba3c2e\",\"token_symbol\":\"BEBE\",\"token_name\":\"BEBE\",\"token_amount\":1e-8,\"price_usd\":1.68910980901518e-9,\"value_usd\":1.68910980901518e-17},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x4dfae3690b93c47470b03036a17b23c1be05127c\",\"token_symbol\":\"PEPE\",\"token_name\":\"Pepe\",\"token_amount\":1e-18,\"price_usd\":5.59493683133497,\"value_usd\":5.594936831334971e-18},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xba25b2281214300e4e649fead9a6d6acd25f1c0a\",\"token_symbol\":\"TREE\",\"token_name\":\"Tree\",\"token_amount\":1e-18,\"price_usd\":0.163691823200599,\"value_usd\":1.63691823200599e-19},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x35bd01fc9d6d5d81ca9e055db88dc49aa2c699a8\",\"token_symbol\":\"FWB-PRO\",\"token_name\":\"Friends With Benefits Pro\",\"token_amount\":1e-18,\"price_usd\":0.11185495224617,\"value_usd\":1.1185495224617e-19},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x5afe3855358e112b5647b952709e6165e1c1eeee\",\"token_symbol\":\"SAFE\",\"token_name\":\"Safe Token\",\"token_amount\":1e-18,\"price_usd\":0.0980225028270027,\"value_usd\":9.802250282700271e-20},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x93ed3fbe21207ec2e8f2d3c3de6e058cb73bc04d\",\"token_symbol\":\"PNK\",\"token_name\":\"Pinakion\",\"token_amount\":1e-18,\"price_usd\":0.00834945573274471,\"value_usd\":8.34945573274471e-21},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xc52fafdc900cb92ae01e6e4f8979af7f436e2eb2\",\"token_symbol\":\"SEXY\",\"token_name\":\"Settled ETHXY Token\",\"token_amount\":1e-18,\"price_usd\":0.00446014552893879,\"value_usd\":4.4601455289387905e-21},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x8e729198d1c59b82bd6bba579310c40d740a11c2\",\"token_symbol\":\"ALVA\",\"token_name\":\"Alvara\",\"token_amount\":1e-18,\"price_usd\":0.00241652445363063,\"value_usd\":2.4165244536306302e-21},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xacd2c239012d17beb128b0944d49015104113650\",\"token_symbol\":\"KARRAT\",\"token_name\":\"KarratCoin\",\"token_amount\":1e-18,\"price_usd\":0.00219120096401833,\"value_usd\":2.19120096401833e-21},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x58cb30368ceb2d194740b144eab4c2da8a917dcb\",\"token_symbol\":\"ZYN\",\"token_name\":\"ZynCoin\",\"token_amount\":1e-18,\"price_usd\":0.000795806063127863,\"value_usd\":7.95806063127863e-22},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x393bf304dd474f48210f5ce741f19a2a851703ca\",\"token_symbol\":\"BALL\",\"token_name\":\"Game 5 BALL\",\"token_amount\":1e-18,\"price_usd\":0.000281215552975531,\"value_usd\":2.81215552975531e-22},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x7613c48e0cd50e42dd9bf0f6c235063145f6f8dc\",\"token_symbol\":\"PIRATE\",\"token_name\":\"Pirate Nation Token\",\"token_amount\":1e-18,\"price_usd\":0.000260932111541172,\"value_usd\":2.60932111541172e-22},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x50b0696468f42cab1ddc76413a1312aff3cabdf6\",\"token_symbol\":\"CLOSEDAI\",\"token_name\":\"ClosedAI\",\"token_amount\":1e-18,\"price_usd\":0.000221506243282466,\"value_usd\":2.2150624328246603e-22},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x391cf4b21f557c935c7f670218ef42c21bd8d686\",\"token_symbol\":\"XMW\",\"token_name\":\"Morphware\",\"token_amount\":1e-18,\"price_usd\":0.000174242130622058,\"value_usd\":1.74242130622058e-22},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x6900f7b42fb4abb615c938db6a26d73a9afbed69\",\"token_symbol\":\"DXY\",\"token_name\":\"US Degen Index 6900\",\"token_amount\":1e-18,\"price_usd\":0.0000971675229725239,\"value_usd\":9.71675229725239e-23},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x9a594f5ed8d119b73525dfe23adbceca77fd828d\",\"token_symbol\":\"TRIANGLE\",\"token_name\":\"dancing triangle\",\"token_amount\":1e-18,\"price_usd\":0.000041895440037514,\"value_usd\":4.1895440037514003e-23},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x888c1a341ce9d9ae9c2d2a75a72a7f0d2551a2dc\",\"token_symbol\":\"CSI\",\"token_name\":\"CSI888\",\"token_amount\":1e-18,\"price_usd\":0.000035810665856369,\"value_usd\":3.5810665856369e-23},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xd6175692026bcd7cb12a515e39cf0256ef35cb86\",\"token_symbol\":\"BONZI\",\"token_name\":\"BONZI\",\"token_amount\":1e-18,\"price_usd\":0.0000162798688861317,\"value_usd\":1.62798688861317e-23},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x87d907568a0761ea45d2917e324557920668f224\",\"token_symbol\":\"GROK2.0\",\"token_name\":\"GROK 2.0\",\"token_amount\":1e-18,\"price_usd\":3.94496137838325e-6,\"value_usd\":3.94496137838325e-24},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x91fbb2503ac69702061f1ac6885759fc853e6eae\",\"token_symbol\":\"KNINE\",\"token_name\":\"K9 Finance DAO\",\"token_amount\":1e-18,\"price_usd\":3.00002271668316e-7,\"value_usd\":3.00002271668316e-25},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xaaee1a9723aadb7afa2810263653a34ba2c21c7a\",\"token_symbol\":\"MOG\",\"token_name\":\"Mog Coin\",\"token_amount\":1e-18,\"price_usd\":1.02907063059134e-7,\"value_usd\":1.0290706305913401e-25},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0xf43f21384d03b5cbbddd58d2de64071e4ce76ab0\",\"token_symbol\":\"GIGACHAD\",\"token_name\":\"GigaChad\",\"token_amount\":1e-18,\"price_usd\":2.38005235471659e-10,\"value_usd\":2.3800523547165905e-28},{\"chain\":\"ethereum\",\"address\":\"0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c\",\"token_address\":\"0x95af148dcdc6b36b977addf7ea2599c5e0483263\",\"token_symbol\":\"HACHI\",\"token_name\":\"Hachiko Inu\",\"token_amount\":1e-18,\"price_usd\":1.24489176551036e-11,\"value_usd\":1.24489176551036e-29}]}"
+    },
+    "5d63593de09b118f38c52ca98a6cc98c": {
+      "storedAt": "2026-09-18T10:07:39.183Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/counterparties",
+      "body": {
+        "address": "0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "source_input": "Combined",
+        "group_by": "wallet",
+        "pagination": {
+          "page": 1,
+          "per_page": 50
+        },
+        "order_by": [
+          {
+            "field": "total_volume_usd",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":50,\"is_last_page\":true},\"data\":[{\"counterparty_address\":\"0x4313c378cc91ea583c91387b9216e2c03096b27f\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":27,\"total_volume_usd\":37074.30809691712,\"volume_in_usd\":16523.252371936174,\"volume_out_usd\":20551.055724980946,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"25\",\"total_token_amount\":12.490265995685316,\"token_in_amount\":4.210265995685318,\"token_out_amount\":8.28},{\"token_address\":\"0x75e2fc69ff2ac12af65ba7d321bbf4f878c535d2\",\"token_symbol\":\"STOCKER\",\"token_name\":\"Stockereum.fun\",\"num_transfer\":\"1\",\"total_token_amount\":13003815.691080453,\"token_in_amount\":13003815.691080453,\"token_out_amount\":0.0},{\"token_address\":\"0xeaa69a34e138edd218bd1f02ba074d0c72f4a69a\",\"token_symbol\":\"CLARUS\",\"token_name\":\"The Dogcow\",\"num_transfer\":\"1\",\"total_token_amount\":14741474.689932095,\"token_in_amount\":14741474.689932095,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x000000000004444c5dc75cb358380d2e3de08a90\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":15,\"total_volume_usd\":16900.381534652628,\"volume_in_usd\":10536.691045021918,\"volume_out_usd\":6363.6904896307105,\"tokens_info\":[{\"token_address\":\"0x89ab9b5fca71a8be8e00480c7d042a5444ed1d33\",\"token_symbol\":\"CORPUS\",\"token_name\":\"CORPUS by Takens Theorem\",\"num_transfer\":\"6\",\"total_token_amount\":54106.76040217013,\"token_in_amount\":27053.380201085067,\"token_out_amount\":27053.380201085067},{\"token_address\":\"0x6a77e39240da69ea788e4cf93663d2c41ea4b12b\",\"token_symbol\":\"SPIRAL\",\"token_name\":\"Spiral\",\"num_transfer\":\"3\",\"total_token_amount\":20024.264322432595,\"token_in_amount\":17136.37991685501,\"token_out_amount\":2887.884405577585},{\"token_address\":\"0x8f294a99a0609822c233b24867f331c292ce2da9\",\"token_symbol\":\"RELICS\",\"token_name\":\"Relics\",\"num_transfer\":\"2\",\"total_token_amount\":271.94204476270386,\"token_in_amount\":135.97102238135193,\"token_out_amount\":135.97102238135193},{\"token_address\":\"0x4ddb9817c9fb8781b17ebe7a5eb255bc1c5d54dd\",\"token_symbol\":\"PON\",\"token_name\":\"Proof of Nothing\",\"num_transfer\":\"2\",\"total_token_amount\":4310190.944631675,\"token_in_amount\":2155095.4723158376,\"token_out_amount\":2155095.4723158376},{\"token_address\":\"0xff954252dd5d782afd2a69fb0325c2c1077c5044\",\"token_symbol\":\"🌱 STONKTOWER\",\"token_name\":\"🌱 StonkTower\",\"num_transfer\":\"1\",\"total_token_amount\":16864.629780915253,\"token_in_amount\":16864.629780915253,\"token_out_amount\":0.0},{\"token_address\":\"0xeaa69a34e138edd218bd1f02ba074d0c72f4a69a\",\"token_symbol\":\"CLARUS\",\"token_name\":\"The Dogcow\",\"num_transfer\":\"1\",\"total_token_amount\":14741474.689932095,\"token_in_amount\":0.0,\"token_out_amount\":14741474.689932095}]},{\"counterparty_address\":\"0x04d698035a1b34e0cf3835aa2cfedbc6361b3f7a\",\"counterparty_address_label\":[\"High Balance\"],\"interaction_count\":13,\"total_volume_usd\":13372.899466785535,\"volume_in_usd\":7258.408676930388,\"volume_out_usd\":6114.490789855147,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"13\",\"total_token_amount\":5.702684281325796,\"token_in_amount\":3.0126842813257957,\"token_out_amount\":2.69}]},{\"counterparty_address\":\"0x4f97ce9a4d8ee1bbd3d2ca891db2a238f39f1844\",\"counterparty_address_label\":[\"Liquidity Pool\"],\"interaction_count\":4,\"total_volume_usd\":6364.056550598365,\"volume_in_usd\":3653.1396442809955,\"volume_out_usd\":2710.916906317369,\"tokens_info\":[{\"token_address\":\"0x168b2c3385f30205056627da585d36bf30ad6cd8\",\"token_symbol\":\"SPACESHIB\",\"token_name\":\"Space Shib\",\"num_transfer\":\"4\",\"total_token_amount\":33131406.681654338,\"token_in_amount\":16565703.340827169,\"token_out_amount\":16565703.340827169}]},{\"counterparty_address\":\"0x5f9d85928246a57578709219335b2c635467ea48\",\"counterparty_address_label\":[\"Uniswap V2\"],\"interaction_count\":2,\"total_volume_usd\":3153.6373926286446,\"volume_in_usd\":1498.5055010716508,\"volume_out_usd\":1655.1318915569939,\"tokens_info\":[{\"token_address\":\"0x74e9fee3fcb56bccac22e726cce7a78ca90185e1\",\"token_symbol\":\"RIZO\",\"token_name\":\"Rizo\",\"num_transfer\":\"2\",\"total_token_amount\":10399283387.037268,\"token_in_amount\":5199641693.518634,\"token_out_amount\":5199641693.518634}]},{\"counterparty_address\":\"0x18dd3c14e34c1bc379f7538068c59160d9f68e25\",\"counterparty_address_label\":[\"High Activity\"],\"interaction_count\":1,\"total_volume_usd\":2483.4018487198487,\"volume_in_usd\":2483.4018487198487,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":0.9997843284901103,\"token_in_amount\":0.9997843284901103,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xf0e2cf7919cc34a912b31ea5cebf979e9d3a93b6\",\"counterparty_address_label\":null,\"interaction_count\":7,\"total_volume_usd\":32.63436865491289,\"volume_in_usd\":32.63436865491289,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x14c3abf95cb9c93a8b82c1cdcb76d72cb87b2d4c\",\"token_symbol\":\"AAPLON\",\"token_name\":\"Apple (Ondo Tokenized)\",\"num_transfer\":\"7\",\"total_token_amount\":0.10108352690251161,\"token_in_amount\":0.10108352690251161,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0xaaf794ba98bf4dbcf299d561c2567f101bd977bb\",\"counterparty_address_label\":null,\"interaction_count\":1,\"total_volume_usd\":0.0059436230712612195,\"volume_in_usd\":0.0059436230712612195,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_name\":\"Ethereum\",\"num_transfer\":\"1\",\"total_token_amount\":2.374300473268e-6,\"token_in_amount\":2.374300473268e-6,\"token_out_amount\":0.0}]},{\"counterparty_address\":\"0x345ad3dd40c5a544d4f5459f75efc475fe96c5e1\",\"counterparty_address_label\":[\"Token Contract\"],\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x345ad3dd40c5a544d4f5459f75efc475fe96c5e1\",\"token_symbol\":\"ETHLABS\",\"token_name\":\"ETHLABS FUND\",\"num_transfer\":\"1\",\"total_token_amount\":27677.403369239,\"token_in_amount\":0.0,\"token_out_amount\":27677.403369239}]},{\"counterparty_address\":\"0xb6407a94844c8bb4007978e929ab4bdd8c863505\",\"counterparty_address_label\":[\"Uniswap V2\"],\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x345ad3dd40c5a544d4f5459f75efc475fe96c5e1\",\"token_symbol\":\"ETHLABS\",\"token_name\":\"ETHLABS FUND\",\"num_transfer\":\"1\",\"total_token_amount\":894902.708938743,\"token_in_amount\":0.0,\"token_out_amount\":894902.708938743}]},{\"counterparty_address\":\"0xfe6fdcc4cd119630049ba8dbe0ac64773d2b1cb3\",\"counterparty_address_label\":[\"UniswapV2\"],\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa06eb3e52dabf9aa7ff8ad1428b548c9a420aa20\",\"token_symbol\":\"STARBASE\",\"token_name\":\"STARBASE\",\"num_transfer\":\"1\",\"total_token_amount\":646927111.1386089,\"token_in_amount\":0.0,\"token_out_amount\":646927111.1386089}]},{\"counterparty_address\":\"0x91722658c526b02e6821cf9c94df941af0004f5b\",\"counterparty_address_label\":[\"Uniswap V2\"],\"interaction_count\":1,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x694207f4677579ab01d3b55be436c62750d81e49\",\"token_symbol\":\"STARBASE\",\"token_name\":\"Starbase\",\"num_transfer\":\"1\",\"total_token_amount\":16368101.59183878,\"token_in_amount\":0.0,\"token_out_amount\":16368101.59183878}]},{\"counterparty_address\":\"0xa42ddf92d9d5098e4e485b26b365f6a89fe8c410\",\"counterparty_address_label\":[\"Uniswap V2\"],\"interaction_count\":2,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0xa31551296758d738e693c88cfe2f97a1a665e440\",\"token_symbol\":\"POPCAT\",\"token_name\":\"Popcat\",\"num_transfer\":\"2\",\"total_token_amount\":43451233.987205446,\"token_in_amount\":21725616.993602723,\"token_out_amount\":21725616.993602723}]},{\"counterparty_address\":\"0x0fd2779cab172bd09d3a68ed78a7ad757699fa1f\",\"counterparty_address_label\":[\"UniswapV2\"],\"interaction_count\":2,\"total_volume_usd\":0.0,\"volume_in_usd\":0.0,\"volume_out_usd\":0.0,\"tokens_info\":[{\"token_address\":\"0x566e95139e4de1bfa505a598ec3a9da4cfa879ec\",\"token_symbol\":\"TCATI\",\"token_name\":\"CrinoTcati\",\"num_transfer\":\"2\",\"total_token_amount\":71866.63394782443,\"token_in_amount\":35933.31697391222,\"token_out_amount\":35933.31697391222}]}]}"
+    },
+    "322a93e26742323b3222c523a9cd1fc1": {
+      "storedAt": "2026-09-18T10:07:39.196Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl-summary",
+      "body": {
+        "address": "0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        }
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":1,\"is_last_page\":true},\"top5_tokens\":[{\"realized_pnl\":1617.3678943445516,\"realized_roi\":0.064355757813661,\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"chain\":\"ethereum\"},{\"realized_pnl\":488.31113249390324,\"realized_roi\":1.3705547009232057,\"token_address\":\"0xc1fb4b8abb840237170d8afcc2cdcc31274d5496\",\"token_symbol\":\"⚠️ MMD\",\"chain\":\"ethereum\"},{\"realized_pnl\":-612.2194621521575,\"realized_roi\":-0.81787248662599,\"token_address\":\"0xeaa69a34e138edd218bd1f02ba074d0c72f4a69a\",\"token_symbol\":\"CLARUS\",\"chain\":\"ethereum\"},{\"realized_pnl\":-1049.9852657793674,\"realized_roi\":-0.4175009705243317,\"token_address\":\"0x74e9fee3fcb56bccac22e726cce7a78ca90185e1\",\"token_symbol\":\"RIZO\",\"chain\":\"ethereum\"},{\"realized_pnl\":-5384.450143455811,\"realized_roi\":-0.5638247593291638,\"token_address\":\"0x89ab9b5fca71a8be8e00480c7d042a5444ed1d33\",\"token_symbol\":\"CORPUS\",\"chain\":\"ethereum\"}],\"traded_token_count\":17,\"traded_times\":80,\"realized_pnl_usd\":-4405.1688311847465,\"realized_pnl_percent\":-0.09628455920640155,\"win_rate\":0.47058823529411764}"
+    },
+    "29ca0f8bf3cd5cee970df985107f5de1": {
+      "storedAt": "2026-09-18T10:07:39.197Z",
+      "ttlMs": 86400000,
+      "endpoint": "profiler/address/pnl",
+      "body": {
+        "address": "0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c",
+        "chain": "ethereum",
+        "date": {
+          "from": "2026-08-19",
+          "to": "2026-09-18"
+        },
+        "filters": {
+          "show_realized": true
+        },
+        "pagination": {
+          "page": 1,
+          "per_page": 5
+        },
+        "order_by": [
+          {
+            "field": "pnl_usd_realised",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "text": "{\"pagination\":{\"page\":1,\"per_page\":5,\"is_last_page\":false},\"data\":[{\"token_address\":\"0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"token_symbol\":\"ETH\",\"token_price\":2507.7957971274927,\"roi_percent_realised\":0.06435575781366099,\"pnl_usd_realised\":1617.3678943445516,\"pnl_usd_unrealised\":32.37241640444628,\"roi_percent_unrealised\":0.018417496703108306,\"bought_amount\":8.222736979801697,\"bought_usd\":20242.83687796714,\"cost_basis_usd\":2462.4437475258455,\"sold_amount\":10.97,\"sold_usd\":26749.041411849583,\"avg_sold_price_usd\":2438.3811678987768,\"holding_amount\":0.7138027209087923,\"holding_usd\":1790.0714634732378,\"nof_buys\":\"20\",\"nof_sells\":\"20\",\"max_balance_held\":3.5453997221708016,\"max_balance_held_usd\":8891.138522396917},{\"token_address\":\"0xc1fb4b8abb840237170d8afcc2cdcc31274d5496\",\"token_symbol\":\"⚠️ MMD\",\"token_price\":0.0,\"roi_percent_realised\":1.3705547009232055,\"pnl_usd_realised\":488.31113249390324,\"pnl_usd_unrealised\":-379.3128300641811,\"roi_percent_unrealised\":-1.0,\"bought_amount\":16422529.056252087,\"bought_usd\":735.6000560792953,\"cost_basis_usd\":0.000044792129979471767,\"sold_amount\":7954237.188059611,\"sold_usd\":844.5983585090173,\"avg_sold_price_usd\":0.00010618219428720004,\"holding_amount\":8468291.868192475,\"holding_usd\":0.0,\"nof_buys\":\"1\",\"nof_sells\":\"1\",\"max_balance_held\":16422529.056252087,\"max_balance_held_usd\":0.0},{\"token_address\":\"0x6a77e39240da69ea788e4cf93663d2c41ea4b12b\",\"token_symbol\":\"SPIRAL\",\"token_price\":0.0123694634579937,\"roi_percent_realised\":3.6901374782972063,\"pnl_usd_realised\":306.2107454058821,\"pnl_usd_unrealised\":-233.1718989473906,\"roi_percent_unrealised\":-0.5695201901677438,\"bought_amount\":17136.37991685501,\"bought_usd\":492.39899373313705,\"cost_basis_usd\":0.02873413148647708,\"sold_amount\":2887.884405577585,\"sold_usd\":389.1915956334951,\"avg_sold_price_usd\":0.13476702699104598,\"holding_amount\":14248.495511277422,\"holding_usd\":176.24624455813333,\"nof_buys\":\"2\",\"nof_sells\":\"1\",\"max_balance_held\":17136.37991685501,\"max_balance_held_usd\":211.96782518383515},{\"token_address\":\"0x168b2c3385f30205056627da585d36bf30ad6cd8\",\"token_symbol\":\"SPACESHIB\",\"token_price\":0.0,\"roi_percent_realised\":0.11194635771267845,\"pnl_usd_realised\":274.43117435923443,\"pnl_usd_unrealised\":-0.0,\"roi_percent_unrealised\":null,\"bought_amount\":16565703.340827169,\"bought_usd\":2451.452463184104,\"cost_basis_usd\":0.0001720684010195108,\"sold_amount\":16565703.340827169,\"sold_usd\":2725.883637543339,\"avg_sold_price_usd\":0.0001645498281274442,\"holding_amount\":0.0,\"holding_usd\":0.0,\"nof_buys\":\"2\",\"nof_sells\":\"2\",\"max_balance_held\":11977395.077598367,\"max_balance_held_usd\":0.0},{\"token_address\":\"0xae991abbe39d28aa398e636c7027166a7321f9c5\",\"token_symbol\":\"⚠️ WARRIOR\",\"token_price\":0.0,\"roi_percent_realised\":0.38235685497302446,\"pnl_usd_realised\":93.78628440330895,\"pnl_usd_unrealised\":-0.0,\"roi_percent_unrealised\":null,\"bought_amount\":16157755.447871402,\"bought_usd\":245.28469460793542,\"cost_basis_usd\":0.000015180616849863813,\"sold_amount\":16157755.447871402,\"sold_usd\":339.0709790112444,\"avg_sold_price_usd\":0.000020985029765128242,\"holding_amount\":0.0,\"holding_usd\":0.0,\"nof_buys\":\"1\",\"nof_sells\":\"1\",\"max_balance_held\":16157755.447871402,\"max_balance_held_usd\":0.0}]}"
+    }
+  },
+  "card": {
+    "id": "52e215f6fd",
+    "address": "0xab0054e6d91e5be4b69c11ff7ce77c4571ff7c7c",
+    "chain": "ethereum",
+    "class": "smart-money",
+    "nansenLabel": "puplabs.eth",
+    "entity": null,
+    "clues": {
+      "pnl": {
+        "ok": true,
+        "realizedUsd": -4405,
+        "realizedPct": -0.096,
+        "winRate": 0.471,
+        "trades": 80,
+        "tokensTraded": 17,
+        "top": [
+          {
+            "symbol": "ETH",
+            "roi": 0.064,
+            "pnlUsd": 1617
+          },
+          {
+            "symbol": "⚠️ MMD",
+            "roi": 1.371,
+            "pnlUsd": 488
+          },
+          {
+            "symbol": "CLARUS",
+            "roi": -0.818,
+            "pnlUsd": -612
+          },
+          {
+            "symbol": "RIZO",
+            "roi": -0.418,
+            "pnlUsd": -1050
+          },
+          {
+            "symbol": "CORPUS",
+            "roi": -0.564,
+            "pnlUsd": -5384
+          }
+        ]
+      },
+      "trades": {
+        "ok": true,
+        "rows": [
+          {
+            "symbol": "ETH",
+            "pnlUsd": 1617,
+            "buys": 20,
+            "sells": 20
+          },
+          {
+            "symbol": "⚠️ MMD",
+            "pnlUsd": 488,
+            "buys": 1,
+            "sells": 1
+          },
+          {
+            "symbol": "SPIRAL",
+            "pnlUsd": 306,
+            "buys": 2,
+            "sells": 1
+          },
+          {
+            "symbol": "SPACESHIB",
+            "pnlUsd": 274,
+            "buys": 2,
+            "sells": 2
+          },
+          {
+            "symbol": "⚠️ WARRIOR",
+            "pnlUsd": 94,
+            "buys": 1,
+            "sells": 1
+          }
+        ]
+      },
+      "balance": {
+        "ok": true,
+        "tokens": 53,
+        "tokensCapped": false,
+        "totalUsd": 6767,
+        "topShare": 0.591,
+        "topSymbol": "ETH",
+        "stableShare": 0
+      },
+      "counterparties": {
+        "ok": true,
+        "count": 14,
+        "countCapped": false,
+        "interactions": 78,
+        "topOutShare": 0.55,
+        "mix": {
+          "pool": 0.12,
+          "entity": 0,
+          "contract": 0,
+          "wealth": 0.168,
+          "activity": 0.711,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 0
+        },
+        "counts": {
+          "pool": 7,
+          "entity": 0,
+          "contract": 1,
+          "wealth": 1,
+          "activity": 3,
+          "ens": 0,
+          "other": 0,
+          "unlabelled": 2
+        }
+      },
+      "empty": false
+    },
+    "tell": "80 trades in 30 d · win rate 47% · realised −$4.4K across 17 tokens · 83% of flow through DEX pools and routers — a trader Nansen tracks as Smart Money",
+    "source": {
+      "endpoint": "smart-money/dex-trades",
+      "labelType": null,
+      "token": null,
+      "tag": "puplabs.eth"
+    },
+    "readerGuess": "smart-money",
+    "readerBecause": "80 trades across 17 tokens in 30 days — an active multi-token trader",
+    "cardHash": "2c197ede146a28a8c658324d301b9f75f64333c645f761804518474fe60b2c59",
+    "recordedAt": "2026-09-18T10:07:28.640Z",
+    "now": 1789726048640
+  }
+}
