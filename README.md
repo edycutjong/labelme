@@ -33,7 +33,7 @@
 
 ## 📸 See it in Action
 
-<img src="docs/screenshots/03-reveal-correct.png" alt="Label Me — card 1 of 10 revealed: four Nansen clue panels (PnL, trades, balance, counterparties), the Smart Money chip green, the tell line and the Nansen provenance under it" width="100%">
+<img src="docs/demo.gif" alt="Label Me — 16 s demo: card 1 face up (PnL, trades, balance, counterparties), Smart Money guessed and revealed correct with the tell; card 2 guessed Whale, Nansen says Exchange — Binance" width="100%">
 
 | The face | The guess | The reveal |
 |---|---|---|
