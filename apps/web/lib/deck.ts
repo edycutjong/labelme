@@ -1,4 +1,4 @@
-import "server-only";
+// server-side only: reads fixtures from disk (never imported by a client component — the browser surface is @labelme/core/browser)
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { loadDeck, makeRound, read, face, type Card, type CardFace } from "@labelme/core";
@@ -22,11 +22,28 @@ export function roundFor(seed: string): RoundPayload {
   const d = deck();
   const r = makeRound(d.cards, seed);
   const cards = r.cardIds.map((id) => d.byId.get(id)!);
-  return { seed: r.seed, deckHash: r.deckHash, deckSize: d.cards.length, cards: cards.map(face), house: cards.filter((c) => read(c.clues).guess === c.class).length, recordedAt: cards[0]?.recordedAt ?? "" };
+  return {
+    seed: r.seed,
+    deckHash: r.deckHash,
+    deckSize: d.cards.length,
+    cards: cards.map(face),
+    house: cards.filter((c) => read(c.clues).guess === c.class).length,
+    recordedAt: cards[0]?.recordedAt ?? "",
+  };
 }
 export type Answer = Pick<Card, "id" | "class" | "nansenLabel" | "entity" | "address" | "tell" | "source" | "recordedAt"> & { house: Card["class"] };
 export function answerFor(id: string): Answer | undefined {
   const c = deck().byId.get(id);
   if (!c) return undefined;
-  return { id: c.id, class: c.class, nansenLabel: c.nansenLabel, entity: c.entity, address: c.address, tell: c.tell, source: c.source, recordedAt: c.recordedAt, house: read(c.clues).guess };
+  return {
+    id: c.id,
+    class: c.class,
+    nansenLabel: c.nansenLabel,
+    entity: c.entity,
+    address: c.address,
+    tell: c.tell,
+    source: c.source,
+    recordedAt: c.recordedAt,
+    house: read(c.clues).guess,
+  };
 }

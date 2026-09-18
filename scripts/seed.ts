@@ -29,7 +29,6 @@ import {
   CARDS_DIR,
   type CacheStore,
   type CacheEntry,
-  type Candidate,
   type Dropped,
   classFromEntity,
   type LabelClass,
@@ -79,7 +78,9 @@ if (!DRY) {
     if (ONLY && cls !== ONLY) continue;
     let n = perClass(cls);
     // smart-money: active traders first (they came from smart-money/dex-trades)
-    const pool = candidates.filter((c) => c.class === cls && !have.has(c.address)).sort((a, b) => (a.source.endpoint === "smart-money/dex-trades" ? -1 : 0) - (b.source.endpoint === "smart-money/dex-trades" ? -1 : 0));
+    const pool = candidates
+      .filter((c) => c.class === cls && !have.has(c.address))
+      .sort((a, b) => (a.source.endpoint === "smart-money/dex-trades" ? -1 : 0) - (b.source.endpoint === "smart-money/dex-trades" ? -1 : 0));
     for (const cand of pool) {
       if (n >= TARGET) break;
       const store = new Layered(disk);
@@ -94,7 +95,11 @@ if (!DRY) {
           if (h) {
             const l = await nansen.txLookup(client, h);
             const d = l.data?.[0];
-            const labels = [d?.from_address_label, d?.to_address_label, ...(d?.token_transfer_array ?? []).flatMap((t) => [t.from_address_label, t.to_address_label])].filter((x): x is string => !!x && x.trim().length > 0);
+            const labels = [
+              d?.from_address_label,
+              d?.to_address_label,
+              ...(d?.token_transfer_array ?? []).flatMap((t) => [t.from_address_label, t.to_address_label]),
+            ].filter((x): x is string => !!x && x.trim().length > 0);
             const mine = labels.find((x) => x.toLowerCase().includes(cand.address.slice(2, 8)));
             entity = mine ?? null;
           }
@@ -108,7 +113,11 @@ if (!DRY) {
       const ms = Date.now() - t0;
       if (finalClass !== cls) console.log(`  ↪ ${cand.address.slice(0, 10)} ${cls} → ${finalClass} by entity label ${entity}`);
       if (cls === "smart-money" && card.clues.pnl.trades < MIN_SM_TRADES) {
-        extraDropped.push({ address: cand.address, reason: `dormant Smart Money: ${card.clues.pnl.trades} trades in 30 d (< ${MIN_SM_TRADES})`, lists: ["smart-money"] });
+        extraDropped.push({
+          address: cand.address,
+          reason: `dormant Smart Money: ${card.clues.pnl.trades} trades in 30 d (< ${MIN_SM_TRADES})`,
+          lists: ["smart-money"],
+        });
         credits += client.creditsSpent;
         calls += client.calls.filter((c) => !c.cached).length;
         console.log(`  ✗ ${cls} ${cand.address.slice(0, 10)} dormant (${card.clues.pnl.trades} trades) · ${client.creditsSpent} cr`);
@@ -122,21 +131,42 @@ if (!DRY) {
       }
       const live = client.calls.filter((c) => !c.cached && c.ok);
       const failed = client.calls.filter((c) => !c.ok).map((c) => `${c.endpoint}: ${c.error}`);
-      const path = writeCardFixture({ edge: `${finalClass} via ${cand.source.endpoint}${cand.source.labelType ? ` ${cand.source.labelType}` : ""}${cand.source.token ? ` on ${cand.source.token}` : ""}`, recordedAt: card.recordedAt, now, live: { calls: live.length, credits: client.creditsSpent, ms, failed }, responses: store.mem.entries(), card });
+      const path = writeCardFixture({
+        edge: `${finalClass} via ${cand.source.endpoint}${cand.source.labelType ? ` ${cand.source.labelType}` : ""}${cand.source.token ? ` on ${cand.source.token}` : ""}`,
+        recordedAt: card.recordedAt,
+        now,
+        live: { calls: live.length, credits: client.creditsSpent, ms, failed },
+        responses: store.mem.entries(),
+        card,
+      });
       n++;
       credits += client.creditsSpent;
       calls += live.length;
-      console.log(`  ✔ ${finalClass.padEnd(12)} ${card.address.slice(0, 10)} ${JSON.stringify(card.nansenLabel).padEnd(22)} ${entity ? `${entity} ` : ""}reader=${card.readerGuess === finalClass ? "✓" : card.readerGuess} · ${client.creditsSpent} cr · ${(ms / 1000).toFixed(1)}s${failures.length ? ` · ⚠ ${failures.map((f) => f.section).join(",")}` : ""} → ${path}`);
+      console.log(
+        `  ✔ ${finalClass.padEnd(12)} ${card.address.slice(0, 10)} ${JSON.stringify(card.nansenLabel).padEnd(22)} ${entity ? `${entity} ` : ""}reader=${card.readerGuess === finalClass ? "✓" : card.readerGuess} · ${client.creditsSpent} cr · ${(ms / 1000).toFixed(1)}s${failures.length ? ` · ⚠ ${failures.map((f) => f.section).join(",")}` : ""} → ${path}`,
+      );
     }
   }
 }
 
 const deck = loadDeck();
 const byClass = Object.fromEntries(DECK_CLASSES.map((k) => [k, deck.filter((c) => c.class === k).length]));
-writeDeckFile({ version: 1, recordedAt: new Date(now).toISOString(), chain: "ethereum", cards: deck.length, byClass, deckHash: deckHash(deck), ids: deck.map((c) => c.id) });
+writeDeckFile({
+  version: 1,
+  recordedAt: new Date(now).toISOString(),
+  chain: "ethereum",
+  cards: deck.length,
+  byClass,
+  deckHash: deckHash(deck),
+  ids: deck.map((c) => c.id),
+});
 const allDropped = [...dropped, ...extraDropped];
-const prev = existsSync(join("fixtures", "dropped.json")) ? (JSON.parse(await import("node:fs").then((m) => m.readFileSync(join("fixtures", "dropped.json"), "utf8"))) as Dropped[]) : [];
+const prev = existsSync(join("fixtures", "dropped.json"))
+  ? (JSON.parse(await import("node:fs").then((m) => m.readFileSync(join("fixtures", "dropped.json"), "utf8"))) as Dropped[])
+  : [];
 const merged = new Map<string, Dropped>([...prev, ...allDropped].map((d) => [d.address, d]));
 writeDropped([...merged.values()].sort((a, b) => a.address.localeCompare(b.address)));
 const reader = deck.filter((c) => c.readerGuess === c.class).length;
-console.log(`\ndeck: ${deck.length} cards ${JSON.stringify(byClass)} · reader ${reader}/${deck.length} · dropped ${merged.size} · this run ${credits} credits / ${calls} live calls · ${CARDS_DIR}`);
+console.log(
+  `\ndeck: ${deck.length} cards ${JSON.stringify(byClass)} · reader ${reader}/${deck.length} · dropped ${merged.size} · this run ${credits} credits / ${calls} live calls · ${CARDS_DIR}`,
+);

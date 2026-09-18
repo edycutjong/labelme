@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Label Me — a wallet card face down: three grey label bars and a question mark; Nansen's label lands and the middle bar turns green">
+<!-- STORYBOARD (dur 6s — must equal this file's single master dur)
+  0-10%   steady state: the static icon — plate, grey / green / grey bars, the question mark on the green bar (poster; geometry = build/apps/web/app/icon.svg × 8)
+  10-32%  trigger:      the green bar drops to grey — the card is face down, all three labels equally possible; the question mark pulses; a ring draws itself around the plate   data-story="beat-2"
+  32-56%  mechanism:    A wallet card face down; Nansen's label lands and exactly one bar turns green.                                                                         data-story="beat-3"
+  56-84%  resolution:   the green bar persists with a glow breath; the question mark fades — the label is known                                                                data-story="beat-4"
+  84-100% breathe + seam: overlays fade 94-99% back to the poster
+-->
+<defs>
+  <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8" stop-opacity="0"/><stop offset=".5" stop-color="#38bdf8" stop-opacity=".45"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></linearGradient>
+  <filter id="glow" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="14"/></filter>
+  <clipPath id="plate"><rect width="512" height="512" rx="112"/></clipPath>
+</defs>
+<style>
+  @keyframes breath { 0%,58% { opacity: 0 } 66% { opacity: .7 } 76% { opacity: .25 } 86% { opacity: .7 } 94%,100% { opacity: 0 } }
+  .breath { animation: breath 6s ease-in-out infinite }
+  [data-story] { will-change: opacity }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<!-- poster: the static icon, fully visible at t=0 -->
+<rect width="512" height="512" rx="112" fill="#0f141b"/>
+<rect x="80" y="80"  width="352" height="96" rx="24" fill="#334155"/>
+<rect x="80" y="208" width="352" height="96" rx="24" fill="#22c55e"/>
+<rect x="80" y="336" width="352" height="96" rx="24" fill="#334155"/>
+<path transform="translate(293.5 320.0) scale(7.2)" d="M7.07 -4.92L4.19 -4.92L4.19 -5.18Q4.19 -6.54 4.43 -7.33Q4.67 -8.11 5.13 -8.58Q5.59 -9.04 6.25 -9.44L6.25 -9.44Q6.97 -9.92 7.47 -10.46Q7.96 -11.01 7.96 -11.79L7.96 -11.79Q7.96 -12.35 7.7 -12.76Q7.43 -13.17 6.99 -13.4Q6.55 -13.62 6 -13.62L6 -13.62Q5.49 -13.62 5.03 -13.4Q4.57 -13.17 4.27 -12.73Q3.97 -12.29 3.94 -11.63L3.94 -11.63L0.85 -11.63Q0.87 -13.18 1.57 -14.2Q2.28 -15.21 3.45 -15.72Q4.62 -16.22 6.02 -16.22L6.02 -16.22Q7.56 -16.22 8.74 -15.71Q9.93 -15.19 10.6 -14.22Q11.27 -13.26 11.27 -11.9L11.27 -11.9Q11.27 -10.53 10.62 -9.61Q9.98 -8.7 8.87 -8.05L8.87 -8.05Q8.26 -7.68 7.86 -7.31Q7.46 -6.94 7.26 -6.45Q7.07 -5.95 7.07 -5.18L7.07 -5.18L7.07 -4.92ZM5.64 0.2L5.64 0.2Q4.8 0.2 4.26 -0.3Q3.73 -0.81 3.73 -1.61L3.73 -1.61Q3.73 -2.43 4.26 -2.93Q4.8 -3.44 5.64 -3.44L5.64 -3.44Q6.49 -3.44 7.01 -2.93Q7.54 -2.43 7.54 -1.61L7.54 -1.61Q7.54 -0.81 7.01 -0.3Q6.49 0.2 5.64 0.2Z" fill="#04150a"/>
+<!-- beat 2: face down — the green bar goes grey, all three identical; the question mark stays and pulses -->
+<g opacity="0" data-story="beat-2">
+  <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.10;.14;.40;.46;.94;1" dur="6s" repeatCount="indefinite"/>
+  <rect x="80" y="208" width="352" height="96" rx="24" fill="#334155"/>
+  <path transform="translate(293.5 320.0) scale(7.2)" d="M7.07 -4.92L4.19 -4.92L4.19 -5.18Q4.19 -6.54 4.43 -7.33Q4.67 -8.11 5.13 -8.58Q5.59 -9.04 6.25 -9.44L6.25 -9.44Q6.97 -9.92 7.47 -10.46Q7.96 -11.01 7.96 -11.79L7.96 -11.79Q7.96 -12.35 7.7 -12.76Q7.43 -13.17 6.99 -13.4Q6.55 -13.62 6 -13.62L6 -13.62Q5.49 -13.62 5.03 -13.4Q4.57 -13.17 4.27 -12.73Q3.97 -12.29 3.94 -11.63L3.94 -11.63L0.85 -11.63Q0.87 -13.18 1.57 -14.2Q2.28 -15.21 3.45 -15.72Q4.62 -16.22 6.02 -16.22L6.02 -16.22Q7.56 -16.22 8.74 -15.71Q9.93 -15.19 10.6 -14.22Q11.27 -13.26 11.27 -11.9L11.27 -11.9Q11.27 -10.53 10.62 -9.61Q9.98 -8.7 8.87 -8.05L8.87 -8.05Q8.26 -7.68 7.86 -7.31Q7.46 -6.94 7.26 -6.45Q7.07 -5.95 7.07 -5.18L7.07 -5.18L7.07 -4.92ZM5.64 0.2L5.64 0.2Q4.8 0.2 4.26 -0.3Q3.73 -0.81 3.73 -1.61L3.73 -1.61Q3.73 -2.43 4.26 -2.93Q4.8 -3.44 5.64 -3.44L5.64 -3.44Q6.49 -3.44 7.01 -2.93Q7.54 -2.43 7.54 -1.61L7.54 -1.61Q7.54 -0.81 7.01 -0.3Q6.49 0.2 5.64 0.2Z" fill="#e6edf3">
+    <animate attributeName="opacity" values="1;1;.35;1;.35;1;1" keyTimes="0;.14;.20;.26;.32;.38;1" dur="6s" repeatCount="indefinite"/>
+  </path>
+</g>
+<!-- beat 2: the ring draws itself in while Nansen is looked up -->
+<rect x="14" y="14" width="484" height="484" rx="100" fill="none" stroke="#38bdf8" stroke-width="6" stroke-dasharray="1936" stroke-dashoffset="1936" opacity="0" data-story="beat-2">
+  <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.10;.12;.44;.56;.94;1" dur="6s" repeatCount="indefinite"/>
+  <animate attributeName="stroke-dashoffset" values="1936;1936;0;0;0;1936" keyTimes="0;.10;.36;.56;.94;1" dur="6s" repeatCount="indefinite"/>
+</rect>
+<!-- beat 3: the scan sweeps down the bars — the label is landing -->
+<g clip-path="url(#plate)" opacity="0" data-story="beat-3">
+  <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.30;.33;.50;.56;.94;1" dur="6s" repeatCount="indefinite"/>
+  <rect x="0" y="-160" width="512" height="160" fill="url(#scan)">
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 672;0 672;0 0" keyTimes="0;.32;.52;.94;1" dur="6s" repeatCount="indefinite"/>
+  </rect>
+</g>
+<!-- beat 3→4: the middle bar turns green again — Nansen's label: the reveal -->
+<rect x="80" y="208" width="352" height="96" rx="24" fill="#22c55e" opacity="0" data-story="beat-3">
+  <animate attributeName="opacity" values="0;0;0;1;1;1;0;0" keyTimes="0;.10;.44;.48;.84;.94;.99;1" dur="6s" repeatCount="indefinite"/>
+</rect>
+<rect x="80" y="208" width="352" height="96" rx="24" fill="#22c55e" filter="url(#glow)" class="breath" opacity="0" data-story="beat-4"/>
+</svg>

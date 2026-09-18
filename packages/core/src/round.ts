@@ -53,7 +53,10 @@ export function makeRound(cards: Card[], seed: string, size = ROUND_SIZE): Round
     if (!byClass.has(c.class)) byClass.set(c.class, []);
     byClass.get(c.class)!.push(c);
   }
-  const order = shuffle(DECK_CLASSES.filter((k) => byClass.has(k)), next);
+  const order = shuffle(
+    DECK_CLASSES.filter((k) => byClass.has(k)),
+    next,
+  );
   const queues = new Map(order.map((k) => [k, shuffle(byClass.get(k)!, next)]));
   const picked: Card[] = [];
   let guard = 0;
@@ -68,7 +71,11 @@ export function makeRound(cards: Card[], seed: string, size = ROUND_SIZE): Round
 }
 
 export type Guess = { cardId: string; guess: LabelClass; correct: boolean };
-export function score(round: Round, cards: Map<string, Card>, guesses: Record<string, LabelClass>): { correct: number; total: number; streakBest: number; perClass: Record<LabelClass, { right: number; seen: number }>; house: number } {
+export function score(
+  round: Round,
+  cards: Map<string, Card>,
+  guesses: Record<string, LabelClass>,
+): { correct: number; total: number; streakBest: number; perClass: Record<LabelClass, { right: number; seen: number }>; house: number } {
   const perClass = Object.fromEntries(DECK_CLASSES.map((k) => [k, { right: 0, seen: 0 }])) as Record<LabelClass, { right: number; seen: number }>;
   let correct = 0,
     streak = 0,

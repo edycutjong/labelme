@@ -24,7 +24,11 @@ type Seen = { lists: Map<LabelClass, { tag: string; source: Source }>; publicFig
  * who-bought-sold(excluded) with a neutral tag → regular. Public-Figure-list members and exchange∩smart-money are dropped.
  * Cost: per token holders ×4 (20) + who-bought-sold (1); smart-money/dex-trades once (5).
  */
-export async function gatherCandidates(c: NansenClient, now: number, tokens: Record<string, string> = TOKENS): Promise<{ candidates: Candidate[]; dropped: Dropped[] }> {
+export async function gatherCandidates(
+  c: NansenClient,
+  now: number,
+  tokens: Record<string, string> = TOKENS,
+): Promise<{ candidates: Candidate[]; dropped: Dropped[] }> {
   const seen = new Map<string, Seen>();
   const at = (addr: string) => {
     const a = addr.toLowerCase();
@@ -43,7 +47,10 @@ export async function gatherCandidates(c: NansenClient, now: number, tokens: Rec
 
   const sm = await nansen.smartMoneyTrades(c);
   noteRows(
-    [...new Map(sm.data.map((t) => [t.trader_address.toLowerCase(), t])).values()].map((t) => ({ address: t.trader_address, address_label: t.trader_address_label ?? "" })),
+    [...new Map(sm.data.map((t) => [t.trader_address.toLowerCase(), t])).values()].map((t) => ({
+      address: t.trader_address,
+      address_label: t.trader_address_label ?? "",
+    })),
     "smart-money",
     { endpoint: "smart-money/dex-trades", labelType: null, token: null },
   );
@@ -64,13 +71,15 @@ export async function gatherCandidates(c: NansenClient, now: number, tokens: Rec
       const tag = r.address_label ?? "";
       const cls = classFromTag(tag);
       if (cls === "contract") at(r.address).structural = tag;
-      if (cls === "whale" && !at(r.address).lists.has("whale")) at(r.address).lists.set("whale", { tag, source: { endpoint: "tgm/holders", labelType: "all_holders", token: sym, tag } });
+      if (cls === "whale" && !at(r.address).lists.has("whale"))
+        at(r.address).lists.set("whale", { tag, source: { endpoint: "tgm/holders", labelType: "all_holders", token: sym, tag } });
     }
     for (const r of wb.data) {
       const tag = r.address_label ?? "";
       if (!tagIsNeutral(tag)) continue;
       const s = at(r.address);
-      if (!s.lists.has("regular")) s.lists.set("regular", { tag, source: { endpoint: "tgm/who-bought-sold", labelType: "exclude all 17 label groups", token: sym, tag } });
+      if (!s.lists.has("regular"))
+        s.lists.set("regular", { tag, source: { endpoint: "tgm/who-bought-sold", labelType: "exclude all 17 label groups", token: sym, tag } });
     }
   }
 
@@ -83,7 +92,8 @@ export async function gatherCandidates(c: NansenClient, now: number, tokens: Rec
       continue;
     }
     if (s.structural) {
-      const src = s.lists.get("exchange")?.source ?? s.lists.get("whale")?.source ?? { endpoint: "tgm/holders", labelType: "all_holders", token: null, tag: s.structural };
+      const src = s.lists.get("exchange")?.source ??
+        s.lists.get("whale")?.source ?? { endpoint: "tgm/holders", labelType: "all_holders", token: null, tag: s.structural };
       candidates.push({ address, class: "contract", nansenLabel: s.structural, source: { ...src, tag: s.structural } });
       continue;
     }
@@ -91,7 +101,15 @@ export async function gatherCandidates(c: NansenClient, now: number, tokens: Rec
       dropped.push({ address, reason: "in both the Exchange and the Smart Money groups", lists });
       continue;
     }
-    const cls: LabelClass | undefined = s.lists.has("exchange") ? "exchange" : s.lists.has("smart-money") ? "smart-money" : s.lists.has("whale") ? "whale" : s.lists.has("regular") ? "regular" : undefined;
+    const cls: LabelClass | undefined = s.lists.has("exchange")
+      ? "exchange"
+      : s.lists.has("smart-money")
+        ? "smart-money"
+        : s.lists.has("whale")
+          ? "whale"
+          : s.lists.has("regular")
+            ? "regular"
+            : undefined;
     if (!cls) continue;
     if (cls === "regular" && lists.length > 1) {
       dropped.push({ address, reason: "regular candidate also appears in a label list", lists });

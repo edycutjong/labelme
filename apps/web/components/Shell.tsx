@@ -1,8 +1,9 @@
 import Link from "next/link";
 import pkg from "../package.json";
+import { REPO } from "@/lib/site";
 
 export const VERSION = `v${pkg.version}`;
-export const REPO = "https://github.com/edycutjong/labelme";
+export { REPO };
 
 /** The family mark — three stacked bars, the middle one green: one label among many is the right one. */
 export function Mark({ size = 24 }: { size?: number }) {

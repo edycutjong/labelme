@@ -17,7 +17,15 @@ export type CardFixture = {
   responses: Record<string, CacheEntry>;
   card: Card;
 };
-export type DeckFile = { version: number; recordedAt: string; chain: "ethereum"; cards: number; byClass: Record<string, number>; deckHash: string; ids: string[] };
+export type DeckFile = {
+  version: number;
+  recordedAt: string;
+  chain: "ethereum";
+  cards: number;
+  byClass: Record<string, number>;
+  deckHash: string;
+  ids: string[];
+};
 
 export const FIXTURES_DIR = "fixtures";
 export const CARDS_DIR = join(FIXTURES_DIR, "cards");

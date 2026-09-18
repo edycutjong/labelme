@@ -20,8 +20,12 @@ export function renderFace(c: Clues, title: string): string {
   lines.push(
     `${D}PnL 30d ${X}   ${p.ok ? `realised ${signed(p.realizedUsd)} · win rate ${pct(p.winRate)} · ${p.trades} trades · ${p.tokensTraded} tokens${p.top.length ? ` · top: ${p.top.map((x) => `${x.symbol} ${x.roi === null ? "" : pct(x.roi)}`.trim()).join(", ")}` : ""}` : `${R}unavailable${X}`}`,
   );
-  lines.push(`${D}Trades  ${X}   ${t.ok ? (t.rows.length ? t.rows.map((r) => `${r.symbol} ${signed(r.pnlUsd)} (${r.buys}b/${r.sells}s)`).join(" · ") : "none in 30 d") : `${R}unavailable${X}`}`);
-  lines.push(`${D}Balance ${X}   ${b.ok ? `${plus(b.tokens, b.tokensCapped)} tokens · ${fmtUsd(b.totalUsd)}${b.topSymbol ? ` · top ${b.topSymbol} ${pct(b.topShare)}` : ""} · stables ${pct(b.stableShare)}` : `${R}unavailable${X}`}`);
+  lines.push(
+    `${D}Trades  ${X}   ${t.ok ? (t.rows.length ? t.rows.map((r) => `${r.symbol} ${signed(r.pnlUsd)} (${r.buys}b/${r.sells}s)`).join(" · ") : "none in 30 d") : `${R}unavailable${X}`}`,
+  );
+  lines.push(
+    `${D}Balance ${X}   ${b.ok ? `${plus(b.tokens, b.tokensCapped)} tokens · ${fmtUsd(b.totalUsd)}${b.topSymbol ? ` · top ${b.topSymbol} ${pct(b.topShare)}` : ""} · stables ${pct(b.stableShare)}` : `${R}unavailable${X}`}`,
+  );
   lines.push(
     `${D}Counterp.${X}  ${k.ok ? `${plus(k.count, k.countCapped)} in 30 d · ${k.interactions} interactions · top outflow ${pct(k.topOutShare)} · DEX ${pct(Math.min(1, k.mix.pool + k.mix.activity))} · wealth-tagged ${pct(k.mix.wealth + k.mix.entity)} · contracts ${pct(k.mix.contract)} · unlabelled ${pct(k.mix.unlabelled)}` : `${R}unavailable${X}`}`,
   );

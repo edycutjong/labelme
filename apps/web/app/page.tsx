@@ -15,7 +15,16 @@ export default function Home() {
     <>
       <SiteHeader current="home" />
       <main className="wrap">
-        <Game idleChildren={hero ? <><Example card={hero} deckSize={d.cards.length} house={d.house} /><HowItDecides deckSize={d.cards.length} house={d.house} /></> : null} />
+        <Game
+          idleChildren={
+            hero ? (
+              <>
+                <Example card={hero} deckSize={d.cards.length} house={d.house} />
+                <HowItDecides deckSize={d.cards.length} house={d.house} />
+              </>
+            ) : null
+          }
+        />
       </main>
       <SiteFooter />
     </>

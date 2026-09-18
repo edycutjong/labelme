@@ -16,7 +16,14 @@ describe("NansenClient", () => {
     const c = new NansenClient(KEY, { fetchImpl });
     await c.post("tgm/holders", { chain: "ethereum", token_address: "0x1" }, ["data[].address_label"]);
     expect(headers.apikey).toMatch(/^nsn_/);
-    expect(c.calls[0]).toMatchObject({ endpoint: "tgm/holders", credits: 5, status: 200, cached: false, fieldsUsed: ["data[].address_label"], reportedCredits: undefined });
+    expect(c.calls[0]).toMatchObject({
+      endpoint: "tgm/holders",
+      credits: 5,
+      status: 200,
+      cached: false,
+      fieldsUsed: ["data[].address_label"],
+      reportedCredits: undefined,
+    });
     expect(c.calls[0].responseHash).toHaveLength(64);
     expect(c.creditsSpent).toBe(5);
   });
@@ -33,7 +40,17 @@ describe("NansenClient", () => {
     expect(c.calls[0].credits).toBe(5);
   });
   it("the credit table covers every endpoint the engine calls", () => {
-    for (const e of ["tgm/holders", "tgm/who-bought-sold", "smart-money/dex-trades", "profiler/address/pnl-summary", "profiler/address/pnl", "profiler/address/current-balance", "profiler/address/counterparties", "profiler/address/transactions", "transaction-with-token-transfer-lookup"])
+    for (const e of [
+      "tgm/holders",
+      "tgm/who-bought-sold",
+      "smart-money/dex-trades",
+      "profiler/address/pnl-summary",
+      "profiler/address/pnl",
+      "profiler/address/current-balance",
+      "profiler/address/counterparties",
+      "profiler/address/transactions",
+      "transaction-with-token-transfer-lookup",
+    ])
       expect(CREDITS[e], e).toBeTypeOf("number");
     expect(CREDITS["profiler/address/labels"]).toBe(100);
   });
@@ -64,7 +81,8 @@ describe("NansenClient", () => {
   it("a first-attempt timeout is retried and counted", async () => {
     let n = 0;
     const fetchImpl: typeof fetch = async (_u, init) => {
-      if (n++ === 0) await new Promise((_, rej) => init!.signal!.addEventListener("abort", () => rej(Object.assign(new Error("aborted"), { name: "AbortError" }))));
+      if (n++ === 0)
+        await new Promise((_, rej) => init!.signal!.addEventListener("abort", () => rej(Object.assign(new Error("aborted"), { name: "AbortError" }))));
       return new Response('{"ok":1}', { status: 200 });
     };
     const c = new NansenClient(KEY, { fetchImpl, timeoutMs: 30, rps: 1000 });
@@ -88,10 +106,13 @@ describe("NansenClient", () => {
   });
   it("rate limiter: never more than rps requests in a rolling second", async () => {
     const stamps: number[] = [];
-    const c = fakeClient(() => {
-      stamps.push(Date.now());
-      return { ok: 1 };
-    }, { rps: 3 });
+    const c = fakeClient(
+      () => {
+        stamps.push(Date.now());
+        return { ok: 1 };
+      },
+      { rps: 3 },
+    );
     await Promise.all(Array.from({ length: 6 }, () => c.post("account", {})));
     stamps.sort((a, b) => a - b);
     expect(stamps[3] - stamps[0]).toBeGreaterThanOrEqual(900);

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-label="Label Me — a wallet card with four Nansen clues and five class chips; the Nansen label lands and the Smart Money chip turns green">
+<!-- STORYBOARD (dur 8s — must equal this file's single master dur)
+  0-10%   steady state: plate, mark, outlined wordmark, tagline; the card with its four clue rows, empty bars; five outlined chips (poster)
+  10-30%  trigger:      the scan sweeps down the card; the four clue bars grow row by row — Nansen's numbers land             data-story="beat-2"
+  30-58%  mechanism:    A wallet card with four Nansen clues; the label lands and exactly one chip turns green: Smart Money.  data-story="beat-3"
+  58-82%  resolution:   the tell line appears under the card; the green chip persists                                       data-story="beat-4"
+  82-100% breathe + seam: overlays fade 94-99% back to the poster
+-->
+<defs>
+  <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8" stop-opacity="0"/><stop offset=".5" stop-color="#38bdf8" stop-opacity=".35"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></linearGradient>
+  <filter id="glow" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="10"/></filter>
+  <clipPath id="card"><rect x="640" y="36" width="600" height="248" rx="16"/></clipPath>
+</defs>
+<style>
+  @keyframes breath { 0%,60% { opacity: 0 } 68% { opacity: .6 } 76% { opacity: .2 } 84% { opacity: .6 } 94%,100% { opacity: 0 } }
+  .breath { animation: breath 8s ease-in-out infinite }
+  [data-story] { will-change: opacity }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<!-- plate: mandatory so the banner reads on white GitHub too -->
+<rect width="1280" height="320" rx="24" fill="#0a0e13"/>
+<rect x="1" y="1" width="1278" height="318" rx="23" fill="none" stroke="#22303d"/>
+<!-- the mark -->
+<rect x="56" y="70" width="44" height="12" rx="3" fill="#334155"/>
+<rect x="56" y="86" width="44" height="12" rx="3" fill="#22c55e"/>
+<rect x="56" y="102" width="44" height="12" rx="3" fill="#334155"/>
+<!-- wordmark: Inter 700 outlined (make-wordmarks.cjs) -->
+<g transform="translate(120 114)">
+  <path d="M34.9 0L4.4 0L4.4 -48L14.2 -48L14.2 -8.2L34.9 -8.2L34.9 0ZM51.5 0.7L51.5 0.7Q48.1 0.7 45.4 -0.5Q42.6 -1.7 41.1 -4.1Q39.5 -6.5 39.5 -10.1L39.5 -10.1Q39.5 -13.1 40.6 -15.1Q41.7 -17.1 43.7 -18.4Q45.6 -19.6 48 -20.2Q50.4 -20.9 53.1 -21.1L53.1 -21.1Q56.2 -21.5 58.2 -21.7Q60.1 -22 61 -22.6Q61.8 -23.2 61.8 -24.4L61.8 -24.4L61.8 -24.5Q61.8 -26.1 61.2 -27.1Q60.6 -28.2 59.3 -28.8Q58 -29.3 56.2 -29.3L56.2 -29.3Q54.3 -29.3 52.9 -28.8Q51.6 -28.2 50.7 -27.3Q49.8 -26.3 49.4 -25.2L49.4 -25.2L40.5 -26.6Q41.5 -29.8 43.6 -32Q45.8 -34.2 49 -35.3Q52.2 -36.5 56.2 -36.5L56.2 -36.5Q59.1 -36.5 61.9 -35.8Q64.6 -35.1 66.8 -33.6Q69 -32.2 70.2 -29.9Q71.5 -27.5 71.5 -24.3L71.5 -24.3L71.5 0L62.4 0L62.4 -5L62 -5Q61.2 -3.3 59.7 -2Q58.3 -0.8 56.2 0Q54.2 0.7 51.5 0.7ZM54.2 -6.1L54.2 -6.1Q56.5 -6.1 58.2 -7Q60 -7.9 60.9 -9.4Q61.9 -11 61.9 -12.9L61.9 -12.9L61.9 -16.8Q61.5 -16.5 60.6 -16.2Q59.7 -16 58.7 -15.8Q57.6 -15.6 56.6 -15.4Q55.6 -15.2 54.8 -15.1L54.8 -15.1Q53 -14.9 51.6 -14.3Q50.3 -13.7 49.5 -12.8Q48.8 -11.8 48.8 -10.3L48.8 -10.3Q48.8 -9 49.5 -8Q50.2 -7.1 51.4 -6.6Q52.7 -6.1 54.2 -6.1ZM99.9 0.6L99.9 0.6Q97 0.6 95 -0.4Q92.9 -1.4 91.7 -2.9Q90.4 -4.3 89.7 -5.8L89.7 -5.8L89.3 -5.8L89.3 0L79.8 0L79.8 -48L89.4 -48L89.4 -30L89.7 -30Q90.4 -31.4 91.6 -32.9Q92.9 -34.4 94.9 -35.4Q96.9 -36.5 100 -36.5L100 -36.5Q104 -36.5 107.3 -34.4Q110.6 -32.4 112.6 -28.2Q114.6 -24.1 114.6 -18L114.6 -18Q114.6 -12 112.7 -7.8Q110.7 -3.7 107.4 -1.5Q104.1 0.6 99.9 0.6ZM97 -7.2L97 -7.2Q99.5 -7.2 101.2 -8.5Q102.9 -9.9 103.8 -12.4Q104.7 -14.8 104.7 -18L104.7 -18Q104.7 -21.1 103.8 -23.6Q102.9 -26 101.2 -27.4Q99.5 -28.7 97 -28.7L97 -28.7Q94.5 -28.7 92.7 -27.4Q91 -26.1 90.1 -23.7Q89.2 -21.3 89.2 -18L89.2 -18Q89.2 -14.7 90.1 -12.3Q91 -9.9 92.8 -8.5Q94.5 -7.2 97 -7.2ZM137.6 0.7L137.6 0.7Q132.1 0.7 128.1 -1.5Q124.1 -3.8 122 -8Q119.9 -12.1 119.9 -17.8L119.9 -17.8Q119.9 -23.4 122 -27.6Q124.1 -31.8 128 -34.1Q131.9 -36.5 137.2 -36.5L137.2 -36.5Q140.7 -36.5 143.8 -35.4Q146.8 -34.2 149.1 -32Q151.5 -29.7 152.8 -26.3Q154.1 -22.8 154.1 -18.2L154.1 -18.2L154.1 -15.5L129.4 -15.5Q129.5 -12.8 130.5 -10.8L130.5 -10.8Q131.5 -8.7 133.4 -7.6Q135.3 -6.6 137.8 -6.6L137.8 -6.6Q139.5 -6.6 140.9 -7.1Q142.3 -7.5 143.3 -8.5Q144.2 -9.4 144.8 -10.8L144.8 -10.8L153.5 -9.2Q152.7 -6.2 150.5 -4Q148.3 -1.7 145.1 -0.5Q141.9 0.7 137.6 0.7ZM129.5 -21.6L129.5 -21.6L144.8 -21.6Q144.6 -23.4 144 -24.8L144 -24.8Q143.1 -26.9 141.4 -28.1Q139.7 -29.2 137.3 -29.2L137.3 -29.2Q134.7 -29.2 133 -28Q131.2 -26.9 130.3 -24.9L130.3 -24.9Q129.6 -23.4 129.5 -21.6ZM160.7 -48L170.3 -48L170.3 0L160.7 0L160.7 -48Z" fill="#e6edf3"/>
+  <path transform="translate(192.4 0)" d="M14.1 0L4.4 0L4.4 -48L19.4 -48L27.2 -26Q27.7 -24.4 28.3 -22Q29 -19.5 29.6 -16.7L29.6 -16.7Q30.3 -13.9 30.8 -11.3L30.8 -11.3Q31.4 -13.9 32 -16.6L32 -16.6Q32.6 -19.5 33.2 -21.9Q33.9 -24.4 34.4 -26L34.4 -26L42 -48L57.2 -48L57.2 0L47.3 0L47.3 -22.6Q47.3 -24.2 47.3 -26.6Q47.4 -28.9 47.5 -31.6Q47.5 -34.4 47.6 -37.1L47.6 -37.1Q47.6 -38.3 47.7 -39.5L47.7 -39.5Q47.3 -38.2 47 -36.8L47 -36.8Q46.2 -33.9 45.5 -31.3Q44.7 -28.6 44 -26.3Q43.3 -24.1 42.9 -22.6L42.9 -22.6L34.9 0L26.6 0L18.5 -22.6Q18 -24.1 17.4 -26.3Q16.7 -28.5 15.9 -31.2Q15.2 -33.9 14.4 -36.7L14.4 -36.7Q14.1 -38 13.8 -39.2L13.8 -39.2Q13.8 -38.3 13.8 -37.3L13.8 -37.3Q13.9 -34.5 13.9 -31.8Q14 -29 14.1 -26.6Q14.1 -24.3 14.1 -22.6L14.1 -22.6L14.1 0ZM81.9 0.7L81.9 0.7Q76.4 0.7 72.4 -1.5Q68.4 -3.8 66.2 -8Q64.1 -12.1 64.1 -17.8L64.1 -17.8Q64.1 -23.4 66.2 -27.6Q68.4 -31.8 72.3 -34.1Q76.2 -36.5 81.4 -36.5L81.4 -36.5Q84.9 -36.5 88 -35.4Q91.1 -34.2 93.4 -32Q95.7 -29.7 97 -26.3Q98.3 -22.8 98.3 -18.2L98.3 -18.2L98.3 -15.5L73.7 -15.5Q73.8 -12.8 74.7 -10.8L74.7 -10.8Q75.8 -8.7 77.6 -7.6Q79.5 -6.6 82 -6.6L82 -6.6Q83.8 -6.6 85.1 -7.1Q86.5 -7.5 87.5 -8.5Q88.5 -9.4 89 -10.8L89 -10.8L97.8 -9.2Q96.9 -6.2 94.7 -4Q92.6 -1.7 89.3 -0.5Q86.1 0.7 81.9 0.7ZM73.7 -21.6L73.7 -21.6L89 -21.6Q88.8 -23.4 88.2 -24.8L88.2 -24.8Q87.4 -26.9 85.7 -28.1Q84 -29.2 81.5 -29.2L81.5 -29.2Q79 -29.2 77.2 -28Q75.5 -26.9 74.6 -24.9L74.6 -24.9Q73.9 -23.4 73.7 -21.6Z" fill="#22c55e"/>
+</g>
+<text x="56" y="160" font-family="Inter, system-ui, sans-serif" font-size="20" fill="#b6c2cf">Ten real wallets. Guess the Nansen label.</text>
+<text x="56" y="190" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#8b9bab">Every clue is a Nansen field · every answer is Nansen's label</text>
+<text x="56" y="214" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#8b9bab">62 recorded cards replay offline · one live draw = 13 credits</text>
+<text x="56" y="256" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#8b9bab">tgm/holders · pnl-summary · pnl · balance · counterparties</text>
+<!-- the card -->
+<rect x="640" y="36" width="600" height="248" rx="16" fill="#182130" stroke="#2c3b4b"/>
+<text x="660" y="36" dy="-8" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#8b9bab">WALLET 1 OF 10 · ETHEREUM · 30 D</text>
+  <text x="660" y="70" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#8b9bab">PNL 30D</text>
+  <text x="790" y="70" font-family="ui-monospace, Menlo, monospace" font-size="14" font-weight="700" fill="#e6edf3">+$12K · win 67% · 472 trades</text>
+  <rect x="1040" y="62" width="180" height="8" rx="4" fill="#22303d"/>
+  <rect x="1040" y="62" width="140" height="8" rx="4" fill="#38bdf8"/>
+  <rect x="1040" y="62" width="0" height="8" rx="4" fill="#bae6fd" data-story="beat-2"><animate attributeName="width" values="0;0;140;140;140;0" keyTimes="0;.10;0.14;.82;.96;1" dur="8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.10;.12;.30;.36;.94;1" dur="8s" repeatCount="indefinite"/></rect>
+  <text x="660" y="110" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#8b9bab">TRADES</text>
+  <text x="790" y="110" font-family="ui-monospace, Menlo, monospace" font-size="14" font-weight="700" fill="#e6edf3">GIVE +$6.6K · GULD +$5.4K</text>
+  <rect x="1040" y="102" width="180" height="8" rx="4" fill="#22303d"/>
+  <rect x="1040" y="102" width="99" height="8" rx="4" fill="#38bdf8"/>
+  <rect x="1040" y="102" width="0" height="8" rx="4" fill="#bae6fd" data-story="beat-2"><animate attributeName="width" values="0;0;99;99;99;0" keyTimes="0;.10;0.17;.82;.96;1" dur="8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.10;.12;.30;.36;.94;1" dur="8s" repeatCount="indefinite"/></rect>
+  <text x="660" y="150" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#8b9bab">BALANCE</text>
+  <text x="790" y="150" font-family="ui-monospace, Menlo, monospace" font-size="14" font-weight="700" fill="#e6edf3">10 tokens · $14K · top 86%</text>
+  <rect x="1040" y="142" width="180" height="8" rx="4" fill="#22303d"/>
+  <rect x="1040" y="142" width="72" height="8" rx="4" fill="#38bdf8"/>
+  <rect x="1040" y="142" width="0" height="8" rx="4" fill="#bae6fd" data-story="beat-2"><animate attributeName="width" values="0;0;72;72;72;0" keyTimes="0;.10;0.20;.82;.96;1" dur="8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.10;.12;.30;.36;.94;1" dur="8s" repeatCount="indefinite"/></rect>
+  <text x="660" y="190" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#8b9bab">COUNTERPARTIES</text>
+  <text x="790" y="190" font-family="ui-monospace, Menlo, monospace" font-size="14" font-weight="700" fill="#e6edf3">9 wallets · DEX 97%</text>
+  <rect x="1040" y="182" width="180" height="8" rx="4" fill="#22303d"/>
+  <rect x="1040" y="182" width="166" height="8" rx="4" fill="#38bdf8"/>
+  <rect x="1040" y="182" width="0" height="8" rx="4" fill="#bae6fd" data-story="beat-2"><animate attributeName="width" values="0;0;166;166;166;0" keyTimes="0;.10;0.23;.82;.96;1" dur="8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.10;.12;.30;.36;.94;1" dur="8s" repeatCount="indefinite"/></rect>
+
+  <rect x="660" y="238" width="118" height="30" rx="15" fill="none" stroke="#2c3b4b" stroke-width="1.5"/>
+  <text x="719" y="257" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#b6c2cf">Smart Money</text>
+  <rect x="660" y="238" width="118" height="30" rx="15" fill="#22c55e" opacity="0" data-story="beat-3"><animate attributeName="opacity" values="0;0;0;1;1;1;0;0" keyTimes="0;.10;.30;.34;.82;.94;.99;1" dur="8s" repeatCount="indefinite"/></rect>
+  <text x="719" y="257" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="800" fill="#04150a" opacity="0" data-story="beat-3"><animate attributeName="opacity" values="0;0;0;1;1;1;0;0" keyTimes="0;.10;.30;.34;.82;.94;.99;1" dur="8s" repeatCount="indefinite"/>Smart Money</text>
+  <rect x="786.2" y="238" width="94" height="30" rx="15" fill="none" stroke="#2c3b4b" stroke-width="1.5"/>
+  <text x="833" y="257" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#b6c2cf">Exchange</text>
+  
+  <rect x="887.8000000000001" y="238" width="69" height="30" rx="15" fill="none" stroke="#2c3b4b" stroke-width="1.5"/>
+  <text x="922" y="257" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#b6c2cf">Whale</text>
+  
+  <rect x="964.8000000000001" y="238" width="151" height="30" rx="15" fill="none" stroke="#2c3b4b" stroke-width="1.5"/>
+  <text x="1040" y="257" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#b6c2cf">Contract / Pool</text>
+  
+  <rect x="1123.8000000000002" y="238" width="85" height="30" rx="15" fill="none" stroke="#2c3b4b" stroke-width="1.5"/>
+  <text x="1167" y="257" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#b6c2cf">Regular</text>
+  
+
+<!-- beat 2: the scan sweeps down the card -->
+<g clip-path="url(#card)" opacity="0" data-story="beat-2">
+  <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;.10;.12;.28;.32;.94;1" dur="8s" repeatCount="indefinite"/>
+  <rect x="640" y="-54" width="600" height="90" fill="url(#scan)">
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 338;0 338;0 0" keyTimes="0;.10;.30;.94;1" dur="8s" repeatCount="indefinite"/>
+  </rect>
+</g>
+<!-- beat 4: the tell -->
+<text x="660" y="308" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#22c55e" opacity="0" data-story="beat-4"><animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;.10;.56;.60;.94;.99;1" dur="8s" repeatCount="indefinite"/>472 trades · win rate 67% · 97% of flow through DEX pools — Smart Money, says Nansen</text>
+<rect x="660" y="238" width="120" height="30" rx="15" fill="#22c55e" filter="url(#glow)" class="breath" opacity="0" data-story="beat-4"/>
+</svg>

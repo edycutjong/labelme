@@ -27,12 +27,25 @@ export function read(c: Clues): Read {
   const perCp = k.count > 0 ? k.interactions / k.count : 0;
   const traffic = k.interactions >= R.contract.minInteractions || (k.countCapped && perCp >= R.contract.interactionsPerCounterparty);
   if (traffic && b.tokens < R.contract.maxTokens)
-    return { guess: "contract", because: `${k.interactions} interactions from ${k.count}${k.countCapped ? "+" : ""} counterparties and only ${b.tokens} tokens — traffic, not trading` };
+    return {
+      guess: "contract",
+      because: `${k.interactions} interactions from ${k.count}${k.countCapped ? "+" : ""} counterparties and only ${b.tokens} tokens — traffic, not trading`,
+    };
   const wealthy = k.mix.wealth + k.mix.entity;
-  if (b.totalUsd >= R.exchange.minUsd && p.trades <= R.exchange.maxTrades && ((b.tokens >= R.exchange.minTokens && wealthy >= R.exchange.minWealthMix) || b.tokens >= R.exchange.manyTokens))
-    return { guess: "exchange", because: `${b.tokens}${b.tokensCapped ? "+" : ""} tokens, $${Math.round(b.totalUsd / 1e6)}M, ${Math.round(wealthy * 100)}% wealth-tagged counterparties, ${p.trades} trades` };
+  if (
+    b.totalUsd >= R.exchange.minUsd &&
+    p.trades <= R.exchange.maxTrades &&
+    ((b.tokens >= R.exchange.minTokens && wealthy >= R.exchange.minWealthMix) || b.tokens >= R.exchange.manyTokens)
+  )
+    return {
+      guess: "exchange",
+      because: `${b.tokens}${b.tokensCapped ? "+" : ""} tokens, $${Math.round(b.totalUsd / 1e6)}M, ${Math.round(wealthy * 100)}% wealth-tagged counterparties, ${p.trades} trades`,
+    };
   if (b.totalUsd >= R.whale.minUsd && (b.topShare ?? 0) >= R.whale.minTopShare && p.trades <= R.whale.maxTrades)
-    return { guess: "whale", because: `one position is ${Math.round((b.topShare ?? 0) * 100)}% of $${Math.round(b.totalUsd / 1e6)}M and only ${p.trades} trades` };
+    return {
+      guess: "whale",
+      because: `one position is ${Math.round((b.topShare ?? 0) * 100)}% of $${Math.round(b.totalUsd / 1e6)}M and only ${p.trades} trades`,
+    };
   if (p.trades >= R.smartMoney.minTrades && p.tokensTraded >= R.smartMoney.minTokensTraded)
     return { guess: "smart-money", because: `${p.trades} trades across ${p.tokensTraded} tokens in 30 days — an active multi-token trader` };
   return { guess: "regular", because: `${p.trades} trades, ${b.tokens} tokens, $${b.totalUsd} — nothing that reads like a label` };

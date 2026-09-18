@@ -49,7 +49,13 @@ if (cmd === "play") {
   const round = makeRound(deck, seed);
   const cards = round.cardIds.map((id) => byId.get(id)!);
   if (flags.has("--json")) {
-    console.log(JSON.stringify({ round, cards: flags.has("--answers") ? cards : cards.map((c) => ({ id: c.id, chain: c.chain, clues: c.clues, cardHash: c.cardHash })) }, null, 2));
+    console.log(
+      JSON.stringify(
+        { round, cards: flags.has("--answers") ? cards : cards.map((c) => ({ id: c.id, chain: c.chain, clues: c.clues, cardHash: c.cardHash })) },
+        null,
+        2,
+      ),
+    );
     process.exit(0);
   }
   console.log(`\n${B}Label Me${X} — ${D}round ${seed} · deck ${round.deckHash.slice(0, 12)} · ${deck.length} cards on disk · 0 credits${X}\n`);
@@ -74,7 +80,9 @@ if (cmd === "play") {
   if (interactive) {
     const s = score(round, byId, guesses);
     const house = cards.filter((c) => read(c.clues).guess === c.class).length;
-    console.log(`${B}You read wallets ${s.correct}/${s.total}${X}${s.streakBest > 1 ? ` · best streak ${s.streakBest}` : ""} · ${D}the house rule got ${house}/${s.total}${X}`);
+    console.log(
+      `${B}You read wallets ${s.correct}/${s.total}${X}${s.streakBest > 1 ? ` · best streak ${s.streakBest}` : ""} · ${D}the house rule got ${house}/${s.total}${X}`,
+    );
     console.log(`${D}per class: ${DECK_CLASSES.map((k) => `${CLASS_INFO[k].short} ${s.perClass[k].right}/${s.perClass[k].seen}`).join(" · ")}${X}`);
     console.log(`${D}share: /r/${seed} · replay: npm run labelme -- play --seed ${seed}${X}`);
   } else {
@@ -110,12 +118,26 @@ if (cmd === "draw") {
   } catch (e) {
     const failed = client.calls.filter((c) => !c.ok);
     if (flags.has("--json")) console.log(JSON.stringify({ error: (e as Error).message, provenance: client.calls }, null, 2));
-    else console.log(`${R}Nansen busy — try again${X} ${D}(${(e as Error).message.slice(0, 140)}${failed.length ? `; ${failed.length} failed call(s)` : ""})${X}`);
+    else
+      console.log(`${R}Nansen busy — try again${X} ${D}(${(e as Error).message.slice(0, 140)}${failed.length ? `; ${failed.length} failed call(s)` : ""})${X}`);
     process.exit(2);
   }
   const ms = Date.now() - t0;
   if (flags.has("--json")) {
-    console.log(JSON.stringify({ card, house: read(card.clues), credits: client.creditsSpent, calls: client.calls.length, ms, provenance: flags.has("--explain") ? client.calls : undefined }, null, 2));
+    console.log(
+      JSON.stringify(
+        {
+          card,
+          house: read(card.clues),
+          credits: client.creditsSpent,
+          calls: client.calls.length,
+          ms,
+          provenance: flags.has("--explain") ? client.calls : undefined,
+        },
+        null,
+        2,
+      ),
+    );
     process.exit(0);
   }
   console.log("\n" + renderFace(card.clues, `Fresh card · ${card.chain}`));
@@ -123,7 +145,9 @@ if (cmd === "draw") {
   const h = read(card.clues);
   console.log(`${D}house rule reads:${X} ${h.guess === card.class ? G : R}${CLASS_INFO[h.guess].name}${X} ${D}— ${h.because}${X}`);
   const cached = client.calls.filter((c) => c.cached).length;
-  console.log(`${D}${client.creditsSpent} credits · ${client.calls.length} calls (${cached} cached) · ${(ms / 1000).toFixed(1)} s · card ${card.cardHash.slice(0, 12)}${X}`);
+  console.log(
+    `${D}${client.creditsSpent} credits · ${client.calls.length} calls (${cached} cached) · ${(ms / 1000).toFixed(1)} s · card ${card.cardHash.slice(0, 12)}${X}`,
+  );
   process.exit(0);
 }
 
@@ -135,17 +159,49 @@ if (cmd === "card") {
   }
   const known = deck.find((c) => c.address === address);
   const t0 = Date.now();
-  const { card, failures } = await buildCard(client, { address, class: known?.class ?? "regular", nansenLabel: known?.nansenLabel ?? "", entity: known?.entity ?? null, source: known?.source ?? { endpoint: "profiler/*", labelType: null, token: null, tag: "" } }, Date.now());
+  const { card, failures } = await buildCard(
+    client,
+    {
+      address,
+      class: known?.class ?? "regular",
+      nansenLabel: known?.nansenLabel ?? "",
+      entity: known?.entity ?? null,
+      source: known?.source ?? { endpoint: "profiler/*", labelType: null, token: null, tag: "" },
+    },
+    Date.now(),
+  );
   const h = read(card.clues);
   if (flags.has("--json")) {
-    console.log(JSON.stringify({ address, clues: card.clues, house: h, nansen: known ? { class: known.class, label: known.nansenLabel, entity: known.entity, source: known.source } : null, credits: client.creditsSpent, calls: client.calls.length, ms: Date.now() - t0, failures, provenance: flags.has("--explain") ? client.calls : undefined }, null, 2));
+    console.log(
+      JSON.stringify(
+        {
+          address,
+          clues: card.clues,
+          house: h,
+          nansen: known ? { class: known.class, label: known.nansenLabel, entity: known.entity, source: known.source } : null,
+          credits: client.creditsSpent,
+          calls: client.calls.length,
+          ms: Date.now() - t0,
+          failures,
+          provenance: flags.has("--explain") ? client.calls : undefined,
+        },
+        null,
+        2,
+      ),
+    );
     process.exit(0);
   }
   console.log("\n" + renderFace(card.clues, `${address} · ethereum`));
   for (const f of failures) console.log(`${R}✗ ${f.section}: ${f.error}${X}`);
   console.log(`${D}house rule reads:${X} ${B}${CLASS_INFO[h.guess].name}${X} ${D}— ${h.because}${X}`);
-  if (known) console.log(`${D}Nansen (from the deck):${X} ${G}${CLASS_INFO[known.class].name}${X}${known.entity ? ` · ${known.entity}` : ""}${known.nansenLabel ? ` · tag "${known.nansenLabel}"` : ""}`);
-  else console.log(`${D}Nansen's label for an arbitrary address is a 100-credit call (profiler/address/labels) — not made. The answer key exists for wallets Nansen has grouped: try \`draw\`.${X}`);
+  if (known)
+    console.log(
+      `${D}Nansen (from the deck):${X} ${G}${CLASS_INFO[known.class].name}${X}${known.entity ? ` · ${known.entity}` : ""}${known.nansenLabel ? ` · tag "${known.nansenLabel}"` : ""}`,
+    );
+  else
+    console.log(
+      `${D}Nansen's label for an arbitrary address is a 100-credit call (profiler/address/labels) — not made. The answer key exists for wallets Nansen has grouped: try \`draw\`.${X}`,
+    );
   if (flags.has("--explain")) for (const c of client.calls) console.log(renderCall(c));
   console.log(`${D}${client.creditsSpent} credits · ${client.calls.length} calls · ${((Date.now() - t0) / 1000).toFixed(1)} s${X}`);
   process.exit(0);

@@ -27,20 +27,63 @@ export type Personality = "trader" | "exchange" | "whale" | "pool" | "regular" |
 export function clueRoutes(p: Personality, over: Partial<Record<string, unknown>> = {}) {
   return (endpoint: string): unknown => {
     if (endpoint === "profiler/address/pnl-summary") {
-      const base = { pagination: { page: 1, per_page: 1, is_last_page: true }, top5_tokens: [] as unknown[], traded_token_count: 0, traded_times: 0, realized_pnl_usd: 0, realized_pnl_percent: 0, win_rate: 0 };
-      if (p === "trader") return { ...base, top5_tokens: [{ token_symbol: "GIVE", realized_pnl: 9101.4, realized_roi: 0.12, token_address: "0x1", chain: "ethereum" }], traded_token_count: 6, traded_times: 472, realized_pnl_usd: 11892.3, realized_pnl_percent: 0.0412, win_rate: 0.6667 };
-      if (p === "regular") return { ...base, top5_tokens: [{ token_symbol: "ETH", realized_pnl: 9, realized_roi: 0.001, token_address: "0xe", chain: "ethereum" }], traded_token_count: 2, traded_times: 13, realized_pnl_usd: 9.2, realized_pnl_percent: 0.001, win_rate: 1 };
+      const base = {
+        pagination: { page: 1, per_page: 1, is_last_page: true },
+        top5_tokens: [] as unknown[],
+        traded_token_count: 0,
+        traded_times: 0,
+        realized_pnl_usd: 0,
+        realized_pnl_percent: 0,
+        win_rate: 0,
+      };
+      if (p === "trader")
+        return {
+          ...base,
+          top5_tokens: [{ token_symbol: "GIVE", realized_pnl: 9101.4, realized_roi: 0.12, token_address: "0x1", chain: "ethereum" }],
+          traded_token_count: 6,
+          traded_times: 472,
+          realized_pnl_usd: 11892.3,
+          realized_pnl_percent: 0.0412,
+          win_rate: 0.6667,
+        };
+      if (p === "regular")
+        return {
+          ...base,
+          top5_tokens: [{ token_symbol: "ETH", realized_pnl: 9, realized_roi: 0.001, token_address: "0xe", chain: "ethereum" }],
+          traded_token_count: 2,
+          traded_times: 13,
+          realized_pnl_usd: 9.2,
+          realized_pnl_percent: 0.001,
+          win_rate: 1,
+        };
       if (p === "whale") return { ...base, traded_times: 3, traded_token_count: 1, win_rate: 0 };
-      return { ...base, ...over.pnlSummary as object };
+      return { ...base, ...(over.pnlSummary as object) };
     }
     if (endpoint === "profiler/address/pnl") {
-      if (p === "trader") return { pagination: {}, data: [{ token_symbol: "GIVE", pnl_usd_realised: 9101.4, nof_buys: "120", nof_sells: "118" }, { token_symbol: "GULD", pnl_usd_realised: -300.2, nof_buys: "5", nof_sells: 4 }] };
+      if (p === "trader")
+        return {
+          pagination: {},
+          data: [
+            { token_symbol: "GIVE", pnl_usd_realised: 9101.4, nof_buys: "120", nof_sells: "118" },
+            { token_symbol: "GULD", pnl_usd_realised: -300.2, nof_buys: "5", nof_sells: 4 },
+          ],
+        };
       if (p === "regular") return { pagination: {}, data: [{ token_symbol: "ETH", pnl_usd_realised: 9, nof_buys: "3", nof_sells: "5" }] };
       return { pagination: {}, data: [] };
     }
     if (endpoint === "profiler/address/current-balance") {
-      const row = (s: string, usd: number) => ({ chain: "ethereum", address: "0x", token_address: "0x", token_symbol: s, token_name: s, token_amount: 1, price_usd: 1, value_usd: usd });
-      if (p === "exchange") return { pagination: { is_last_page: false }, data: Array.from({ length: 100 }, (_, i) => row(i === 0 ? "USDT" : `T${i}`, i === 0 ? 3e9 : 6e7)) };
+      const row = (s: string, usd: number) => ({
+        chain: "ethereum",
+        address: "0x",
+        token_address: "0x",
+        token_symbol: s,
+        token_name: s,
+        token_amount: 1,
+        price_usd: 1,
+        value_usd: usd,
+      });
+      if (p === "exchange")
+        return { pagination: { is_last_page: false }, data: Array.from({ length: 100 }, (_, i) => row(i === 0 ? "USDT" : `T${i}`, i === 0 ? 3e9 : 6e7)) };
       if (p === "whale") return { pagination: { is_last_page: true }, data: [row("PEPE", 29_952_734)] };
       if (p === "pool") return { pagination: { is_last_page: true }, data: [row("PEPE", 14_100_000), row("WETH", 14_071_038)] };
       if (p === "trader") return { pagination: { is_last_page: true }, data: [row("WPRL", 3832), row("USDC", 500), row("ETH", 569)] };
@@ -49,11 +92,30 @@ export function clueRoutes(p: Personality, over: Partial<Record<string, unknown>
       return { pagination: { is_last_page: true }, data: [] };
     }
     if (endpoint === "profiler/address/counterparties") {
-      const cp = (labels: string[] | null, n: number, vol: number, out: number) => ({ counterparty_address: "0xc", counterparty_address_label: labels, interaction_count: n, total_volume_usd: vol, volume_in_usd: vol - out, volume_out_usd: out });
-      if (p === "exchange") return { pagination: { is_last_page: true }, data: [cp(["Token Billionaire"], 200, 8e8, 4e8), cp(["High Balance"], 40, 1e8, 2e7), cp(null, 5, 1e6, 1e6)] };
+      const cp = (labels: string[] | null, n: number, vol: number, out: number) => ({
+        counterparty_address: "0xc",
+        counterparty_address_label: labels,
+        interaction_count: n,
+        total_volume_usd: vol,
+        volume_in_usd: vol - out,
+        volume_out_usd: out,
+      });
+      if (p === "exchange")
+        return {
+          pagination: { is_last_page: true },
+          data: [cp(["Token Billionaire"], 200, 8e8, 4e8), cp(["High Balance"], 40, 1e8, 2e7), cp(null, 5, 1e6, 1e6)],
+        };
       if (p === "whale") return { pagination: { is_last_page: true }, data: [cp(null, 1, 1000, 0)] };
-      if (p === "pool") return { pagination: { is_last_page: false }, data: Array.from({ length: 50 }, (_, i) => cp(i % 3 ? ["Token Millionaire"] : ["High Activity"], 750, 1e6, 5e5)) };
-      if (p === "trader") return { pagination: { is_last_page: true }, data: [cp(["High Activity"], 300, 342_045, 170_000), cp(["Liquidity Pool"], 100, 83, 40), cp(null, 72, 21_113, 21_113)] };
+      if (p === "pool")
+        return {
+          pagination: { is_last_page: false },
+          data: Array.from({ length: 50 }, (_, i) => cp(i % 3 ? ["Token Millionaire"] : ["High Activity"], 750, 1e6, 5e5)),
+        };
+      if (p === "trader")
+        return {
+          pagination: { is_last_page: true },
+          data: [cp(["High Activity"], 300, 342_045, 170_000), cp(["Liquidity Pool"], 100, 83, 40), cp(null, 72, 21_113, 21_113)],
+        };
       if (p === "regular") return { pagination: { is_last_page: true }, data: [cp(["Uniswap V2"], 8, 30_000, 15_000), cp(null, 6, 12_000, 12_000)] };
       return { pagination: { is_last_page: true }, data: [] };
     }

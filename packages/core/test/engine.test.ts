@@ -26,26 +26,75 @@ describe("fmtUsd / pct", () => {
 
 describe("tell — one line per class from the numbers", () => {
   it("exchange names size, counterparties and the absence of trades", () => {
-    const t = tell("exchange", clues({ balance: { ok: true, tokens: 100, tokensCapped: true, totalUsd: 9.37e9, topShare: 0.41, topSymbol: "USDT", stableShare: 0.32 }, counterparties: { ok: true, count: 21, countCapped: false, interactions: 245, topOutShare: 0.47, mix: mix({ wealth: 1 }), counts: mix({ wealth: 21 }) } }));
-    expect(t).toBe("100+ tokens worth $9.4B · 21 counterparties in 30 d, 100% of that volume with wealth-tagged or exchange wallets · 0 DEX trades — money moves in and out, nobody is trading: an exchange wallet");
+    const t = tell(
+      "exchange",
+      clues({
+        balance: { ok: true, tokens: 100, tokensCapped: true, totalUsd: 9.37e9, topShare: 0.41, topSymbol: "USDT", stableShare: 0.32 },
+        counterparties: { ok: true, count: 21, countCapped: false, interactions: 245, topOutShare: 0.47, mix: mix({ wealth: 1 }), counts: mix({ wealth: 21 }) },
+      }),
+    );
+    expect(t).toBe(
+      "100+ tokens worth $9.4B · 21 counterparties in 30 d, 100% of that volume with wealth-tagged or exchange wallets · 0 DEX trades — money moves in and out, nobody is trading: an exchange wallet",
+    );
   });
   it("whale names the one position", () => {
-    expect(tell("whale", clues({ balance: { ok: true, tokens: 1, tokensCapped: false, totalUsd: 29_952_734, topShare: 1, topSymbol: "PEPE", stableShare: 0 } }))).toMatch(/^PEPE is 100% of a \$30M balance · 0 trades · 1 counterparty in 30 d — a big holder sitting still: a whale$/);
+    expect(
+      tell("whale", clues({ balance: { ok: true, tokens: 1, tokensCapped: false, totalUsd: 29_952_734, topShare: 1, topSymbol: "PEPE", stableShare: 0 } })),
+    ).toMatch(/^PEPE is 100% of a \$30M balance · 0 trades · 1 counterparty in 30 d — a big holder sitting still: a whale$/);
   });
   it("smart money: active vs dormant wording", () => {
-    const active = tell("smart-money", clues({ pnl: { ok: true, realizedUsd: 11892, realizedPct: 0.041, winRate: 0.667, trades: 472, tokensTraded: 6, top: [] }, counterparties: { ok: true, count: 9, countCapped: false, interactions: 472, topOutShare: 0.5, mix: mix({ activity: 0.97, unlabelled: 0.03 }), counts: mix({}) } }));
-    expect(active).toMatch(/^472 trades in 30 d · win rate 67% · realised \$12K across 6 tokens · 97% of flow through DEX pools and routers — a trader Nansen tracks as Smart Money$/);
+    const active = tell(
+      "smart-money",
+      clues({
+        pnl: { ok: true, realizedUsd: 11892, realizedPct: 0.041, winRate: 0.667, trades: 472, tokensTraded: 6, top: [] },
+        counterparties: {
+          ok: true,
+          count: 9,
+          countCapped: false,
+          interactions: 472,
+          topOutShare: 0.5,
+          mix: mix({ activity: 0.97, unlabelled: 0.03 }),
+          counts: mix({}),
+        },
+      }),
+    );
+    expect(active).toMatch(
+      /^472 trades in 30 d · win rate 67% · realised \$12K across 6 tokens · 97% of flow through DEX pools and routers — a trader Nansen tracks as Smart Money$/,
+    );
     expect(tell("smart-money", clues())).toMatch(/sat still$/);
   });
   it("contract: a pool speaks of traffic, a multisig of signers", () => {
-    const pool = tell("contract", clues({ counterparties: { ok: true, count: 50, countCapped: true, interactions: 37652, topOutShare: 0.54, mix: mix({ wealth: 0.9, activity: 0.1 }), counts: mix({}) }, balance: { ok: true, tokens: 19, tokensCapped: false, totalUsd: 28_171_038, topShare: 0.501, topSymbol: "PEPE", stableShare: 0 } }), "UniswapV2");
-    expect(pool).toBe("37,652 interactions from 50+ counterparties in 30 d · 19 tokens split 50% / 50% · no trades of its own — traffic without a trader: a liquidity pool");
-    const safe = tell("contract", clues({ counterparties: { ok: true, count: 1, countCapped: false, interactions: 6, topOutShare: 1, mix: mix({ wealth: 1 }), counts: mix({}) } }), "Gnosis Safe Proxy");
+    const pool = tell(
+      "contract",
+      clues({
+        counterparties: {
+          ok: true,
+          count: 50,
+          countCapped: true,
+          interactions: 37652,
+          topOutShare: 0.54,
+          mix: mix({ wealth: 0.9, activity: 0.1 }),
+          counts: mix({}),
+        },
+        balance: { ok: true, tokens: 19, tokensCapped: false, totalUsd: 28_171_038, topShare: 0.501, topSymbol: "PEPE", stableShare: 0 },
+      }),
+      "UniswapV2",
+    );
+    expect(pool).toBe(
+      "37,652 interactions from 50+ counterparties in 30 d · 19 tokens split 50% / 50% · no trades of its own — traffic without a trader: a liquidity pool",
+    );
+    const safe = tell(
+      "contract",
+      clues({ counterparties: { ok: true, count: 1, countCapped: false, interactions: 6, topOutShare: 1, mix: mix({ wealth: 1 }), counts: mix({}) } }),
+      "Gnosis Safe Proxy",
+    );
     expect(safe).toMatch(/code with signers, not a person: a Gnosis Safe Proxy$/);
     expect(tell("contract", clues(), "")).toMatch(/a contract$/);
   });
   it("regular says which label groups it is NOT in; public-figure has a fixed line", () => {
-    expect(tell("regular", clues({ pnl: { ok: true, realizedUsd: 9, realizedPct: 0, winRate: 1, trades: 1, tokensTraded: 1, top: [] } }))).toMatch(/^1 trade · 1 token worth \$100 · 1 counterparty in 30 d — none of Nansen's label groups: a regular wallet$/);
+    expect(tell("regular", clues({ pnl: { ok: true, realizedUsd: 9, realizedPct: 0, winRate: 1, trades: 1, tokensTraded: 1, top: [] } }))).toMatch(
+      /^1 trade · 1 token worth \$100 · 1 counterparty in 30 d — none of Nansen's label groups: a regular wallet$/,
+    );
     expect(tell("public-figure", clues())).toMatch(/Public Figure/);
   });
 });
@@ -53,20 +102,74 @@ describe("tell — one line per class from the numbers", () => {
 describe("read — the house rule", () => {
   const big = { ok: true, tokens: 100, tokensCapped: true, totalUsd: 9.37e9, topShare: 0.41, topSymbol: "USDT", stableShare: 0.32 };
   it("pool: traffic and few tokens", () => {
-    expect(read(clues({ counterparties: { ok: true, count: 50, countCapped: true, interactions: 37652, topOutShare: 0.5, mix: mix({}), counts: mix({}) }, balance: { ...big, tokens: 19, tokensCapped: false } })).guess).toBe("contract");
-    expect(read(clues({ counterparties: { ok: true, count: 50, countCapped: true, interactions: 1055, topOutShare: 0.5, mix: mix({}), counts: mix({}) }, balance: { ...big, tokens: 7, tokensCapped: false } })).guess).toBe("contract");
+    expect(
+      read(
+        clues({
+          counterparties: { ok: true, count: 50, countCapped: true, interactions: 37652, topOutShare: 0.5, mix: mix({}), counts: mix({}) },
+          balance: { ...big, tokens: 19, tokensCapped: false },
+        }),
+      ).guess,
+    ).toBe("contract");
+    expect(
+      read(
+        clues({
+          counterparties: { ok: true, count: 50, countCapped: true, interactions: 1055, topOutShare: 0.5, mix: mix({}), counts: mix({}) },
+          balance: { ...big, tokens: 7, tokensCapped: false },
+        }),
+      ).guess,
+    ).toBe("contract");
   });
   it("exchange: traffic + many tokens is an exchange, not a pool (Luno, Bybit)", () => {
-    expect(read(clues({ counterparties: { ok: true, count: 50, countCapped: true, interactions: 5020, topOutShare: 0.25, mix: mix({ wealth: 0.3, unlabelled: 0.45 }), counts: mix({}) }, balance: { ...big, totalUsd: 94e6 } })).guess).toBe("exchange");
-    expect(read(clues({ counterparties: { ok: true, count: 21, countCapped: false, interactions: 245, topOutShare: 0.47, mix: mix({ wealth: 1 }), counts: mix({}) }, balance: big })).guess).toBe("exchange");
-    expect(read(clues({ counterparties: { ok: true, count: 1, countCapped: false, interactions: 1, topOutShare: null, mix: mix({ unlabelled: 1 }), counts: mix({}) }, balance: { ...big, tokens: 51, tokensCapped: false, totalUsd: 3.39e9, topShare: 0.9 } })).guess).toBe("exchange");
+    expect(
+      read(
+        clues({
+          counterparties: {
+            ok: true,
+            count: 50,
+            countCapped: true,
+            interactions: 5020,
+            topOutShare: 0.25,
+            mix: mix({ wealth: 0.3, unlabelled: 0.45 }),
+            counts: mix({}),
+          },
+          balance: { ...big, totalUsd: 94e6 },
+        }),
+      ).guess,
+    ).toBe("exchange");
+    expect(
+      read(
+        clues({
+          counterparties: { ok: true, count: 21, countCapped: false, interactions: 245, topOutShare: 0.47, mix: mix({ wealth: 1 }), counts: mix({}) },
+          balance: big,
+        }),
+      ).guess,
+    ).toBe("exchange");
+    expect(
+      read(
+        clues({
+          counterparties: { ok: true, count: 1, countCapped: false, interactions: 1, topOutShare: null, mix: mix({ unlabelled: 1 }), counts: mix({}) },
+          balance: { ...big, tokens: 51, tokensCapped: false, totalUsd: 3.39e9, topShare: 0.9 },
+        }),
+      ).guess,
+    ).toBe("exchange");
   });
   it("whale: one position of a $1M+ balance, few trades", () => {
-    expect(read(clues({ balance: { ok: true, tokens: 1, tokensCapped: false, totalUsd: 29_952_734, topShare: 1, topSymbol: "PEPE", stableShare: 0 } })).guess).toBe("whale");
-    expect(read(clues({ balance: { ok: true, tokens: 1, tokensCapped: false, totalUsd: 29_952_734, topShare: 1, topSymbol: "PEPE", stableShare: 0 }, pnl: { ok: true, realizedUsd: 1, realizedPct: 0, winRate: 0.5, trades: 5019, tokensTraded: 2, top: [] } })).guess).not.toBe("whale");
+    expect(
+      read(clues({ balance: { ok: true, tokens: 1, tokensCapped: false, totalUsd: 29_952_734, topShare: 1, topSymbol: "PEPE", stableShare: 0 } })).guess,
+    ).toBe("whale");
+    expect(
+      read(
+        clues({
+          balance: { ok: true, tokens: 1, tokensCapped: false, totalUsd: 29_952_734, topShare: 1, topSymbol: "PEPE", stableShare: 0 },
+          pnl: { ok: true, realizedUsd: 1, realizedPct: 0, winRate: 0.5, trades: 5019, tokensTraded: 2, top: [] },
+        }),
+      ).guess,
+    ).not.toBe("whale");
   });
   it("smart money: many trades across many tokens; a busy two-token buyer stays regular", () => {
-    expect(read(clues({ pnl: { ok: true, realizedUsd: -4761, realizedPct: -0.1, winRate: 0.185, trades: 458, tokensTraded: 27, top: [] } })).guess).toBe("smart-money");
+    expect(read(clues({ pnl: { ok: true, realizedUsd: -4761, realizedPct: -0.1, winRate: 0.185, trades: 458, tokensTraded: 27, top: [] } })).guess).toBe(
+      "smart-money",
+    );
     expect(read(clues({ pnl: { ok: true, realizedUsd: 521, realizedPct: 0.1, winRate: 1, trades: 25, tokensTraded: 2, top: [] } })).guess).toBe("regular");
     expect(read(clues()).guess).toBe("regular");
   });
@@ -78,7 +181,13 @@ describe("read — the house rule", () => {
 });
 
 describe("card — hash, id, projection, face", () => {
-  const input = { address: ADDR("A").toUpperCase(), class: "whale" as LabelClass, nansenLabel: "Token Millionaire", entity: null, source: { endpoint: "tgm/holders", labelType: "all_holders", token: "PEPE", tag: "Token Millionaire" } };
+  const input = {
+    address: ADDR("A").toUpperCase(),
+    class: "whale" as LabelClass,
+    nansenLabel: "Token Millionaire",
+    entity: null,
+    source: { endpoint: "tgm/holders", labelType: "all_holders", token: "PEPE", tag: "Token Millionaire" },
+  };
   it("finishCard lower-cases the address, hashes the projection, and the hash ignores reader/cost/time", () => {
     const now = Date.parse("2026-09-18T10:00:00Z");
     const a = finishCard(input, clues(), now);
@@ -115,7 +224,13 @@ describe("card — hash, id, projection, face", () => {
 });
 
 function deck(n: number, classes: LabelClass[] = DECK_CLASSES): Card[] {
-  return Array.from({ length: n }, (_, i) => finishCard({ address: ADDR(i + 1), class: classes[i % classes.length], nansenLabel: "", source: { endpoint: "t", labelType: null, token: null, tag: "" } }, clues({ balance: { ...clues().balance, totalUsd: i } }), 0));
+  return Array.from({ length: n }, (_, i) =>
+    finishCard(
+      { address: ADDR(i + 1), class: classes[i % classes.length], nansenLabel: "", source: { endpoint: "t", labelType: null, token: null, tag: "" } },
+      clues({ balance: { ...clues().balance, totalUsd: i } }),
+      0,
+    ),
+  );
 }
 
 describe("round — deterministic, balanced, seed-safe", () => {

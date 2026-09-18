@@ -185,7 +185,7 @@
       },
       "empty": false
     },
-    "tell": "15 tokens worth $268M · 0 trades · 1 counterparty in 30 d — code with signers, not a person: a 🤖 🏦 Gnosis Safe Proxy [0xee136c]",
+    "tell": "15 tokens worth $268M · 0 trades · 1 counterparty in 30 d — code with signers, not a person: a Proxy",
     "source": {
       "endpoint": "tgm/holders",
       "labelType": "exchange",
@@ -194,7 +194,7 @@
     },
     "readerGuess": "regular",
     "readerBecause": "0 trades, 15 tokens, $268415372 — nothing that reads like a label",
-    "cardHash": "b24dbf8b00bdfadaa6880969a20f283322a4e3486334db70b6e056f1be1c39b3",
+    "cardHash": "20c0c52b955b0da75e7a0849e8623bdd758f5c973f9280f752b431c48328c3bb",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

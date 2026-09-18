@@ -61,10 +61,19 @@ export function cleanEntity(entity: string | null | undefined): string | null {
 export function finishCard(input: BuildInput, clues: Clues, now: number): Card {
   input = { ...input, entity: cleanEntity(input.entity) };
   const address = input.address.toLowerCase();
-  const t = tell(input.class, clues, input.entity ?? input.nansenLabel);
+  const t = tell(input.class, clues, input.nansenLabel, input.entity);
   const r = read(clues);
   const base = { address, chain: "ethereum" as const, class: input.class, nansenLabel: input.nansenLabel, entity: input.entity ?? null, clues, tell: t };
-  return { id: cardId(address), ...base, source: input.source, readerGuess: r.guess, readerBecause: r.because, cardHash: cardHash(base), recordedAt: new Date(now).toISOString(), now };
+  return {
+    id: cardId(address),
+    ...base,
+    source: input.source,
+    readerGuess: r.guess,
+    readerBecause: r.because,
+    cardHash: cardHash(base),
+    recordedAt: new Date(now).toISOString(),
+    now,
+  };
 }
 
 /** What the player sees before guessing: the card without its answer. */

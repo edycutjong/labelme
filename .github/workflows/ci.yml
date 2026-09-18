@@ -1,0 +1,132 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── STAGE 1: Quality (parallel with Stage 2) ─────────────────
+  quality:
+    name: "Stage 1 · Quality"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ${{ github.event_name == 'push' && fromJSON('[20, 22, 24]') || fromJSON('[20]') }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the readiness check scans the whole git history for keys
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - name: Format check (Prettier)
+        run: npm run format:check
+      - name: Lint (ESLint)
+        run: npm run lint
+      - name: Type check (engine, CLI, scripts)
+        run: npm run typecheck
+      - name: Type check (web)
+        run: npx tsc -p apps/web/tsconfig.json --noEmit
+      - name: Unit + property tests with coverage (no key, no network)
+        run: npm run test:coverage
+      - name: Offline replay of the 62 recorded cards (no key, no network)
+        run: npm run verify
+      - name: House reader on the deck
+        run: npm run reader
+      - name: Submission readiness (README claims vs tree, kitchen/secret scan)
+        run: npm run check
+      - uses: actions/upload-artifact@v4
+        if: matrix.node-version == 20
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7
+
+  # ── STAGE 2: Security (parallel with Stage 1) ────────────────
+  secret-scan:
+    name: "Stage 2 · Secret Scanning"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: TruffleHog (verified secrets, full history)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+  dependency-audit:
+    name: "Stage 2 · Dependency Audit"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci
+      - name: npm audit (production deps, high + critical)
+        run: npm run audit
+        continue-on-error: true # advisory — transitive upstream advisories must not block a frozen submission
+      - name: License compliance
+        run: npx license-checker --production --failOn "GPL-3.0;AGPL-3.0" --summary
+        continue-on-error: true
+
+  # ── STAGE 3: Build ───────────────────────────────────────────
+  build:
+    name: "Stage 3 · Build Verification"
+    needs: [quality]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci
+      - name: Next.js production build (no API key — nothing is fetched at build time)
+        run: npm run build
+      - name: Bundle size
+        run: |
+          TOTAL=$(du -sk apps/web/.next/static | cut -f1); echo "static: ${TOTAL}KB"
+          if [ "$TOTAL" -gt 2000 ]; then echo "::error::bundle ${TOTAL}KB > 2000KB"; exit 1; fi
+
+  # ── STAGE 4: E2E (built app, no key — the honest no-key path) ─
+  e2e:
+    name: "Stage 4 · E2E"
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Playwright (deck round, reveal, keyless draw replay, /judge, responsive)
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  # ── STAGE 5: Deploy gate (main only) ─────────────────────────
+  deploy-gate:
+    name: "Stage 5 · Deploy Gate"
+    needs: [build, e2e, secret-scan, dependency-audit]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - run: echo "all gates passed — production is deployed from build/ with vercel deploy --prod (see DEMO.md)"

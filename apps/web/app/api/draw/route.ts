@@ -19,7 +19,11 @@ export async function POST(req: NextRequest) {
   const cls = (DECK_CLASSES as string[]).includes(clsParam) ? (clsParam as LabelClass) : undefined;
   if (clsParam && !cls) return Response.json({ error: `class must be one of ${DECK_CLASSES.join(", ")}` }, { status: 400 });
   const gate = ipAllowed(clientIp(req.headers));
-  if (!gate.ok) return Response.json({ error: `Too many draws from this address — try again in ${gate.retryAfter} s` }, { status: 429, headers: { "retry-after": String(gate.retryAfter), "cache-control": "no-store" } });
+  if (!gate.ok)
+    return Response.json(
+      { error: `Too many draws from this address — try again in ${gate.retryAfter} s` },
+      { status: 429, headers: { "retry-after": String(gate.retryAfter), "cache-control": "no-store" } },
+    );
   const key = process.env.NANSEN_API_KEY ?? "";
   const degraded = !key || budgetExhausted();
 

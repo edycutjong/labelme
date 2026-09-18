@@ -14,7 +14,15 @@ export type Clues = {
     top: { symbol: string; roi: number | null; pnlUsd: number | null }[];
   };
   trades: { ok: boolean; rows: { symbol: string; pnlUsd: number | null; buys: number; sells: number }[] };
-  balance: { ok: boolean; tokens: number; tokensCapped: boolean; totalUsd: number; topShare: number | null; topSymbol: string | null; stableShare: number | null };
+  balance: {
+    ok: boolean;
+    tokens: number;
+    tokensCapped: boolean;
+    totalUsd: number;
+    topShare: number | null;
+    topSymbol: string | null;
+    stableShare: number | null;
+  };
   counterparties: {
     ok: boolean;
     count: number;
@@ -29,7 +37,27 @@ export type Clues = {
   empty: boolean;
 };
 
-export const STABLECOINS = new Set(["USDT", "USDC", "DAI", "USDS", "USDE", "FDUSD", "TUSD", "PYUSD", "USD1", "FRAX", "LUSD", "GHO", "CRVUSD", "SUSD", "BUSD", "USDP", "USDD", "USDC.E", "USDT0"]);
+export const STABLECOINS = new Set([
+  "USDT",
+  "USDC",
+  "DAI",
+  "USDS",
+  "USDE",
+  "FDUSD",
+  "TUSD",
+  "PYUSD",
+  "USD1",
+  "FRAX",
+  "LUSD",
+  "GHO",
+  "CRVUSD",
+  "SUSD",
+  "BUSD",
+  "USDP",
+  "USDD",
+  "USDC.E",
+  "USDT0",
+]);
 
 const r3 = (x: number) => Math.round(x * 1000) / 1000;
 const r0 = (x: number) => Math.round(x);
@@ -55,16 +83,38 @@ export function extractPnl(s: PnlSummaryResponse | undefined): Clues["pnl"] {
     winRate: n(s.win_rate) === null || trades === 0 ? null : r3(n(s.win_rate)!),
     trades,
     tokensTraded: int(s.traded_token_count),
-    top: (s.top5_tokens ?? []).slice(0, 5).map((t) => ({ symbol: (t.token_symbol ?? "?").slice(0, 12), roi: n(t.realized_roi) === null ? null : r3(n(t.realized_roi)!), pnlUsd: n(t.realized_pnl) === null ? null : r0(n(t.realized_pnl)!) })),
+    top: (s.top5_tokens ?? []).slice(0, 5).map((t) => ({
+      symbol: (t.token_symbol ?? "?").slice(0, 12),
+      roi: n(t.realized_roi) === null ? null : r3(n(t.realized_roi)!),
+      pnlUsd: n(t.realized_pnl) === null ? null : r0(n(t.realized_pnl)!),
+    })),
   };
 }
 
-export function extractTrades(rows: { token_symbol?: string | null; pnl_usd_realised?: number | null; nof_buys?: string | number | null; nof_sells?: string | number | null }[] | null | undefined, ok = true): Clues["trades"] {
+export function extractTrades(
+  rows:
+    | { token_symbol?: string | null; pnl_usd_realised?: number | null; nof_buys?: string | number | null; nof_sells?: string | number | null }[]
+    | null
+    | undefined,
+  ok = true,
+): Clues["trades"] {
   if (!ok || !rows) return { ok: false, rows: [] };
-  return { ok: true, rows: rows.slice(0, 5).map((r) => ({ symbol: (r.token_symbol ?? "?").slice(0, 12), pnlUsd: n(r.pnl_usd_realised) === null ? null : r0(n(r.pnl_usd_realised)!), buys: int(r.nof_buys), sells: int(r.nof_sells) })) };
+  return {
+    ok: true,
+    rows: rows.slice(0, 5).map((r) => ({
+      symbol: (r.token_symbol ?? "?").slice(0, 12),
+      pnlUsd: n(r.pnl_usd_realised) === null ? null : r0(n(r.pnl_usd_realised)!),
+      buys: int(r.nof_buys),
+      sells: int(r.nof_sells),
+    })),
+  };
 }
 
-export function extractBalance(rows: { token_symbol?: string | null; value_usd?: number | null }[] | null | undefined, isLastPage: boolean | undefined, ok = true): Clues["balance"] {
+export function extractBalance(
+  rows: { token_symbol?: string | null; value_usd?: number | null }[] | null | undefined,
+  isLastPage: boolean | undefined,
+  ok = true,
+): Clues["balance"] {
   if (!ok || !rows) return { ok: false, tokens: 0, tokensCapped: false, totalUsd: 0, topShare: null, topSymbol: null, stableShare: null };
   const vals = rows.map((r) => ({ sym: (r.token_symbol ?? "").toUpperCase(), usd: Math.max(0, n(r.value_usd) ?? 0) }));
   const total = vals.reduce((a, v) => a + v.usd, 0);
@@ -82,7 +132,10 @@ export function extractBalance(rows: { token_symbol?: string | null; value_usd?:
 }
 
 export function extractCounterparties(
-  rows: { counterparty_address_label?: string[] | null; interaction_count?: number | null; total_volume_usd?: number | null; volume_out_usd?: number | null }[] | null | undefined,
+  rows:
+    | { counterparty_address_label?: string[] | null; interaction_count?: number | null; total_volume_usd?: number | null; volume_out_usd?: number | null }[]
+    | null
+    | undefined,
   isLastPage: boolean | undefined,
   ok = true,
 ): Clues["counterparties"] {
@@ -106,7 +159,15 @@ export function extractCounterparties(
   }
   // volume share when volumes exist, else count share — so a wallet whose volumes are all null still gets a mix
   for (const k of MIX_KEYS) mix[k] = r3(totalVol > 0 ? mix[k] / totalVol : rows.length ? counts[k] / rows.length : 0);
-  return { ok: true, count: rows.length, countCapped: isLastPage === false, interactions, topOutShare: totalOut > 0 ? r3(maxOut / totalOut) : null, mix, counts };
+  return {
+    ok: true,
+    count: rows.length,
+    countCapped: isLastPage === false,
+    interactions,
+    topOutShare: totalOut > 0 ? r3(maxOut / totalOut) : null,
+    mix,
+    counts,
+  };
 }
 
 export type ClueFailure = { section: "pnl" | "trades" | "balance" | "counterparties"; error: string };
@@ -116,7 +177,12 @@ export type ClueFailure = { section: "pnl" | "trades" | "balance" | "counterpart
  * (`ok: false`) and is reported in `failures` — the card is still a card, and the failure shows in provenance.
  */
 export async function fetchClues(c: NansenClient, address: string, now: number): Promise<{ clues: Clues; failures: ClueFailure[] }> {
-  const [ps, pn, ba, cp] = await Promise.allSettled([nansen.pnlSummary(c, address, now), nansen.pnl(c, address, now), nansen.balance(c, address), nansen.counterparties(c, address, now)]);
+  const [ps, pn, ba, cp] = await Promise.allSettled([
+    nansen.pnlSummary(c, address, now),
+    nansen.pnl(c, address, now),
+    nansen.balance(c, address),
+    nansen.counterparties(c, address, now),
+  ]);
   const failures: ClueFailure[] = [];
   const err = (e: unknown) => (e instanceof Error ? e.message.slice(0, 160) : String(e));
   if (ps.status === "rejected") failures.push({ section: "pnl", error: err(ps.reason) });
@@ -125,8 +191,16 @@ export async function fetchClues(c: NansenClient, address: string, now: number):
   if (cp.status === "rejected") failures.push({ section: "counterparties", error: err(cp.reason) });
   const pnl = extractPnl(ps.status === "fulfilled" ? ps.value : undefined);
   const trades = extractTrades(pn.status === "fulfilled" ? pn.value.data : undefined, pn.status === "fulfilled");
-  const balance = extractBalance(ba.status === "fulfilled" ? ba.value.data : undefined, ba.status === "fulfilled" ? ba.value.pagination?.is_last_page : undefined, ba.status === "fulfilled");
-  const counterparties = extractCounterparties(cp.status === "fulfilled" ? cp.value.data : undefined, cp.status === "fulfilled" ? cp.value.pagination?.is_last_page : undefined, cp.status === "fulfilled");
+  const balance = extractBalance(
+    ba.status === "fulfilled" ? ba.value.data : undefined,
+    ba.status === "fulfilled" ? ba.value.pagination?.is_last_page : undefined,
+    ba.status === "fulfilled",
+  );
+  const counterparties = extractCounterparties(
+    cp.status === "fulfilled" ? cp.value.data : undefined,
+    cp.status === "fulfilled" ? cp.value.pagination?.is_last_page : undefined,
+    cp.status === "fulfilled",
+  );
   const empty = pnl.trades === 0 && trades.rows.length === 0 && balance.tokens === 0 && counterparties.count === 0;
   return { clues: { pnl, trades, balance, counterparties, empty }, failures };
 }

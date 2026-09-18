@@ -48,7 +48,9 @@ for (let i = 0; i < RUNS; i++) {
   }
   const house = card ? read(card.clues).guess : undefined;
   rows.push({ i, class: cls, coldMs, warmMs, credits: cold.creditsSpent, calls: cold.calls.length, failed, card, house });
-  console.log(`${String(i + 1).padStart(2)} ${cls.padEnd(12)} cold ${(coldMs / 1000).toFixed(1)}s · warm ${warmMs} ms · ${cold.creditsSpent} cr / ${cold.calls.length} calls${card ? ` · ${card.address.slice(0, 10)} house=${house === cls ? "✓" : house}` : ` · ✗ ${failed}`}`);
+  console.log(
+    `${String(i + 1).padStart(2)} ${cls.padEnd(12)} cold ${(coldMs / 1000).toFixed(1)}s · warm ${warmMs} ms · ${cold.creditsSpent} cr / ${cold.calls.length} calls${card ? ` · ${card.address.slice(0, 10)} house=${house === cls ? "✓" : house}` : ` · ✗ ${failed}`}`,
+  );
 }
 
 const ok = rows.filter((r) => r.card);
@@ -78,4 +80,6 @@ The default round (\`npm run labelme -- play\`) makes **0 calls and costs 0 cred
 Cold = the first draw on a fresh cache; warm = the identical draw served from the cache (every row recorded at 0 credits, hash identical).
 `;
 writeFileSync("docs/BENCH.md", md);
-console.log(`\ncold p50 ${(q(cold, 0.5) / 1000).toFixed(1)}s p95 ${(q(cold, 0.95) / 1000).toFixed(1)}s · warm p50 ${q(warm, 0.5)} ms · ${ok.length ? (credits / ok.length).toFixed(1) : "—"} cr/draw · house ${houseRight}/${ok.length} · ${credits} credits total → docs/BENCH.md`);
+console.log(
+  `\ncold p50 ${(q(cold, 0.5) / 1000).toFixed(1)}s p95 ${(q(cold, 0.95) / 1000).toFixed(1)}s · warm p50 ${q(warm, 0.5)} ms · ${ok.length ? (credits / ok.length).toFixed(1) : "—"} cr/draw · house ${houseRight}/${ok.length} · ${credits} credits total → docs/BENCH.md`,
+);

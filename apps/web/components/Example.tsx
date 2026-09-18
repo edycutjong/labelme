@@ -12,7 +12,8 @@ export function Example({ card, deckSize, house }: { card: Card; deckSize: numbe
             <span className="kicker">example</span> One card, already revealed
           </h2>
           <p className="example-sub">
-            4 Nansen calls · recorded {card.recordedAt.slice(0, 10)} · replayed from <code>fixtures/cards/{card.address}.json</code> · 0 credits · <code>{card.cardHash.slice(0, 12)}</code>
+            4 Nansen calls · recorded {card.recordedAt.slice(0, 10)} · replayed from <code>fixtures/cards/{card.address}.json</code> · 0 credits ·{" "}
+            <code>{card.cardHash.slice(0, 12)}</code>
           </p>
         </div>
       </div>
@@ -42,11 +43,26 @@ export function Example({ card, deckSize, house }: { card: Card; deckSize: numbe
 
 export function HowItDecides({ deckSize, house }: { deckSize: number; house: number }) {
   const steps: { ep: string; cr: string; what: string; decides: string }[] = [
-    { ep: "tgm/holders label_type=smart_money · exchange", cr: "5 cr", what: "holders in Nansen's own label groups", decides: "→ the answer key, by construction" },
-    { ep: "tgm/holders free tags · who-bought-sold −labels", cr: "5 · 1 cr", what: "Token Billionaire, Liquidity Pool… or none of the groups", decides: "→ whale · contract · regular keys" },
+    {
+      ep: "tgm/holders label_type=smart_money · exchange",
+      cr: "5 cr",
+      what: "holders in Nansen's own label groups",
+      decides: "→ the answer key, by construction",
+    },
+    {
+      ep: "tgm/holders free tags · who-bought-sold −labels",
+      cr: "5 · 1 cr",
+      what: "Token Billionaire, Liquidity Pool… or none of the groups",
+      decides: "→ whale · contract · regular keys",
+    },
     { ep: "profiler/address/pnl-summary · pnl", cr: "1 · 1 cr", what: "30-day PnL, win rate, trades, top tokens", decides: "→ the PnL and Trades clues" },
     { ep: "profiler/address/current-balance", cr: "1 cr", what: "tokens held, top position, stables", decides: "→ the Balance clue" },
-    { ep: "profiler/address/counterparties", cr: "5 cr", what: "who it moves money with, labelled by class", decides: "→ the Counterparties clue and the tell" },
+    {
+      ep: "profiler/address/counterparties",
+      cr: "5 cr",
+      what: "who it moves money with, labelled by class",
+      decides: "→ the Counterparties clue and the tell",
+    },
   ];
   return (
     <section className="how" aria-labelledby="how-h">
@@ -64,13 +80,21 @@ export function HowItDecides({ deckSize, house }: { deckSize: number; house: num
       </ol>
       <ul className="proof-row">
         <li>
-          <b>{deckSize}</b> recorded cards · <b>{deckSize}/{deckSize}</b> replay offline
+          <b>{deckSize}</b> recorded cards ·{" "}
+          <b>
+            {deckSize}/{deckSize}
+          </b>{" "}
+          replay offline
         </li>
         <li>
           <b>{PROOF.creditsPerDraw}</b> credits per live draw · <b>{PROOF.coldP50s} s</b> cold p50
         </li>
         <li>
-          house rule <b>{house}/{deckSize}</b> on the deck
+          house rule{" "}
+          <b>
+            {house}/{deckSize}
+          </b>{" "}
+          on the deck
         </li>
         <li>
           <b>{PROOF.tests}</b> tests · <b>{PROOF.propertyCases.toLocaleString("en-US")}</b> property cases

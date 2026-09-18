@@ -126,7 +126,8 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
           if (!line.trim()) continue;
           const e = JSON.parse(line);
           if (e.type === "call") setRows((r) => [...r, e.call]);
-          else if (e.type === "picked") setStatus(`Picked one of ${e.candidates} unseen ${CLASS_INFO[e.class as LabelClass].name} wallets on ${e.token} — pulling its clues…`);
+          else if (e.type === "picked")
+            setStatus(`Picked one of ${e.candidates} unseen ${CLASS_INFO[e.class as LabelClass].name} wallets on ${e.token} — pulling its clues…`);
           else if (e.type === "replay") setDrawReplay(e.message);
           else if (e.type === "card") {
             setDrawCard(e.card);
@@ -179,7 +180,15 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
         const isPick = picked === k;
         const cls = ["chip", isTruth ? "truth" : "", isPick && !isTruth ? "miss" : "", isPick ? "on" : ""].filter(Boolean).join(" ");
         return (
-          <button key={k} type="button" className={cls} onClick={() => onPick(k)} disabled={disabled || !!picked} aria-pressed={isPick} aria-label={`${CLASS_INFO[k].name} (key ${n + 1})`}>
+          <button
+            key={k}
+            type="button"
+            className={cls}
+            onClick={() => onPick(k)}
+            disabled={disabled || !!picked}
+            aria-pressed={isPick}
+            aria-label={`${CLASS_INFO[k].name} (key ${n + 1})`}
+          >
             <kbd>{n + 1}</kbd> {CLASS_INFO[k].name}
           </button>
         );
@@ -187,7 +196,11 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
     </div>
   );
 
-  const revealPanel = (a: Pick<Reveal, "class" | "nansenLabel" | "entity" | "address" | "tell" | "source" | "recordedAt">, picked: LabelClass | undefined, live: boolean) => {
+  const revealPanel = (
+    a: Pick<Reveal, "class" | "nansenLabel" | "entity" | "address" | "tell" | "source" | "recordedAt">,
+    picked: LabelClass | undefined,
+    live: boolean,
+  ) => {
     const ok = picked === a.class;
     return (
       <div className={`reveal ${ok ? "ok" : "miss"}`} role="status" aria-live="polite">
@@ -226,7 +239,14 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
             start(seedInput);
           }}
         >
-          <input value={seedInput} onChange={(e) => setSeedInput(e.target.value)} placeholder="seed — leave empty for a random round" aria-label="round seed (optional)" maxLength={32} autoComplete="off" />
+          <input
+            value={seedInput}
+            onChange={(e) => setSeedInput(e.target.value)}
+            placeholder="seed — leave empty for a random round"
+            aria-label="round seed (optional)"
+            maxLength={32}
+            autoComplete="off"
+          />
           <button type="submit" disabled={phase === "loading"}>
             {phase === "idle" || phase === "loading" ? "Deal" : "Deal again"}
           </button>
@@ -287,7 +307,8 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
             You read wallets <b>{correct}/10</b>
           </div>
           <p className="score-sub">
-            round <code>{round.seed}</code> · deck <code>{round.deckHash.slice(0, 12)}</code> · the house rule reads {round.house}/10 of these from the same clues
+            round <code>{round.seed}</code> · deck <code>{round.deckHash.slice(0, 12)}</code> · the house rule reads {round.house}/10 of these from the same
+            clues
           </p>
           <ul className="score-classes">
             {DECK_CLASSES.map((k) => {
@@ -303,7 +324,8 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
           <ul className="score-list">
             {guessed.map((g, n) => (
               <li key={g.id} className={g.reveal.correct ? "ok" : "miss"}>
-                <span>{n + 1}</span> <span className="mono">{shortAddr(g.reveal.address)}</span> <b style={{ color: CLASS_INFO[g.reveal.class].hue }}>{CLASS_INFO[g.reveal.class].name}</b>
+                <span>{n + 1}</span> <span className="mono">{shortAddr(g.reveal.address)}</span>{" "}
+                <b style={{ color: CLASS_INFO[g.reveal.class].hue }}>{CLASS_INFO[g.reveal.class].name}</b>
                 {!g.reveal.correct && <span className="muted"> — you said {CLASS_INFO[g.guess].name}</span>}
               </li>
             ))}
@@ -346,7 +368,11 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
             </div>
           )}
           {drawCardState && (
-            <WalletCard clues={drawCardState.clues} title={drawReplay ? "Replayed card" : "Fresh card · live"} state={drawGuess ? (drawGuess === drawCardState.class ? "right" : "wrong") : "face"}>
+            <WalletCard
+              clues={drawCardState.clues}
+              title={drawReplay ? "Replayed card" : "Fresh card · live"}
+              state={drawGuess ? (drawGuess === drawCardState.class ? "right" : "wrong") : "face"}
+            >
               {chips((c) => setDrawGuess(c), drawGuess, drawGuess ? drawCardState.class : undefined)}
               {drawGuess && revealPanel(drawCardState, drawGuess, !drawReplay)}
               {drawGuess && drawHouse && (

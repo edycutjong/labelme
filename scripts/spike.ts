@@ -7,7 +7,16 @@
  *
  * Output: a table on stdout (tee it into ../specs/spike-raw.txt); the findings are written by hand to ../specs/spike.md.
  */
-import { cachedClientFromEnv, nansen, fetchClues, classFromTag, tagIsNeutral, STRUCTURAL_TAG, type LabelClass, type HolderRow } from "../packages/core/src/index.js";
+import {
+  cachedClientFromEnv,
+  nansen,
+  fetchClues,
+  classFromTag,
+  tagIsNeutral,
+  STRUCTURAL_TAG,
+  type LabelClass,
+  type HolderRow,
+} from "../packages/core/src/index.js";
 
 const PEPE = "0x6982508145454ce325ddbe47a25d4ec3d2311933";
 const client = cachedClientFromEnv();
@@ -36,7 +45,9 @@ for (const r of sm.data) note(r.address!, "smart-money");
 for (const r of ex.data) note(r.address!, "exchange");
 for (const r of pf.data) note(r.address!, "public-figure");
 for (const r of smt.data) note(r.trader_address, "smart-money");
-console.log(`smart_money ${sm.data.length} rows · exchange ${ex.data.length} · public_figure ${pf.data.length} · all_holders(excl) ${all.data.length} · who-bought(excl) ${wb.data.length} · sm dex-trades ${smt.data.length} (${new Set(smt.data.map((t) => t.trader_address)).size} traders)`);
+console.log(
+  `smart_money ${sm.data.length} rows · exchange ${ex.data.length} · public_figure ${pf.data.length} · all_holders(excl) ${all.data.length} · who-bought(excl) ${wb.data.length} · sm dex-trades ${smt.data.length} (${new Set(smt.data.map((t) => t.trader_address)).size} traders)`,
+);
 
 const only = (addr: string, cls: LabelClass) => seen.get(addr.toLowerCase())?.size === 1 && seen.get(addr.toLowerCase())!.has(cls);
 const take = (rows: HolderRow[], cls: LabelClass, want: number, src: string, filter: (r: HolderRow) => boolean = () => true) => {
@@ -50,7 +61,10 @@ const take = (rows: HolderRow[], cls: LabelClass, want: number, src: string, fil
 };
 // class lists (by construction)
 take(sm.data, "smart-money", 2, "holders:smart_money", (r) => !STRUCTURAL_TAG.test(r.address_label ?? ""));
-const traders = [...new Map(smt.data.map((t) => [t.trader_address.toLowerCase(), t])).values()].map((t) => ({ address: t.trader_address, address_label: t.trader_address_label ?? "" }));
+const traders = [...new Map(smt.data.map((t) => [t.trader_address.toLowerCase(), t])).values()].map((t) => ({
+  address: t.trader_address,
+  address_label: t.trader_address_label ?? "",
+}));
 take(traders as HolderRow[], "smart-money", 4, "smart-money/dex-trades", (r) => !STRUCTURAL_TAG.test(r.address_label ?? ""));
 take(ex.data, "exchange", 4, "holders:exchange");
 take(pf.data, "public-figure", 3, "holders:public_figure");
@@ -71,7 +85,8 @@ for (const p of picks) console.log(`  ${p.cls.padEnd(14)} ${p.address} ${JSON.st
 
 console.log("\n── clues (4 calls each) ──");
 const rows: string[] = [];
-const hdr = "class          | tag                  | trades | win  | pnl$      | tok | tot$        | top  | stab | cps | topOut | pool | wealth | ens  | unlab | int  | ms";
+const hdr =
+  "class          | tag                  | trades | win  | pnl$      | tok | tot$        | top  | stab | cps | topOut | pool | wealth | ens  | unlab | int  | ms";
 console.log(hdr);
 for (const p of picks) {
   const t0 = Date.now();
@@ -86,7 +101,11 @@ for (const p of picks) {
 if (args.has("--premium")) {
   console.log("\n── premium_labels=true on the free plan (once; 150 cr if accepted) ──");
   try {
-    const r = await client.post<unknown>("tgm/holders", { chain: "ethereum", token_address: PEPE, premium_labels: true, pagination: { page: 1, per_page: 3 } }, []);
+    const r = await client.post<unknown>(
+      "tgm/holders",
+      { chain: "ethereum", token_address: PEPE, premium_labels: true, pagination: { page: 1, per_page: 3 } },
+      [],
+    );
     console.log("HTTP 200 — accepted; rows:", JSON.stringify(r).slice(0, 400));
   } catch (e) {
     console.log("refused:", (e as Error).message.slice(0, 300));
@@ -103,7 +122,14 @@ if (args.has("--entity")) {
       if (h) {
         const l = await nansen.txLookup(client, h);
         const d = l.data?.[0];
-        console.log("from:", d?.from_address_label, "| to:", d?.to_address_label, "| transfers:", (d?.token_transfer_array ?? []).slice(0, 3).map((t) => `${t.from_address_label} → ${t.to_address_label}`));
+        console.log(
+          "from:",
+          d?.from_address_label,
+          "| to:",
+          d?.to_address_label,
+          "| transfers:",
+          (d?.token_transfer_array ?? []).slice(0, 3).map((t) => `${t.from_address_label} → ${t.to_address_label}`),
+        );
       }
     } catch (e) {
       console.log("failed:", (e as Error).message.slice(0, 200));
@@ -113,5 +139,13 @@ if (args.has("--entity")) {
 
 const live = client.calls.filter((c) => !c.cached);
 const failed = client.calls.filter((c) => !c.ok);
-console.log(`\n${client.calls.length} calls · ${live.length} live · ${client.creditsSpent} credits · ${failed.length} failed${failed.length ? ": " + failed.map((c) => `${c.endpoint} ${c.error}`).join("; ") : ""}`);
-console.log(`slowest: ${[...client.calls].sort((a, b) => b.totalMs - a.totalMs).slice(0, 5).map((c) => `${c.endpoint} ${(c.totalMs / 1000).toFixed(1)}s`).join(" · ")}`);
+console.log(
+  `\n${client.calls.length} calls · ${live.length} live · ${client.creditsSpent} credits · ${failed.length} failed${failed.length ? ": " + failed.map((c) => `${c.endpoint} ${c.error}`).join("; ") : ""}`,
+);
+console.log(
+  `slowest: ${[...client.calls]
+    .sort((a, b) => b.totalMs - a.totalMs)
+    .slice(0, 5)
+    .map((c) => `${c.endpoint} ${(c.totalMs / 1000).toFixed(1)}s`)
+    .join(" · ")}`,
+);

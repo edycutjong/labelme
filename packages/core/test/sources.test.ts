@@ -13,16 +13,39 @@ const holder = (address: string, label: string | null) => ({ address, address_la
 
 /** One token's sourcing lists modelled on the spike: an address may sit in several. */
 function sourcingRoutes(endpoint: string, body: Record<string, unknown>) {
-  if (endpoint === "smart-money/dex-trades") return { data: [{ trader_address: ADDR("d1"), trader_address_label: "" }, { trader_address: ADDR("d1"), trader_address_label: "" }, { trader_address: ADDR("both"), trader_address_label: "x.eth" }], pagination: {} };
-  if (endpoint === "tgm/who-bought-sold") return { data: [holder(ADDR("r1"), null), holder(ADDR("r2"), "Token Millionaire"), holder(ADDR("r3"), "huck.eth"), holder(ADDR("d1"), null)], pagination: {} };
+  if (endpoint === "smart-money/dex-trades")
+    return {
+      data: [
+        { trader_address: ADDR("d1"), trader_address_label: "" },
+        { trader_address: ADDR("d1"), trader_address_label: "" },
+        { trader_address: ADDR("both"), trader_address_label: "x.eth" },
+      ],
+      pagination: {},
+    };
+  if (endpoint === "tgm/who-bought-sold")
+    return {
+      data: [holder(ADDR("r1"), null), holder(ADDR("r2"), "Token Millionaire"), holder(ADDR("r3"), "huck.eth"), holder(ADDR("d1"), null)],
+      pagination: {},
+    };
   if (endpoint === "tgm/holders") {
     const lt = body.label_type;
     if (lt === "smart_money") return { data: [holder(ADDR("s1"), "High Balance"), holder(ADDR("both"), ""), holder(ADDR("pf"), "")], pagination: {} };
-    if (lt === "exchange") return { data: [holder(ADDR("e1"), "Token Billionaire"), holder(ADDR("both"), ""), holder(ADDR("pool"), "UniswapV2")], pagination: {} };
+    if (lt === "exchange")
+      return { data: [holder(ADDR("e1"), "Token Billionaire"), holder(ADDR("both"), ""), holder(ADDR("pool"), "UniswapV2")], pagination: {} };
     if (lt === "public_figure") return { data: [holder(ADDR("pf"), "fatmac.eth*")], pagination: {} };
     // the excluded page: Nansen drops exchange / smart-money / public-figure members server-side
-    if ((body.filters as { exclude_smart_money_labels?: string[] } | undefined)?.exclude_smart_money_labels) return { data: [holder(ADDR("w1"), "Token Millionaire"), holder(ADDR("safe"), "Proxy"), holder(ADDR("r3"), "huck.eth")], pagination: {} };
-    return { data: [holder(ADDR("w1"), "Token Millionaire"), holder(ADDR("e1"), "Token Billionaire"), holder(ADDR("pool"), "UniswapV2"), holder(ADDR("safe"), "Proxy"), holder(ADDR("r3"), "huck.eth")], pagination: {} };
+    if ((body.filters as { exclude_smart_money_labels?: string[] } | undefined)?.exclude_smart_money_labels)
+      return { data: [holder(ADDR("w1"), "Token Millionaire"), holder(ADDR("safe"), "Proxy"), holder(ADDR("r3"), "huck.eth")], pagination: {} };
+    return {
+      data: [
+        holder(ADDR("w1"), "Token Millionaire"),
+        holder(ADDR("e1"), "Token Billionaire"),
+        holder(ADDR("pool"), "UniswapV2"),
+        holder(ADDR("safe"), "Proxy"),
+        holder(ADDR("r3"), "huck.eth"),
+      ],
+      pagination: {},
+    };
   }
   throw new Error("unexpected " + endpoint);
 }
@@ -43,7 +66,12 @@ describe("gatherCandidates — one class per address, by precedence", () => {
     expect(cls[ADDR("r2")]).toBeUndefined(); // wealth-tagged buyer is not "regular" and not a whale (not on the plain page)
     expect(dropped.find((d) => d.address === ADDR("both"))?.reason).toMatch(/both the Exchange and the Smart Money/);
     expect(dropped.find((d) => d.address === ADDR("pf"))?.reason).toMatch(/Public Figure/);
-    expect(candidates.find((x) => x.address === ADDR("e1"))?.source).toMatchObject({ endpoint: "tgm/holders", labelType: "exchange", token: "PEPE", tag: "Token Billionaire" });
+    expect(candidates.find((x) => x.address === ADDR("e1"))?.source).toMatchObject({
+      endpoint: "tgm/holders",
+      labelType: "exchange",
+      token: "PEPE",
+      tag: "Token Billionaire",
+    });
     expect(candidates.find((x) => x.address === ADDR("d1"))?.source.endpoint).toBe("smart-money/dex-trades");
     expect(c.creditsSpent).toBe(5 + 4 * 5 + 1);
   });
@@ -60,7 +88,8 @@ describe("gatherCandidates — one class per address, by precedence", () => {
 });
 
 describe("drawCard — one fresh card, live, streamed", () => {
-  const routes = (endpoint: string, body: Record<string, unknown>) => (endpoint.startsWith("profiler/") ? clueRoutes("whale")(endpoint) : sourcingRoutes(endpoint, body));
+  const routes = (endpoint: string, body: Record<string, unknown>) =>
+    endpoint.startsWith("profiler/") ? clueRoutes("whale")(endpoint) : sourcingRoutes(endpoint, body);
   it("draws a whale from a plain page, emits one call event per Nansen call and a card event, 13 credits", async () => {
     const c = fakeClient(routes);
     const events: string[] = [];
@@ -85,7 +114,9 @@ describe("drawCard — one fresh card, live, streamed", () => {
     expect(card.address).not.toBe(ADDR("e1"));
     expect(card.class).toBe("exchange");
     const c2 = fakeClient(routes);
-    await expect(drawCard(c2, { class: "whale", seed: "s", exclude: new Set([ADDR("w1")]), tokens: { A: "0xa", B: "0xb", C: "0xc" } })).rejects.toThrow(/no unseen whale/);
+    await expect(drawCard(c2, { class: "whale", seed: "s", exclude: new Set([ADDR("w1")]), tokens: { A: "0xa", B: "0xb", C: "0xc" } })).rejects.toThrow(
+      /no unseen whale/,
+    );
     expect(c2.calls.filter((x) => x.endpoint === "tgm/holders")).toHaveLength(3);
   });
   it("contract draws only deal unambiguous pool tags, never a MultiSig/Proxy (may be an exchange wallet)", async () => {
@@ -108,8 +139,15 @@ describe("fixtures — write, list, read, replay", () => {
     const store = new MemoryCache();
     const live = new CachedNansenClient(KEY, { fetchImpl: fakeFetch(clueRoutes("regular")), rps: 1000, store });
     const now = Date.parse("2026-09-18T10:00:00Z");
-    const { card } = await buildCard(live, { address: ADDR(9), class: "regular", nansenLabel: "", source: { endpoint: "tgm/who-bought-sold", labelType: null, token: "PEPE", tag: "" } }, now);
-    const path = writeCardFixture({ edge: "test", recordedAt: card.recordedAt, now, live: { calls: 4, credits: 8, ms: 1, failed: [] }, responses: store.entries(), card }, dir);
+    const { card } = await buildCard(
+      live,
+      { address: ADDR(9), class: "regular", nansenLabel: "", source: { endpoint: "tgm/who-bought-sold", labelType: null, token: "PEPE", tag: "" } },
+      now,
+    );
+    const path = writeCardFixture(
+      { edge: "test", recordedAt: card.recordedAt, now, live: { calls: 4, credits: 8, ms: 1, failed: [] }, responses: store.entries(), card },
+      dir,
+    );
     expect(listCardFixtures(dir)).toEqual([path]);
     const f = readCardFixture(path);
     expect(JSON.stringify(f)).not.toContain(KEY);
@@ -122,7 +160,11 @@ describe("fixtures — write, list, read, replay", () => {
       store: fixtureStore(f),
       offline: true,
     });
-    const again = await buildCard(replay, { address: f.card.address, class: f.card.class, nansenLabel: f.card.nansenLabel, entity: f.card.entity, source: f.card.source }, f.now);
+    const again = await buildCard(
+      replay,
+      { address: f.card.address, class: f.card.class, nansenLabel: f.card.nansenLabel, entity: f.card.entity, source: f.card.source },
+      f.now,
+    );
     expect(again.card.cardHash).toBe(f.card.cardHash);
     expect(fetched).toBe(0);
     expect(replay.creditsSpent).toBe(0);
@@ -139,10 +181,17 @@ describe("fixtures — write, list, read, replay", () => {
     for (const k of ["smart-money", "exchange", "whale", "contract", "regular"]) expect(deck.filter((c) => c.class === k).length, k).toBeGreaterThanOrEqual(8);
     expect(new Set(deck.map((c) => c.id)).size).toBe(deck.length);
     expect(JSON.stringify(deck)).not.toMatch(/nsn_[A-Za-z0-9]{20}/);
-    for (const c of deck) expect(c.cardHash).toBe(finishCard({ address: c.address, class: c.class, nansenLabel: c.nansenLabel, entity: c.entity, source: c.source }, c.clues, c.now).cardHash);
+    for (const c of deck)
+      expect(c.cardHash).toBe(
+        finishCard({ address: c.address, class: c.class, nansenLabel: c.nansenLabel, entity: c.entity, source: c.source }, c.clues, c.now).cardHash,
+      );
   });
   it("a card built from empty clues is still a valid card", () => {
-    const c = finishCard({ address: ADDR(1), class: "whale", nansenLabel: "", source: { endpoint: "t", labelType: null, token: null, tag: "" } }, clues({ empty: true }), 0);
+    const c = finishCard(
+      { address: ADDR(1), class: "whale", nansenLabel: "", source: { endpoint: "t", labelType: null, token: null, tag: "" } },
+      clues({ empty: true }),
+      0,
+    );
     expect(c.tell).toBeTypeOf("string");
   });
 });

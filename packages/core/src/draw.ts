@@ -6,16 +6,38 @@ import { TOKENS } from "./sources.js";
 import { rng, shuffle } from "./round.js";
 import type { ClueFailure } from "./clues.js";
 
-export type DrawEvent = { type: "call"; call: Call } | { type: "picked"; class: LabelClass; token: string; page: number; candidates: number } | { type: "card"; card: Card } | { type: "error"; message: string };
+export type DrawEvent =
+  | { type: "call"; call: Call }
+  | { type: "picked"; class: LabelClass; token: string; page: number; candidates: number }
+  | { type: "card"; card: Card }
+  | { type: "error"; message: string };
 
-export type DrawOptions = { class?: LabelClass; seed?: string; exclude?: Set<string>; now?: number; onProgress?: (e: DrawEvent) => void; tokens?: Record<string, string> };
+export type DrawOptions = {
+  class?: LabelClass;
+  seed?: string;
+  exclude?: Set<string>;
+  now?: number;
+  onProgress?: (e: DrawEvent) => void;
+  tokens?: Record<string, string>;
+};
 
 export const DRAW_CLASSES: LabelClass[] = ["smart-money", "exchange", "whale", "contract", "regular"];
 /** pools are rare in the top-100 of a meme coin (≈1 per page) but WETH's top holders are ~10 % Uniswap pools — contract draws start there */
-export const POOL_RICH_TOKENS: Record<string, string> = { WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", MOG: TOKENS.MOG, PEPE: TOKENS.PEPE, TURBO: TOKENS.TURBO };
+export const POOL_RICH_TOKENS: Record<string, string> = {
+  WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  MOG: TOKENS.MOG,
+  PEPE: TOKENS.PEPE,
+  TURBO: TOKENS.TURBO,
+};
 
 /** the sourcing call for a class: holders with the class filter; whale/contract read tags off a plain page; regular = who-bought-sold(excluded) */
-async function candidatesFor(c: NansenClient, cls: LabelClass, token: string, page: number, now: number): Promise<{ address: string; tag: string; labelType: string | null; endpoint: string }[]> {
+async function candidatesFor(
+  c: NansenClient,
+  cls: LabelClass,
+  token: string,
+  page: number,
+  now: number,
+): Promise<{ address: string; tag: string; labelType: string | null; endpoint: string }[]> {
   if (cls === "smart-money") {
     // the live Smart Money feed: traders who traded in the last hours — active by construction, never a dormant holder
     const r = await nansen.smartMoneyTrades(c);
@@ -25,7 +47,9 @@ async function candidatesFor(c: NansenClient, cls: LabelClass, token: string, pa
   }
   if (cls === "regular") {
     const r = await nansen.whoBought(c, token, now);
-    return r.data.filter((x) => tagIsNeutral(x.address_label)).map((x) => ({ address: x.address, tag: x.address_label ?? "", labelType: "exclude all 17 label groups", endpoint: "tgm/who-bought-sold" }));
+    return r.data
+      .filter((x) => tagIsNeutral(x.address_label))
+      .map((x) => ({ address: x.address, tag: x.address_label ?? "", labelType: "exclude all 17 label groups", endpoint: "tgm/who-bought-sold" }));
   }
   // whale: the page with every label group excluded server-side, so a Token Billionaire that is really an exchange never deals as a whale;
   // contract: the plain page (pools sit inside Nansen's Exchange group and would be excluded)
@@ -33,7 +57,13 @@ async function candidatesFor(c: NansenClient, cls: LabelClass, token: string, pa
   const r = await nansen.holders(c, token, lt, page, 100);
   return r.data
     .filter((x) => x.address)
-    .filter((x) => (cls === "whale" ? classFromTag(x.address_label) === "whale" : cls === "contract" ? isPoolTag(x.address_label) : classFromTag(x.address_label) !== "contract"))
+    .filter((x) =>
+      cls === "whale"
+        ? classFromTag(x.address_label) === "whale"
+        : cls === "contract"
+          ? isPoolTag(x.address_label)
+          : classFromTag(x.address_label) !== "contract",
+    )
     .map((x) => ({ address: x.address!, tag: x.address_label ?? "", labelType: lt === "all_holders_plain" ? "all_holders" : lt, endpoint: "tgm/holders" }));
 }
 
@@ -47,11 +77,15 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
   const next = rng(opts.seed ?? `${now}:${Math.random()}`);
   const cls = opts.class ?? DRAW_CLASSES[Math.floor(next() * DRAW_CLASSES.length)];
   // class lists (smart_money / exchange / who-bought-sold) are short — page 1 only; plain holder pages run deep — pages 1–3
-  const tokens = opts.tokens ? shuffle(Object.entries(opts.tokens), next) : cls === "contract" ? [Object.entries(POOL_RICH_TOKENS)[0], ...shuffle(Object.entries(POOL_RICH_TOKENS).slice(1), next)] : shuffle(Object.entries(TOKENS), next);
+  const tokens = opts.tokens
+    ? shuffle(Object.entries(opts.tokens), next)
+    : cls === "contract"
+      ? [Object.entries(POOL_RICH_TOKENS)[0], ...shuffle(Object.entries(POOL_RICH_TOKENS).slice(1), next)]
+      : shuffle(Object.entries(TOKENS), next);
   const deepPage = cls === "whale" || cls === "contract";
   let fresh: Awaited<ReturnType<typeof candidatesFor>> = [];
-  let sym = "",
-    page = 1;
+  let sym = "";
+  let page: number | undefined;
   // up to three sourcing pages (5 credits each) before giving up — a page whose rows are all in the deck is not a failure of Nansen
   for (const [trySym, token] of tokens.slice(0, cls === "smart-money" ? 1 : 3)) {
     sym = trySym;
@@ -64,14 +98,29 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
       for (const call of c.calls.slice(seenBefore)) opts.onProgress?.({ type: "call", call });
     }
     fresh = rows.filter((r) => !opts.exclude?.has(r.address.toLowerCase()));
-    opts.onProgress?.({ type: "picked", class: cls, token: sym, page, candidates: fresh.length });
+    opts.onProgress?.({
+      type: "picked",
+      class: cls,
+      token: cls === "smart-money" ? "the live Smart Money feed" : sym,
+      page: page ?? 1,
+      candidates: fresh.length,
+    });
     if (fresh.length) break;
   }
   if (fresh.length === 0) throw new Error(`no unseen ${cls} wallet on the sourcing pages tried — try again`);
   // smart-money: prefer a row that will have trades; we cannot know before the clues, so pick at random and accept the card as dealt
   const pick = fresh[Math.floor(next() * fresh.length)];
   const before = c.calls.length;
-  const result = await buildCard(c, { address: pick.address, class: cls, nansenLabel: pick.tag, source: { endpoint: pick.endpoint, labelType: pick.labelType, token: sym, tag: pick.tag } }, now);
+  const result = await buildCard(
+    c,
+    {
+      address: pick.address,
+      class: cls,
+      nansenLabel: pick.tag,
+      source: { endpoint: pick.endpoint, labelType: pick.labelType, token: cls === "smart-money" ? null : sym, tag: pick.tag },
+    },
+    now,
+  );
   for (const call of c.calls.slice(before)) opts.onProgress?.({ type: "call", call });
   opts.onProgress?.({ type: "card", card: result.card });
   return result;

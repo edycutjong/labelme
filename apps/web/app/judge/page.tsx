@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SiteHeader, SiteFooter } from "@/components/Shell";
 import { PROOF } from "@/lib/proof";
 import { deck } from "@/lib/deck";
+import { SITE, REPO } from "@/lib/site";
 
 /**
  * /judge — a page built for exactly one reader. No auth, no cookies, no Nansen call, no key. Mirrored in JUDGE.md at
@@ -13,9 +14,6 @@ export const metadata: Metadata = {
   description: "The claim, the 30-second path, the receipts, the real reproduce command, and the honest limitations.",
 };
 export const dynamic = "force-dynamic";
-
-const SITE = "https://labelme.edycu.dev";
-const REPO = "https://github.com/edycutjong/labelme";
 
 export default function Judge() {
   const d = deck();
@@ -29,8 +27,8 @@ export default function Judge() {
         </p>
         <h1>Ten real wallets. Guess the Nansen label. The answer key is the label; the clues are Nansen&apos;s fields.</h1>
         <p className="judge-lede">
-          A card game on labelled ethereum wallets: PnL summary, top trades, balance profile and the counterparty label-class mix — all Nansen-computed — and the
-          reveal is Nansen&apos;s own label group, sourced by construction. The default round is a recorded deck (0 credits, 0 crash surface); &ldquo;Draw
+          A card game on labelled ethereum wallets: PnL summary, top trades, balance profile and the counterparty label-class mix — all Nansen-computed — and
+          the reveal is Nansen&apos;s own label group, sourced by construction. The default round is a recorded deck (0 credits, 0 crash surface); &ldquo;Draw
           fresh&rdquo; pulls one unseen labelled holder live and streams the five calls as they land.
         </p>
 
@@ -41,16 +39,16 @@ export default function Judge() {
             <a href={`${SITE}/r/meridian`}>
               <code>{SITE}/r/meridian</code>
             </a>
-            . Ten cards from the recorded deck, the same ten for everyone. Guess with the chips (or keys 1–5); the reveal shows the class, the free-tier tag, the
-            entity name where the 1-credit lookup found one, and a one-line tell written from the card&apos;s numbers.
+            . Ten cards from the recorded deck, the same ten for everyone. Guess with the chips (or keys 1–5); the reveal shows the class, the free-tier tag,
+            the entity name where the 1-credit lookup found one, and a one-line tell written from the card&apos;s numbers.
           </li>
           <li>
             Press <b>Draw fresh</b>: one <code>tgm/holders</code> / <code>smart-money/dex-trades</code> row and four profiler calls stream in with credits and
             latency; the card appears; guess; the house rule&apos;s read is shown next to Nansen&apos;s answer. Click <b>Provenance</b> for every call.
           </li>
           <li>
-            Finish the round: &ldquo;You read wallets N/10&rdquo;, per-class breakdown, the house rule&apos;s score on the same ten, a share link whose OG card carries
-            the score and the seed.
+            Finish the round: &ldquo;You read wallets N/10&rdquo;, per-class breakdown, the house rule&apos;s score on the same ten, a share link whose OG card
+            carries the score and the seed.
           </li>
         </ol>
 
@@ -60,36 +58,41 @@ export default function Judge() {
             <tr>
               <th>The deck</th>
               <td>
-                <b>{d.cards.length} cards</b>, ethereum — {by("smart-money")} Smart Money · {by("exchange")} exchange · {by("whale")} whale · {by("contract")} contract/pool
-                · {by("regular")} regular — recorded live by <code>scripts/seed.ts</code>; every raw response committed under <code>fixtures/cards/</code>;{" "}
-                <code>fixtures/dropped.json</code> lists the addresses dropped and why
+                <b>{d.cards.length} cards</b>, ethereum — {by("smart-money")} Smart Money · {by("exchange")} exchange · {by("whale")} whale · {by("contract")}{" "}
+                contract/pool · {by("regular")} regular — recorded live by <code>scripts/seed.ts</code>; every raw response committed under{" "}
+                <code>fixtures/cards/</code>; <code>fixtures/dropped.json</code> lists the addresses dropped and why
               </td>
             </tr>
             <tr>
               <th>Determinism</th>
               <td>
-                <code>npm run verify</code> replays all {d.cards.length} cards offline — same clues, same tell, same <code>cardHash</code> — zero network, zero credits
+                <code>npm run verify</code> replays all {d.cards.length} cards offline — same clues, same tell, same <code>cardHash</code> — zero network, zero
+                credits
               </td>
             </tr>
             <tr>
               <th>Live draw, benchmarked</th>
               <td>
-                cold p50 <b>{PROOF.coldP50s} s</b>, <b>{PROOF.creditsPerDraw} credits</b> / 5 calls per draw; out-of-sample house-reader score on the fresh cards —{" "}
-                <a href={`${REPO}/blob/main/docs/BENCH.md`}>docs/BENCH.md</a> is the script&rsquo;s output
+                cold p50 <b>{PROOF.coldP50s} s</b>, <b>{PROOF.creditsPerDraw} credits</b> / 5 calls per draw; out-of-sample house-reader score on the fresh
+                cards — <a href={`${REPO}/blob/main/docs/BENCH.md`}>docs/BENCH.md</a> is the script&rsquo;s output
               </td>
             </tr>
             <tr>
               <th>The house rule</th>
               <td>
-                a deterministic reader over the same four clues reads <b>{d.house}/{d.cards.length}</b> of the deck (thresholds in{" "}
-                <a href={`${REPO}/blob/main/docs/RULES.md`}>docs/RULES.md</a>, set on this deck — in-sample; the bench is out-of-sample)
+                a deterministic reader over the same four clues reads{" "}
+                <b>
+                  {d.house}/{d.cards.length}
+                </b>{" "}
+                of the deck (thresholds in <a href={`${REPO}/blob/main/docs/RULES.md`}>docs/RULES.md</a>, set on this deck — in-sample; the bench is
+                out-of-sample)
               </td>
             </tr>
             <tr>
               <th>Nansen endpoints</th>
               <td>
-                <code>tgm/holders</code> (label_type smart_money · exchange · public_figure · plain · label-excluded) · <code>tgm/who-bought-sold</code> (label-excluded) ·{" "}
-                <code>smart-money/dex-trades</code> · <code>profiler/address/pnl-summary</code> · <code>profiler/address/pnl</code> ·{" "}
+                <code>tgm/holders</code> (label_type smart_money · exchange · public_figure · plain · label-excluded) · <code>tgm/who-bought-sold</code>{" "}
+                (label-excluded) · <code>smart-money/dex-trades</code> · <code>profiler/address/pnl-summary</code> · <code>profiler/address/pnl</code> ·{" "}
                 <code>profiler/address/current-balance</code> · <code>profiler/address/counterparties</code> · <code>profiler/address/transactions</code> +{" "}
                 <code>transaction-with-token-transfer-lookup</code> (entity names)
               </td>
@@ -97,8 +100,9 @@ export default function Judge() {
             <tr>
               <th>Tests</th>
               <td>
-                <b>{PROOF.tests} tests</b> (vitest) · <b>{PROOF.propertyCases.toLocaleString("en-US")} generated cases</b> (fast-check: the reader is total, the tell
-                is one line, the hash ignores time and the reader, a round is deterministic and URL-safe) · route boundary tests: garbage never reaches Nansen
+                <b>{PROOF.tests} tests</b> (vitest) · <b>{PROOF.propertyCases.toLocaleString("en-US")} generated cases</b> (fast-check: the reader is total, the
+                tell is one line, the hash ignores time and the reader, a round is deterministic and URL-safe) · route boundary tests: garbage never reaches
+                Nansen
               </td>
             </tr>
             <tr>
@@ -130,12 +134,12 @@ npm run labelme -- draw --explain                    # one unseen wallet live: f
             <code>label_type</code> filter that returned the row; entity names (🏦 Binance) appear only where the optional 1-credit tx-lookup found one.
           </li>
           <li>
-            &ldquo;Regular&rdquo; is a negative: Nansen put the wallet in none of its 17 label groups. Public Figure was dropped after the spike — a person label is not
-            a wallet behaviour.
+            &ldquo;Regular&rdquo; is a negative: Nansen put the wallet in none of its 17 label groups. Public Figure was dropped after the spike — a person
+            label is not a wallet behaviour.
           </li>
           <li>
-            A dormant Smart Money wallet (0 trades this month) is unreadable from cheap clues; the deck keeps only active ones (≥ 5 trades), a live draw can still
-            deal one and says so in the tell.
+            A dormant Smart Money wallet (0 trades this month) is unreadable from cheap clues; the deck keeps only active ones (≥ 5 trades), a live draw can
+            still deal one and says so in the tell.
           </li>
           <li>Nansen latency swings by the minute; a live draw takes 2–12 s cold. The default round never touches the network.</li>
         </ul>
@@ -146,12 +150,13 @@ npm run labelme -- draw --explain                    # one unseen wallet live: f
             Live: <a href={SITE}>{SITE}</a>
           </li>
           <li>
-            Repo: <a href={REPO}>{REPO}</a> — README, <a href={`${REPO}/blob/main/JUDGE.md`}>JUDGE.md</a> (this page), <a href={`${REPO}/blob/main/DEMO.md`}>DEMO.md</a>,{" "}
-            <a href={`${REPO}/blob/main/docs/RULES.md`}>RULES.md</a>, <a href={`${REPO}/blob/main/docs/BENCH.md`}>BENCH.md</a>,{" "}
-            <a href={`${REPO}/blob/main/docs/DX-REPORT.md`}>DX-REPORT.md</a>
+            Repo: <a href={REPO}>{REPO}</a> — README, <a href={`${REPO}/blob/main/JUDGE.md`}>JUDGE.md</a> (this page),{" "}
+            <a href={`${REPO}/blob/main/DEMO.md`}>DEMO.md</a>, <a href={`${REPO}/blob/main/docs/RULES.md`}>RULES.md</a>,{" "}
+            <a href={`${REPO}/blob/main/docs/BENCH.md`}>BENCH.md</a>, <a href={`${REPO}/blob/main/docs/DX-REPORT.md`}>DX-REPORT.md</a>
           </li>
           <li>
-            Built by <a href="https://x.com/edycutjong">@edycutjong</a> for the <a href="https://nansen.ai/campaigns/meridian-buildathon">Nansen Meridian Buildathon</a>
+            Built by <a href="https://x.com/edycutjong">@edycutjong</a> for the{" "}
+            <a href="https://nansen.ai/campaigns/meridian-buildathon">Nansen Meridian Buildathon</a>
           </li>
         </ul>
       </main>

@@ -44,7 +44,10 @@ export const SmartMoneyTradesResponse = z.object({ data: z.array(SmartMoneyTrade
 
 export const PnlSummaryResponse = z
   .object({
-    top5_tokens: z.array(z.object({ token_symbol: str, realized_pnl: num, realized_roi: num, token_address: str }).passthrough()).nullable().optional(),
+    top5_tokens: z
+      .array(z.object({ token_symbol: str, realized_pnl: num, realized_roi: num, token_address: str }).passthrough())
+      .nullable()
+      .optional(),
     traded_token_count: num,
     traded_times: num,
     realized_pnl_usd: num,
@@ -55,7 +58,13 @@ export const PnlSummaryResponse = z
 export type PnlSummaryResponse = z.infer<typeof PnlSummaryResponse>;
 
 export const PnlRow = z
-  .object({ token_symbol: str, pnl_usd_realised: num, roi_percent_realised: num, nof_buys: z.union([z.string(), z.number()]).nullable().optional(), nof_sells: z.union([z.string(), z.number()]).nullable().optional() })
+  .object({
+    token_symbol: str,
+    pnl_usd_realised: num,
+    roi_percent_realised: num,
+    nof_buys: z.union([z.string(), z.number()]).nullable().optional(),
+    nof_sells: z.union([z.string(), z.number()]).nullable().optional(),
+  })
   .passthrough();
 export const PnlResponse = z.object({ data: z.array(PnlRow).nullable().optional(), pagination: pagination.optional() }).passthrough();
 
@@ -77,12 +86,33 @@ export const CounterpartiesResponse = z.object({ data: z.array(CounterpartyRow).
 export const TxLookupResponse = z
   .object({
     data: z
-      .array(z.object({ from_address: str, from_address_label: str, to_address: str, to_address_label: str, token_transfer_array: z.array(z.object({ from_address: str, from_address_label: str, to_address: str, to_address_label: str }).passthrough()).nullable().optional() }).passthrough())
+      .array(
+        z
+          .object({
+            from_address: str,
+            from_address_label: str,
+            to_address: str,
+            to_address_label: str,
+            token_transfer_array: z
+              .array(z.object({ from_address: str, from_address_label: str, to_address: str, to_address_label: str }).passthrough())
+              .nullable()
+              .optional(),
+          })
+          .passthrough(),
+      )
       .nullable()
       .optional(),
   })
   .passthrough();
-export const TransactionsResponse = z.object({ data: z.array(z.object({ transaction_hash: str, block_timestamp: str, method: str }).passthrough()).nullable().optional(), pagination: pagination.optional() }).passthrough();
+export const TransactionsResponse = z
+  .object({
+    data: z
+      .array(z.object({ transaction_hash: str, block_timestamp: str, method: str }).passthrough())
+      .nullable()
+      .optional(),
+    pagination: pagination.optional(),
+  })
+  .passthrough();
 
 export function isoDay(ms: number): string {
   return new Date(ms).toISOString().slice(0, 10);
@@ -93,7 +123,14 @@ export function window(now: number, days = WINDOW_DAYS): { from: string; to: str
   return { from: isoDay(now - days * 86_400_000), to: isoDay(now) };
 }
 
-async function call<T>(c: NansenClient, endpoint: string, body: Record<string, unknown>, fields: string[], schema: z.ZodType<T>, opts?: CallOptions): Promise<T> {
+async function call<T>(
+  c: NansenClient,
+  endpoint: string,
+  body: Record<string, unknown>,
+  fields: string[],
+  schema: z.ZodType<T>,
+  opts?: CallOptions,
+): Promise<T> {
   const raw = await c.post<unknown>(endpoint, body, fields, opts);
   return schema.parse(raw);
 }
@@ -104,7 +141,13 @@ export const nansen = {
   /** tgm/holders (5 cr). `labelType` ≠ all_holders filters by Nansen's own label group — the class is known by construction. */
   holders: (c: NansenClient, token: string, labelType: HolderLabelType, page = 1, perPage = 100, opts?: CallOptions) => {
     const include =
-      labelType === "smart_money" ? [...SMART_MONEY_LABELS] : labelType === "exchange" ? ["Exchange"] : labelType === "public_figure" ? ["Public Figure"] : undefined;
+      labelType === "smart_money"
+        ? [...SMART_MONEY_LABELS]
+        : labelType === "exchange"
+          ? ["Exchange"]
+          : labelType === "public_figure"
+            ? ["Public Figure"]
+            : undefined;
     const body: Record<string, unknown> = { chain: CHAIN, token_address: token, pagination: { page, per_page: perPage } };
     if (include) body.filters = { include_smart_money_labels: include };
     else if (labelType === "all_holders") body.filters = { exclude_smart_money_labels: [...ALL_LABEL_TYPES] };
@@ -116,20 +159,42 @@ export const nansen = {
     call(
       c,
       "tgm/who-bought-sold",
-      { chain: CHAIN, token_address: token, buy_or_sell: "BUY", date: window(now, 7), filters: { exclude_smart_money_labels: [...ALL_LABEL_TYPES] }, pagination: { page: 1, per_page: 100 } },
+      {
+        chain: CHAIN,
+        token_address: token,
+        buy_or_sell: "BUY",
+        date: window(now, 7),
+        filters: { exclude_smart_money_labels: [...ALL_LABEL_TYPES] },
+        pagination: { page: 1, per_page: 100 },
+      },
       ["data[].address", "data[].address_label", "data[].bought_volume_usd"],
       WhoBoughtSoldResponse,
       opts,
     ),
   /** smart-money/dex-trades (5 cr): trader addresses are Smart Money by construction */
   smartMoneyTrades: (c: NansenClient, opts?: CallOptions) =>
-    call(c, "smart-money/dex-trades", { chains: [CHAIN], pagination: { page: 1, per_page: 100 } }, ["data[].trader_address", "data[].trader_address_label"], SmartMoneyTradesResponse, opts),
+    call(
+      c,
+      "smart-money/dex-trades",
+      { chains: [CHAIN], pagination: { page: 1, per_page: 100 } },
+      ["data[].trader_address", "data[].trader_address_label"],
+      SmartMoneyTradesResponse,
+      opts,
+    ),
   pnlSummary: (c: NansenClient, address: string, now: number, opts?: CallOptions) =>
     call(
       c,
       "profiler/address/pnl-summary",
       { address, chain: CHAIN, date: window(now) },
-      ["realized_pnl_usd", "realized_pnl_percent", "win_rate", "traded_times", "traded_token_count", "top5_tokens[].token_symbol", "top5_tokens[].realized_roi"],
+      [
+        "realized_pnl_usd",
+        "realized_pnl_percent",
+        "win_rate",
+        "traded_times",
+        "traded_token_count",
+        "top5_tokens[].token_symbol",
+        "top5_tokens[].realized_roi",
+      ],
       PnlSummaryResponse,
       opts,
     ),
@@ -138,7 +203,14 @@ export const nansen = {
     call(
       c,
       "profiler/address/pnl",
-      { address, chain: CHAIN, date: window(now), filters: { show_realized: true }, pagination: { page: 1, per_page: 5 }, order_by: [{ field: "pnl_usd_realised", direction: "DESC" }] },
+      {
+        address,
+        chain: CHAIN,
+        date: window(now),
+        filters: { show_realized: true },
+        pagination: { page: 1, per_page: 5 },
+        order_by: [{ field: "pnl_usd_realised", direction: "DESC" }],
+      },
       ["data[].token_symbol", "data[].pnl_usd_realised", "data[].nof_buys", "data[].nof_sells"],
       PnlResponse,
       opts,
@@ -156,7 +228,15 @@ export const nansen = {
     call(
       c,
       "profiler/address/counterparties",
-      { address, chain: CHAIN, date: window(now), source_input: "Combined", group_by: "wallet", pagination: { page: 1, per_page: 50 }, order_by: [{ field: "total_volume_usd", direction: "DESC" }] },
+      {
+        address,
+        chain: CHAIN,
+        date: window(now),
+        source_input: "Combined",
+        group_by: "wallet",
+        pagination: { page: 1, per_page: 50 },
+        order_by: [{ field: "total_volume_usd", direction: "DESC" }],
+      },
       ["data[].counterparty_address_label", "data[].interaction_count", "data[].volume_out_usd", "data[].total_volume_usd", "pagination.is_last_page"],
       CounterpartiesResponse,
       { timeoutMs: 12_000, ...opts },
@@ -171,5 +251,12 @@ export const nansen = {
       opts,
     ),
   txLookup: (c: NansenClient, transaction_hash: string, opts?: CallOptions) =>
-    call(c, "transaction-with-token-transfer-lookup", { chain: CHAIN, transaction_hash }, ["data[].from_address_label", "data[].to_address_label", "data[].token_transfer_array[].*_address_label"], TxLookupResponse, opts),
+    call(
+      c,
+      "transaction-with-token-transfer-lookup",
+      { chain: CHAIN, transaction_hash },
+      ["data[].from_address_label", "data[].to_address_label", "data[].token_transfer_array[].*_address_label"],
+      TxLookupResponse,
+      opts,
+    ),
 };

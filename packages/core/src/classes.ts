@@ -9,21 +9,47 @@ export const PRECEDENCE: LabelClass[] = ["exchange", "smart-money", "public-figu
 
 export type ClassInfo = { id: LabelClass; name: string; short: string; hue: string; howNansenSaysIt: string };
 export const CLASS_INFO: Record<LabelClass, ClassInfo> = {
-  "smart-money": { id: "smart-money", name: "Smart Money", short: "SM", hue: "#a78bfa", howNansenSaysIt: "tgm/holders label_type=smart_money (Fund / Smart Trader tiers) or smart-money/dex-trades" },
+  "smart-money": {
+    id: "smart-money",
+    name: "Smart Money",
+    short: "SM",
+    hue: "#a78bfa",
+    howNansenSaysIt: "tgm/holders label_type=smart_money (Fund / Smart Trader tiers) or smart-money/dex-trades",
+  },
   exchange: { id: "exchange", name: "Exchange", short: "CEX", hue: "#38bdf8", howNansenSaysIt: "tgm/holders label_type=exchange" },
-  whale: { id: "whale", name: "Whale", short: "Whale", hue: "#f59e0b", howNansenSaysIt: "tgm/holders free tag: Token Billionaire / Token Millionaire / <X> Whale / High Balance" },
-  contract: { id: "contract", name: "Contract / Pool", short: "Contract", hue: "#94a3b8", howNansenSaysIt: "tgm/holders free tag: Liquidity Pool / Uniswap / Token Contract / Proxy / MultiSig / Deployer" },
+  whale: {
+    id: "whale",
+    name: "Whale",
+    short: "Whale",
+    hue: "#f59e0b",
+    howNansenSaysIt: "tgm/holders free tag: Token Billionaire / Token Millionaire / <X> Whale / High Balance",
+  },
+  contract: {
+    id: "contract",
+    name: "Contract / Pool",
+    short: "Contract",
+    hue: "#94a3b8",
+    howNansenSaysIt: "tgm/holders free tag: Liquidity Pool / Uniswap / Token Contract / Proxy / MultiSig / Deployer",
+  },
   "public-figure": { id: "public-figure", name: "Public Figure", short: "Public", hue: "#f472b6", howNansenSaysIt: "tgm/holders label_type=public_figure" },
-  regular: { id: "regular", name: "Regular wallet", short: "Regular", hue: "#e6edf3", howNansenSaysIt: "tgm/who-bought-sold with all 17 Nansen label groups excluded" },
+  regular: {
+    id: "regular",
+    name: "Regular wallet",
+    short: "Regular",
+    hue: "#e6edf3",
+    howNansenSaysIt: "tgm/who-bought-sold with all 17 Nansen label groups excluded",
+  },
 };
 
 /** free-tier `address_label` patterns (observed live 2026-09-16/18 across whichone, sentwrong and this project's probes) */
-export const STRUCTURAL_TAG = /liquidity pool|uniswap|sushi|curve|balancer|pancake|router|token contract|\bproxy\b|multisig|multi-sig|deployer|\bvault\b|staking|bridge|\bcontract\b|gnosis safe|\bsafe\b/i;
+export const STRUCTURAL_TAG =
+  /liquidity pool|uniswap|sushi|curve|balancer|pancake|router|token contract|\bproxy\b|multisig|multi-sig|deployer|\bvault\b|staking|bridge|\bcontract\b|gnosis safe|\bsafe\b/i;
 export const WEALTH_TAG = /billionaire|millionaire|whale|high balance/i;
 export const ACTIVITY_TAG = /high activity/i;
 export const ENS_TAG = /\.(eth|sol|base\.eth)\*?$|on opensea|referral code/i;
 /** an entity name: exchange/fund/protocol labels carry emoji prefixes or a "Name: role" shape; only seen on tx-lookup labels so far */
-export const ENTITY_TAG = /🏦|🤖|🐋|binance|coinbase|kraken|okx|bybit|bitget|kucoin|gate\.io|huobi|htx|robinhood|crypto\.com|gemini|bitfinex|upbit|mexc|:\s*(deposit|hot wallet|cold wallet)/i;
+export const ENTITY_TAG =
+  /🏦|🤖|🐋|binance|coinbase|kraken|okx|bybit|bitget|kucoin|gate\.io|huobi|htx|robinhood|crypto\.com|gemini|bitfinex|upbit|mexc|:\s*(deposit|hot wallet|cold wallet)/i;
 
 /** unambiguous pool tags — the only structural tags the live draw deals as "contract" (a MultiSig may be an exchange's wallet) */
 export const POOL_TAG = /liquidity pool|uniswap|sushi|curve|balancer|pancake|\bpool\b/i;

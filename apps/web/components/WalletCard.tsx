@@ -13,7 +13,17 @@ function Stat({ label, value, tone }: { label: string; value: string; tone?: "up
 }
 
 /** The face of a card: four clue groups, every number a Nansen field. No label, no address, no hint of the answer. */
-export function WalletCard({ clues, title, state, children }: { clues: Clues; title: string; state?: "face" | "right" | "wrong" | "example"; children?: React.ReactNode }) {
+export function WalletCard({
+  clues,
+  title,
+  state,
+  children,
+}: {
+  clues: Clues;
+  title: string;
+  state?: "face" | "right" | "wrong" | "example";
+  children?: React.ReactNode;
+}) {
   const p = clues.pnl,
     t = clues.trades,
     b = clues.balance,
@@ -33,7 +43,11 @@ export function WalletCard({ clues, title, state, children }: { clues: Clues; ti
           {p.ok ? (
             <>
               <div className="stats">
-                <Stat label="realised" value={signed(p.realizedUsd)} tone={p.realizedUsd === null || p.realizedUsd === 0 ? undefined : p.realizedUsd > 0 ? "up" : "down"} />
+                <Stat
+                  label="realised"
+                  value={signed(p.realizedUsd)}
+                  tone={p.realizedUsd === null || p.realizedUsd === 0 ? undefined : p.realizedUsd > 0 ? "up" : "down"}
+                />
                 <Stat label="win rate" value={pct(p.winRate)} />
                 <Stat label="trades" value={String(p.trades)} />
                 <Stat label="tokens traded" value={String(p.tokensTraded)} />
@@ -101,7 +115,11 @@ export function WalletCard({ clues, title, state, children }: { clues: Clues; ti
                 <Stat label="interactions" value={k.interactions.toLocaleString("en-US")} />
                 <Stat label="top outflow" value={pct(k.topOutShare)} />
               </div>
-              <div className="mixbar" role="img" aria-label={`counterparty volume: ${pct(dex)} DEX pools and routers, ${pct(wealth)} wealth-tagged or exchange wallets, ${pct(k.mix.contract)} contracts, ${pct(k.mix.unlabelled)} unlabelled`}>
+              <div
+                className="mixbar"
+                role="img"
+                aria-label={`counterparty volume: ${pct(dex)} DEX pools and routers, ${pct(wealth)} wealth-tagged or exchange wallets, ${pct(k.mix.contract)} contracts, ${pct(k.mix.unlabelled)} unlabelled`}
+              >
                 <i className="m-dex" style={{ width: `${dex * 100}%` }} />
                 <i className="m-wealth" style={{ width: `${wealth * 100}%` }} />
                 <i className="m-contract" style={{ width: `${k.mix.contract * 100}%` }} />
