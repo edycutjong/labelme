@@ -1,12 +1,8 @@
 import { isPoolTag, type LabelClass } from "./classes.js";
 import type { Clues } from "./clues.js";
 
-export const fmtUsd = (n: number): string => {
-  const a = Math.abs(n);
-  const s = a >= 1e9 ? `${(a / 1e9).toFixed(a >= 1e10 ? 0 : 1)}B` : a >= 1e6 ? `${(a / 1e6).toFixed(a >= 1e7 ? 0 : 1)}M` : a >= 1e3 ? `${(a / 1e3).toFixed(a >= 1e4 ? 0 : 1)}K` : a.toFixed(0);
-  return `${n < 0 ? "−" : ""}$${s}`;
-};
-export const pct = (x: number | null): string => (x === null ? "—" : `${Math.round(x * 100)}%`);
+import { fmtUsd, pct } from "./format.js";
+export { fmtUsd, pct };
 const plus = (n: number, capped: boolean) => `${n}${capped ? "+" : ""}`;
 
 /** One line, written from the card's own numbers, that says why the label fits. Deterministic — part of the card hash. */

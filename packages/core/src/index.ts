@@ -11,7 +11,7 @@ export type { Clues, ClueFailure } from "./clues.js";
 export { tell, fmtUsd, pct } from "./tell.js";
 export { read, READER } from "./reader.js";
 export type { Read } from "./reader.js";
-export { buildCard, finishCard, cardHash, cardId, cardProjection, face } from "./card.js";
+export { buildCard, finishCard, cardHash, cardId, cardProjection, face, cleanEntity } from "./card.js";
 export type { Card, CardFace, Source, BuildInput } from "./card.js";
 export { gatherCandidates, TOKENS } from "./sources.js";
 export type { Candidate, Dropped } from "./sources.js";

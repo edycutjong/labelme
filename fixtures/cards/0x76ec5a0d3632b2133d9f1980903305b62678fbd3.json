@@ -132,7 +132,7 @@
     "chain": "ethereum",
     "class": "exchange",
     "nansenLabel": "Token Millionaire",
-    "entity": "​​🏦 BTCTurk [0x76ec5a]",
+    "entity": "🏦 BTCTurk [0x76ec5a]",
     "clues": {
       "pnl": {
         "ok": true,
@@ -194,7 +194,7 @@
     },
     "readerGuess": "exchange",
     "readerBecause": "100+ tokens, $401M, 96% wealth-tagged counterparties, 0 trades",
-    "cardHash": "aceee5eccc4370ee55277db1f283b2f5fa100bc8eca5b24cb3aafb90a266b1af",
+    "cardHash": "3f1c3770d9ab67ee2dc98cb9d5db4f1d8c22a7461f58e2077627050774d2ffe2",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

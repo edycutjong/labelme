@@ -132,7 +132,7 @@
     "chain": "ethereum",
     "class": "exchange",
     "nansenLabel": "Token Millionaire",
-    "entity": "​​🏦 Upbit [0x3f9a83]",
+    "entity": "🏦 Upbit [0x3f9a83]",
     "clues": {
       "pnl": {
         "ok": true,
@@ -194,7 +194,7 @@
     },
     "readerGuess": "exchange",
     "readerBecause": "17 tokens, $53M, 100% wealth-tagged counterparties, 0 trades",
-    "cardHash": "4290ddeaf6309aca34e385e77643022f54f985e25628446ba215fc22f2815064",
+    "cardHash": "4e61293813ab55ba4def17cc316dac3aa85c90b57ac5420691959eb6a4eb8925",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

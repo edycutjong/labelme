@@ -2,8 +2,9 @@ import { sha256 } from "./client.js";
 import type { LabelClass } from "./classes.js";
 import type { Card } from "./card.js";
 
-export const ROUND_SIZE = 10;
-export const DECK_CLASSES: LabelClass[] = ["smart-money", "exchange", "whale", "contract", "regular"];
+import { normalizeSeed } from "./seed.js";
+import { DECK_CLASSES, ROUND_SIZE } from "./constants.js";
+export { normalizeSeed, DECK_CLASSES, ROUND_SIZE };
 
 export type Round = { seed: string; deckHash: string; cardIds: string[] };
 
@@ -36,11 +37,6 @@ export function deckHash(cards: Card[]): string {
   return sha256(cards.map((c) => c.cardHash).join("\n"));
 }
 
-/** A seed is a short label; anything else is squeezed to [A-Za-z0-9_-] and 32 chars so it survives a URL. */
-export function normalizeSeed(seed: string | undefined | null): string {
-  const s = (seed ?? "").toString().trim().replace(/[^A-Za-z0-9_-]/g, "").slice(0, 32);
-  return s || "";
-}
 export function randomSeed(): string {
   return sha256(`${Date.now()}:${Math.random()}`).slice(0, 8);
 }

@@ -132,7 +132,7 @@
     "chain": "ethereum",
     "class": "contract",
     "nansenLabel": "MultiSig",
-    "entity": "​​🤖 Multisig [0x5b97a1]",
+    "entity": "🤖 Multisig [0x5b97a1]",
     "clues": {
       "pnl": {
         "ok": true,
@@ -242,7 +242,7 @@
       },
       "empty": false
     },
-    "tell": "89 tokens worth $11M · 28 trades · 3 counterparties in 30 d, 98% of outflow to one of them — code with signers, not a person: a ​​🤖 Multisig [0x5b97a1]",
+    "tell": "89 tokens worth $11M · 28 trades · 3 counterparties in 30 d, 98% of outflow to one of them — code with signers, not a person: a 🤖 Multisig [0x5b97a1]",
     "source": {
       "endpoint": "tgm/holders",
       "labelType": "all_holders",
@@ -251,7 +251,7 @@
     },
     "readerGuess": "smart-money",
     "readerBecause": "28 trades across 6 tokens in 30 days — an active multi-token trader",
-    "cardHash": "71bab889fd5e2d98850482fe1c50ce266a38077da1d92af4a01d57f351cc408b",
+    "cardHash": "92354e9d922214d16c950d540fccbc744fb23c95e4c56b98938d6dacc882c770",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

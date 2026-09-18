@@ -132,7 +132,7 @@
     "chain": "ethereum",
     "class": "exchange",
     "nansenLabel": "Token Millionaire",
-    "entity": "​​🏦 Robinhood [0x1d4896]",
+    "entity": "🏦 Robinhood [0x1d4896]",
     "clues": {
       "pnl": {
         "ok": true,
@@ -194,7 +194,7 @@
     },
     "readerGuess": "exchange",
     "readerBecause": "24 tokens, $1274M, 100% wealth-tagged counterparties, 0 trades",
-    "cardHash": "c488cff9394a97f5990fc79824efc74c13af02128fe780417e5ae148878c30f6",
+    "cardHash": "75215ffd2b7eacdff1f76dabd6a7e7c2e87669e6d1c6123e534882229a241555",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

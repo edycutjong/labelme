@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "jsx": "preserve",
     "types": ["node"],
-    "paths": { "@labelme/core": ["./packages/core/src/index.ts"], "@/*": ["./apps/web/*"] }
+    "paths": { "@labelme/core/browser": ["./packages/core/src/browser.ts"], "@labelme/core": ["./packages/core/src/index.ts"], "@/*": ["./apps/web/*"] }
   },
   "include": ["packages/**/*.ts", "scripts/**/*.ts"]
 }

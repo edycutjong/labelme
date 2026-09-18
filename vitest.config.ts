@@ -9,6 +9,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      "@labelme/core/browser": new URL("./packages/core/src/browser.ts", import.meta.url).pathname,
       "@labelme/core": new URL("./packages/core/src/index.ts", import.meta.url).pathname,
       "@": new URL("./apps/web", import.meta.url).pathname,
     },

@@ -52,7 +52,14 @@ export async function buildCard(c: NansenClient, input: BuildInput, now: number)
   return { card: finishCard({ ...input, address }, clues, now), failures };
 }
 
+/** Nansen entity labels sometimes carry zero-width characters ("\u200b\u200b🏦 Robinhood") — strip them, keep the emoji. */
+export function cleanEntity(entity: string | null | undefined): string | null {
+  const e = (entity ?? "").replace(/[\u200b-\u200d\ufeff]/g, "").trim();
+  return e || null;
+}
+
 export function finishCard(input: BuildInput, clues: Clues, now: number): Card {
+  input = { ...input, entity: cleanEntity(input.entity) };
   const address = input.address.toLowerCase();
   const t = tell(input.class, clues, input.entity ?? input.nansenLabel);
   const r = read(clues);
