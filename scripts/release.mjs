@@ -8,7 +8,7 @@ import { execFileSync } from "node:child_process";
 import process from "node:process";
 
 const dry = process.argv.includes("--dry-run");
-const sh = (cmd, args, opts = {}) => execFileSync(cmd, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], ...opts }).trim();
+const sh = (cmd, args, opts = {}) => (execFileSync(cmd, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], ...opts }) ?? "").trim();
 const git = (...args) => sh("git", args);
 const say = (s) => process.stdout.write(s + "\n");
 const fail = (s) => {
