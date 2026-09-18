@@ -8,7 +8,7 @@ An address earns one class from the sourcing lists it appears in, by precedence:
 
 | Precedence | Class | Nansen says so via | Credits |
 |---|---|---|---|
-| 0 | **exchange** or **contract** by *entity label* | `profiler/address/transactions` (1) + `transaction-with-token-transfer-lookup` (1): when the label on the wallet's own side of a transfer carries 🏦 it is an exchange (`🤖 🏦 Luno: Wallet`), when it names a pool it is a contract (`🤖 🏦 Uniswap: V2 PEPE-WETH Liquidity Pool`). Optional; looked up for exchange/contract candidates in `seed` only | 2 |
+| 0 | **exchange** or **contract** by *entity label* | `profiler/address/transactions` (1) + `transaction-with-token-transfer-lookup` (1): when the label on the wallet's own side of a transfer carries 🏦 it is an exchange (`🤖 🏦 Luno: Wallet`), when it names a pool or the contract itself it is a contract (`🤖 🏦 Uniswap: V2 PEPE-WETH Liquidity Pool`, `🤖 🏦 Gnosis Safe Proxy` — the 🏦 says who owns the code; the reveal adds "in Nansen's Exchange group"). Optional; looked up for exchange/contract candidates in `seed` only | 2 |
 | 1 | **contract** | a structural free-tier tag on `tgm/holders` (`Liquidity Pool`, `UniswapV2`, `Proxy`, `MultiSig`, `Token Contract`, `<X> Token Deployer`, …) — outranks membership in Nansen's Exchange group, because Nansen files DEX pools under Exchange | 5 |
 | 2 | **exchange** | the row came from `tgm/holders label_type: "exchange"` + `include_smart_money_labels: ["Exchange"]` | 5 |
 | 3 | **smart-money** | the row came from `tgm/holders label_type: "smart_money"` + `include_smart_money_labels: [Fund, 30D/90D/180D Smart Trader, Smart Trader]` or from `smart-money/dex-trades` (traders are Smart Money by construction) | 5 |
