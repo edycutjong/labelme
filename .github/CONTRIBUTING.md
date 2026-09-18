@@ -17,7 +17,7 @@ Thanks for your interest in improving Label Me! 🎉
   `npm run verify` at 62/62 — if a card legitimately changes, rebuild it offline with `npm run verify -- --update` and say so in the PR.
 - Keep commits conventional: `feat:` (minor), `fix:`/`perf:` (patch), `docs:`, `test:`, `ci:`, `chore:` (no release).
   `release.yml` tags and publishes from these prefixes automatically once the CI/CD pipeline is green on `main`
-  (bumps every `package.json` + the lockfile, commits `chore(release): vX.Y.Z [skip ci]`, annotated tag, GitHub Release
+  (bumps every `package.json` + the lockfile, commits `chore(release): vX.Y.Z`, annotated tag, GitHub Release
   with generated notes). When Actions is unavailable, a maintainer runs the same algorithm locally:
   `npm run release -- --dry-run` to preview, `npm run release` to cut it (clean tree, on `main`, level with origin).
 
