@@ -33,13 +33,13 @@ jobs:
         run: |
           set -euo pipefail
           LAST=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || echo "")
-          if [ -z "$LAST" ]; then RANGE=""; CUR="0.0.0"; else RANGE="${LAST}..HEAD"; CUR="${LAST#v}"; fi
-          LOG=$(git log --format=%B $RANGE)
+          if [ -z "$LAST" ]; then RANGE="HEAD"; CUR="0.0.0"; else RANGE="${LAST}..HEAD"; CUR="${LAST#v}"; fi
+          LOG=$(git log --format=%B "$RANGE")
           if [ -z "$(echo "$LOG" | tr -d '[:space:]')" ]; then echo "skip=true" >> "$GITHUB_OUTPUT"; exit 0; fi
-          BUMP=none
-          echo "$LOG" | grep -qE '^[a-z]+(\(.+\))?!:|^BREAKING CHANGE:' && BUMP=major
-          [ "$BUMP" = none ] && echo "$LOG" | grep -qE '^feat(\(.+\))?:'       && BUMP=minor
-          [ "$BUMP" = none ] && echo "$LOG" | grep -qE '^(fix|perf)(\(.+\))?:' && BUMP=patch
+          BUMP="none"
+          if echo "$LOG" | grep -qE '^[a-z]+(\(.+\))?!:|^BREAKING CHANGE:'; then BUMP="major"
+          elif echo "$LOG" | grep -qE '^feat(\(.+\))?:'; then BUMP="minor"
+          elif echo "$LOG" | grep -qE '^(fix|perf)(\(.+\))?:'; then BUMP="patch"; fi
           if [ "$BUMP" = none ]; then
             echo "No releasable commits since ${LAST:-the beginning}."; echo "skip=true" >> "$GITHUB_OUTPUT"; exit 0
           fi
