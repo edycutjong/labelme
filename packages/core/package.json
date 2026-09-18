@@ -1,0 +1,10 @@
+{
+  "name": "@labelme/core",
+  "version": "0.1.0",
+  "description": "Label Me engine: Nansen client, deck sourcing, clues, reader, rounds.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": { "zod": "^3.25.76" }
+}

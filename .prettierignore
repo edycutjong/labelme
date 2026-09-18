@@ -1,0 +1,8 @@
+node_modules
+.next
+coverage
+fixtures
+docs/screenshots
+package-lock.json
+*.md
+*.css

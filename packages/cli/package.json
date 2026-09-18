@@ -1,0 +1,9 @@
+{
+  "name": "labelme-cli",
+  "version": "0.1.0",
+  "description": "Ten real wallets. Guess the Nansen label.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "labelme": "./src/cli.ts" },
+  "dependencies": { "@labelme/core": "0.1.0" }
+}

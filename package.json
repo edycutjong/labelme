@@ -1,0 +1,39 @@
+{
+  "name": "labelme",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ten real wallets. Guess the Nansen label.",
+  "license": "MIT",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "spike": "tsx scripts/spike.ts",
+    "labelme": "tsx packages/cli/src/cli.ts",
+    "seed": "tsx scripts/seed.ts",
+    "verify": "tsx scripts/verify.ts",
+    "reader": "tsx scripts/reader.ts",
+    "bench": "tsx scripts/bench.ts",
+    "check": "tsx scripts/check_submission_readiness.ts",
+    "dev": "npm run dev -w apps/web",
+    "build": "npm run build -w apps/web",
+    "start": "npm run start -w apps/web",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{ts,tsx,json,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,yml,yaml}\"",
+    "audit": "npm audit --omit=dev --audit-level=high",
+    "ci": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run verify && npm run check"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "fast-check": "^4.1.1",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "engines": { "node": ">=20" },
+  "type": "module"
+}
