@@ -1,6 +1,6 @@
 import type { NansenClient, Call } from "./client.js";
 import { nansen, type HolderLabelType } from "./nansen.js";
-import { classFromTag, tagIsNeutral, POOL_TAG, type LabelClass } from "./classes.js";
+import { classFromTag, tagIsNeutral, isPoolTag, type LabelClass } from "./classes.js";
 import { buildCard, type Card } from "./card.js";
 import { TOKENS } from "./sources.js";
 import { rng, shuffle } from "./round.js";
@@ -11,6 +11,8 @@ export type DrawEvent = { type: "call"; call: Call } | { type: "picked"; class: 
 export type DrawOptions = { class?: LabelClass; seed?: string; exclude?: Set<string>; now?: number; onProgress?: (e: DrawEvent) => void; tokens?: Record<string, string> };
 
 export const DRAW_CLASSES: LabelClass[] = ["smart-money", "exchange", "whale", "contract", "regular"];
+/** pools are rare in the top-100 of a meme coin (≈1 per page) but WETH's top holders are ~10 % Uniswap pools — contract draws start there */
+export const POOL_RICH_TOKENS: Record<string, string> = { WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", MOG: TOKENS.MOG, PEPE: TOKENS.PEPE, TURBO: TOKENS.TURBO };
 
 /** the sourcing call for a class: holders with the class filter; whale/contract read tags off a plain page; regular = who-bought-sold(excluded) */
 async function candidatesFor(c: NansenClient, cls: LabelClass, token: string, page: number, now: number): Promise<{ address: string; tag: string; labelType: string | null; endpoint: string }[]> {
@@ -31,7 +33,7 @@ async function candidatesFor(c: NansenClient, cls: LabelClass, token: string, pa
   const r = await nansen.holders(c, token, lt, page, 100);
   return r.data
     .filter((x) => x.address)
-    .filter((x) => (cls === "whale" ? classFromTag(x.address_label) === "whale" : cls === "contract" ? POOL_TAG.test(x.address_label ?? "") : classFromTag(x.address_label) !== "contract"))
+    .filter((x) => (cls === "whale" ? classFromTag(x.address_label) === "whale" : cls === "contract" ? isPoolTag(x.address_label) : classFromTag(x.address_label) !== "contract"))
     .map((x) => ({ address: x.address!, tag: x.address_label ?? "", labelType: lt === "all_holders_plain" ? "all_holders" : lt, endpoint: "tgm/holders" }));
 }
 
@@ -45,7 +47,7 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
   const next = rng(opts.seed ?? `${now}:${Math.random()}`);
   const cls = opts.class ?? DRAW_CLASSES[Math.floor(next() * DRAW_CLASSES.length)];
   // class lists (smart_money / exchange / who-bought-sold) are short — page 1 only; plain holder pages run deep — pages 1–3
-  const tokens = shuffle(Object.entries(opts.tokens ?? TOKENS), next);
+  const tokens = opts.tokens ? shuffle(Object.entries(opts.tokens), next) : cls === "contract" ? [Object.entries(POOL_RICH_TOKENS)[0], ...shuffle(Object.entries(POOL_RICH_TOKENS).slice(1), next)] : shuffle(Object.entries(TOKENS), next);
   const deepPage = cls === "whale" || cls === "contract";
   let fresh: Awaited<ReturnType<typeof candidatesFor>> = [];
   let sym = "",

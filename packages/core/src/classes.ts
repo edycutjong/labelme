@@ -29,6 +29,11 @@ export const ENTITY_TAG = /🏦|🤖|🐋|binance|coinbase|kraken|okx|bybit|bitg
 export const POOL_TAG = /liquidity pool|uniswap|sushi|curve|balancer|pancake|\bpool\b/i;
 /** Nansen's exchange marker on entity labels ("🏦 Binance", "🤖 🏦 Luno: Wallet"); a pool label carries it too (DEX) and stays a contract */
 export const EXCHANGE_MARK = /🏦/u;
+/** a pool tag that is not an ENS name ("uniswap.eth" is a person) */
+export function isPoolTag(tag: string | null | undefined): boolean {
+  const t = (tag ?? "").trim();
+  return !!t && !ENS_TAG.test(t) && POOL_TAG.test(t);
+}
 
 /**
  * When the 1-credit tx-lookup returned an entity label for the wallet itself, it outranks the free-tier tag:
@@ -36,7 +41,7 @@ export const EXCHANGE_MARK = /🏦/u;
  */
 export function classFromEntity(entity: string | null | undefined, fallback: LabelClass): LabelClass {
   if (!entity) return fallback;
-  if (POOL_TAG.test(entity)) return "contract";
+  if (isPoolTag(entity)) return "contract";
   if (EXCHANGE_MARK.test(entity)) return "exchange";
   return fallback;
 }

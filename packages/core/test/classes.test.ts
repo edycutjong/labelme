@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { counterpartyClass, classFromTag, classFromEntity, tagIsNeutral, resolveClass, PRECEDENCE, CLASS_INFO, POOL_TAG } from "../src/classes.js";
+import { counterpartyClass, classFromTag, classFromEntity, tagIsNeutral, resolveClass, isPoolTag, PRECEDENCE, CLASS_INFO, POOL_TAG } from "../src/classes.js";
 
 describe("counterpartyClass — the other side of a transfer, bucketed", () => {
   it("live strings observed 2026-09-18 land in the expected buckets", () => {
@@ -55,10 +55,14 @@ describe("classFromEntity — the 1-credit entity label outranks the tag", () =>
     expect(classFromEntity(null, "whale")).toBe("whale");
     expect(classFromEntity("", "regular")).toBe("regular");
   });
-  it("POOL_TAG is strict enough that a MultiSig or Proxy is not a pool", () => {
+  it("POOL_TAG is strict enough that a MultiSig or Proxy is not a pool; isPoolTag rejects ENS names like uniswap.eth", () => {
     expect(POOL_TAG.test("MultiSig")).toBe(false);
     expect(POOL_TAG.test("Proxy")).toBe(false);
     expect(POOL_TAG.test("Liquidity Pool")).toBe(true);
+    expect(isPoolTag("uniswap.eth")).toBe(false);
+    expect(isPoolTag("UniswapV2")).toBe(true);
+    expect(isPoolTag("")).toBe(false);
+    expect(classFromEntity("uniswap.eth", "regular")).toBe("regular");
   });
 });
 
