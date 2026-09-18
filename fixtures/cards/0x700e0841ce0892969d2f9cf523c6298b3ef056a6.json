@@ -181,7 +181,7 @@
       },
       "empty": false
     },
-    "tell": "PEPE is 99% of a $8.2M balance · 5019 trades · 50 counterparties in 30 d — a big holder sitting still: a whale",
+    "tell": "PEPE is 99% of a $8.2M balance · 5019 trades · 50+ counterparties in 30 d — a big holder that also trades: a whale by balance, not by behaviour",
     "source": {
       "endpoint": "tgm/holders",
       "labelType": "all_holders",
@@ -190,7 +190,7 @@
     },
     "readerGuess": "contract",
     "readerBecause": "1921 interactions from 50+ counterparties and only 9 tokens — traffic, not trading",
-    "cardHash": "af20da230013c1405fab1b344b01f2f26ed2aacbef3fb4581ed52fe5f556b6f6",
+    "cardHash": "81dde1347924f6919c66803ee26e614ffd39b3157f1b7791f7bc0365b470cd49",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

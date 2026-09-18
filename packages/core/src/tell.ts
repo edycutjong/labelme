@@ -15,7 +15,8 @@ export function tell(cls: LabelClass, c: Clues, tag = "", entity: string | null 
     case "exchange":
       return `${plus(b.tokens, b.tokensCapped)} tokens worth ${fmtUsd(b.totalUsd)} · ${plus(k.count, k.countCapped)} counterparties in 30 d, ${pct(k.mix.wealth + k.mix.entity)} of that volume with wealth-tagged or exchange wallets · ${p.trades} DEX trades — money moves in and out, nobody is trading: an exchange wallet`;
     case "whale":
-      return `${b.topSymbol ? `${b.topSymbol} is ` : "one position is "}${pct(b.topShare)} of a ${fmtUsd(b.totalUsd)} balance · ${p.trades} trades · ${k.count} counterpart${k.count === 1 ? "y" : "ies"} in 30 d — a big holder sitting still: a whale`;
+      // REGRESSION (audit 2026-09-19): a wealth-tagged wallet with hundreds of trades is not "sitting still" — say what the numbers say
+      return `${b.topSymbol ? `${b.topSymbol} is ` : "one position is "}${pct(b.topShare)} of a ${fmtUsd(b.totalUsd)} balance · ${p.trades} trades · ${plus(k.count, k.countCapped)} counterpart${k.count === 1 ? "y" : "ies"} in 30 d — ${p.trades > 10 ? "a big holder that also trades: a whale by balance, not by behaviour" : "a big holder sitting still: a whale"}`;
     case "smart-money":
       if (p.trades < 5)
         return `${p.trades} trade${p.trades === 1 ? "" : "s"} in 30 d · ${plus(b.tokens, b.tokensCapped)} tokens worth ${fmtUsd(b.totalUsd)} · ${k.count} counterpart${k.count === 1 ? "y" : "ies"} — Nansen tracks this wallet as Smart Money for its record; this month it sat still`;

@@ -41,6 +41,19 @@ describe("tell — one line per class from the numbers", () => {
     expect(
       tell("whale", clues({ balance: { ok: true, tokens: 1, tokensCapped: false, totalUsd: 29_952_734, topShare: 1, topSymbol: "PEPE", stableShare: 0 } })),
     ).toMatch(/^PEPE is 100% of a \$30M balance · 0 trades · 1 counterparty in 30 d — a big holder sitting still: a whale$/);
+    // REGRESSION (audit 2026-09-19): a live draw dealt a Token Millionaire with 522 trades and the tell said "sitting still"
+    expect(
+      tell(
+        "whale",
+        clues({
+          pnl: { ok: true, realizedUsd: 24_000, realizedPct: 0.1, winRate: 0.2, trades: 522, tokensTraded: 84, top: [] },
+          balance: { ok: true, tokens: 100, tokensCapped: true, totalUsd: 1_600_000, topShare: 0.35, topSymbol: "ETH", stableShare: 0.26 },
+          counterparties: { ...clues().counterparties, count: 50, countCapped: true },
+        }),
+      ),
+    ).toMatch(
+      /^ETH is 35% of a \$1\.6M balance · 522 trades · 50\+ counterparties in 30 d — a big holder that also trades: a whale by balance, not by behaviour$/,
+    );
   });
   it("smart money: active vs dormant wording", () => {
     const active = tell(

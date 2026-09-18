@@ -6,7 +6,7 @@ Two real runs, verbatim, and the numbers behind the README. The deck path spends
 
 ```
 $ npm run labelme -- play --seed meridian1933 --answers
-Label Me — round meridian1933 · deck f3c341732e9f · 62 cards on disk · 0 credits
+Label Me — round meridian1933 · deck 6af510b47088 · 62 cards on disk · 0 credits
 
 Wallet 1 of 10 · ethereum
 PnL 30d    realised +$12K · win rate 67% · 472 trades · 6 tokens · top: GIVE 4%, GULD 3%, ETH 3%, WIN -10%, ELMT -13%
