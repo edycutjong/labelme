@@ -127,8 +127,8 @@
       "pnl": {
         "ok": true,
         "realizedUsd": 0,
-        "realizedPct": 0,
-        "winRate": 0,
+        "realizedPct": null,
+        "winRate": null,
         "trades": 0,
         "tokensTraded": 0,
         "top": []
@@ -175,7 +175,7 @@
       },
       "empty": false
     },
-    "tell": "0 interactions from 0 counterparties in 30 d · 10 tokens · no trades of its own — traffic without a trader: a contract or pool",
+    "tell": "10 tokens worth $165K · 0 trades · 0 counterparties in 30 d — code with signers, not a person: a Proxy",
     "source": {
       "endpoint": "tgm/holders",
       "labelType": "all_holders",
@@ -184,7 +184,7 @@
     },
     "readerGuess": "regular",
     "readerBecause": "0 trades, 10 tokens, $164978 — nothing that reads like a label",
-    "cardHash": "05291682497217fc32083a47dd7b36e85033714cf087e6c452541da187aca52a",
+    "cardHash": "a0a002697eedabce98902b7b755fd8145c64297c8401b7c67417981a007d7ccd",
     "recordedAt": "2026-09-18T10:11:01.398Z",
     "now": 1789726261398
   }

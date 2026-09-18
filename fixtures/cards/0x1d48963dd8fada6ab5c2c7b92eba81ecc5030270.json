@@ -137,8 +137,8 @@
       "pnl": {
         "ok": true,
         "realizedUsd": 0,
-        "realizedPct": 0,
-        "winRate": 0,
+        "realizedPct": null,
+        "winRate": null,
         "trades": 0,
         "tokensTraded": 0,
         "top": []
@@ -194,7 +194,7 @@
     },
     "readerGuess": "exchange",
     "readerBecause": "24 tokens, $1274M, 100% wealth-tagged counterparties, 0 trades",
-    "cardHash": "98e8f54aa6bfed22c63e75d0d08629f07ae5fc175e557b3c14a19cfade3e87f8",
+    "cardHash": "c488cff9394a97f5990fc79824efc74c13af02128fe780417e5ae148878c30f6",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

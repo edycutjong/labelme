@@ -46,12 +46,14 @@ export function extractPnl(s: PnlSummaryResponse | undefined): Clues["pnl"] {
   if (!s) return { ok: false, realizedUsd: null, realizedPct: null, winRate: null, trades: 0, tokensTraded: 0, top: [] };
   const usd = n(s.realized_pnl_usd);
   const pct = n(s.realized_pnl_percent);
+  const trades = int(s.traded_times);
+  // Nansen reports win_rate 0 and pnl 0 for a wallet with no sales in the window — that is "no data", not "lost every trade"
   return {
     ok: true,
     realizedUsd: usd === null ? null : r0(usd),
-    realizedPct: pct === null ? null : r3(pct),
-    winRate: n(s.win_rate) === null ? null : r3(n(s.win_rate)!),
-    trades: int(s.traded_times),
+    realizedPct: pct === null || trades === 0 ? null : r3(pct),
+    winRate: n(s.win_rate) === null || trades === 0 ? null : r3(n(s.win_rate)!),
+    trades,
     tokensTraded: int(s.traded_token_count),
     top: (s.top5_tokens ?? []).slice(0, 5).map((t) => ({ symbol: (t.token_symbol ?? "?").slice(0, 12), roi: n(t.realized_roi) === null ? null : r3(n(t.realized_roi)!), pnlUsd: n(t.realized_pnl) === null ? null : r0(n(t.realized_pnl)!) })),
   };

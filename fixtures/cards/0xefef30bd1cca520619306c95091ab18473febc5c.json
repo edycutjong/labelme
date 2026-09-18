@@ -137,8 +137,8 @@
       "pnl": {
         "ok": true,
         "realizedUsd": 0,
-        "realizedPct": 0,
-        "winRate": 0,
+        "realizedPct": null,
+        "winRate": null,
         "trades": 0,
         "tokensTraded": 0,
         "top": []
@@ -194,7 +194,7 @@
     },
     "readerGuess": "regular",
     "readerBecause": "0 trades, 20 tokens, $50936001 — nothing that reads like a label",
-    "cardHash": "9fa4026a82420bd8e05411846c7408ca2e8badeadfe17f6a7c4a13110abed10f",
+    "cardHash": "9b1dc9ca2bcac53b62ba674eff5ffa92a69e464363e913f4ae8d81d5ba1967ea",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

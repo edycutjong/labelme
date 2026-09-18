@@ -109,8 +109,8 @@
       "pnl": {
         "ok": true,
         "realizedUsd": 0,
-        "realizedPct": 0,
-        "winRate": 0,
+        "realizedPct": null,
+        "winRate": null,
         "trades": 0,
         "tokensTraded": 0,
         "top": []
@@ -166,7 +166,7 @@
     },
     "readerGuess": "whale",
     "readerBecause": "one position is 100% of $8M and only 0 trades",
-    "cardHash": "821e7b77d3c8e76592df13d06338f8fcd51d5755b7fdb15d204c0654a1100d6b",
+    "cardHash": "a92e2121c8b6ffb88d4cd76fffe0c89a51e5441d6d8f08e0e1560c87df1479f2",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

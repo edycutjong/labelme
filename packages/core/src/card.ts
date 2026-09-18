@@ -54,7 +54,7 @@ export async function buildCard(c: NansenClient, input: BuildInput, now: number)
 
 export function finishCard(input: BuildInput, clues: Clues, now: number): Card {
   const address = input.address.toLowerCase();
-  const t = tell(input.class, clues);
+  const t = tell(input.class, clues, input.entity ?? input.nansenLabel);
   const r = read(clues);
   const base = { address, chain: "ethereum" as const, class: input.class, nansenLabel: input.nansenLabel, entity: input.entity ?? null, clues, tell: t };
   return { id: cardId(address), ...base, source: input.source, readerGuess: r.guess, readerBecause: r.because, cardHash: cardHash(base), recordedAt: new Date(now).toISOString(), now };

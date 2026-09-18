@@ -137,8 +137,8 @@
       "pnl": {
         "ok": true,
         "realizedUsd": 0,
-        "realizedPct": 0,
-        "winRate": 0,
+        "realizedPct": null,
+        "winRate": null,
         "trades": 0,
         "tokensTraded": 0,
         "top": []
@@ -185,7 +185,7 @@
       },
       "empty": false
     },
-    "tell": "1,055 interactions from 50+ counterparties in 30 d · 7 tokens · no trades of its own — traffic without a trader: a contract or pool",
+    "tell": "1,055 interactions from 50+ counterparties in 30 d · 7 tokens split 60% / 40% · no trades of its own — traffic without a trader: a liquidity pool",
     "source": {
       "endpoint": "tgm/holders",
       "labelType": "exchange",
@@ -194,7 +194,7 @@
     },
     "readerGuess": "contract",
     "readerBecause": "1055 interactions from 50+ counterparties and only 7 tokens — traffic, not trading",
-    "cardHash": "7976fe71d53b85b58104ecf474a03810b5e879eaab2f382acc084f02f6680a06",
+    "cardHash": "6f902d472a5303619d3bc058aa392820c11e49dfa571b0fa0fe7615a869d9e25",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

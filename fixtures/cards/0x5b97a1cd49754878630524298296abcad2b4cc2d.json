@@ -242,7 +242,7 @@
       },
       "empty": false
     },
-    "tell": "38 interactions from 3 counterparties in 30 d · 89 tokens · 28 trades — traffic without a trader: a contract or pool",
+    "tell": "89 tokens worth $11M · 28 trades · 3 counterparties in 30 d, 98% of outflow to one of them — code with signers, not a person: a ​​🤖 Multisig [0x5b97a1]",
     "source": {
       "endpoint": "tgm/holders",
       "labelType": "all_holders",
@@ -251,7 +251,7 @@
     },
     "readerGuess": "smart-money",
     "readerBecause": "28 trades across 6 tokens in 30 days — an active multi-token trader",
-    "cardHash": "4e42e38d273d9885c1ff352d339fab6db04ccc87255861cbfe677944391adbfd",
+    "cardHash": "71bab889fd5e2d98850482fe1c50ce266a38077da1d92af4a01d57f351cc408b",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

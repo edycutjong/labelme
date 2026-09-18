@@ -137,8 +137,8 @@
       "pnl": {
         "ok": true,
         "realizedUsd": 0,
-        "realizedPct": 0,
-        "winRate": 0,
+        "realizedPct": null,
+        "winRate": null,
         "trades": 0,
         "tokensTraded": 0,
         "top": []
@@ -185,7 +185,7 @@
       },
       "empty": false
     },
-    "tell": "1 interactions from 1 counterparties in 30 d · 15 tokens · no trades of its own — traffic without a trader: a contract or pool",
+    "tell": "15 tokens worth $268M · 0 trades · 1 counterparty in 30 d — code with signers, not a person: a 🤖 🏦 Gnosis Safe Proxy [0xee136c]",
     "source": {
       "endpoint": "tgm/holders",
       "labelType": "exchange",
@@ -194,7 +194,7 @@
     },
     "readerGuess": "regular",
     "readerBecause": "0 trades, 15 tokens, $268415372 — nothing that reads like a label",
-    "cardHash": "853bf3de2b3d5205f34c4a92321b409dfec054f2f6c0b57db2606c7481461f8a",
+    "cardHash": "b24dbf8b00bdfadaa6880969a20f283322a4e3486334db70b6e056f1be1c39b3",
     "recordedAt": "2026-09-18T10:07:28.640Z",
     "now": 1789726048640
   }

@@ -1,4 +1,4 @@
-import type { LabelClass } from "./classes.js";
+import { POOL_TAG, type LabelClass } from "./classes.js";
 import type { Clues } from "./clues.js";
 
 export const fmtUsd = (n: number): string => {
@@ -10,7 +10,7 @@ export const pct = (x: number | null): string => (x === null ? "—" : `${Math.r
 const plus = (n: number, capped: boolean) => `${n}${capped ? "+" : ""}`;
 
 /** One line, written from the card's own numbers, that says why the label fits. Deterministic — part of the card hash. */
-export function tell(cls: LabelClass, c: Clues): string {
+export function tell(cls: LabelClass, c: Clues, tag = ""): string {
   const b = c.balance,
     p = c.pnl,
     k = c.counterparties;
@@ -21,9 +21,13 @@ export function tell(cls: LabelClass, c: Clues): string {
     case "whale":
       return `${b.topSymbol ? `${b.topSymbol} is ` : "one position is "}${pct(b.topShare)} of a ${fmtUsd(b.totalUsd)} balance · ${p.trades} trades · ${k.count} counterpart${k.count === 1 ? "y" : "ies"} in 30 d — a big holder sitting still: a whale`;
     case "smart-money":
+      if (p.trades < 5)
+        return `${p.trades} trade${p.trades === 1 ? "" : "s"} in 30 d · ${plus(b.tokens, b.tokensCapped)} tokens worth ${fmtUsd(b.totalUsd)} · ${k.count} counterpart${k.count === 1 ? "y" : "ies"} — Nansen tracks this wallet as Smart Money for its record; this month it sat still`;
       return `${p.trades} trades in 30 d · win rate ${pct(p.winRate)} · realised ${p.realizedUsd === null ? "—" : fmtUsd(p.realizedUsd)} across ${p.tokensTraded} tokens · ${pct(dex)} of flow through DEX pools and routers — a trader Nansen tracks as Smart Money`;
     case "contract":
-      return `${k.interactions.toLocaleString("en-US")} interactions from ${plus(k.count, k.countCapped)} counterparties in 30 d · ${plus(b.tokens, b.tokensCapped)} tokens · ${p.trades === 0 ? "no trades of its own" : `${p.trades} trades`} — traffic without a trader: a contract or pool`;
+      if (POOL_TAG.test(tag))
+        return `${k.interactions.toLocaleString("en-US")} interactions from ${plus(k.count, k.countCapped)} counterparties in 30 d · ${plus(b.tokens, b.tokensCapped)} tokens${b.topShare !== null && b.topShare < 0.7 ? ` split ${pct(b.topShare)} / ${pct(1 - b.topShare)}` : ""} · no trades of its own — traffic without a trader: a liquidity pool`;
+      return `${plus(b.tokens, b.tokensCapped)} tokens worth ${fmtUsd(b.totalUsd)} · ${p.trades} trade${p.trades === 1 ? "" : "s"} · ${k.count} counterpart${k.count === 1 ? "y" : "ies"} in 30 d${k.topOutShare !== null ? `, ${pct(k.topOutShare)} of outflow to one of them` : ""} — code with signers, not a person: a ${tag || "contract"}`;
     case "regular":
       return `${p.trades} trade${p.trades === 1 ? "" : "s"} · ${plus(b.tokens, b.tokensCapped)} token${b.tokens === 1 ? "" : "s"} worth ${fmtUsd(b.totalUsd)} · ${k.count} counterpart${k.count === 1 ? "y" : "ies"} in 30 d — none of Nansen's label groups: a regular wallet`;
     case "public-figure":
