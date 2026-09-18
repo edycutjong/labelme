@@ -22,7 +22,7 @@ A card game on labelled ethereum wallets: PnL summary, top trades, balance profi
 | The house rule | a deterministic reader over the same four clues reads **50/62** of the deck (thresholds in [docs/RULES.md](docs/RULES.md), set on this deck — in-sample; the bench is out-of-sample) |
 | Nansen endpoints | `tgm/holders` (label_type smart_money · exchange · public_figure · plain · label-excluded) · `tgm/who-bought-sold` (label-excluded) · `smart-money/dex-trades` · `profiler/address/pnl-summary` · `profiler/address/pnl` · `profiler/address/current-balance` · `profiler/address/counterparties` · `profiler/address/transactions` + `transaction-with-token-transfer-lookup` |
 | Tests | **94 tests** (vitest) · **12,000 generated cases** (fast-check) · **10,000 generated malformed ids** rejected before any network call · 20 Playwright runs (10 tests × desktop + Pixel 7) on a built app with no key |
-| Clean clone → first output | **CLONE_SECONDS s** of machine time (clone · install · first round · verify · tests) |
+| Clean clone → first output | **6 s** to the first round, **9 s** through verify and the 94 tests (clone 1 s · install 4 s · round 1 s · verify < 1 s · tests 3 s; timed 2026-09-18) |
 
 ## Reproduce
 

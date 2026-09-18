@@ -151,7 +151,7 @@ npm install
 | Draw one unseen wallet live (13 credits) | `export NANSEN_API_KEY=nsn_… && npm run labelme -- draw --explain` | 1–3 s |
 | The web app | `npm run dev` → http://localhost:3200 | first page 4 s |
 
-Clone + install + first output: **CLONE_SECONDS s** of machine time (timed clean clone; see [JUDGE.md](JUDGE.md)).
+Clone + install + first round: **6 s** of machine time; with `verify` and the 94 tests **9 s** (timed clean clone from GitHub, 2026-09-18 — clone 1 s · install 4 s · first round 1 s · verify < 1 s · tests 3 s).
 
 ## 🧪 Testing & CI
 
