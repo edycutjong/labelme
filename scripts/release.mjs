@@ -2,7 +2,7 @@
 // Node only, no dependencies. Same rules as the workflow:
 //   last v* tag → Conventional Commits since it → feat: minor · fix:/perf: patch · "!" / BREAKING CHANGE major · else no release
 //   → scripts/bump-version.mjs bumps every package.json + the lockfile → `npm ci --ignore-scripts` proves the lockfile
-//   → commit "chore(release): vX.Y.Z [skip ci]" → annotated tag → push → `gh release create vX.Y.Z --generate-notes`.
+//   → commit "chore(release): vX.Y.Z" → annotated tag → push → `gh release create vX.Y.Z --generate-notes`.
 // Refuses to run on a dirty tree, off `main`, or when main is not level with origin/main.
 import { execFileSync } from "node:child_process";
 import process from "node:process";
@@ -58,7 +58,7 @@ say(
     .join("\n"),
 );
 if (dry) {
-  say(`(dry run) would bump every package.json + lockfile to ${next.slice(1)}, commit "chore(release): ${next} [skip ci]", tag, push and publish.`);
+  say(`(dry run) would bump every package.json + lockfile to ${next.slice(1)}, commit "chore(release): ${next}", tag, push and publish.`);
   process.exit(0);
 }
 
@@ -69,7 +69,7 @@ say(git("diff", "--stat", "--", "package.json", "package-lock.json", "apps/*/pac
 
 // ── 3. commit, tag, push, publish ─────────────────────────────────────────
 git("add", "-A");
-git("commit", "-q", "-m", `chore(release): ${next} [skip ci]`);
+git("commit", "-q", "-m", `chore(release): ${next}`);
 git("tag", "-a", next, "-m", next);
 git("push", "--quiet", "origin", "HEAD:main");
 git("push", "--quiet", "origin", next);
