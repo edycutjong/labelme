@@ -1,6 +1,6 @@
 # For the judge — Label Me
 
-*Mirror of https://labelme-edycutjong.vercel.app/judge — no login, no key, no setup.*
+*Mirror of https://labelme.edycu.dev/judge — no login, no key, no setup.*
 
 ## Ten real wallets. Guess the Nansen label. The answer key is the label; the clues are Nansen's fields.
 
@@ -8,7 +8,7 @@ A card game on labelled ethereum wallets: PnL summary, top trades, balance profi
 
 ## The 30-second path
 
-1. Open **https://labelme-edycutjong.vercel.app/r/meridian1933**. Ten cards from the recorded deck, the same ten for everyone. Guess with the chips (or keys 1–5); the reveal shows the class, the free-tier tag, the entity name where the 1-credit lookup found one, and a one-line tell written from the card's numbers.
+1. Open **https://labelme.edycu.dev/r/meridian1933**. Ten cards from the recorded deck, the same ten for everyone. Guess with the chips (or keys 1–5); the reveal shows the class, the free-tier tag, the entity name where the 1-credit lookup found one, and a one-line tell written from the card's numbers.
 2. Press **Draw fresh**: one `tgm/holders` / `smart-money/dex-trades` row and four profiler calls stream in with credits and latency; the card appears; guess; the house rule's read is shown next to Nansen's answer. **Provenance** lists every call.
 3. Finish the round: "You read wallets N/10", per-class breakdown, the house rule's score on the same ten, a share link whose OG card carries the score and the seed.
 
@@ -50,6 +50,6 @@ npm run verify                                       # 62/62 cards reproduced of
 
 ## Links
 
-- Live: https://labelme-edycutjong.vercel.app · `/judge` · `/r/meridian1933`
+- Live: https://labelme.edycu.dev · `/judge` · `/r/meridian1933` (fallback alias: https://labelme-edycutjong.vercel.app)
 - Repo: https://github.com/edycutjong/labelme — [README](README.md), [DEMO.md](DEMO.md), [ARCHITECTURE.md](ARCHITECTURE.md), [docs/RULES.md](docs/RULES.md), [docs/BENCH.md](docs/BENCH.md), [docs/DX-REPORT.md](docs/DX-REPORT.md)
 - Built by [@edycutjong](https://x.com/edycutjong) for the [Nansen Meridian Buildathon](https://nansen.ai/campaigns/meridian-buildathon)

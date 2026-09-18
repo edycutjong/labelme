@@ -101,7 +101,7 @@ tell: 15 tokens worth $268M · 0 trades · 1 counterparty in 30 d — code with 
 answer key printed (not a TTY or --answers) · the house rule reads 7/10 of this round
 ```
 
-The same ten cards, face up, at https://labelme-edycutjong.vercel.app/r/meridian1933 — the server deals them from `fixtures/cards/` and reveals through `/api/reveal`, so the browser never holds the answers before a guess.
+The same ten cards, face up, at https://labelme.edycu.dev/r/meridian1933 — the server deals them from `fixtures/cards/` and reveals through `/api/reveal`, so the browser never holds the answers before a guess.
 
 ## 2 · One unseen wallet, live (this run: 8 credits — the Smart Money feed page was still cached from the bench; 13 on a cold cache)
 
