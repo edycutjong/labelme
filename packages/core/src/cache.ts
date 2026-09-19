@@ -91,6 +91,7 @@ export class CachedNansenClient extends NansenClient {
 
   override async post<T = unknown>(endpoint: string, body: Record<string, unknown>, fieldsUsed: string[] = [], opts: CallOptions = {}): Promise<T> {
     const key = cacheKey(endpoint, body);
+    const seq = this.begin(endpoint, body);
     // Freshness is judged by THIS client's TTL, not the TTL the entry was written with — so `ttlMs: 0` (--no-cache)
     // really bypasses reads. Offline mode serves any entry regardless of age (it is a replay, and says so).
     const hit = this.ttlMs > 0 || this.offline ? this.store.get(key) : undefined;
@@ -108,6 +109,7 @@ export class CachedNansenClient extends NansenClient {
         attempts: 0,
         totalMs: 0,
         ok: true,
+        seq,
       });
       if (!this.oldestHit || hit.storedAt < this.oldestHit) this.oldestHit = hit.storedAt;
       return JSON.parse(hit.text) as T;
@@ -118,7 +120,7 @@ export class CachedNansenClient extends NansenClient {
     try {
       raw = await this.postRaw(endpoint, body, opts);
     } catch (e) {
-      this.recordFailure(endpoint, body, fieldsUsed, e, Date.now() - t0);
+      this.recordFailure(endpoint, body, fieldsUsed, e, Date.now() - t0, seq);
       throw e;
     }
     const { text, ms, status, attempts, totalMs, reportedCredits } = raw;
@@ -135,6 +137,7 @@ export class CachedNansenClient extends NansenClient {
       totalMs,
       ok: true,
       reportedCredits,
+      seq,
     });
     this.store.set(key, { storedAt: new Date().toISOString(), ttlMs: this.ttlMs, endpoint, body, text });
     return JSON.parse(text) as T;

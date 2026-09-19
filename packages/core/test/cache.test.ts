@@ -79,4 +79,14 @@ describe("CachedNansenClient", () => {
     expect(d.get("k")?.text).toBe("{}");
     expect(d.get("missing")).toBeUndefined();
   });
+
+  it("a cache hit still emits start → call with the same seq (the rail resolves its pending row instantly)", async () => {
+    const order: string[] = [];
+    const c = fakeCached(() => ({ ok: 1 }));
+    c.onStart = (s) => order.push(`start:${s.seq}`);
+    c.onCall = (k) => order.push(`call:${k.seq}:${k.cached}`);
+    await c.post("tgm/holders", { a: 1 });
+    await c.post("tgm/holders", { a: 1 });
+    expect(order).toEqual(["start:1", "call:1:false", "start:2", "call:2:true"]);
+  });
 });

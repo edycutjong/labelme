@@ -1,5 +1,6 @@
 import { CLASS_INFO, type Card } from "@labelme/core";
 import { WalletCard } from "./WalletCard";
+import { RunLive } from "./RunLive";
 import { PROOF } from "@/lib/proof";
 
 /** The empty page already shows the payoff: one recorded card, revealed — the same file `npm run verify` replays. */
@@ -16,6 +17,7 @@ export function Example({ card, deckSize, house }: { card: Card; deckSize: numbe
             <code>{card.cardHash.slice(0, 12)}</code>
           </p>
         </div>
+        <RunLive />
       </div>
       <WalletCard clues={card.clues} title="Wallet 1 of 10 — what the player sees" state="example">
         <div className="reveal ok example-reveal">

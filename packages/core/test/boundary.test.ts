@@ -58,7 +58,7 @@ describe("boundary 2: routes reject garbage before any network call", () => {
       fc.asyncProperty(
         fc.string({ minLength: 0, maxLength: 40 }).filter((s) => !/^[0-9a-f]{10}$/.test(s)),
         async (id) => {
-          const res = revealRoute(new NextRequest(`http://x/api/reveal?id=${encodeURIComponent(id)}`));
+          const res = await revealRoute(new NextRequest(`http://x/api/reveal?id=${encodeURIComponent(id)}`));
           expect(res.status).toBe(400);
           checked++;
         },
@@ -68,10 +68,30 @@ describe("boundary 2: routes reject garbage before any network call", () => {
     expect(checked).toBe(10_000);
     expect(fetchSpy).not.toHaveBeenCalled();
   });
-  it("/api/reveal: a well-formed unknown id → 404; a bad guess value → 400", () => {
-    expect(revealRoute(new NextRequest("http://x/api/reveal?id=0123456789")).status).toBe(404);
+  it("/api/reveal: a well-formed unknown id → 404; a bad guess value → 400", async () => {
+    expect((await revealRoute(new NextRequest("http://x/api/reveal?id=0123456789"))).status).toBe(404);
     const real = loadDeck()[0];
-    expect(revealRoute(new NextRequest(`http://x/api/reveal?id=${real.id}&guess=hacker`)).status).toBe(400);
+    expect((await revealRoute(new NextRequest(`http://x/api/reveal?id=${real.id}&guess=hacker`))).status).toBe(400);
+  });
+  it("/api/reveal: a real id answers with the four recorded calls replayed (cached, 0 credits, seq-paired) and no network", async () => {
+    const real = loadDeck()[0];
+    const res = await revealRoute(new NextRequest(`http://x/api/reveal?id=${real.id}&guess=whale`));
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as { calls: { endpoint: string; cached: boolean; credits: number; seq?: number; responseHash: string }[] };
+    expect(body.calls).toHaveLength(4);
+    expect(body.calls.map((c) => c.endpoint).sort()).toEqual([
+      "profiler/address/counterparties",
+      "profiler/address/current-balance",
+      "profiler/address/pnl",
+      "profiler/address/pnl-summary",
+    ]);
+    for (const c of body.calls) {
+      expect(c.cached).toBe(true);
+      expect(c.credits).toBe(0);
+      expect(c.responseHash).toHaveLength(64);
+      expect(c.seq).toBeTypeOf("number");
+    }
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
   it("/api/round: an over-long seed → 400; any other seed is squeezed and answered with ten faces and no answers", async () => {
     expect(roundRoute(new NextRequest(`http://x/api/round?seed=${"a".repeat(65)}`)).status).toBe(400);

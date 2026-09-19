@@ -1,7 +1,19 @@
 // server-side only: reads fixtures from disk (never imported by a client component — the browser surface is @labelme/core/browser)
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { loadDeck, makeRound, read, face, type Card, type CardFace } from "@labelme/core";
+import {
+  loadDeck,
+  makeRound,
+  read,
+  face,
+  readCardFixture,
+  fixtureStore,
+  CachedNansenClient,
+  buildCard,
+  type Card,
+  type CardFace,
+  type Call,
+} from "@labelme/core";
 
 /** The committed deck, read once per instance from fixtures/cards (0 network). */
 let cache: { cards: Card[]; byId: Map<string, Card>; house: number } | undefined;
@@ -31,8 +43,34 @@ export function roundFor(seed: string): RoundPayload {
     recordedAt: cards[0]?.recordedAt ?? "",
   };
 }
-export type Answer = Pick<Card, "id" | "class" | "nansenLabel" | "entity" | "address" | "tell" | "source" | "recordedAt"> & { house: Card["class"] };
-export function answerFor(id: string): Answer | undefined {
+/**
+ * The four Nansen calls behind one recorded card, replayed through the engine exactly as `npm run verify` does
+ * (CachedNansenClient, offline, the fixture's own responses and clock) — so the rail's "replayed · 0 cr" rows are
+ * real `Call` objects from the same code path as a live draw, never hand-written. Cached per address; 0 network.
+ */
+const replays = new Map<string, Call[]>();
+export async function replayCalls(address: string): Promise<Call[]> {
+  const hit = replays.get(address);
+  if (hit) return hit;
+  const c = deck().cards.find((x) => x.address === address);
+  if (!c) return [];
+  try {
+    const f = readCardFixture(join(dir(), `${address}.json`));
+    const client = new CachedNansenClient("nsn_offline_replay_000000000000000", { store: fixtureStore(f), offline: true });
+    await buildCard(client, { address: c.address, class: c.class, nansenLabel: c.nansenLabel, entity: c.entity, source: c.source }, f.now);
+    const calls = client.calls.filter((k) => k.cached);
+    replays.set(address, calls);
+    return calls;
+  } catch {
+    return [];
+  }
+}
+export type Answer = Pick<Card, "id" | "class" | "nansenLabel" | "entity" | "address" | "tell" | "source" | "recordedAt"> & {
+  house: Card["class"];
+  /** the recorded Nansen calls that built this card, replayed offline (rail rows: replayed · 0 cr) */
+  calls: Call[];
+};
+export async function answerFor(id: string): Promise<Answer | undefined> {
   const c = deck().byId.get(id);
   if (!c) return undefined;
   return {
@@ -45,5 +83,6 @@ export function answerFor(id: string): Answer | undefined {
     source: c.source,
     recordedAt: c.recordedAt,
     house: read(c.clues).guess,
+    calls: await replayCalls(c.address),
   };
 }

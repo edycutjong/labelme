@@ -27,6 +27,16 @@ describe("NansenClient", () => {
     expect(c.calls[0].responseHash).toHaveLength(64);
     expect(c.creditsSpent).toBe(5);
   });
+  it("onStart fires before the network with a seq the landed Call carries — on success, on failure, and on a cache hit", async () => {
+    const order: string[] = [];
+    const c = fakeClient((endpoint) => (endpoint === "tgm/holders" ? { ok: 1 } : new Response("nope", { status: 400 })));
+    c.onStart = (s) => order.push(`start:${s.seq}:${s.endpoint}`);
+    c.onCall = (k) => order.push(`call:${k.seq}:${k.endpoint}:${k.ok}`);
+    await c.post("tgm/holders", { chain: "ethereum" });
+    await expect(c.post("profiler/address/pnl", {})).rejects.toThrow();
+    expect(order).toEqual(["start:1:tgm/holders", "call:1:tgm/holders:true", "start:2:profiler/address/pnl", "call:2:profiler/address/pnl:false"]);
+    expect(c.calls.map((k) => k.seq)).toEqual([1, 2]);
+  });
   it("prefers the x-nansen-credits-cost header over the static table", async () => {
     const c = fakeClient(() => ({ ok: 1 }), {}, { "x-nansen-credits-cost": "150" });
     await c.post("tgm/holders", {});

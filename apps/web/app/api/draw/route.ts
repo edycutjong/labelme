@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { CachedNansenClient, MemoryCache, drawCard, DECK_CLASSES, read, makeRound, type DrawEvent, type LabelClass } from "@labelme/core";
-import { deck } from "@/lib/deck";
+import { deck, replayCalls } from "@/lib/deck";
 import { clientIp, ipAllowed, budgetExhausted, recordSpend, BUDGET_MESSAGE } from "@/lib/guard";
 
 export const runtime = "nodejs";
@@ -46,6 +46,8 @@ export async function POST(req: NextRequest) {
           const r = makeRound(d.cards, `replay-${Date.now()}`, 1);
           const card = d.byId.get(r.cardIds[0])!;
           send({ type: "replay", message: key ? BUDGET_MESSAGE : "This deployment has no NANSEN_API_KEY — this card is a replay from the recorded deck." });
+          // the rail still gets real rows: the card's four recorded calls, replayed through the engine (labelled replayed · 0 cr)
+          for (const call of await replayCalls(card.address)) send({ type: "call", call });
           send({ type: "card", card });
           const h = read(card.clues);
           send({ type: "house", guess: h.guess, because: h.because, credits: 0, calls: 0, ms: Date.now() - t0 });

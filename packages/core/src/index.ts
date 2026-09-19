@@ -1,5 +1,5 @@
 export { NansenClient, NansenError, clientFromEnv, sha256, CREDITS } from "./client.js";
-export type { Call, ClientOptions, CallOptions } from "./client.js";
+export type { Call, CallStart, ClientOptions, CallOptions } from "./client.js";
 export { CachedNansenClient, cachedClientFromEnv, DiskCache, MemoryCache, cacheKey, canonicalize, DEFAULT_TTL_MS } from "./cache.js";
 export type { CacheStore, CacheEntry, CachedClientOptions } from "./cache.js";
 export { nansen, window, isoDay, CHAIN, ALL_LABEL_TYPES, SMART_MONEY_LABELS, WINDOW_DAYS } from "./nansen.js";

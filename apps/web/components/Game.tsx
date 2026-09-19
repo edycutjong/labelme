@@ -3,15 +3,26 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CLASS_INFO, DECK_CLASSES, normalizeSeed, type Card, type CardFace, type Call, type LabelClass } from "@labelme/core/browser";
 import type { RoundPayload, Answer } from "@/lib/deck";
 import { WalletCard } from "./WalletCard";
+import { NansenRail, cap, landCall, replayRows, rowFromStart, type RailRow } from "./NansenRail";
 
 type Reveal = Answer & { correct: boolean | null };
 type Phase = "idle" | "loading" | "play" | "done" | "draw";
-type DrawRow = Call;
 type Guessed = { id: string; guess: LabelClass; reveal: Reveal };
 
 const shortAddr = (a: string) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 
-export function Game({ initialRound, idleChildren }: { initialRound?: RoundPayload; idleChildren?: React.ReactNode }) {
+export function Game({
+  initialRound,
+  idleChildren,
+  exampleCalls,
+  exampleRecordedAt,
+}: {
+  initialRound?: RoundPayload;
+  idleChildren?: React.ReactNode;
+  /** the example card's four recorded calls, replayed server-side through the engine — the rail on load (replayed · 0 cr) */
+  exampleCalls?: Call[];
+  exampleRecordedAt?: string;
+}) {
   const [phase, setPhase] = useState<Phase>(initialRound ? "play" : "idle");
   const [seedInput, setSeedInput] = useState("");
   const [round, setRound] = useState<RoundPayload | undefined>(initialRound);
@@ -22,8 +33,20 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
   const [error, setError] = useState<string | undefined>();
   const [status, setStatus] = useState("");
   const [toast, setToast] = useState<string | undefined>();
+  // the Nansen call rail: every call this page made, in order; a "run" = one replay / reveal / live draw
+  const [rail, setRail] = useState<RailRow[]>(() => (exampleCalls?.length ? replayRows(0, exampleCalls, exampleRecordedAt) : []));
+  const [currentRun, setCurrentRun] = useState(0);
+  const runRef = useRef(0);
+  const newRun = () => {
+    const run = ++runRef.current;
+    setCurrentRun(run);
+    return run;
+  };
+  /** the receipt: the current run's rows — the drawer prints exactly these */
+  const receipt = rail.filter((r) => r.run === currentRun);
+  const rows = receipt.filter((r) => r.call).map((r) => r.call!);
+  const receiptReplayed = receipt.length > 0 && receipt.every((r) => r.origin === "replayed");
   // live draw
-  const [rows, setRows] = useState<DrawRow[]>([]);
   const [drawCardState, setDrawCard] = useState<Card | undefined>();
   const [drawGuess, setDrawGuess] = useState<LabelClass | undefined>();
   const [drawHouse, setDrawHouse] = useState<{ guess: LabelClass; because: string; credits: number; calls: number; ms: number } | undefined>();
@@ -80,6 +103,11 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
         const a = (await res.json()) as Reveal;
         setReveal(a);
         setGuessed((g) => [...g, { id: current.id, guess: cls, reveal: a }]);
+        // the reveal is also the receipt: the four recorded calls behind this card land in the rail, replayed at 0 credits
+        if (a.calls?.length) {
+          const run = newRun();
+          setRail((r) => cap([...r, ...replayRows(run, a.calls, a.recordedAt)]));
+        }
       } catch (e) {
         setError((e as Error).message);
       } finally {
@@ -106,7 +134,9 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
     abortRef.current = ctrl;
     if (phaseRef.current !== "draw") setReturnPhase(phaseRef.current === "loading" ? "idle" : phaseRef.current);
     setPhase("draw");
-    setRows([]);
+    const run = newRun();
+    let origin: RailRow["origin"] = "live";
+    let recordedAt: string | undefined;
     setDrawCard(undefined);
     setDrawGuess(undefined);
     setDrawHouse(undefined);
@@ -131,12 +161,16 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
           buf = buf.slice(nl + 1);
           if (!line.trim()) continue;
           const e = JSON.parse(line);
-          if (e.type === "call") setRows((r) => [...r, e.call]);
+          if (e.type === "start") setRail((r) => cap([...r, rowFromStart(run, e.start)]));
+          else if (e.type === "call") setRail((r) => landCall(r, run, e.call, origin, recordedAt));
           else if (e.type === "picked")
             setStatus(`Picked one of ${e.candidates} unseen ${CLASS_INFO[e.class as LabelClass].name} wallets on ${e.token} — pulling its clues…`);
-          else if (e.type === "replay") setDrawReplay(e.message);
-          else if (e.type === "card") {
+          else if (e.type === "replay") {
+            origin = "replayed";
+            setDrawReplay(e.message);
+          } else if (e.type === "card") {
             gotCard = true;
+            recordedAt = e.card?.recordedAt;
             setDrawCard(e.card);
             setStatus("");
           } else if (e.type === "house") setDrawHouse(e);
@@ -156,6 +190,13 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
       }
     }
   }, []);
+
+  // the Example section (a server component) asks for the live run through a DOM event
+  useEffect(() => {
+    const onLive = () => draw();
+    window.addEventListener("labelme:draw", onLive);
+    return () => window.removeEventListener("labelme:draw", onLive);
+  }, [draw]);
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
@@ -280,7 +321,7 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
       </div>
 
       <p className="status" aria-live="polite">
-        {status}
+        {phase === "draw" && drawBusy ? "" : status}
       </p>
       {error && (
         <div className="banner err" role="alert">
@@ -359,21 +400,14 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
 
       {phase === "draw" && (
         <section className="round" aria-label="a fresh card, live from Nansen">
-          <div className="draw-rows" aria-live="polite">
-            {rows.map((r, n) => (
-              <div key={n} className={`draw-row animate-up ${r.ok ? "" : "fail"}`}>
-                <code>{r.endpoint}</code>
-                <span>{r.credits} cr</span>
-                <span>{r.cached ? "cached" : `${r.totalMs} ms`}</span>
-                <span className={r.ok ? "ok" : "fail"}>{r.ok ? (r.cached ? "hit" : r.status) : (r.error ?? "failed")}</span>
-              </div>
-            ))}
-            {drawBusy && !drawCardState && (
+          {drawBusy && !drawCardState && (
+            <div className="draw-rows">
               <div className="draw-row pending">
                 <span className="spinner" aria-hidden /> {status || "connecting…"}
+                <span className="draw-row-hint">{rows.length ? `${rows.length} of the calls landed` : "calls stream into the Nansen rail as they land"}</span>
               </div>
-            )}
-          </div>
+            </div>
+          )}
           {drawReplay && (
             <div className="banner warn">
               {drawReplay}
@@ -426,9 +460,18 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
 
       {phase === "idle" && idleChildren}
 
+      <NansenRail
+        rows={rail}
+        currentRun={currentRun}
+        onClear={() => setRail([])}
+        onOpenReceipt={() => setDrawerOpen(true)}
+        onRunLive={() => draw()}
+        liveBusy={drawBusy}
+      />
+
       <aside className={`drawer ${drawerOpen ? "open" : ""}`} aria-hidden={!drawerOpen} aria-label="provenance">
         <h3>
-          Provenance — every Nansen call this draw made
+          Provenance — every Nansen call this {receiptReplayed ? "replay" : "draw"} made
           <button type="button" className="btn" onClick={() => setDrawerOpen(false)} tabIndex={drawerOpen ? 0 : -1}>
             Close
           </button>
@@ -444,19 +487,26 @@ export function Game({ initialRound, idleChildren }: { initialRound?: RoundPaylo
             </tr>
           </thead>
           <tbody>
-            {rows.map((r, n) => (
-              <tr key={n}>
-                <td className="mono">{r.endpoint}</td>
-                <td>{r.credits}</td>
-                <td>{r.cached ? "cached" : r.totalMs}</td>
-                <td className={r.ok ? "" : "fail"}>{r.ok ? r.status : r.error}</td>
-                <td className="mono">{r.fieldsUsed.join(", ")}</td>
-              </tr>
-            ))}
+            {receipt
+              .filter((x) => x.call)
+              .map((x) => {
+                const r = x.call!;
+                return (
+                  <tr key={x.key}>
+                    <td className="mono">{r.endpoint}</td>
+                    <td>{r.credits}</td>
+                    <td>{x.origin === "replayed" ? "replayed" : r.cached ? "cached" : r.totalMs}</td>
+                    <td className={r.ok ? "" : "fail"}>{r.ok ? r.status : r.error}</td>
+                    <td className="mono">{r.fieldsUsed.join(", ")}</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
-        <p className="sum">
-          {rows.reduce((a, r) => a + r.credits, 0)} credits · {rows.length} calls · sha256 of every response recorded (<code>responseHash</code>)
+        <p className="sum" data-testid="drawer-sum">
+          {rows.reduce((a, r) => a + r.credits, 0)} credits · {rows.length} calls
+          {receiptReplayed ? ` · replayed from fixtures, recorded ${(receipt[0]?.recordedAt ?? "").slice(0, 10)}` : ""} · sha256 of every response recorded (
+          <code>responseHash</code>)
         </p>
       </aside>
       {toast && <div className="toast">{toast}</div>}

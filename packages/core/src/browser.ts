@@ -7,5 +7,5 @@ export { DECK_CLASSES } from "./constants.js";
 export type { Clues, ClueFailure } from "./clues.js";
 export { allFailed } from "./clues.js";
 export type { Card, CardFace, Source } from "./card.js";
-export type { Call } from "./client.js";
+export type { Call, CallStart } from "./client.js";
 export type { DrawEvent } from "./draw.js";

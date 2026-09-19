@@ -24,7 +24,8 @@ export default defineConfig({
     url: `${BASE}/judge`,
     reuseExistingServer: false,
     timeout: 180_000,
-    // the key is stripped on purpose: every assertion must hold with no credential in the server
-    env: { ...process.env, NANSEN_API_KEY: "", NANSEN_OFFLINE: "" },
+    // the key is stripped on purpose: every assertion must hold with no credential in the server; the per-IP draw gate is
+    // lifted because two projects × several keyless replay draws from one localhost exceed 4/min (the gate itself is unit-tested)
+    env: { ...process.env, NANSEN_API_KEY: "", NANSEN_OFFLINE: "", GUARD_IP_PER_MIN: "1000" },
   },
 });

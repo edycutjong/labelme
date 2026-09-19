@@ -173,3 +173,78 @@ test.describe("review pass 1 regressions", () => {
     await expect(page.locator(".reveal")).toHaveCount(0);
   });
 });
+
+test.describe("the Nansen call rail (LANDING_DESIGN §13 A3)", () => {
+  test("on load the rail holds the example's four recorded calls, replayed at 0 credits; the receipt totals match", async ({ page }) => {
+    await page.goto("/");
+    const rail = page.getByRole("complementary", { name: "Nansen API calls" });
+    await expect(rail).toBeAttached();
+    const rows = rail.locator(".rail-row");
+    await expect(rows).toHaveCount(4);
+    await expect(rows.first()).toHaveAttribute("data-state", "replayed");
+    await expect(rows.first()).toContainText("POST");
+    await expect(rows.first()).toContainText("0 cr · replayed");
+    await expect(rail.locator(".rail-counters")).toHaveText("4 calls · 0 cr · replayed");
+    await expect(rail.locator(".rail-foot")).toContainText("session · 4 calls · 0 credits");
+    // never the key, never a full request body
+    expect(await rail.innerHTML()).not.toMatch(KEY_SHAPE);
+    expect(await rail.innerText()).not.toContain('"address"');
+    await rail.getByRole("button", { name: "receipt" }).click();
+    await expect(page.locator("[data-testid=drawer-sum]")).toContainText("0 credits · 4 calls · replayed from fixtures");
+    await expect(page.locator(".drawer tbody tr")).toHaveCount(4);
+  });
+  test("a reveal lands the card's four recorded calls in the rail; clear empties it into the empty state", async ({ page }) => {
+    await page.goto("/r/meridian1933");
+    const rail = page.getByRole("complementary", { name: "Nansen API calls" });
+    await expect(rail.locator(".rail-row")).toHaveCount(0);
+    await expect(rail.locator(".rail-empty")).toContainText("No calls yet");
+    await page.keyboard.press("3");
+    await expect(page.locator(".reveal")).toBeVisible();
+    await expect(rail.locator(".rail-row")).toHaveCount(4);
+    await expect(rail.locator(".rail-counters")).toHaveText("4 calls · 0 cr · replayed");
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("1");
+    await expect(rail.locator(".rail-row")).toHaveCount(8);
+    await expect(rail.locator(".rail-foot")).toContainText("session · 8 calls · 0 credits");
+    await rail.getByRole("button", { name: "clear" }).click();
+    await expect(rail.locator(".rail-row")).toHaveCount(0);
+    await expect(rail.locator(".rail-empty")).toBeVisible();
+  });
+  test("the keyless Draw fresh replay still streams four real rows into the rail, labelled replayed", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /Run it live now/ }).click();
+    await expect(page.locator(".banner.warn")).toContainText("replay");
+    const rail = page.getByRole("complementary", { name: "Nansen API calls" });
+    await expect(rail.locator(".rail-row")).toHaveCount(8);
+    await expect(rail.locator(".rail-row[data-state=replayed]")).toHaveCount(8);
+    await expect(rail.locator(".rail-counters")).toHaveText("4 calls · 0 cr · replayed");
+    await expect(page.locator(".round .wallet")).toBeVisible();
+  });
+  test("layout: ≥ 1280 px a fixed right rail with the page shifted left; below, a 44 px bar that opens with a tap and with Enter", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto("/");
+    const rail = page.locator(".rail");
+    const box = (await rail.boundingBox())!;
+    expect(box.width).toBe(360);
+    expect(Math.round(box.x + box.width)).toBe(1920 - 24);
+    expect(Math.round(box.y)).toBe(84);
+    await expect(page.locator(".rail-bar")).toBeHidden();
+    const main = (await page.locator("main.wrap").boundingBox())!;
+    expect(main.x + main.width).toBeLessThanOrEqual(box.x);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+    const bar = page.getByTestId("rail-bar");
+    await expect(bar).toBeVisible();
+    expect(Math.round((await bar.boundingBox())!.height)).toBe(44);
+    await expect(bar).toHaveAttribute("aria-expanded", "false");
+    expect(Math.round((await rail.boundingBox())!.height)).toBe(44);
+    await bar.click();
+    await expect(bar).toHaveAttribute("aria-expanded", "true");
+    await expect.poll(async () => (await rail.boundingBox())!.height).toBeGreaterThan(200);
+    await bar.focus();
+    await page.keyboard.press("Enter");
+    await expect(bar).toHaveAttribute("aria-expanded", "false");
+    const [sw, iw] = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
+    expect(sw).toBeLessThanOrEqual(iw);
+  });
+});

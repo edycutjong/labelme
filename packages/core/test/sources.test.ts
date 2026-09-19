@@ -104,6 +104,29 @@ describe("drawCard — one fresh card, live, streamed", () => {
     expect(events.at(-1)).toBe("card");
     expect(c.creditsSpent).toBe(13);
   });
+  it("every call is announced by a start event first, paired by seq — the rail's pending row resolves into the landed Call", async () => {
+    const c = fakeClient(routes);
+    const seen: { type: string; seq: number; endpoint: string }[] = [];
+    await drawCard(c, {
+      class: "whale",
+      seed: "s",
+      onProgress: (e) => {
+        if (e.type === "start") seen.push({ type: "start", seq: e.start.seq, endpoint: e.start.endpoint });
+        if (e.type === "call") seen.push({ type: "call", seq: e.call.seq ?? -1, endpoint: e.call.endpoint });
+      },
+    });
+    const starts = seen.filter((x) => x.type === "start");
+    const calls = seen.filter((x) => x.type === "call");
+    expect(starts).toHaveLength(5);
+    expect(calls).toHaveLength(5);
+    for (const k of calls) {
+      const i = seen.findIndex((x) => x.type === "start" && x.seq === k.seq);
+      expect(i, `${k.endpoint} has a start`).toBeGreaterThanOrEqual(0);
+      expect(seen[i].endpoint).toBe(k.endpoint);
+      expect(i).toBeLessThan(seen.indexOf(k));
+    }
+    expect(c.onStart).toBeUndefined();
+  });
   it("REGRESSION (audit 2026-09-19): clue rows are emitted as each call lands, not as one batch after the slowest", async () => {
     const slow = async (endpoint: string, body: Record<string, unknown>) => {
       if (endpoint === "profiler/address/counterparties") await new Promise((r) => setTimeout(r, 300));

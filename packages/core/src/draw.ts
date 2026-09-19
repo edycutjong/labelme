@@ -1,4 +1,4 @@
-import type { NansenClient, Call } from "./client.js";
+import type { NansenClient, Call, CallStart } from "./client.js";
 import { nansen, type HolderLabelType } from "./nansen.js";
 import { classFromTag, tagIsNeutral, isPoolTag, type LabelClass } from "./classes.js";
 import { buildCard, type Card } from "./card.js";
@@ -7,6 +7,7 @@ import { rng, shuffle } from "./round.js";
 import { allFailed, type ClueFailure } from "./clues.js";
 
 export type DrawEvent =
+  | { type: "start"; start: CallStart }
   | { type: "call"; call: Call }
   | { type: "picked"; class: LabelClass; token: string; page: number; candidates: number }
   | { type: "card"; card: Card }
@@ -86,14 +87,21 @@ export async function drawCard(c: NansenClient, opts: DrawOptions = {}): Promise
   // REGRESSION (audit 2026-09-19): every call is emitted the moment the client records it — the four clue calls run in parallel and
   // used to be emitted as one batch after the slowest landed, so the page could not show rows "as they land"
   const prevOnCall = c.onCall;
+  const prevOnStart = c.onStart;
   c.onCall = (call) => {
     prevOnCall?.(call);
     opts.onProgress?.({ type: "call", call });
+  };
+  // the start event lets a UI draw the pending row (pulsing dot) before any bytes move; the `call` with the same seq resolves it
+  c.onStart = (start) => {
+    prevOnStart?.(start);
+    opts.onProgress?.({ type: "start", start });
   };
   try {
     return await drawInner(c, opts, cls, tokens, deepPage, now, next);
   } finally {
     c.onCall = prevOnCall;
+    c.onStart = prevOnStart;
   }
 }
 
