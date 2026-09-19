@@ -411,7 +411,7 @@ export function Game({
                 </div>
               </div>
               {/* loading state: the shape of the card about to land, while the clue calls stream into the rail */}
-              <div className="wallet skeleton" aria-hidden>
+              <div className="wallet-sk" aria-hidden>
                 <div className="wallet-top">
                   <span className="sk sk-title" />
                   <span className="sk sk-badge" />
