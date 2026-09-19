@@ -403,12 +403,30 @@ export function Game({
       {phase === "draw" && (
         <section className="round" aria-label="a fresh card, live from Nansen">
           {drawBusy && !drawCardState && (
-            <div className="draw-rows">
-              <div className="draw-row pending">
-                <span className="spinner" aria-hidden /> {status || "connecting…"}
-                <span className="draw-row-hint">{rows.length ? `${rows.length} of the calls landed` : "calls stream into the Nansen rail as they land"}</span>
+            <>
+              <div className="draw-rows">
+                <div className="draw-row pending" role="status" aria-live="polite">
+                  <span className="spinner" aria-hidden /> {status || "connecting…"}
+                  <span className="draw-row-hint">{rows.length ? `${rows.length} of 5 calls landed` : "calls stream into the Nansen rail as they land"}</span>
+                </div>
               </div>
-            </div>
+              {/* loading state: the shape of the card about to land, while the clue calls stream into the rail */}
+              <div className="wallet skeleton" aria-hidden>
+                <div className="wallet-top">
+                  <span className="sk sk-title" />
+                  <span className="sk sk-badge" />
+                </div>
+                <div className="clues">
+                  {["PnL", "Trades", "Balance", "Counterparties"].map((h) => (
+                    <div key={h} className="clue">
+                      <h3>{h}</h3>
+                      <div className="sk sk-line" />
+                      <div className="sk sk-line short" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
           )}
           {drawReplay && (
             <div className="banner warn">
