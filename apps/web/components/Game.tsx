@@ -242,7 +242,7 @@ export function Game({
             onClick={() => onPick(k)}
             disabled={disabled || !!picked}
             aria-pressed={isPick}
-            aria-label={`${CLASS_INFO[k].name} (key ${n + 1})`}
+            title={`press ${n + 1}`}
           >
             <kbd>{n + 1}</kbd> {CLASS_INFO[k].name}
           </button>

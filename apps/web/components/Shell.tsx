@@ -19,7 +19,7 @@ export function Mark({ size = 24 }: { size?: number }) {
 export function SiteHeader({ current }: { current: "home" | "judge" }) {
   return (
     <header className="site-header">
-      <Link href="/" className="brand" aria-label="Label Me — home">
+      <Link href="/" className="brand">
         <Mark />
         <span className="brand-name">labelme</span>
         <span className="brand-tag">guess the Nansen label · on Nansen</span>
