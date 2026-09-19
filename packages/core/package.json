@@ -1,6 +1,6 @@
 {
   "name": "@labelme/core",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Label Me engine: Nansen client, deck sourcing, clues, reader, rounds.",
   "license": "MIT",
   "type": "module",
