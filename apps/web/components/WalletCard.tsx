@@ -30,7 +30,8 @@ export function WalletCard({
     k = clues.counterparties;
   const dex = Math.min(1, k.mix.pool + k.mix.activity);
   const wealth = Math.min(1, k.mix.wealth + k.mix.entity);
-  const rest = Math.max(0, 1 - dex - wealth - k.mix.contract - k.mix.unlabelled);
+  // a wallet with no counterparties has no mix — an empty bar, not a full "other" bar (seen on a dormant whale in the recording)
+  const rest = k.interactions === 0 ? 0 : Math.max(0, 1 - dex - wealth - k.mix.contract - k.mix.unlabelled);
   return (
     <article className={`wallet ${state ?? "face"}`} aria-label={title}>
       <header className="wallet-top">
