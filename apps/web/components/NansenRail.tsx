@@ -235,7 +235,7 @@ export function NansenRail({
           </div>
           {/* the animated counters are hidden from AT (a count-up would be announced 15 times); the sr line carries the settled totals */}
           <div className="rail-counters" data-testid="rail-counters" aria-hidden>
-            <b>{calls}</b> calls · <b>{credits}</b> cr ·{" "}
+            <b>{calls}</b> {plural(cur.calls, "call")} · <b>{credits}</b> cr ·{" "}
             {liveInRun ? (
               <>
                 <b>{secs}</b> s
