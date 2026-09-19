@@ -57,6 +57,13 @@ A card game on real ethereum wallets. The face is what Nansen computes for the w
 
 ## 🏗️ Architecture & Tech Stack
 
+One card object, three views. The answer key is the Nansen label group that returned the row; every clue is a Nansen field. No database, no accounts, no LLM.
+
+<p align="center"><img src="docs/assets/architecture.png" alt="Label Me architecture — views (web page with the Nansen call rail, /r permalink + /api/og, /judge, CLI) → /api/draw + /api/reveal behind a spend guard → packages/core drawCard/buildCard → Nansen sourcing calls (tgm/holders 5 cr, tgm/who-bought-sold 1 cr, smart-money/dex-trades 5 cr) and the four profiler clue calls (pnl-summary 1, pnl 1, current-balance 1, counterparties 5) → Card with provenance; read-through cache, 62 recorded fixtures, rail replay at 0 credits" width="100%"></p>
+
+<details>
+<summary><b>Mermaid source</b> — expand to see the diagram as text (renders on GitHub)</summary>
+
 ```mermaid
 flowchart LR
   subgraph deck["Deck build — once, live · scripts/seed.ts"]
@@ -74,6 +81,8 @@ flowchart LR
     UI --> G[guard: per-IP · daily ceiling] --> S["one sourcing page (5)"] --> C2["4 clue calls (8)"] --> N[NDJSON rows] --> UI
   end
 ```
+
+</details>
 
 | Layer | Choice | Why |
 |---|---|---|
@@ -98,6 +107,8 @@ Full detail: [ARCHITECTURE.md](ARCHITECTURE.md) · the rule doc: [docs/RULES.md]
 | `profiler/address/current-balance` | 1 | the Balance clue (tokens, total, biggest position, stable share) |
 | `profiler/address/counterparties` (`counterparty_address_label[]`) | 5 | the Counterparties clue — class mix, top-outflow share — and most of the tell |
 | `profiler/address/transactions` + `transaction-with-token-transfer-lookup` | 1 + 1 | entity names on the reveal (🏦 Luno: Wallet) — and they outrank the free tag: a "MultiSig"-tagged wallet Nansen marks 🏦 is an exchange |
+
+**See the calls, not just the table:** the web page carries a live **Nansen call rail** on the right — every call the page makes streams in as it happens (pending → live/cached/error dot, `POST endpoint`, params, credits, ms, sha256 of the response), the same `Call` objects the provenance drawer prints and `--explain` lists in the CLI; on load it already shows the example card's four recorded calls, replayed at 0 credits.
 
 ### Why only Nansen
 
