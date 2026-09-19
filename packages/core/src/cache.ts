@@ -114,7 +114,12 @@ export class CachedNansenClient extends NansenClient {
       if (!this.oldestHit || hit.storedAt < this.oldestHit) this.oldestHit = hit.storedAt;
       return JSON.parse(hit.text) as T;
     }
-    if (this.offline) throw new Error(`NANSEN_OFFLINE=1 and no cached response for ${endpoint} ${JSON.stringify(body)}`);
+    if (this.offline) {
+      // an offline miss is recorded too, so the `start` this call emitted always gets its matching Call (the rail never hangs pending)
+      const miss = new Error(`NANSEN_OFFLINE=1 and no cached response for ${endpoint} ${JSON.stringify(body)}`);
+      this.recordFailure(endpoint, body, fieldsUsed, miss, 0, seq);
+      throw miss;
+    }
     const t0 = Date.now();
     let raw: Awaited<ReturnType<NansenClient["postRaw"]>>;
     try {

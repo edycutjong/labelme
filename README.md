@@ -20,7 +20,7 @@
 ![Next.js](https://img.shields.io/badge/Next.js_15-black?style=flat&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
 ![Nansen API](https://img.shields.io/badge/Nansen_API-9_endpoints-7c3aed?style=flat&labelColor=0a0e13)
-![tests](https://img.shields.io/badge/tests-115%20passing-22c55e?style=flat)
+![tests](https://img.shields.io/badge/tests-116%20passing-22c55e?style=flat)
 ![property cases](https://img.shields.io/badge/property_cases-12%2C000-22c55e?style=flat)
 ![deck](https://img.shields.io/badge/deck-62%2F62%20replay%20offline-22c55e?style=flat)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat)](LICENSE)
@@ -120,7 +120,7 @@ Take Nansen out and the game has no answer key and no clues: you would need a Sm
 |---|---|
 | **Deck** | 62 cards on ethereum (12 Smart Money · 16 exchange · 12 whale · 10 contract/pool · 12 regular), recorded live by `scripts/seed.ts`; every raw response committed; `fixtures/dropped.json` names the 101 addresses dropped and why |
 | **Determinism** | `npm run verify` replays all 62 cards offline — same clues, same tell, same `cardHash` — zero network, zero credits |
-| **Tests** | **115 tests** (vitest) · **12,000 property cases** (fast-check: the reader is total over any clues, the tell is one line, the hash ignores time and the reader, a round is deterministic and URL-safe, extractors never throw) · a route boundary suite: garbage never reaches Nansen |
+| **Tests** | **116 tests** (vitest) · **12,000 property cases** (fast-check: the reader is total over any clues, the tell is one line, the hash ignores time and the reader, a round is deterministic and URL-safe, extractors never throw) · a route boundary suite: garbage never reaches Nansen |
 | **Bench** | 10 live draws: **cold p50 2.1 s · p95 2.6 s · warm 1 ms · 12.2 credits per draw · 0 failed**; the house rule read 7/10 fresh cards (out-of-sample) — [docs/BENCH.md](docs/BENCH.md) |
 | **House rule** | 50/62 on the deck (in-sample; thresholds set on this deck and printed in [docs/RULES.md](docs/RULES.md)) |
 | **Spend guard** | `/api/draw` is the only route that spends: 4 draws per minute per IP, 600 credits per UTC day per instance, then a labelled deck replay |
@@ -163,12 +163,12 @@ npm install
 | Draw one unseen wallet live (13 credits) | `export NANSEN_API_KEY=nsn_… && npm run labelme -- draw --explain` | 1–3 s |
 | The web app | `npm run dev` → http://localhost:3200 | first page 4 s |
 
-Clone + install + first round: **7 s** of machine time; with `verify` and the 115 tests **11 s** (timed clean clone from GitHub, re-measured 2026-09-19 — clone 2 s · install 5 s · first round < 1 s · verify 1 s · tests 3 s; 6 s / 9 s on 2026-09-18).
+Clone + install + first round: **7 s** of machine time; with `verify` and the 116 tests **11 s** (timed clean clone from GitHub, re-measured 2026-09-19 — clone 2 s · install 5 s · first round < 1 s · verify 1 s · tests 3 s; 6 s / 9 s on 2026-09-18).
 
 ## 🧪 Testing & CI
 
 ```bash
-npm test                 # 115 vitest tests, no key, no network (≈ 4 s)
+npm test                 # 116 vitest tests, no key, no network (≈ 4 s)
 npm run verify           # 62/62 cards reproduced offline
 npm run reader           # the house rule's confusion matrix on the deck
 npm run typecheck && npm run lint && npm run format:check

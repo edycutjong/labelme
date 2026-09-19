@@ -89,4 +89,15 @@ describe("CachedNansenClient", () => {
     await c.post("tgm/holders", { a: 1 });
     expect(order).toEqual(["start:1", "call:1:false", "start:2", "call:2:true"]);
   });
+
+  it("an offline miss is recorded as a failed call with the start's seq (never a start without its Call)", async () => {
+    const c = fakeCached(() => ({ ok: 1 }), { offline: true });
+    const order: string[] = [];
+    c.onStart = (s) => order.push(`start:${s.seq}`);
+    c.onCall = (k) => order.push(`call:${k.seq}:${k.ok}`);
+    await expect(c.post("tgm/holders", { a: 1 })).rejects.toThrow(/NANSEN_OFFLINE/);
+    expect(order).toEqual(["start:1", "call:1:false"]);
+    expect(c.calls[0]).toMatchObject({ ok: false, credits: 0, cached: false });
+    expect(c.calls[0].error).toMatch(/no cached response/);
+  });
 });

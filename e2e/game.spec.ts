@@ -174,6 +174,12 @@ test.describe("review pass 1 regressions", () => {
   });
 });
 
+/** below 1280 px the rail is a collapsed sheet whose controls are inert — open it before pressing its links */
+async function openRail(page: import("@playwright/test").Page) {
+  const bar = page.getByTestId("rail-bar");
+  if (await bar.isVisible()) await bar.click();
+}
+
 test.describe("the Nansen call rail (LANDING_DESIGN §13 A3)", () => {
   test("on load the rail holds the example's four recorded calls, replayed at 0 credits; the receipt totals match", async ({ page }) => {
     await page.goto("/");
@@ -189,6 +195,7 @@ test.describe("the Nansen call rail (LANDING_DESIGN §13 A3)", () => {
     // never the key, never a full request body
     expect(await rail.innerHTML()).not.toMatch(KEY_SHAPE);
     expect(await rail.innerText()).not.toContain('"address"');
+    await openRail(page);
     await rail.getByRole("button", { name: "receipt" }).click();
     await expect(page.locator("[data-testid=drawer-sum]")).toContainText("0 credits · 4 calls · replayed from fixtures");
     await expect(page.locator(".drawer tbody tr")).toHaveCount(4);
@@ -206,6 +213,7 @@ test.describe("the Nansen call rail (LANDING_DESIGN §13 A3)", () => {
     await page.keyboard.press("1");
     await expect(rail.locator(".rail-row")).toHaveCount(8);
     await expect(rail.locator(".rail-foot")).toContainText("session · 8 calls · 0 credits");
+    await openRail(page);
     await rail.getByRole("button", { name: "clear" }).click();
     await expect(rail.locator(".rail-row")).toHaveCount(0);
     await expect(rail.locator(".rail-empty")).toBeVisible();
@@ -219,6 +227,11 @@ test.describe("the Nansen call rail (LANDING_DESIGN §13 A3)", () => {
     await expect(rail.locator(".rail-row[data-state=replayed]")).toHaveCount(8);
     await expect(rail.locator(".rail-counters")).toHaveText("4 calls · 0 cr · replayed");
     await expect(page.locator(".round .wallet")).toBeVisible();
+    // the rows landed before the card event; they still carry the fixture date (review finding)
+    await expect(rail.locator(".rail-row").last().locator(".rail-ms")).toHaveText(/^\d{4}-\d{2}-\d{2}$/);
+    await openRail(page);
+    await rail.getByRole("button", { name: "receipt" }).click();
+    await expect(page.locator("[data-testid=drawer-sum]")).toContainText(/replayed from fixtures, recorded \d{4}-\d{2}-\d{2}/);
   });
   test("layout: ≥ 1280 px a fixed right rail with the page shifted left; below, a 44 px bar that opens with a tap and with Enter", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
@@ -244,6 +257,10 @@ test.describe("the Nansen call rail (LANDING_DESIGN §13 A3)", () => {
     await bar.focus();
     await page.keyboard.press("Enter");
     await expect(bar).toHaveAttribute("aria-expanded", "false");
+    // collapsed: the sheet's controls are inert — Tab from the bar never lands on a hidden link (review finding)
+    await expect(page.locator(".rail-body")).toHaveAttribute("inert", "");
+    await page.keyboard.press("Tab");
+    expect(await page.evaluate(() => document.activeElement?.closest(".rail-body") !== null)).toBe(false);
     const [sw, iw] = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
     expect(sw).toBeLessThanOrEqual(iw);
   });

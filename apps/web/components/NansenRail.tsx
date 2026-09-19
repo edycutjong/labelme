@@ -199,6 +199,15 @@ export function NansenRail({
   liveBusy: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  // below 1280 px the sheet is collapsed by max-height only — mark its body inert so hidden controls leave the tab order
+  const [wide, setWide] = useState(true);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1280px)");
+    const sync = () => setWide(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
   const listRef = useRef<HTMLOListElement>(null);
   const titleId = useId();
   const run = rows.filter((r) => r.run === currentRun);
@@ -227,7 +236,7 @@ export function NansenRail({
           {open ? "▾" : "▴"}
         </span>
       </button>
-      <div className="rail-body" id={titleId}>
+      <div className="rail-body" id={titleId} inert={!wide && !open ? true : undefined}>
         <header className="rail-head">
           <div className="rail-title">
             <span className="kicker">Nansen API</span>

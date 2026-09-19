@@ -171,6 +171,8 @@ export function Game({
           } else if (e.type === "card") {
             gotCard = true;
             recordedAt = e.card?.recordedAt;
+            // the replayed rows landed before the card: stamp them with the fixture date now
+            if (origin === "replayed" && recordedAt) setRail((r) => r.map((x) => (x.run === run && !x.recordedAt ? { ...x, recordedAt } : x)));
             setDrawCard(e.card);
             setStatus("");
           } else if (e.type === "house") setDrawHouse(e);
