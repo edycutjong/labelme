@@ -118,15 +118,15 @@ export default function Judge() {
         <p>The deck (0 credits, no key) and the live path (13 credits):</p>
         <pre>
           <code>{`git clone ${REPO} && cd labelme && npm install
-npm run labelme -- play --seed meridian1933 --answers   # the recording's ten cards with the answer key, 0 credits
-export NANSEN_API_KEY=nsn_...                        # your key from https://app.nansen.ai/api
-npm run labelme -- draw --explain                    # one unseen wallet live: five calls, credits, the reveal`}</code>
+npm run labelme -- play --seed meridian1933 --answers  # the recording's ten cards with the answer key, 0 credits
+export NANSEN_API_KEY=nsn_...      # your key from https://app.nansen.ai/api
+npm run labelme -- draw --explain  # one unseen wallet live: five calls, credits, the reveal`}</code>
         </pre>
         <p>
           <b>CI / deterministic replay</b> (not the product — a check that the engine has not drifted):
         </p>
         <pre>
-          <code>{`npm run verify                                       # ${d.cards.length}/${d.cards.length} cards reproduced offline, no key, no network`}</code>
+          <code>{`npm run verify  # ${d.cards.length}/${d.cards.length} cards reproduced offline, no key, no network`}</code>
         </pre>
 
         <h2>Honest limitations</h2>
