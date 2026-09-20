@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Label Me",
     title: "Label Me",
-    description: "Ten real wallets. Guess the Nansen label.",
+    description: "Ten real Ethereum wallets, four Nansen clues each. Guess Smart Money, exchange or whale — the reveal is Nansen's own label.",
     images: [
       {
         url: "/api/og?seed=meridian1933",
@@ -21,7 +21,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: { card: "summary_large_image", creator: "@edycutjong", title: "Label Me", description: "Ten real wallets. Guess the Nansen label." },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@edycutjong",
+    title: "Label Me",
+    description: "Ten real Ethereum wallets, four Nansen clues each. Guess Smart Money, exchange or whale — the reveal is Nansen's own label.",
+  },
   authors: [{ name: "Edy Cu Tjong", url: "https://github.com/edycutjong" }],
   creator: "Edy Cu Tjong",
   alternates: { canonical: "/" },
