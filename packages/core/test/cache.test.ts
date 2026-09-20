@@ -1,9 +1,21 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { CachedNansenClient, MemoryCache, DiskCache, cacheKey, canonicalize, DEFAULT_TTL_MS } from "../src/cache.js";
 import { fakeCached, fakeFetch, KEY } from "./helpers.js";
+
+// A footgun fix: a real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts — every
+// test below builds its own CachedNansenClient with an explicit `offline` option, but a stray ambient
+// NANSEN_OFFLINE would otherwise flip that default for any client built without it.
+const REAL_NANSEN_OFFLINE = process.env.NANSEN_OFFLINE;
+beforeEach(() => {
+  delete process.env.NANSEN_OFFLINE;
+});
+afterEach(() => {
+  if (REAL_NANSEN_OFFLINE === undefined) delete process.env.NANSEN_OFFLINE;
+  else process.env.NANSEN_OFFLINE = REAL_NANSEN_OFFLINE;
+});
 
 describe("cache keys", () => {
   it("canonicalize sorts keys at every depth and keeps array order", () => {
