@@ -300,4 +300,12 @@ describe("round — deterministic, balanced, seed-safe", () => {
     expect(s.house).toBeGreaterThanOrEqual(0);
     expect(score(r, byId, {}).correct).toBe(0);
   });
+  it("score skips a round cardId that is missing from the cards map (defensive path)", () => {
+    const r = makeRound(d, "meridian");
+    const byId = new Map(d.map((c) => [c.id, c]));
+    byId.delete(r.cardIds[0]);
+    const s = score(r, byId, {});
+    expect(s.total).toBe(10);
+    expect(Object.values(s.perClass).reduce((a, x) => a + x.seen, 0)).toBe(9);
+  });
 });

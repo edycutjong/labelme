@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { NansenClient, CREDITS } from "../src/client.js";
-import { fakeClient, KEY } from "./helpers.js";
+import { NansenClient, CREDITS, clientFromEnv } from "../src/client.js";
+import { nansen } from "../src/nansen.js";
+import { fakeClient, KEY, ADDR } from "./helpers.js";
 
 describe("NansenClient", () => {
   it("rejects a missing or malformed key", () => {
@@ -109,10 +110,56 @@ describe("NansenClient", () => {
     expect(n).toBe(1);
     expect(c.calls[0].attempts).toBe(1);
   });
+  it("nansen.transactions and nansen.txLookup parse live-shaped responses (used by scripts/seed.ts and scripts/spike.ts)", async () => {
+    const c = fakeClient((endpoint) => {
+      if (endpoint === "profiler/address/transactions")
+        return { data: [{ transaction_hash: "0xabc", block_timestamp: "2026-09-18T00:00:00Z", method: "transfer" }], pagination: {} };
+      if (endpoint === "transaction-with-token-transfer-lookup")
+        return {
+          data: [{ from_address: "0x1", from_address_label: "A", to_address: "0x2", to_address_label: "B", token_transfer_array: [] }],
+        };
+      throw new Error("unexpected " + endpoint);
+    });
+    const tx = await nansen.transactions(c, ADDR(1), Date.now());
+    expect(tx.data?.[0].transaction_hash).toBe("0xabc");
+    const l = await nansen.txLookup(c, "0xabc");
+    expect(l.data?.[0].from_address_label).toBe("A");
+  });
   it("redacts the API key from an upstream error body before recording it", async () => {
     const c = fakeClient(() => new Response(`bad key ${KEY} rejected`, { status: 401 }));
     await expect(c.post("tgm/holders", {})).rejects.toThrow(/nsn_\[redacted\]/);
     expect(JSON.stringify(c.calls)).not.toContain(KEY);
+  });
+  it("clientFromEnv builds a client from NANSEN_API_KEY", () => {
+    const prev = process.env.NANSEN_API_KEY;
+    process.env.NANSEN_API_KEY = KEY;
+    try {
+      expect(clientFromEnv()).toBeInstanceOf(NansenClient);
+    } finally {
+      if (prev === undefined) delete process.env.NANSEN_API_KEY;
+      else process.env.NANSEN_API_KEY = prev;
+    }
+  });
+  it("clientFromEnv falls back to an empty key when NANSEN_API_KEY is unset, which the client rejects", () => {
+    const prev = process.env.NANSEN_API_KEY;
+    delete process.env.NANSEN_API_KEY;
+    try {
+      expect(() => clientFromEnv()).toThrow(/NANSEN_API_KEY/);
+    } finally {
+      if (prev !== undefined) process.env.NANSEN_API_KEY = prev;
+    }
+  });
+  it("a live call to an endpoint outside the CREDITS table with no reported cost falls back to 1 credit", async () => {
+    const c = fakeClient(() => ({ ok: 1 }));
+    await c.post("totally/unknown-endpoint", {});
+    expect(c.calls[0].credits).toBe(1);
+  });
+  it("a timeout exhausted on every attempt is recorded with error 'timeout' (AbortError branch)", async () => {
+    const fetchImpl: typeof fetch = async (_u, init) =>
+      new Promise((_, rej) => init!.signal!.addEventListener("abort", () => rej(Object.assign(new Error("aborted"), { name: "AbortError" }))));
+    const c = new NansenClient(KEY, { fetchImpl, timeoutMs: 20, rps: 1000 });
+    await expect(c.post("tgm/holders", {})).rejects.toThrow();
+    expect(c.calls[0]).toMatchObject({ ok: false, error: "timeout" });
   });
   it("rate limiter: never more than rps requests in a rolling second", async () => {
     const stamps: number[] = [];

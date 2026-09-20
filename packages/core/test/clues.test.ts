@@ -36,6 +36,17 @@ describe("extractPnl", () => {
     });
     expect(p).toMatchObject({ ok: true, realizedUsd: null, trades: 0, tokensTraded: 0, top: [] });
   });
+  it("a top5 row missing symbol/roi/pnl falls back to '?' and nulls", () => {
+    const p = extractPnl({
+      top5_tokens: [{}],
+      traded_token_count: 1,
+      traded_times: 1,
+      realized_pnl_usd: 1,
+      realized_pnl_percent: 1,
+      win_rate: 1,
+    });
+    expect(p.top[0]).toEqual({ symbol: "?", roi: null, pnlUsd: null });
+  });
 });
 
 describe("extractTrades", () => {
@@ -49,6 +60,10 @@ describe("extractTrades", () => {
   it("failed → ok:false; null data → ok:false", () => {
     expect(extractTrades(undefined, false).ok).toBe(false);
     expect(extractTrades(null).ok).toBe(false);
+  });
+  it("a row missing symbol/pnl falls back to '?' and null", () => {
+    const t = extractTrades([{ nof_buys: "1", nof_sells: 2 }]);
+    expect(t.rows[0]).toEqual({ symbol: "?", pnlUsd: null, buys: 1, sells: 2 });
   });
 });
 
@@ -165,5 +180,14 @@ describe("fetchClues — four calls in parallel, sections degrade independently"
     const c = fakeClient(clueRoutes("empty"));
     const { clues } = await fetchClues(c, ADDR(4), Date.now());
     expect(clues.empty).toBe(true);
+  });
+  it("a non-Error rejection reason is stringified, not read as .message", async () => {
+    const routes = clueRoutes("regular");
+    const c = fakeClient((e) => {
+      if (e === "profiler/address/pnl-summary") throw "boom";
+      return routes(e);
+    });
+    const { failures } = await fetchClues(c, ADDR(8), Date.now());
+    expect(failures).toContainEqual({ section: "pnl", error: "boom" });
   });
 });

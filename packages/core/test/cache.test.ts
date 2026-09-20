@@ -1,13 +1,13 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { mkdtempSync } from "node:fs";
+import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { CachedNansenClient, MemoryCache, DiskCache, cacheKey, canonicalize, DEFAULT_TTL_MS } from "../src/cache.js";
+import { CachedNansenClient, MemoryCache, DiskCache, cacheKey, canonicalize, DEFAULT_TTL_MS, cachedClientFromEnv } from "../src/cache.js";
 import { fakeCached, fakeFetch, KEY } from "./helpers.js";
 
 // A footgun fix: a real shell with NANSEN_OFFLINE=1 exported must not change what this suite asserts — every
-// test below builds its own CachedNansenClient with an explicit `offline` option, but a stray ambient
-// NANSEN_OFFLINE would otherwise flip that default for any client built without it.
+// test below builds its own CachedNansenClient with an explicit `offline` option, but cachedClientFromEnv reads
+// the ambient env directly, so it is neutralized around just that test too.
 const REAL_NANSEN_OFFLINE = process.env.NANSEN_OFFLINE;
 beforeEach(() => {
   delete process.env.NANSEN_OFFLINE;
@@ -90,6 +90,32 @@ describe("CachedNansenClient", () => {
     d.set("k", { storedAt: "x", ttlMs: 1, endpoint: "e", body: {}, text: "{}" });
     expect(d.get("k")?.text).toBe("{}");
     expect(d.get("missing")).toBeUndefined();
+    writeFileSync(join(dir, "corrupt.json"), "{not json");
+    expect(d.get("corrupt")).toBeUndefined();
+  });
+  it("cachedClientFromEnv builds a client from NANSEN_API_KEY", () => {
+    const prev = process.env.NANSEN_API_KEY;
+    process.env.NANSEN_API_KEY = KEY;
+    try {
+      expect(cachedClientFromEnv()).toBeInstanceOf(CachedNansenClient);
+    } finally {
+      if (prev === undefined) delete process.env.NANSEN_API_KEY;
+      else process.env.NANSEN_API_KEY = prev;
+    }
+  });
+  it("cachedClientFromEnv falls back to an empty key when NANSEN_API_KEY is unset, which the client rejects", () => {
+    const prev = process.env.NANSEN_API_KEY;
+    delete process.env.NANSEN_API_KEY;
+    try {
+      expect(() => cachedClientFromEnv()).toThrow(/NANSEN_API_KEY/);
+    } finally {
+      if (prev !== undefined) process.env.NANSEN_API_KEY = prev;
+    }
+  });
+  it("a live call to an endpoint outside the CREDITS table with no reported cost falls back to 1 credit", async () => {
+    const c = fakeCached(() => ({ ok: 1 }));
+    await c.post("totally/unknown-endpoint", {});
+    expect(c.calls[0].credits).toBe(1);
   });
 
   it("a cache hit still emits start → call with the same seq (the rail resolves its pending row instantly)", async () => {

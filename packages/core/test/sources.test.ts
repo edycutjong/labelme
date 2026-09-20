@@ -3,7 +3,7 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { gatherCandidates } from "../src/sources.js";
-import { drawCard } from "../src/draw.js";
+import { drawCard, DRAW_CLASSES } from "../src/draw.js";
 import { writeCardFixture, readCardFixture, listCardFixtures, fixtureStore, loadDeck, deckExists, writeDeckFile, writeDropped } from "../src/fixtures.js";
 import { CachedNansenClient, MemoryCache } from "../src/cache.js";
 import { NansenClient } from "../src/client.js";
@@ -76,6 +76,41 @@ describe("gatherCandidates — one class per address, by precedence", () => {
     });
     expect(candidates.find((x) => x.address === ADDR("d1"))?.source.endpoint).toBe("smart-money/dex-trades");
     expect(c.creditsSpent).toBe(5 + 4 * 5 + 1);
+  });
+  it("tolerates missing addresses and null labels on every sourcing list, and skips a regular address already claimed", async () => {
+    const routes2 = (endpoint: string, body: Record<string, unknown>) => {
+      if (endpoint === "smart-money/dex-trades") return { data: [{ trader_address: ADDR("smd1"), trader_address_label: null }], pagination: {} };
+      if (endpoint === "tgm/who-bought-sold") return { data: [{ address: ADDR("reg1"), address_label: null }], pagination: {} };
+      if (endpoint === "tgm/holders") {
+        const lt = body.label_type;
+        if (lt === "smart_money")
+          return {
+            data: [
+              { address: null, address_label: "x" },
+              { address: ADDR("sm2"), address_label: null },
+            ],
+            pagination: {},
+          };
+        if (lt === "exchange") return { data: [], pagination: {} };
+        if (lt === "public_figure") return { data: [{ address: null, address_label: "Public Figure" }], pagination: {} };
+        // plain page (all_holders_plain)
+        return {
+          data: [
+            { address: null, address_label: "tag" },
+            { address: ADDR("plain1"), address_label: null },
+          ],
+          pagination: {},
+        };
+      }
+      throw new Error("unexpected " + endpoint);
+    };
+    const c = fakeClient(routes2);
+    const { candidates } = await gatherCandidates(c, Date.now(), { PEPE: "0xpepe", SHIB: "0xshib" });
+    expect(candidates.find((x) => x.address === ADDR("smd1"))?.nansenLabel).toBe("");
+    expect(candidates.find((x) => x.address === ADDR("sm2"))?.class).toBe("smart-money");
+    expect(candidates.find((x) => x.address === ADDR("reg1"))?.class).toBe("regular");
+    // reg1 shows up in who-bought-sold for both tokens; the second sighting must not overwrite the first
+    expect(candidates.filter((x) => x.address === ADDR("reg1"))).toHaveLength(1);
   });
   it("sends the exclusion of all 17 label groups on the regular and plain-whale paths", async () => {
     const c = fakeClient(sourcingRoutes);
@@ -151,6 +186,44 @@ describe("drawCard — one fresh card, live, streamed", () => {
     const { card } = await drawCard(c, { class: "smart-money", seed: "s" });
     expect(card.source.endpoint).toBe("smart-money/dex-trades");
     expect([ADDR("d1"), ADDR("both")]).toContain(card.address);
+  });
+  it("regular draws come from tgm/who-bought-sold with the 17-label exclusion", async () => {
+    const c = fakeClient(routes);
+    const { card } = await drawCard(c, { class: "regular", seed: "s" });
+    expect(card.class).toBe("regular");
+    expect(card.source).toMatchObject({ endpoint: "tgm/who-bought-sold", labelType: "exclude all 17 label groups" });
+    expect([ADDR("r1"), ADDR("r3"), ADDR("d1")]).toContain(card.address);
+  });
+  it("picks a random class from DRAW_CLASSES when none is given", async () => {
+    const c = fakeClient(routes);
+    const { card } = await drawCard(c, { seed: "s" });
+    expect(DRAW_CLASSES).toContain(card.class);
+  });
+  it("emits the fixed 'live Smart Money feed' token label (not a token symbol) in the picked progress event", async () => {
+    const c = fakeClient(routes);
+    const picked: { token: string }[] = [];
+    await drawCard(c, { class: "smart-money", seed: "s", onProgress: (e) => e.type === "picked" && picked.push(e) });
+    expect(picked).toEqual([expect.objectContaining({ token: "the live Smart Money feed" })]);
+  });
+  it("tolerates a smart-money trade row with a null trader label", async () => {
+    const c = fakeClient((endpoint, body) =>
+      endpoint === "smart-money/dex-trades"
+        ? { data: [{ trader_address: ADDR("nolabel"), trader_address_label: null }], pagination: {} }
+        : routes(endpoint, body),
+    );
+    const { card } = await drawCard(c, { class: "smart-money", seed: "s" });
+    expect(card.address).toBe(ADDR("nolabel"));
+    expect(card.nansenLabel).toBe("");
+  });
+  it("tolerates a holder row with a null label on the exchange sourcing page", async () => {
+    const c = fakeClient((endpoint, body) =>
+      endpoint === "tgm/holders" && body.label_type === "exchange"
+        ? { data: [{ address: ADDR("exNull"), address_label: null, value_usd: 1, token_amount: 1, ownership_percentage: 0 }], pagination: {} }
+        : routes(endpoint, body),
+    );
+    const { card } = await drawCard(c, { class: "exchange", seed: "s" });
+    expect(card.address).toBe(ADDR("exNull").toLowerCase());
+    expect(card.nansenLabel).toBe("");
   });
   it("skips addresses already in the deck and tries another token page; gives up honestly when every page is spent", async () => {
     const c = fakeClient(routes);
