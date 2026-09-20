@@ -44,7 +44,9 @@ export function read(c: Clues): Read {
   if (b.totalUsd >= R.whale.minUsd && (b.topShare ?? 0) >= R.whale.minTopShare && p.trades <= R.whale.maxTrades)
     return {
       guess: "whale",
-      because: `one position is ${Math.round((b.topShare ?? 0) * 100)}% of $${Math.round(b.totalUsd / 1e6)}M and only ${p.trades} trades`,
+      // topShare is guaranteed non-null here: the guard above only passes when (topShare ?? 0) >= minTopShare (0.8),
+      // and 0 never clears that bar, so a null topShare could never have reached this branch.
+      because: `one position is ${Math.round(b.topShare! * 100)}% of $${Math.round(b.totalUsd / 1e6)}M and only ${p.trades} trades`,
     };
   if (p.trades >= R.smartMoney.minTrades && p.tokensTraded >= R.smartMoney.minTokensTraded)
     return { guess: "smart-money", because: `${p.trades} trades across ${p.tokensTraded} tokens in 30 days — an active multi-token trader` };

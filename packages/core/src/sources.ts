@@ -101,20 +101,12 @@ export async function gatherCandidates(
       dropped.push({ address, reason: "in both the Exchange and the Smart Money groups", lists });
       continue;
     }
-    const cls: LabelClass | undefined = s.lists.has("exchange")
-      ? "exchange"
-      : s.lists.has("smart-money")
-        ? "smart-money"
-        : s.lists.has("whale")
-          ? "whale"
-          : s.lists.has("regular")
-            ? "regular"
-            : undefined;
-    if (!cls) continue;
-    if (cls === "regular" && lists.length > 1) {
-      dropped.push({ address, reason: "regular candidate also appears in a label list", lists });
-      continue;
-    }
+    // Every address in `seen` that reaches this point was added by exactly one of: noteRows (sets "exchange" or
+    // "smart-money"), the plain-page whale check (sets "whale"), or the who-bought-sold loop (always sets "regular"
+    // when it touches an address) — publicFigure/structural addresses already `continue`d above. So `lists` always
+    // has at least one of these four keys; "regular" is only ever the sole key (the other three routes never also
+    // register "regular"), so there is no "regular, but also something else" case to drop.
+    const cls: LabelClass = s.lists.has("exchange") ? "exchange" : s.lists.has("smart-money") ? "smart-money" : s.lists.has("whale") ? "whale" : "regular";
     const e = s.lists.get(cls)!;
     candidates.push({ address, class: cls, nansenLabel: e.tag, source: e.source });
   }

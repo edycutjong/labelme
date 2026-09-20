@@ -127,7 +127,8 @@ async function drawInner(
       type: "picked",
       class: cls,
       token: cls === "smart-money" ? "the live Smart Money feed" : sym,
-      page: page ?? 1,
+      // page is always assigned just above, in this same iteration, before it is ever read — never undefined here
+      page: page!,
       candidates: fresh.length,
     });
     if (fresh.length) break;
